@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Quick Search Popup",
   "version": "1.0.0",
-  "description": "Double Shift to instantly pop up a quick search bar. Google, Naver, AI search (Perplexity, ChatGPT, Claude) and more. Custom engines, history, custom hotkey.",
+  "description": "Quick search popup on any page. Google, Naver, AI search (ChatGPT, Claude, Perplexity) built-in. Custom engines, history & hotkey.",
   "permissions": [
     "storage"
   ],
