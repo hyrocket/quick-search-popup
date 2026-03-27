@@ -988,19 +988,23 @@ function rebuildEngineStrip() {
 
   // 활성 칩이 보이도록 부드럽게 스크롤
   if (activeChip) {
-    // rAF로 DOM 렌더 후 실행
     requestAnimationFrame(() => {
-      const chipLeft  = activeChip.offsetLeft;
-      const chipRight = chipLeft + activeChip.offsetWidth;
-      const stripLeft  = strip.scrollLeft;
-      const stripRight = stripLeft + strip.offsetWidth;
+      // getBoundingClientRect() 사용 — offsetLeft는 topRow 기준이라 부정확
+      const chipRect  = activeChip.getBoundingClientRect();
+      const stripRect = strip.getBoundingClientRect();
 
-      if (chipLeft < stripLeft) {
-        // 왼쪽으로 스크롤
-        strip.scrollTo({ left: chipLeft - 12, behavior: "smooth" });
-      } else if (chipRight > stripRight) {
-        // 오른쪽으로 스크롤
-        strip.scrollTo({ left: chipRight - strip.offsetWidth + 12, behavior: "smooth" });
+      // strip 내부 기준 상대 위치
+      const chipLeftInStrip  = chipRect.left - stripRect.left + strip.scrollLeft;
+      const chipRightInStrip = chipLeftInStrip + activeChip.offsetWidth;
+      const visibleLeft  = strip.scrollLeft;
+      const visibleRight = strip.scrollLeft + strip.offsetWidth;
+
+      if (chipLeftInStrip < visibleLeft) {
+        // 칩이 왼쪽으로 가려짐 → 왼쪽으로 스크롤
+        strip.scrollTo({ left: chipLeftInStrip - 12, behavior: "smooth" });
+      } else if (chipRightInStrip > visibleRight) {
+        // 칩이 오른쪽으로 가려짐 → 오른쪽으로 스크롤
+        strip.scrollTo({ left: chipRightInStrip - strip.offsetWidth + 12, behavior: "smooth" });
       }
     });
   }
