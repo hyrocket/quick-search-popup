@@ -1,0 +1,12 @@
+# Claude Code 지침서 (로컬에만 보관)
+CLAUDE.md
+
+# 스토어 제출용 ZIP 파일들
+*.zip
+
+# Windows 시스템 파일
+Thumbs.db
+desktop.ini
+
+# Mac 시스템 파일
+.DS_Store
