@@ -484,16 +484,88 @@ function ensurePanel() {
   if (host) return;
 
   host = document.createElement("div");
+  host.dataset.ssTheme = "classic"; // 테마 속성은 항상 존재해야 함 (CSS 셀렉터 기준점)
   sr = host.attachShadow({ mode: "open" });
 
   const style = document.createElement("style");
   style.textContent = `
-    :host,*{box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+    /* ══════════════════════════════════════════════════════════════
+       Theme tokens — 기본값은 classic(현행 렌더링)과 픽셀 단위로 동일하다.
+       --ss-panel-bg / -panel-fg / -sub-bg / -border / -accent 5개는
+       applyTheme()이 host.style에 인라인으로 꽂는다(엔진 팔레트).
+       아래 토큰들은 그 5개에서 파생되거나 고정값이다.
+       ⚠ 접두사를 --ss- 외의 것으로 바꾸지 말 것 (CLAUDE.md 참고)
+       ══════════════════════════════════════════════════════════════ */
+    :host{
+      --ss-font: system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+
+      /* overlay */
+      --ss-overlay-bg: rgba(0,0,0,.22);
+      --ss-overlay-blur: blur(2px);
+
+      /* panel */
+      --ss-backdrop: none;
+      --ss-shadow: 0 16px 48px rgba(0,0,0,.22),0 2px 8px rgba(0,0,0,.08);
+      --ss-panel-bd: color-mix(in oklab,var(--ss-border,#CBD5E1) 40%,transparent);
+      --ss-divider:  color-mix(in oklab,var(--ss-border,#CBD5E1) 40%,transparent);
+      --ss-fg-muted: color-mix(in oklab,var(--ss-panel-fg,#111827) 40%,transparent);
+      --ss-title-fg: #6366F1;
+
+      /* 검색 입력창 + 엔진 버튼 (tint 지점 ①) */
+      --ss-input-bg: var(--ss-sub-bg,#f6f7fb);
+      --ss-input-bd: var(--ss-border,#CBD5E1);
+      --ss-input-focus-bd: var(--ss-accent,#94A3B8);
+      --ss-input-ring: color-mix(in oklab,var(--ss-accent,#94A3B8) 22%,transparent);
+
+      /* 버튼 */
+      --ss-btn-bg: var(--ss-sub-bg,#fafafa);
+      --ss-btn-bd: var(--ss-border,#CBD5E1);
+      --ss-btn-hover-bg: color-mix(in oklab,var(--ss-sub-bg,#f6f7fb) 70%,var(--ss-accent,#94A3B8) 10%);
+      --ss-btn-hover-bd: var(--ss-accent,#94A3B8);
+      --ss-primary-bg: #6366F1;
+      --ss-primary-bg-hover: #4F46E5;
+      --ss-on-accent: #fff;
+
+      /* 엔진 스트립 pill (활성 테두리 = tint 지점 ②) */
+      --ss-chip-bg: color-mix(in oklab,var(--ss-sub-bg,#f6f7fb) 90%,transparent);
+      --ss-chip-fg: var(--ss-panel-fg,#374151);
+      --ss-chip-hover-bg: var(--ss-sub-bg,#f6f7fb);
+      --ss-chip-hover-bd: var(--ss-border,#CBD5E1);
+      --ss-pill-active-bg: color-mix(in oklab,var(--ss-accent,#94A3B8) 15%,var(--ss-panel-bg,#fff));
+      --ss-pill-active-fg: var(--ss-accent,#94A3B8);
+      --ss-pill-active-bd: var(--ss-accent,#94A3B8);
+
+      /* AI 배지 */
+      --ss-aitag-bg: var(--ss-accent,#94A3B8);
+      --ss-aitag-fg: #fff;
+
+      /* 하단 바 (panel 바깥) */
+      --ss-bar-bg: rgba(255,255,255,.92);
+      --ss-bar-bd: rgba(0,0,0,.07);
+      --ss-bar-fg: #111827;
+      --ss-bar-shadow: 0 6px 20px rgba(0,0,0,.08);
+      --ss-bar-backdrop: blur(8px);
+      --ss-hint-fg: rgba(17,24,39,.55);
+      --ss-iconbtn-bg: rgba(255,255,255,.85);
+      --ss-iconbtn-bd: rgba(0,0,0,.10);
+      --ss-iconbtn-hover-bd: rgba(0,0,0,.22);
+      --ss-iconbtn-fg: buttontext;
+
+      /* 히스토리 드롭다운 (panel 바깥) */
+      --ss-drop-bg: var(--ss-panel-bg,#fff);
+      --ss-drop-bd: color-mix(in oklab,var(--ss-border,#CBD5E1) 60%,transparent);
+      --ss-drop-shadow: 0 8px 28px rgba(0,0,0,.16);
+      --ss-hover-bg: color-mix(in oklab,var(--ss-sub-bg,#F3F4F6) 80%,transparent);
+      --ss-danger: #EF4444;
+      --ss-scrollbar: auto;
+    }
+
+    :host,*{box-sizing:border-box;font-family:var(--ss-font)}
 
     .overlay{
       position:fixed;inset:0;
-      background:rgba(0,0,0,.22);
-      backdrop-filter:blur(2px);
+      background:var(--ss-overlay-bg);
+      backdrop-filter:var(--ss-overlay-blur);
       z-index:2147483647;
       display:flex;align-items:center;justify-content:center;
       animation:fadeIn .08s ease;
@@ -516,8 +588,9 @@ function ensurePanel() {
       padding:10px 14px 12px;
       border-radius:16px;
       background:var(--ss-panel-bg,#fff);
-      box-shadow:0 16px 48px rgba(0,0,0,.22),0 2px 8px rgba(0,0,0,.08);
-      border:1px solid color-mix(in oklab,var(--ss-border,#CBD5E1) 40%,transparent);
+      backdrop-filter:var(--ss-backdrop);
+      box-shadow:var(--ss-shadow);
+      border:1px solid var(--ss-panel-bd);
       display:flex;flex-direction:column;
       gap:8px;
       position:relative;
@@ -528,7 +601,7 @@ function ensurePanel() {
     .topRow{
       display:flex;align-items:center;gap:10px;
       padding-bottom:8px;
-      border-bottom:1px solid color-mix(in oklab,var(--ss-border,#CBD5E1) 40%,transparent);
+      border-bottom:1px solid var(--ss-divider);
       min-width:0; /* flex 자식 축소 허용 */
     }
     .titlePill{
@@ -543,11 +616,11 @@ function ensurePanel() {
     }
     .titleText{
       font-size:11px;font-weight:800;letter-spacing:.03em;
-      color:#6366F1; /* 엔진 테마 영향 없이 고정 */
+      color:var(--ss-title-fg); /* 엔진 테마 영향 없이 고정 */
       white-space:nowrap;user-select:none;
     }
     .titleHint{
-      font-size:10px;color:color-mix(in oklab,var(--ss-panel-fg,#111827) 40%,transparent);
+      font-size:10px;color:var(--ss-fg-muted);
       white-space:nowrap;flex-shrink:0;margin-left:auto;padding-left:6px;
     }
     .panelSearchRow{
@@ -560,9 +633,9 @@ function ensurePanel() {
     .engine{
       display:inline-flex;align-items:center;gap:5px;
       padding:0 12px;height:46px;
-      border:1.5px solid var(--ss-border,#CBD5E1);
+      border:1.5px solid var(--ss-input-bd);
       border-radius:12px;
-      background:var(--ss-sub-bg,#f6f7fb);
+      background:var(--ss-input-bg);
       color:var(--ss-panel-fg,#111827);
       font-size:13px;font-weight:600;
       cursor:pointer;user-select:none;
@@ -572,13 +645,13 @@ function ensurePanel() {
       overflow:hidden;
       transition:border-color .15s,background .15s;
     }
-    .engine:hover{border-color:var(--ss-accent,#94A3B8)}
+    .engine:hover{border-color:var(--ss-input-focus-bd)}
     .engine .eIcon{font-size:16px;flex-shrink:0}
     .engine .eName{white-space:nowrap}
     .engine .aiTag{
       font-size:9px;font-weight:700;letter-spacing:.04em;
-      background:var(--ss-accent,#94A3B8);
-      color:#fff;border-radius:4px;padding:1px 4px;
+      background:var(--ss-aitag-bg);
+      color:var(--ss-aitag-fg);border-radius:4px;padding:1px 4px;
       flex-shrink:0;
     }
     .engine .arrow{font-size:10px;color:var(--ss-accent,#94A3B8);flex-shrink:0;margin-left:2px}
@@ -589,21 +662,21 @@ function ensurePanel() {
       width:100%;height:46px;
       font-size:17px;
       padding:0 14px;
-      border:1.5px solid var(--ss-border,#CBD5E1);
+      border:1.5px solid var(--ss-input-bd);
       border-radius:12px;
       outline:none;
-      background:var(--ss-sub-bg,#f6f7fb);
+      background:var(--ss-input-bg);
       color:var(--ss-panel-fg,#111827);
       transition:border-color .15s,box-shadow .15s;
     }
     .search:focus{
-      border-color:var(--ss-accent,#94A3B8);
-      box-shadow:0 0 0 3px color-mix(in oklab,var(--ss-accent,#94A3B8) 22%,transparent);
+      border-color:var(--ss-input-focus-bd);
+      box-shadow:0 0 0 3px var(--ss-input-ring);
     }
     .selBadge{
       position:absolute;right:10px;top:50%;transform:translateY(-50%);
       font-size:10px;font-weight:700;letter-spacing:.05em;
-      background:var(--ss-accent,#94A3B8);color:#fff;
+      background:var(--ss-accent,#94A3B8);color:var(--ss-on-accent);
       border-radius:5px;padding:2px 6px;
       pointer-events:none;opacity:0;transition:opacity .15s;
     }
@@ -613,47 +686,48 @@ function ensurePanel() {
     .actBtns{display:flex;gap:6px}
     .btn{
       height:46px;padding:0 14px;
-      border:1.5px solid var(--ss-border,#CBD5E1);
+      border:1.5px solid var(--ss-btn-bd);
       border-radius:12px;
-      background:var(--ss-sub-bg,#fafafa);
+      background:var(--ss-btn-bg);
       color:var(--ss-panel-fg,#111827);
       cursor:pointer;font-size:13px;font-weight:600;
       white-space:nowrap;user-select:none;
       transition:border-color .15s,background .15s;
       display:flex;align-items:center;gap:5px;
     }
-    .btn:hover{border-color:var(--ss-accent,#94A3B8);background:color-mix(in oklab,var(--ss-sub-bg,#f6f7fb) 70%,var(--ss-accent,#94A3B8) 10%)}
+    .btn:hover{border-color:var(--ss-btn-hover-bd);background:var(--ss-btn-hover-bg)}
     .btn.primary{
-      background:#6366F1;
-      border-color:#6366F1;
-      color:#fff;
+      background:var(--ss-primary-bg);
+      border-color:var(--ss-primary-bg);
+      color:var(--ss-on-accent);
     }
-    .btn.primary:hover{background:#4F46E5;border-color:#4F46E5}
+    .btn.primary:hover{background:var(--ss-primary-bg-hover);border-color:var(--ss-primary-bg-hover)}
     .iconBtn{
       width:36px;height:36px;padding:0;
-      border:1.5px solid rgba(0,0,0,.10);border-radius:10px;
-      background:rgba(255,255,255,.85);cursor:pointer;
+      border:1.5px solid var(--ss-iconbtn-bd);border-radius:10px;
+      background:var(--ss-iconbtn-bg);cursor:pointer;
+      color:var(--ss-iconbtn-fg);
       font-size:16px;display:flex;align-items:center;justify-content:center;
       transition:border-color .15s;
     }
-    .iconBtn:hover{border-color:rgba(0,0,0,.22)}
+    .iconBtn:hover{border-color:var(--ss-iconbtn-hover-bd)}
 
     /* ── Bottom bar ── */
     .bottomBar{
       display:flex;align-items:center;justify-content:space-between;
       padding:6px 12px;
       border-radius:12px;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(0,0,0,.07);
-      box-shadow:0 6px 20px rgba(0,0,0,.08);
-      backdrop-filter:blur(8px);
-      color:#111827;font-size:12px;
+      background:var(--ss-bar-bg);
+      border:1px solid var(--ss-bar-bd);
+      box-shadow:var(--ss-bar-shadow);
+      backdrop-filter:var(--ss-bar-backdrop);
+      color:var(--ss-bar-fg);font-size:12px;
     }
     .bottomLeft{display:flex;align-items:center;gap:10px}
     .bottomRight{display:flex;align-items:center;gap:8px}
     .opts label{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;font-size:12px}
     .opts input[type="checkbox"]{width:14px;height:14px;accent-color:var(--ss-accent,#3B82F6)}
-    .hint{font-size:11px;color:rgba(17,24,39,.55)}
+    .hint{font-size:11px;color:var(--ss-hint-fg)}
 
     /* ── Engine strip: topRow 안에서 가로 스크롤 ── */
     .engStrip{
@@ -667,24 +741,24 @@ function ensurePanel() {
       display:flex;align-items:center;gap:4px;
       padding:5px 11px;border-radius:20px;
       border:1.5px solid transparent;
-      background:color-mix(in oklab,var(--ss-sub-bg,#f6f7fb) 90%,transparent);
-      color:var(--ss-panel-fg,#374151);font-size:12px;font-weight:600;
+      background:var(--ss-chip-bg);
+      color:var(--ss-chip-fg);font-size:12px;font-weight:600;
       cursor:pointer;user-select:none;white-space:nowrap;
       transition:all .13s;
     }
     .engChip:hover{
-      background:var(--ss-sub-bg,#f6f7fb);
-      border-color:var(--ss-border,#CBD5E1);
+      background:var(--ss-chip-hover-bg);
+      border-color:var(--ss-chip-hover-bd);
     }
     .engChip.active{
-      border-color:var(--ss-accent,#94A3B8);
-      background:color-mix(in oklab,var(--ss-accent,#94A3B8) 15%,var(--ss-panel-bg,#fff));
-      color:var(--ss-accent,#94A3B8);
+      border-color:var(--ss-pill-active-bd);
+      background:var(--ss-pill-active-bg);
+      color:var(--ss-pill-active-fg);
     }
     .engChip .chipIcon{font-size:14px}
     .engChip .chipAI{
       font-size:9px;font-weight:700;letter-spacing:.04em;
-      background:var(--ss-accent,#94A3B8);color:#fff;
+      background:var(--ss-aitag-bg);color:var(--ss-aitag-fg);
       border-radius:3px;padding:1px 3px;
     }
 
@@ -694,13 +768,15 @@ function ensurePanel() {
       position:absolute;
       left:0;right:0;
       top:calc(100% - 8px); /* panelWrap 하단 바로 아래 */
-      background:var(--ss-panel-bg,#fff);
-      border:1px solid color-mix(in oklab,var(--ss-border,#CBD5E1) 60%,transparent);
+      background:var(--ss-drop-bg);
+      backdrop-filter:var(--ss-backdrop);
+      border:1px solid var(--ss-drop-bd);
       border-radius:12px;
-      box-shadow:0 8px 28px rgba(0,0,0,.16);
+      box-shadow:var(--ss-drop-shadow);
       z-index:50;overflow:hidden;
       display:none;
       max-height:260px;overflow-y:auto;
+      scrollbar-color:var(--ss-scrollbar);
     }
     .histDrop.open{display:block}
     .histHeader{
@@ -713,33 +789,34 @@ function ensurePanel() {
       font-size:11px;color:var(--ss-accent,#9CA3AF);background:none;
       border:none;cursor:pointer;padding:0;opacity:.7;
     }
-    .histClear:hover{opacity:1;color:#EF4444}
+    .histClear:hover{opacity:1;color:var(--ss-danger)}
     .histItem{
       display:flex;align-items:center;gap:8px;
       padding:8px 12px;font-size:13px;
       color:var(--ss-panel-fg,#374151);
       cursor:pointer;transition:background .1s;
     }
-    .histItem:hover{background:color-mix(in oklab,var(--ss-sub-bg,#F3F4F6) 80%,transparent)}
+    .histItem:hover{background:var(--ss-hover-bg)}
     .histItem .histIcon{font-size:12px;color:var(--ss-accent,#9CA3AF);opacity:.6}
     .histEmpty{padding:10px 12px;font-size:12px;color:var(--ss-panel-fg,#9CA3AF);opacity:.5;text-align:center}
 
-    /* ── Dark mode ── */
+    /* ── Dark mode ── classic 테마 전용.
+       다른 테마는 자체적으로 명암이 확정돼 있으므로 OS 다크모드의 영향을 받지 않는다.
+       panel 배경/텍스트는 JS applyTheme(DARK_OVERRIDE)이 처리한다. */
     @media(prefers-color-scheme:dark){
-      /* panel 배경/텍스트는 JS applyTheme(DARK_OVERRIDE)이 처리 */
-      /* panel 외부 UI만 여기서 처리 */
-      .bottomBar{
-        background:rgba(20,20,32,.95);
-        border-color:rgba(255,255,255,.09);
-        color:#CDD6F4;
+      :host([data-ss-theme="classic"]){
+        --ss-title-fg:#818CF8;
+        --ss-chip-bg:rgba(255,255,255,.07);
+        --ss-chip-hover-bg:rgba(255,255,255,.13);
+        --ss-pill-active-bg:color-mix(in oklab,var(--ss-accent,#818CF8) 20%,var(--ss-panel-bg,#1E1E2E));
+        --ss-bar-bg:rgba(20,20,32,.95);
+        --ss-bar-bd:rgba(255,255,255,.09);
+        --ss-bar-fg:#CDD6F4;
+        --ss-hint-fg:rgba(205,214,244,.5);
+        --ss-iconbtn-bg:rgba(30,30,46,.9);
+        --ss-iconbtn-bd:rgba(255,255,255,.12);
+        --ss-iconbtn-fg:#CDD6F4;
       }
-      .hint{color:rgba(205,214,244,.5)}
-      .iconBtn{background:rgba(30,30,46,.9);border-color:rgba(255,255,255,.12);color:#CDD6F4}
-      .titleText{color:#818CF8}
-      /* engChip 다크모드 */
-      .engChip{background:rgba(255,255,255,.07);color:#CDD6F4}
-      .engChip:hover{background:rgba(255,255,255,.13)}
-      .engChip.active{background:color-mix(in oklab,var(--ss-accent,#818CF8) 20%,#1E1E2E)}
     }
   `;
 
