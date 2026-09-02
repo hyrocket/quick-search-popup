@@ -7,6 +7,9 @@ CLAUDE.md
 # 데일리 업무 일지 (로컬에만 보관)
 logs/
 
+# 작업 지시서 (로컬에만 보관)
+THEME_SPEC.md
+
 # 스토어 제출용 ZIP 파일들
 *.zip
 
