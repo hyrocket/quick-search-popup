@@ -938,7 +938,11 @@ function ensurePanel() {
     .engChip .chipIcon{font-size:14px}
     .engChip .chipAI{
       font-size:9px;font-weight:700;letter-spacing:.04em;
-      background:var(--ss-aitag-bg);color:var(--ss-aitag-fg);
+      /* --ss-chip-accent는 rebuildEngineStrip()이 칩마다 인라인으로 건다.
+         엔진 고유색이므로 :host가 아니라 칩에서 해석돼야 한다.
+         다크 계열 테마는 --ss-tint-blend로 채도를 낮춰 받는다. */
+      background:color-mix(in oklab,var(--ss-chip-accent,var(--ss-aitag-bg)) var(--ss-tint-blend),var(--ss-panel-bg));
+      color:var(--ss-aitag-fg);
       border-radius:3px;padding:1px 3px;
     }
 
@@ -1217,6 +1221,9 @@ function rebuildEngineStrip() {
     chip.className = "engChip" + (isActive ? " active" : "");
 
     const pal = paletteForEngine(en);
+    // 칩은 선택 여부와 무관하게 자기 엔진의 고유색을 유지한다.
+    // (이걸 안 걸면 AI 배지가 전부 "현재 엔진" 색으로 물든다)
+    chip.style.setProperty("--ss-chip-accent", pal.accent);
     if (isActive) {
       chip.style.setProperty("--ss-accent", pal.accent);
       activeChip = chip;
