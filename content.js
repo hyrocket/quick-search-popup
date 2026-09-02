@@ -459,6 +459,13 @@ let host, sr, overlay, panelWrap, panelEl, inputEl, selectEl, hintEl, newTabEl;
 let historyDropEl, engStripEl, selBadgeEl, titleHintEl;
 let overlayOpen = false;
 
+// 편집 가능한 요소인가 (입력을 절대 막으면 안 되는 대상)
+function isEditableTarget(el) {
+  if (!el || el.nodeType !== 1) return false;
+  const tag = el.tagName;
+  return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable === true;
+}
+
 function installGlobalTraps() {
   // ── 페이지 이벤트 차단 트랩 ──
   const trap = (e) => {
@@ -469,6 +476,15 @@ function installGlobalTraps() {
                 || path.includes(panelWrap)
                 || (sr && path.includes(sr));
     if (inside) return;
+
+    // "내 팝업 밖"이라고 해서 무조건 막으면 안 된다.
+    // 같은 확장이 두 벌 떠 있으면(스토어 버전 + 개발용 압축해제 버전 등)
+    // 상대 인스턴스의 입력창이 여기서 "밖"으로 잡혀 타이핑·Backspace·한영 전환이
+    // 전부 죽는다. 한글만 들어가는 것처럼 보이는데, IME는 composition 경로라
+    // keydown을 막아도 통과하기 때문이다.
+    // 편집 가능한 요소에서 난 이벤트는 어떤 경우에도 건드리지 않는다.
+    if (isEditableTarget(path[0])) return;
+
     e.stopPropagation();
     if (e.type === "keydown" || e.type === "keypress" || e.type === "keyup") e.preventDefault();
   };
