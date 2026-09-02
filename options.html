@@ -94,6 +94,65 @@
     input[type=text].sm{min-width:140px}
     .hint{font-size:11px;color:var(--muted);margin-top:4px}
 
+    /* ── Appearance: theme cards ──
+       ⚠ 아래 테마 색상값은 content.js의 [data-ss-theme] 블록과 짝이다.
+          한쪽만 고치면 설정 카드와 실제 팝업이 어긋난다. */
+    .themeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:1000px){.themeGrid{grid-template-columns:repeat(2,1fr)}}
+    .themeCard{
+      border:2px solid var(--border);border-radius:var(--radius);
+      padding:10px;cursor:pointer;background:var(--card);
+      text-align:left;font:inherit;color:inherit;
+      transition:border-color .15s,box-shadow .15s;
+    }
+    .themeCard:hover{border-color:var(--accent)}
+    .themeCard.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    .themeCard .tName{font-size:13px;font-weight:700;margin-top:9px}
+    .themeCard .tDesc{font-size:11px;color:var(--muted);line-height:1.35}
+
+    .tPrevWrap{border-radius:12px}
+    .tPrev{
+      border-radius:9px;padding:7px 8px;
+      display:flex;flex-direction:column;gap:6px;
+      background:var(--t-bg);border:1px solid var(--t-bd);
+    }
+    .tPrevTop{display:flex;align-items:center;gap:4px}
+    .tLogo{width:11px;height:11px;border-radius:3px;background:var(--t-accent);flex:0 0 auto}
+    .tPill{height:11px;width:20px;border-radius:6px;background:var(--t-sub);border:1px solid transparent;flex:0 0 auto}
+    .tPill.on{background:var(--t-pill-bg);border-color:var(--t-tint);width:26px}
+    .tPrevBot{display:flex;align-items:center;gap:5px}
+    .tInput{flex:1;height:17px;border-radius:5px;background:var(--t-sub);border:1px solid var(--t-tint)}
+    .tBtn{width:27px;height:17px;border-radius:5px;background:var(--t-accent);flex:0 0 auto}
+
+    .themeCard[data-theme="classic"]{
+      --t-bg:#F8FAFF;--t-sub:#EFF6FF;--t-bd:#B6D4FE;--t-accent:#3B82F6;--t-tint:#3B82F6;--t-pill-bg:#DCEAFE}
+    .themeCard[data-theme="mono"]{
+      --t-bg:#FFFFFF;--t-sub:#FAFAFA;--t-bd:#D4D4D4;--t-accent:#171717;--t-tint:#171717;--t-pill-bg:transparent}
+    .themeCard[data-theme="midnight"]{
+      --t-bg:#1C1C22;--t-sub:#26262E;--t-bd:#34343E;--t-accent:#7F77DD;--t-tint:#7F77DD;--t-pill-bg:#2A2A33}
+    .themeCard[data-theme="glass"]{
+      --t-bg:rgba(255,255,255,.72);--t-sub:rgba(255,255,255,.55);--t-bd:rgba(255,255,255,.6);
+      --t-accent:#1A1A20;--t-tint:#1A1A20;--t-pill-bg:rgba(255,255,255,.75)}
+    .themeCard[data-theme="glass"] .tPrevWrap{
+      background:linear-gradient(120deg,#8EC5FC 0%,#E0C3FC 100%);padding:6px}
+    .themeCard[data-theme="paper"]{
+      --t-bg:#FAF5EC;--t-sub:#F2EADB;--t-bd:#E3D9C6;--t-accent:#99532A;--t-tint:#99532A;--t-pill-bg:#F0E7D6}
+    .themeCard[data-theme="terminal"]{
+      --t-bg:#0D1117;--t-sub:#161B22;--t-bd:#21313D;--t-accent:#238636;--t-tint:#2A4A35;--t-pill-bg:transparent}
+
+    /* ── Appearance: option rows ── */
+    .optRow{
+      display:flex;align-items:flex-start;gap:12px;
+      padding:12px 0;border-top:1px solid var(--border);
+    }
+    .optRow:first-of-type{border-top:none;padding-top:0}
+    .optRow .optMain{flex:1;min-width:0}
+    .optRow .optName{font-size:13px;font-weight:600}
+    .optRow .optDesc{font-size:11px;color:var(--muted);margin-top:2px}
+    .optRow.disabled .optName,.optRow.disabled .optDesc{opacity:.45}
+    .optRow input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;margin-top:2px}
+    .optRow input[type=checkbox]:disabled{cursor:not-allowed}
+
     /* ── Shortcut keyboard UI ── */
     .kbGrid{
       display:flex;flex-direction:column;gap:6px;
@@ -354,6 +413,9 @@
     <button class="navItem" data-tab="shortcut">
       <span class="navIcon">⌨️</span>Shortcut
     </button>
+    <button class="navItem" data-tab="appearance">
+      <span class="navIcon">🎨</span>Appearance
+    </button>
     <button class="navItem" data-tab="general">
       <span class="navIcon">🌐</span>Language
     </button>
@@ -514,6 +576,49 @@
     </div>
 
     <!-- ── LANGUAGE ── -->
+    <!-- ── APPEARANCE ── -->
+    <div class="section" id="tab-appearance">
+      <div class="pageTitle">Appearance</div>
+      <div class="pageSub">Choose how the search overlay looks. Layout and behavior stay the same.</div>
+
+      <div class="card">
+        <div class="cardTitle">Theme</div>
+        <div class="themeGrid" id="themeGrid"></div>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">Options</div>
+
+        <div class="optRow" id="autoDarkRow">
+          <input type="checkbox" id="autoDarkChk"/>
+          <div class="optMain">
+            <div class="optName">Auto dark</div>
+            <div class="optDesc" id="autoDarkDesc">Follow your system dark mode. Classic theme only.</div>
+          </div>
+        </div>
+
+        <div class="optRow">
+          <input type="checkbox" id="engineTintChk"/>
+          <div class="optMain">
+            <div class="optName">Engine tint</div>
+            <div class="optDesc" id="engineTintDesc">Tint the popup with the selected engine's color.</div>
+          </div>
+        </div>
+
+        <div class="optRow">
+          <div class="optMain">
+            <div class="optName">Font</div>
+            <div class="optDesc">Override the theme's default font.</div>
+          </div>
+          <select id="fontSelect">
+            <option value="system">System</option>
+            <option value="serif">Serif</option>
+            <option value="mono">Mono</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="section" id="tab-general">
       <div class="pageTitle" id="genPageTitle">Language</div>
       <div class="pageSub" id="genPageSub">Set the UI language for the overlay and settings.</div>

@@ -6,6 +6,32 @@ const K_LANG     = "shiftsearch:lang";
 const K_ENGS     = "shiftsearch:engines";
 const K_LAST     = "shiftsearch:lastEngineId";
 const K_SHORTCUT = "shiftsearch:shortcut";
+const K_APPEARANCE = "shiftsearch:appearance";
+
+// ── 테마/외형 (content.js와 동일하게 유지할 것) ──
+const THEME_IDS = ["classic", "mono", "midnight", "glass", "paper", "terminal"];
+const FONT_IDS  = ["system", "serif", "mono"];
+const DEFAULT_APPEARANCE = { theme:"classic", autoDark:true, engineTint:true, font:"system" };
+
+// 카드 라벨. 색상값은 options.html의 .themeCard[data-theme=...] 블록에 있다.
+const THEME_META = [
+  { id:"classic",  name:"Classic",  desc:"Follows the selected engine's color." },
+  { id:"mono",     name:"Mono",     desc:"Neutral black and white." },
+  { id:"midnight", name:"Midnight", desc:"Dark, muted violet accent." },
+  { id:"glass",    name:"Glass",    desc:"Translucent with a blurred backdrop." },
+  { id:"paper",    name:"Paper",    desc:"Warm off-white, serif text." },
+  { id:"terminal", name:"Terminal", desc:"Dark console green, monospace." },
+];
+
+function normalizeAppearance(v) {
+  const a = (v && typeof v === "object") ? v : {};
+  return {
+    theme:      THEME_IDS.includes(a.theme) ? a.theme : DEFAULT_APPEARANCE.theme,
+    autoDark:   typeof a.autoDark   === "boolean" ? a.autoDark   : DEFAULT_APPEARANCE.autoDark,
+    engineTint: typeof a.engineTint === "boolean" ? a.engineTint : DEFAULT_APPEARANCE.engineTint,
+    font:       FONT_IDS.includes(a.font) ? a.font : DEFAULT_APPEARANCE.font,
+  };
+}
 
 // ── AI 도메인 자동 감지 (content.js와 동일) ──
 const AI_DOMAINS = [
@@ -70,7 +96,8 @@ let state = {
   lang: guessDefaultLang(),
   engines: [],
   lastEngineId: "google",
-  shortcut: { type:"double", key:"Shift" }
+  shortcut: { type:"double", key:"Shift" },
+  appearance: { ...DEFAULT_APPEARANCE }
 };
 
 // ── DOM refs ──
@@ -86,6 +113,14 @@ const addHexInput  = $("addHexInput");
 const saveBtn      = $("saveBtn");
 const savedMsg     = $("savedMsg");
 const previewStrip = $("previewStrip");
+// ── Appearance refs ──
+const themeGrid      = $("themeGrid");
+const autoDarkRow    = $("autoDarkRow");
+const autoDarkChk    = $("autoDarkChk");
+const autoDarkDesc   = $("autoDarkDesc");
+const engineTintChk  = $("engineTintChk");
+const engineTintDesc = $("engineTintDesc");
+const fontSelect     = $("fontSelect");
 
 let addColor = "sky";
 
@@ -663,18 +698,92 @@ function defaultEngines() {
 }
 
 function loadAll() {
-  chrome.storage.sync.get([K_LANG, K_ENGS, K_LAST, K_SHORTCUT], (res) => {
+  chrome.storage.sync.get([K_LANG, K_ENGS, K_LAST, K_SHORTCUT, K_APPEARANCE], (res) => {
     state.lang = (LANG_CODES.includes(res?.[K_LANG]) ? res[K_LANG] : "en"); // 기본 영어
     let engs = res?.[K_ENGS];
     state.engines = normalizeEngines(Array.isArray(engs) && engs.length ? engs : defaultEngines());
     state.lastEngineId = res?.[K_LAST] || state.engines[0]?.id || "google";
     state.shortcut = res?.[K_SHORTCUT] || { type:"double", key:"Shift" };
+    state.appearance = normalizeAppearance(res?.[K_APPEARANCE]);
 
     renderLangSelect();
     renderEngineList();
     initAddColorPicker();
     initShortcutUI();
+    initAppearanceUI();
   });
+}
+
+// =====================
+// Appearance
+// =====================
+function initAppearanceUI() {
+  renderThemeGrid();
+
+  autoDarkChk.checked   = state.appearance.autoDark;
+  engineTintChk.checked = state.appearance.engineTint;
+  fontSelect.value      = state.appearance.font;
+
+  autoDarkChk.addEventListener("change", () => {
+    state.appearance.autoDark = autoDarkChk.checked;
+  });
+  engineTintChk.addEventListener("change", () => {
+    state.appearance.engineTint = engineTintChk.checked;
+  });
+  fontSelect.addEventListener("change", () => {
+    state.appearance.font = FONT_IDS.includes(fontSelect.value) ? fontSelect.value : "system";
+  });
+
+  syncAutoDarkRow();
+}
+
+// Auto dark는 classic에서만 의미가 있다.
+// 다른 테마는 자체적으로 명암이 확정돼 있어 OS 모드의 영향을 받지 않는다.
+function syncAutoDarkRow() {
+  const isClassic = state.appearance.theme === "classic";
+  autoDarkChk.disabled = !isClassic;
+  autoDarkRow.classList.toggle("disabled", !isClassic);
+  autoDarkDesc.textContent = isClassic
+    ? "Follow your system dark mode."
+    : "Not used — the " + state.appearance.theme + " theme has a fixed light/dark look.";
+  engineTintDesc.textContent = isClassic
+    ? "Tint the popup with the selected engine's color."
+    : "Show the engine color on the search box and the active engine outline.";
+}
+
+function renderThemeGrid() {
+  themeGrid.innerHTML = "";
+  for (const t of THEME_META) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "themeCard" + (t.id === state.appearance.theme ? " active" : "");
+    card.dataset.theme = t.id;
+    card.innerHTML =
+      '<div class="tPrevWrap">' +
+        '<div class="tPrev">' +
+          '<div class="tPrevTop">' +
+            '<span class="tLogo"></span>' +
+            '<span class="tPill on"></span>' +
+            '<span class="tPill"></span>' +
+            '<span class="tPill"></span>' +
+          '</div>' +
+          '<div class="tPrevBot">' +
+            '<span class="tInput"></span>' +
+            '<span class="tBtn"></span>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="tName"></div><div class="tDesc"></div>';
+    card.querySelector(".tName").textContent = t.name;
+    card.querySelector(".tDesc").textContent = t.desc;
+    card.addEventListener("click", () => {
+      state.appearance.theme = t.id;
+      themeGrid.querySelectorAll(".themeCard").forEach(c =>
+        c.classList.toggle("active", c.dataset.theme === t.id));
+      syncAutoDarkRow();
+    });
+    themeGrid.appendChild(card);
+  }
 }
 
 saveBtn.addEventListener("click", () => {
@@ -684,7 +793,8 @@ saveBtn.addEventListener("click", () => {
     [K_LANG]:     state.lang,
     [K_ENGS]:     state.engines,
     [K_LAST]:     state.lastEngineId,
-    [K_SHORTCUT]: state.shortcut
+    [K_SHORTCUT]: state.shortcut,
+    [K_APPEARANCE]: state.appearance
   }, () => {
     savedMsg.style.display = "inline";
     setTimeout(() => (savedMsg.style.display = "none"), 1800);
