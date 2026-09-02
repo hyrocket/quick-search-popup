@@ -4,6 +4,9 @@ CLAUDE.md
 # 로컬 도구 데이터
 .git-study/
 
+# 데일리 업무 일지 (로컬에만 보관)
+logs/
+
 # 스토어 제출용 ZIP 파일들
 *.zip
 
