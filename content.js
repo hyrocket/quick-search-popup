@@ -13,6 +13,23 @@ const K_ENGS    = "shiftsearch:engines";
 const K_LAST    = "shiftsearch:lastEngineId";
 const K_HISTORY = "shiftsearch:history";
 const K_SHORTCUT= "shiftsearch:shortcut";   // { type:"double", key:"Shift" } | { type:"single", key:"Ctrl+Space" }
+const K_APPEARANCE = "shiftsearch:appearance"; // { theme, autoDark, engineTint, font }
+
+// 테마/외형 — 기본값 조합이 곧 현행 모습이다 (classic + autoDark + engineTint).
+// 이 기본값을 바꾸면 기존 사용자의 팝업이 달라진다.
+const THEME_IDS = ["classic", "mono", "midnight", "glass", "paper", "terminal"];
+const FONT_IDS  = ["system", "serif", "mono"];
+const DEFAULT_APPEARANCE = { theme:"classic", autoDark:true, engineTint:true, font:"system" };
+
+function normalizeAppearance(v) {
+  const a = (v && typeof v === "object") ? v : {};
+  return {
+    theme:      THEME_IDS.includes(a.theme) ? a.theme : DEFAULT_APPEARANCE.theme,
+    autoDark:   typeof a.autoDark   === "boolean" ? a.autoDark   : DEFAULT_APPEARANCE.autoDark,
+    engineTint: typeof a.engineTint === "boolean" ? a.engineTint : DEFAULT_APPEARANCE.engineTint,
+    font:       FONT_IDS.includes(a.font) ? a.font : DEFAULT_APPEARANCE.font,
+  };
+}
 const LEGACY_K_COLORMAP = "shiftsearch:engineColorMap";
 
 const MAX_HISTORY = 30;
@@ -243,16 +260,10 @@ const PALETTE = {
   rose:   { label:"Rose",   panelBg:"#FFF1F3", panelFg:"#1A0A0D", subBg:"#FFE4E6", border:"#FECDD3", accent:"#E11D48" }
 };
 
-// 브라우저 다크모드 감지
-const isDarkMode = () => window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-
-// 다크모드용 공통 팔레트 (엔진 accent는 유지, 배경/텍스트만 덮어씀)
-const DARK_OVERRIDE = {
-  panelBg: "#1E1E2E",
-  panelFg: "#CDD6F4",
-  subBg:   "#313244",
-  border:  "#45475A"
-};
+// 다크모드 처리는 CSS로 옮겼다.
+// 값(구 DARK_OVERRIDE: #1E1E2E / #CDD6F4 / #313244 / #45475A)은
+// shadow DOM 스타일의 @media(prefers-color-scheme:dark) 블록에 있다.
+// JS 분기를 없앴으므로 OS 모드 전환이 팝업이 열린 채로도 즉시 반영된다.
 
 // Resolve engine theme: preset key OR "#rrggbb" custom
 function paletteForEngine(en) {
@@ -348,7 +359,8 @@ let state = {
   engines: defaultEngines(),
   lastEngineId: "google",
   history: [],
-  shortcut: { type: "double", key: "Shift" }
+  shortcut: { type: "double", key: "Shift" },
+  appearance: { ...DEFAULT_APPEARANCE }
 };
 
 // 최초 한 번만 storage에서 로드, 이후 메모리 캐시 사용
@@ -363,6 +375,10 @@ chrome.storage?.sync?.onChanged?.addListener((changes) => {
   if (changes[K_LAST])     { state.lastEngineId = changes[K_LAST].newValue || state.engines[0]?.id; }
   if (changes[K_HISTORY])  { state.history    = changes[K_HISTORY].newValue || []; }
   if (changes[K_SHORTCUT]) { state.shortcut   = changes[K_SHORTCUT].newValue || { type:"double", key:"Shift" }; }
+  if (changes[K_APPEARANCE]) {
+    state.appearance = normalizeAppearance(changes[K_APPEARANCE].newValue);
+    if (host) applyTheme(); // 열려 있는 팝업에도 즉시 반영
+  }
 });
 
 // =======================
@@ -484,7 +500,12 @@ function ensurePanel() {
   if (host) return;
 
   host = document.createElement("div");
-  host.dataset.ssTheme = "classic"; // 테마 속성은 항상 존재해야 함 (CSS 셀렉터 기준점)
+  // 테마 속성은 항상 존재해야 한다 (CSS 셀렉터 기준점).
+  // applyTheme()이 곧 덮어쓰지만, 그 전에 렌더되는 한 프레임에서도 어긋나면 안 된다.
+  host.dataset.ssTheme    = DEFAULT_APPEARANCE.theme;
+  host.dataset.ssAutodark = DEFAULT_APPEARANCE.autoDark ? "on" : "off";
+  host.dataset.ssTint     = DEFAULT_APPEARANCE.engineTint ? "on" : "off";
+  host.dataset.ssFont     = DEFAULT_APPEARANCE.font;
   sr = host.attachShadow({ mode: "open" });
 
   const style = document.createElement("style");
@@ -497,6 +518,21 @@ function ensurePanel() {
        ⚠ 접두사를 --ss- 외의 것으로 바꾸지 말 것 (CLAUDE.md 참고)
        ══════════════════════════════════════════════════════════════ */
     :host{
+      /* 엔진 팔레트 → 테마 변수 매핑 (classic 기본 동작).
+         applyTheme()은 --ss-engine-* 원본만 인라인으로 꽂는다. 인라인은 어떤
+         CSS 규칙보다 강하므로, 파생 이름(--ss-panel-*)에 직접 꽂으면 테마 블록이
+         절대 이길 수 없다. 그래서 매핑을 CSS로 옮겼다. */
+      --ss-panel-bg: var(--ss-engine-bg,#FFFFFF);
+      --ss-panel-fg: var(--ss-engine-fg,#111827);
+      --ss-sub-bg:   var(--ss-engine-sub,#F6F7FB);
+      --ss-border:   var(--ss-engine-bd,#CBD5E1);
+      --ss-accent:   var(--ss-engine-accent,#94A3B8);
+
+      /* 엔진 tint — 비-classic 테마에서 엔진 색이 새어나오는 유일한 통로 */
+      --ss-tint-base: var(--ss-accent);
+      --ss-tint: var(--ss-tint-base);
+      --ss-tint-blend: 100%;
+
       --ss-font: system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
 
       /* overlay */
@@ -558,6 +594,150 @@ function ensurePanel() {
       --ss-hover-bg: color-mix(in oklab,var(--ss-sub-bg,#F3F4F6) 80%,transparent);
       --ss-danger: #EF4444;
       --ss-scrollbar: auto;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       테마 프리셋 — classic은 프리셋이 아니다 (위 :host 기본값 = 현행 동작).
+       아래 파생 블록은 classic을 제외한 모든 테마에 공통 적용된다.
+       각 테마 블록은 기반색 5~6개만 지정하면 나머지가 자동으로 따라온다.
+       ══════════════════════════════════════════════════════════════ */
+    :host(:not([data-ss-theme="classic"])){
+      --ss-panel-bd: var(--ss-border);
+      --ss-divider: color-mix(in oklab,var(--ss-border) 70%,transparent);
+      --ss-title-fg: var(--ss-accent);
+
+      --ss-input-bg: var(--ss-sub-bg);
+      --ss-input-bd: var(--ss-tint);
+      --ss-input-focus-bd: var(--ss-tint);
+      --ss-input-ring: color-mix(in oklab,var(--ss-tint) 22%,transparent);
+
+      --ss-btn-bg: var(--ss-sub-bg);
+      --ss-btn-bd: var(--ss-border);
+      --ss-btn-hover-bg: color-mix(in oklab,var(--ss-sub-bg) 88%,var(--ss-panel-fg));
+      --ss-btn-hover-bd: var(--ss-accent);
+      --ss-primary-bg: var(--ss-accent);
+      --ss-primary-bg-hover: color-mix(in oklab,var(--ss-accent) 85%,var(--ss-panel-fg));
+
+      --ss-chip-bg: color-mix(in oklab,var(--ss-sub-bg) 85%,transparent);
+      --ss-chip-fg: var(--ss-panel-fg);
+      --ss-chip-hover-bg: var(--ss-sub-bg);
+      --ss-chip-hover-bd: var(--ss-border);
+      --ss-pill-active-bd: var(--ss-tint);
+
+      --ss-aitag-bg: var(--ss-accent);
+      --ss-aitag-fg: var(--ss-on-accent);
+
+      --ss-bar-bg: var(--ss-panel-bg);
+      --ss-bar-bd: var(--ss-border);
+      --ss-bar-fg: var(--ss-panel-fg);
+      --ss-bar-backdrop: var(--ss-backdrop);
+      --ss-hint-fg: var(--ss-fg-muted);
+      --ss-iconbtn-bg: var(--ss-sub-bg);
+      --ss-iconbtn-bd: var(--ss-border);
+      --ss-iconbtn-hover-bd: var(--ss-accent);
+      --ss-iconbtn-fg: var(--ss-panel-fg);
+
+      --ss-drop-bg: var(--ss-panel-bg);
+      --ss-drop-bd: var(--ss-border);
+      --ss-hover-bg: color-mix(in oklab,var(--ss-sub-bg) 82%,var(--ss-panel-fg));
+      --ss-scrollbar: color-mix(in oklab,var(--ss-panel-fg) 32%,var(--ss-panel-bg)) var(--ss-sub-bg);
+    }
+    /* classic 외 테마에서만 플레이스홀더 색을 지정한다.
+       classic은 UA 기본값을 그대로 두어야 현행과 동일하다. */
+    :host(:not([data-ss-theme="classic"])) .search::placeholder{color:var(--ss-placeholder)}
+
+    /* 엔진 tint ON — 입력창 테두리와 활성 pill 테두리에만 엔진 색이 반영된다.
+       다크 계열 테마는 --ss-tint-blend로 채도를 낮춘다. */
+    :host([data-ss-tint="on"]:not([data-ss-theme="classic"])){
+      --ss-tint: color-mix(in oklab,var(--ss-engine-accent,#94A3B8) var(--ss-tint-blend),var(--ss-panel-bg));
+    }
+
+    /* ── mono ── */
+    :host([data-ss-theme="mono"]){
+      --ss-panel-bg:#FFFFFF; --ss-panel-fg:#171717;
+      --ss-sub-bg:#FAFAFA;   --ss-border:#D4D4D4;
+      --ss-accent:#171717;   --ss-on-accent:#FAFAFA;
+      --ss-fg-muted:#737373; --ss-placeholder:#A3A3A3;
+      --ss-pill-active-bg:transparent;
+      --ss-pill-active-fg:#171717;
+    }
+
+    /* ── midnight ── */
+    :host([data-ss-theme="midnight"]){
+      --ss-panel-bg:#1C1C22; --ss-panel-fg:#F0F0F4;
+      --ss-sub-bg:#26262E;   --ss-border:#34343E;
+      --ss-accent:#7F77DD;   --ss-on-accent:#16161A;
+      --ss-fg-muted:#8E8E9A; --ss-placeholder:#6E6E7A;
+      --ss-pill-active-bg:#2A2A33;
+      --ss-pill-active-fg:#F0F0F4;
+      --ss-overlay-bg:rgba(0,0,0,.42);
+      --ss-shadow:0 8px 32px rgba(0,0,0,.5);
+      --ss-bar-shadow:0 6px 20px rgba(0,0,0,.4);
+      --ss-drop-shadow:0 8px 28px rgba(0,0,0,.45);
+      --ss-scrollbar:#4A4A56 #26262E;
+      --ss-tint-blend:72%;
+    }
+
+    /* ── glass ── */
+    :host([data-ss-theme="glass"]){
+      --ss-panel-bg:rgba(255,255,255,.72); --ss-panel-fg:#1A1A20;
+      --ss-sub-bg:rgba(255,255,255,.55);   --ss-border:rgba(255,255,255,.6);
+      --ss-accent:#1A1A20;   --ss-on-accent:#F5F5F7;
+      --ss-fg-muted:#4B4B55; --ss-placeholder:#5A5A64;
+      --ss-pill-active-bg:rgba(255,255,255,.75);
+      --ss-pill-active-fg:#1A1A20;
+      --ss-backdrop:blur(14px) saturate(1.2);
+      --ss-overlay-bg:rgba(0,0,0,.28);
+      --ss-hover-bg:rgba(255,255,255,.5);
+      --ss-scrollbar:rgba(0,0,0,.28) transparent;
+    }
+    /* backdrop-filter 미지원 시 반투명만 남으면 가독성이 무너진다 → 불투명 대체 */
+    @supports not (backdrop-filter: blur(1px)){
+      :host([data-ss-theme="glass"]){
+        --ss-panel-bg:#F5F5F7;
+        --ss-sub-bg:#EAEAEE;
+        --ss-border:#D6D6DC;
+        --ss-pill-active-bg:#FFFFFF;
+        --ss-hover-bg:#E4E4EA;
+      }
+    }
+
+    /* ── paper ── */
+    :host([data-ss-theme="paper"]){
+      --ss-panel-bg:#FAF5EC; --ss-panel-fg:#3E3324;
+      --ss-sub-bg:#F2EADB;   --ss-border:#E3D9C6;
+      --ss-accent:#99532A;   --ss-on-accent:#FAF0E4;
+      --ss-fg-muted:#8A7A61; --ss-placeholder:#A3947B;
+      --ss-pill-active-bg:#F0E7D6;
+      --ss-pill-active-fg:#3E3324;
+      --ss-font:Georgia,'Times New Roman','Apple SD Gothic Neo','Malgun Gothic',serif;
+    }
+
+    /* ── terminal ── */
+    :host([data-ss-theme="terminal"]){
+      --ss-panel-bg:#0D1117; --ss-panel-fg:#A9B7C1;
+      --ss-sub-bg:#161B22;   --ss-border:#21313D;
+      --ss-accent:#238636;   --ss-on-accent:#E6FFED;
+      --ss-fg-muted:#58707E; --ss-placeholder:#4E6470;
+      --ss-pill-active-bg:transparent;
+      --ss-pill-active-fg:#3FB950;
+      --ss-tint-base:#2A4A35;
+      --ss-overlay-bg:rgba(0,0,0,.5);
+      --ss-shadow:0 8px 32px rgba(0,0,0,.55);
+      --ss-bar-shadow:0 6px 20px rgba(0,0,0,.45);
+      --ss-drop-shadow:0 8px 28px rgba(0,0,0,.5);
+      --ss-scrollbar:#2A4A35 #161B22;
+      --ss-tint-blend:72%;
+      --ss-font:ui-monospace,'Cascadia Mono','D2Coding',Consolas,'Malgun Gothic',monospace;
+    }
+
+    /* 폰트 오버라이드 — 테마 기본 폰트를 사용자가 덮어쓴다.
+       테마 블록보다 뒤에 와야 이긴다 (동일 specificity → 소스 순서). */
+    :host([data-ss-font="serif"]){
+      --ss-font:Georgia,'Apple SD Gothic Neo','Malgun Gothic',serif;
+    }
+    :host([data-ss-font="mono"]){
+      --ss-font:ui-monospace,'Cascadia Mono','D2Coding',Consolas,'Malgun Gothic',monospace;
     }
 
     :host,*{box-sizing:border-box;font-family:var(--ss-font)}
@@ -802,9 +982,15 @@ function ensurePanel() {
 
     /* ── Dark mode ── classic 테마 전용.
        다른 테마는 자체적으로 명암이 확정돼 있으므로 OS 다크모드의 영향을 받지 않는다.
-       panel 배경/텍스트는 JS applyTheme(DARK_OVERRIDE)이 처리한다. */
+       autoDark를 끄면 이 블록이 매칭되지 않아 라이트 색상이 유지된다. */
     @media(prefers-color-scheme:dark){
-      :host([data-ss-theme="classic"]){
+      :host([data-ss-theme="classic"][data-ss-autodark="on"]){
+        /* 구 DARK_OVERRIDE — accent는 엔진 색을 그대로 유지한다 */
+        --ss-panel-bg:#1E1E2E;
+        --ss-panel-fg:#CDD6F4;
+        --ss-sub-bg:#313244;
+        --ss-border:#45475A;
+
         --ss-title-fg:#818CF8;
         --ss-chip-bg:rgba(255,255,255,.07);
         --ss-chip-hover-bg:rgba(255,255,255,.13);
@@ -1177,14 +1363,25 @@ function engineLabel(en) {
 // =======================
 function applyTheme() {
   const en = getCurrentEngine();
-  const p = paletteForEngine(en);
-  // 다크모드면 배경/텍스트는 DARK_OVERRIDE로, accent는 엔진 색 유지
-  const dark = isDarkMode();
-  host.style.setProperty("--ss-panel-bg", dark ? DARK_OVERRIDE.panelBg : p.panelBg);
-  host.style.setProperty("--ss-panel-fg", dark ? DARK_OVERRIDE.panelFg : p.panelFg);
-  host.style.setProperty("--ss-sub-bg",   dark ? DARK_OVERRIDE.subBg   : p.subBg);
-  host.style.setProperty("--ss-border",   dark ? DARK_OVERRIDE.border  : p.border);
-  host.style.setProperty("--ss-accent",   p.accent); // accent는 항상 엔진 색
+  const ap = state.appearance || DEFAULT_APPEARANCE;
+  const theme   = THEME_IDS.includes(ap.theme) ? ap.theme : "classic";
+  const tintOn  = ap.engineTint !== false;
+
+  // classic + tint off → 엔진 색을 무시하고 중립 팔레트 고정
+  const p = (theme === "classic" && !tintOn) ? PALETTE.pastel : paletteForEngine(en);
+
+  // 테마 스위치는 속성으로만. 다크모드 분기는 CSS media query가 처리한다.
+  host.dataset.ssTheme    = theme;
+  host.dataset.ssAutodark = (ap.autoDark !== false) ? "on" : "off";
+  host.dataset.ssTint     = tintOn ? "on" : "off";
+  host.dataset.ssFont     = FONT_IDS.includes(ap.font) ? ap.font : "system";
+
+  // 엔진 팔레트 원본만 인라인으로. 파생 변수 매핑은 CSS가 담당한다.
+  host.style.setProperty("--ss-engine-bg",     p.panelBg);
+  host.style.setProperty("--ss-engine-fg",     p.panelFg);
+  host.style.setProperty("--ss-engine-sub",    p.subBg);
+  host.style.setProperty("--ss-engine-bd",     p.border);
+  host.style.setProperty("--ss-engine-accent", p.accent);
 
   // Update engine button display
   if (selectEl) {
@@ -1364,13 +1561,14 @@ function normalizeLang(v) {
 
 function loadAll(cb) {
   chrome.storage?.sync?.get?.(
-    [K_LANG, K_NEWTAB, K_ENGS, K_LAST, K_HISTORY, K_SHORTCUT, "shiftsearch:engineColorMap"],
+    [K_LANG, K_NEWTAB, K_ENGS, K_LAST, K_HISTORY, K_SHORTCUT, K_APPEARANCE, "shiftsearch:engineColorMap"],
     (res) => {
       const lang = normalizeLang(res?.[K_LANG]);
       const openInNewTab = typeof res?.[K_NEWTAB] === "boolean" ? res[K_NEWTAB] : false;
       let engines = normalizeEngines(migrateIfNeeded(res));
       const history = Array.isArray(res?.[K_HISTORY]) ? res[K_HISTORY] : [];
       const shortcut = res?.[K_SHORTCUT] || { type:"double", key:"Shift" };
+      const appearance = normalizeAppearance(res?.[K_APPEARANCE]);
 
       let last = typeof res?.[K_LAST] === "string" ? res[K_LAST] : engines[0]?.id;
       if (!engines.find(e => e.id === last && e.enabled !== false)) {
@@ -1378,7 +1576,7 @@ function loadAll(cb) {
         chrome.storage?.sync?.set?.({ [K_LAST]: last });
       }
 
-      state = { lang, openInNewTab, engines, lastEngineId: last, history, shortcut };
+      state = { lang, openInNewTab, engines, lastEngineId: last, history, shortcut, appearance };
       _stateReady = true;
 
       cb?.();
@@ -1396,6 +1594,6 @@ function loadAll(cb) {
 loadAll(() => {});
 
 // 브라우저 다크모드 전환 시 팝업 테마 즉시 갱신
-window.matchMedia?.("(prefers-color-scheme: dark)").addEventListener?.("change", () => {
-  if (overlayOpen) applyTheme();
-});
+// (구) 다크모드 전환 리스너는 제거했다.
+// 이제 @media(prefers-color-scheme:dark)가 변수를 직접 교체하므로
+// 팝업이 열린 상태에서도 JS 개입 없이 즉시 전환된다.
