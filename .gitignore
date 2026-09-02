@@ -1,6 +1,9 @@
 # Claude Code 지침서 (로컬에만 보관)
 CLAUDE.md
 
+# 로컬 도구 데이터
+.git-study/
+
 # 스토어 제출용 ZIP 파일들
 *.zip
 
