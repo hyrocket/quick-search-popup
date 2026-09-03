@@ -106,13 +106,19 @@ const langSelect   = $("langSelect");
 const engineList   = $("engineList");
 const addName      = $("addName");
 const addUrl       = $("addUrl");
-const addIcon      = $("addIcon");
+const addIconWrap  = $("addIconWrap");
 const addBtn       = $("addBtn");
 const addColorRow  = $("addColorRow");
 const addHexInput  = $("addHexInput");
 const saveBtn      = $("saveBtn");
 const savedMsg     = $("savedMsg");
 const previewStrip = $("previewStrip");
+// ── Recommended engines refs ──
+const recMore   = $("recMore");
+const recGrid   = $("recGrid");
+const recCount  = $("recCount");
+const recSel    = $("recSel");
+const recAddBtn = $("recAddBtn");
 // ── Appearance refs ──
 const themeGrid      = $("themeGrid");
 const autoDarkRow    = $("autoDarkRow");
@@ -289,6 +295,120 @@ document.addEventListener("mousedown", (e) => {
  *  - onChange: (colorKeyOrHex) => void
  * Returns the swatch button element.
  */
+/* Emoji picker
+   renderColorPicker와 같은 팝오버 패턴(_openPopover / closeAllPopovers)을 쓴다.
+   목록에 없는 이모지는 상단 입력칸에 직접 입력/붙여넣기 (OS 이모지 키보드: Win + .) */
+const EMOJI_SETS = [
+  ["Search",   ["\u{1F50D}","\u{1F50E}","\u{1F310}","\u{1F9ED}","\u{1F4E1}","\u{1F517}","⚡","⭐","\u{1F680}","\u{1F3AF}"]],
+  ["AI",       ["\u{1F916}","\u{1F9E0}","✨","\u{1F4AB}","\u{1FA84}","\u{1F4A1}","\u{1F52E}","\u{1F9EC}"]],
+  ["Shopping", ["\u{1F6D2}","\u{1F6CD}️","\u{1F4E6}","\u{1F4B3}","\u{1F3F7}️","\u{1F4B0}","\u{1F381}","\u{1F3EA}"]],
+  ["Media",    ["▶️","\u{1F3AC}","\u{1F3B5}","\u{1F3A7}","\u{1F4FA}","\u{1F4F7}","\u{1F5BC}️","\u{1F3AE}"]],
+  ["Social",   ["\u{1F4AC}","\u{1F5E8}️","\u{1F4E2}","\u{1F465}","\u{1F426}","\u{1F4CC}","❤️","\u{1F44D}"]],
+  ["Docs",     ["\u{1F4DA}","\u{1F4D6}","\u{1F4DD}","\u{1F4C4}","\u{1F4F0}","\u{1F5DE}️","\u{1F3DB}️","\u{1F393}"]],
+  ["Dev",      ["\u{1F4BB}","\u{1F419}","\u{1F527}","\u{1F9E9}","\u{1F5A5}️","⌨️","\u{1F5C4}️","\u{1F4CA}"]],
+  ["Places",   ["\u{1F5FA}️","\u{1F4CD}","\u{1F9F3}","✈️","\u{1F3E0}","\u{1F37D}️","☕","\u{1F3E5}"]],
+  ["Colors",   ["\u{1F535}","\u{1F7E2}","\u{1F534}","\u{1F7E1}","\u{1F7E3}","\u{1F7E0}","⚫","⚪","\u{1F7E4}","\u{1F537}","\u{1F536}","⬛"]]
+];
+
+function renderEmojiPicker(anchor, currentIcon, onChange, small) {
+  anchor.innerHTML = "";
+  anchor.style.position = "relative";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "emojiBtn" + (small ? " sm" : "");
+  btn.textContent = currentIcon || "\u{1F50D}";
+  btn.title = "Click to change icon";
+
+  const pop = document.createElement("div");
+  pop.className = "emojiPopover";
+  pop.style.top = small ? "34px" : "44px";
+  pop.style.left = "0";
+
+  // 직접 입력 행
+  const row = document.createElement("div");
+  row.className = "emojiInputRow";
+  const inp = document.createElement("input");
+  inp.type = "text";
+  inp.className = "emojiInline";
+  inp.maxLength = 8;   // ZWJ 조합 이모지는 코드유닛이 길다
+  inp.placeholder = "Type or paste";
+  inp.value = currentIcon || "";
+  const hint = document.createElement("span");
+  hint.className = "emojiHint";
+  hint.textContent = "Win + .";
+  row.append(inp, hint);
+
+  const scroll = document.createElement("div");
+  scroll.className = "emojiScroll";
+
+  const cells = [];
+  function markActive(sel) {
+    for (const c of cells) c.classList.toggle("active", c.dataset.em === sel);
+  }
+  function pick(val) {
+    const v = (val || "").trim();
+    if (!v) return;
+    btn.textContent = v;
+    onChange(v);
+    markActive(v);
+  }
+
+  for (const [label, list] of EMOJI_SETS) {
+    const cat = document.createElement("div");
+    cat.className = "emojiCat";
+    cat.textContent = label;
+    const grid = document.createElement("div");
+    grid.className = "emojiGrid";
+    for (const em of list) {
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "emojiCell";
+      cell.textContent = em;
+      cell.dataset.em = em;
+      cell.addEventListener("click", (e) => {
+        e.stopPropagation();
+        inp.value = em;
+        pick(em);
+        closeAllPopovers();
+      });
+      cells.push(cell);
+      grid.appendChild(cell);
+    }
+    scroll.append(cat, grid);
+  }
+  markActive(currentIcon);
+
+  inp.addEventListener("click", (e) => e.stopPropagation());
+  inp.addEventListener("input", () => pick(inp.value));
+  inp.addEventListener("keydown", (e) => {
+    e.stopPropagation();
+    if (e.key === "Enter")  { e.preventDefault(); pick(inp.value); closeAllPopovers(); }
+    if (e.key === "Escape") { e.preventDefault(); closeAllPopovers(); }
+  });
+
+  pop.append(row, scroll);
+  anchor.append(btn, pop);
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = pop.classList.contains("open");
+    closeAllPopovers();
+    if (isOpen) return;
+    pop.classList.add("open");
+    _openPopover = pop;
+    // 오른쪽으로 넘치면 반대편에 붙인다
+    pop.style.left = "0"; pop.style.right = "auto";
+    if (pop.getBoundingClientRect().right > window.innerWidth - 8) {
+      pop.style.left = "auto"; pop.style.right = "0";
+    }
+    inp.focus();
+    inp.select();
+  });
+
+  return btn;
+}
+
 function renderColorPicker(anchor, currentColor, onChange) {
   anchor.innerHTML = "";
   anchor.style.position = "relative";
@@ -464,9 +584,13 @@ function renderEngineList() {
     const nameWrap = document.createElement("div");
     nameWrap.className = "engName";
 
+    // 아이콘: 클릭하면 이모지 피커가 열린다
     const iconSpan = document.createElement("span");
-    iconSpan.textContent = en.icon || "🔍";
-    iconSpan.style.fontSize = "16px";
+    iconSpan.className = "emojiAnchor";
+    renderEmojiPicker(iconSpan, en.icon || "🔍", (val) => {
+      en.icon = val;
+      renderPreview();
+    }, true);
 
     const nameInput = document.createElement("input");
     nameInput.type = "text";
@@ -584,6 +708,8 @@ function renderEngineList() {
     card.append(toggleWrap, info, colorWrap, orderBtns);
     engineList.appendChild(card);
   });
+  // 목록이 바뀌면 추천 패널의 Added 판정도 다시 한다
+  renderRecommended();
 }
 
 function swap(idx, delta) {
@@ -601,10 +727,16 @@ function initAddColorPicker() {
 }
 initAddColorPicker();
 
+let addIconVal = "🔍";
+function initAddIconPicker() {
+  renderEmojiPicker(addIconWrap, addIconVal, (val) => { addIconVal = val; });
+}
+initAddIconPicker();
+
 addBtn.addEventListener("click", () => {
   const name = addName.value.trim();
   const url  = addUrl.value.trim();
-  const icon = addIcon.value.trim() || "🔍";
+  const icon = addIconVal || "🔍";
   if (!name || !url.includes("{q}")) {
     alert("Please enter a name and a URL containing {q}.");
     return;
@@ -620,7 +752,8 @@ addBtn.addEventListener("click", () => {
   });
   addName.value = "";
   addUrl.value = "";
-  addIcon.value = "";
+  addIconVal = "🔍";
+  initAddIconPicker();
   addColor = "sky";
   initAddColorPicker();
   renderEngineList();
@@ -696,13 +829,223 @@ function normalizeEngines(engs) {
   return out;
 }
 
+/* ── Recommended engines ──
+   설정 페이지 전용이다. content.js는 이 목록을 읽지 않으므로
+   여기 하나만 원본이고 이중 관리 대상이 아니다 (CLAUDE.md #2와 무관).
+   기본 8개와 겹치는 엔진은 넣지 않는다. */
+/* Wikipedia는 언어별로 도메인이 다르다. www.wikipedia.org 는 포털이라 검색이 안 되고
+   /wiki/ 경로는 영문판으로 리다이렉트된다. 그래서 설치 시점의 브라우저 언어로 시드한다.
+   ⚠ content.js / options.js 양쪽에 같은 매핑이 있다 (CLAUDE.md 금지항목 #2) */
+const WIKI_HOST = {
+  kr:"ko", en:"en", ja:"ja", "zh-CN":"zh", "zh-TW":"zh", es:"es", fr:"fr",
+  de:"de", ru:"ru", vn:"vi", ms:"ms", th:"th", id:"id"
+};
+function wikipediaUrl(lang) {
+  const h = WIKI_HOST[lang] || "en";
+  return `https://${h}.wikipedia.org/wiki/Special:Search?search={q}`;
+}
+
+const RECOMMENDED = [
+  /* ── 기본 8개 ──
+     실수로 지웠을 때 다시 넣을 수 있어야 하므로 추천 목록에도 포함한다.
+     이미 들어 있으면 자동으로 "Added"(체크+잠금)로 표시된다.
+     ⚠ defaultEngines()와 name/icon/color/url이 같아야 지웠다 넣어도 모습이 그대로다 */
+  { name:{ en:"Google", kr:"구글" },             icon:"\u{1F50D}", color:"sky",    url:"https://www.google.com/search?q={q}" },
+  { name:{ en:"Naver", kr:"네이버" },             icon:"\u{1F7E2}", color:"mint",   url:"https://search.naver.com/search.naver?query={q}" },
+  { name:{ en:"Bing", kr:"빙" },                 icon:"\u{1F535}", color:"pastel", url:"https://www.bing.com/search?q={q}" },
+  { name:{ en:"Wikipedia", kr:"위키피디아", ja:"ウィキペディア" }, icon:"\u{1F4DA}", color:"gray", url:wikipediaUrl(guessDefaultLang()) },
+  { name:{ en:"Perplexity AI", kr:"퍼플렉시티" },  icon:"\u{1F916}", color:"violet", url:"https://www.perplexity.ai/search?q={q}" },
+  { name:{ en:"ChatGPT", kr:"챗GPT" },            icon:"\u{1F4AC}", color:"gray",   url:"https://chatgpt.com/?q={q}&hints=search" },
+  { name:{ en:"Claude", kr:"클로드" },            icon:"✨",    color:"peach",  url:"https://claude.ai/new?q={q}" },
+  { name:{ en:"YouTube", kr:"유튜브" },           icon:"▶️", color:"rose", url:"https://www.youtube.com/results?search_query={q}" },
+  // ── Search ──
+  { name:{ en:"DuckDuckGo" },                                icon:"\u{1F986}",  color:"lemon",  url:"https://duckduckgo.com/?q={q}" },
+  { name:{ en:"Daum", kr:"다음" },                            icon:"\u{1F537}",  color:"sky",    url:"https://search.daum.net/search?w=tot&q={q}" },
+  { name:{ en:"Yahoo! JAPAN", ja:"Yahoo! JAPAN" },           icon:"\u{1F338}",  color:"rose",   url:"https://search.yahoo.co.jp/search?p={q}" },
+  // ── Images / Maps ──
+  { name:{ en:"Google Images", kr:"구글 이미지", ja:"Google 画像" }, icon:"\u{1F5BC}️", color:"violet", url:"https://www.google.com/search?tbm=isch&q={q}" },
+  { name:{ en:"Google Maps", kr:"구글 지도", ja:"Google マップ" },   icon:"\u{1F5FA}️", color:"sky",  url:"https://www.google.com/maps/search/{q}" },
+  { name:{ en:"Naver Map", kr:"네이버 지도" },                 icon:"\u{1F4CD}",  color:"mint",   url:"https://map.naver.com/p/search/{q}" },
+  // ── Reference / Dev ──
+  { name:{ en:"Namu Wiki", kr:"나무위키" },                    icon:"\u{1F4D7}",  color:"mint",   url:"https://namu.wiki/Search?q={q}" },
+  { name:{ en:"GitHub" },                                    icon:"\u{1F419}",  color:"gray",   url:"https://github.com/search?q={q}" },
+  { name:{ en:"Stack Overflow" },                            icon:"\u{1F536}",  color:"lemon",  url:"https://stackoverflow.com/search?q={q}" },
+  // ── Social ──
+  { name:{ en:"Reddit" },                                    icon:"\u{1F47D}",  color:"peach",  url:"https://www.reddit.com/search/?q={q}" },
+  { name:{ en:"Pinterest" },                                 icon:"\u{1F4CC}",  color:"rose",   url:"https://www.pinterest.com/search/pins/?q={q}" },
+  { name:{ en:"Instagram", kr:"인스타그램" },                  icon:"\u{1F4F7}",  color:"rose",   url:"https://www.instagram.com/explore/search/keyword/?q={q}" },
+  // ── Shopping ──
+  { name:{ en:"Amazon", kr:"아마존" },                         icon:"\u{1F4E6}",  color:"lemon",  url:"https://www.amazon.com/s?k={q}" },
+  { name:{ en:"Amazon.co.jp", ja:"Amazon.co.jp" },           icon:"\u{1F4E6}",  color:"peach",  url:"https://www.amazon.co.jp/s?k={q}" },
+  { name:{ en:"Coupang", kr:"쿠팡" },                          icon:"\u{1F6D2}",  color:"peach",  url:"https://www.coupang.com/np/search?q={q}" },
+  { name:{ en:"Rakuten", ja:"楽天市場", kr:"라쿠텐" },          icon:"\u{1F6CD}️", color:"rose", url:"https://search.rakuten.co.jp/search/mall/{q}/" },
+  { name:{ en:"Mercari", ja:"メルカリ" },                      icon:"\u{1F4F1}",  color:"sky",    url:"https://jp.mercari.com/search?keyword={q}" },
+  { name:{ en:"Kakaku.com", ja:"価格.com" },                  icon:"\u{1F4B4}",  color:"lemon",  url:"https://kakaku.com/search_results/{q}/" },
+  { name:{ en:"eBay" },                                      icon:"\u{1F3F7}️", color:"sky", url:"https://www.ebay.com/sch/i.html?_nkw={q}" }
+];
+
+// 기본 위키가 영문이 아닌 사용자에게는 영문 위키를 따로 제안한다
+if (WIKI_HOST[guessDefaultLang()] !== "en") {
+  RECOMMENDED.push({
+    name:{ en:"Wikipedia (English)", kr:"위키피디아 (영문)", ja:"Wikipedia (英語)" },
+    icon:"\u{1F4D5}", color:"gray",
+    url:"https://en.wikipedia.org/wiki/Special:Search?search={q}"
+  });
+}
+
+// 설정 페이지 언어에 맞춘 표시 이름 (engineDisplayName과 같은 폴백 규칙)
+function recDisplayName(r) {
+  return r.name[state.lang] || r.name.en || r.name.kr || "Engine";
+}
+
+/* 중복 판정은 URL로 한다 — 이름은 사용자가 바꿀 수 있으므로 기준이 될 수 없다.
+   프로토콜/www/후행 슬래시를 무시하고 호스트+경로+쿼리키만 비교한다. */
+function engineUrlKey(url) {
+  if (typeof url !== "string") return "";
+  let u = url.trim().toLowerCase();
+  u = u.replace(/^https?:\/\//, "").replace(/^www\./, "");
+  u = u.replace(/\/+$/, "");
+  return u;
+}
+
+const _recSelected = new Set();
+let _recExpanded = false;
+const REC_COLLAPSED_ROWS = 3;
+
+// 화면 폭에 따라 열 수가 바뀌므로(3 -> 2 -> 1) 접힌 상태의 개수도 같이 바뀐다
+function recColumns() {
+  const w = window.innerWidth;
+  if (w <= 760) return 1;
+  if (w <= 1080) return 2;
+  return 3;
+}
+
+function renderRecommended() {
+  if (!recGrid) return;
+  const have = new Set(state.engines.map(e => engineUrlKey(e.url)));
+
+  // 아직 추가 안 한 것을 앞으로 — 접었을 때 3줄 안에 고를 수 있는 것이 보여야 한다
+  const order = RECOMMENDED
+    .map((r, i) => ({ r, i, added: have.has(engineUrlKey(r.url)) }))
+    .sort((a, b) => (a.added - b.added) || (a.i - b.i));
+
+  recGrid.innerHTML = "";
+  let addable = 0;
+
+  for (const { r, i, added } of order) {
+    if (added) _recSelected.delete(i); else addable++;
+
+    const row = document.createElement("label");
+    row.className = "recItem" + (added ? " added" : "");
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    // 이미 추가된 엔진은 체크된 채로 잠근다 (선택 상태가 아니라 "들어있음" 표시)
+    cb.checked = added || _recSelected.has(i);
+    cb.disabled = added;
+    cb.addEventListener("change", () => {
+      if (cb.checked) _recSelected.add(i); else _recSelected.delete(i);
+      updateRecFoot();
+    });
+
+    const ic = document.createElement("span");
+    ic.className = "recIcon";
+    ic.textContent = r.icon;
+
+    const nm = document.createElement("span");
+    nm.className = "recName";
+    nm.textContent = recDisplayName(r);
+    nm.title = r.url;
+
+    row.append(cb, ic, nm);
+
+    if (added) {
+      const tag = document.createElement("span");
+      tag.className = "recAdded";
+      tag.textContent = "Added";
+      row.appendChild(tag);
+    }
+    recGrid.appendChild(row);
+  }
+
+  recCount.textContent = addable ? `${addable} available` : "all added";
+  applyRecVisibility();
+  updateRecFoot();
+}
+
+function updateRecFoot() {
+  const n = _recSelected.size;
+  recSel.textContent = `${n} selected`;
+  recAddBtn.disabled = n === 0;
+}
+
+// 접힌 상태에서는 앞 3줄만 남긴다. max-height로 자르지 않으므로 스크롤바가 생기지 않는다.
+function applyRecVisibility() {
+  const items = recGrid.querySelectorAll(".recItem");
+  const limit = recColumns() * REC_COLLAPSED_ROWS;
+  const overflow = items.length > limit;
+
+  items.forEach((el, n) => { el.hidden = !_recExpanded && overflow && n >= limit; });
+
+  if (!recMore) return;
+  recMore.hidden = !overflow;
+  recMore.textContent = _recExpanded
+    ? "Show less"
+    : `Show all ${items.length}`;
+}
+
+if (recMore) {
+  recMore.addEventListener("click", () => {
+    _recExpanded = !_recExpanded;   // 펼침 상태는 저장하지 않는다
+    applyRecVisibility();
+  });
+}
+
+// 창 폭이 바뀌면 열 수가 달라지므로 접힘 개수를 다시 계산한다
+window.addEventListener("resize", () => { if (recGrid) applyRecVisibility(); });
+
+if (recAddBtn) {
+  recAddBtn.addEventListener("click", () => {
+    const picked = [...RECOMMENDED.keys()].filter(i => _recSelected.has(i));
+    if (!picked.length) return;
+
+    const newIds = [];
+    for (const i of picked) {
+      const r = RECOMMENDED[i];
+      const id = genId();
+      newIds.push(id);
+      state.engines.push({
+        id,
+        name: { ...r.name },
+        url: r.url,
+        icon: r.icon,
+        color: r.color,
+        enabled: true,
+        isAI: detectIsAI(r.url)
+      });
+    }
+    _recSelected.clear();
+    _recExpanded = false;
+    renderEngineList();   // 내부에서 renderRecommended()도 부른다
+
+    // 방금 추가된 행을 잠깐 강조
+    const cards = engineList.querySelectorAll(".engCard");
+    for (const id of newIds) {
+      const idx = state.engines.findIndex(e => e.id === id);
+      cards[idx]?.classList.add("justAdded");
+    }
+    cards[state.engines.findIndex(e => e.id === newIds[0])]
+      ?.scrollIntoView({ block:"nearest", behavior:"smooth" });
+  });
+}
+
 // ⚠ content.js의 defaultEngines()와 반드시 동일하게 유지 (CLAUDE.md 금지항목 #2)
 function defaultEngines() {
   return [
     { id:"google",     name:{ en:"Google",        kr:"구글" },      url:"https://www.google.com/search?q={q}",                color:"sky",    enabled:true, icon:"🔍" },
     { id:"naver",      name:{ en:"Naver",         kr:"네이버" },     url:"https://search.naver.com/search.naver?query={q}",    color:"mint",   enabled:true, icon:"🟢" },
     { id:"bing",       name:{ en:"Bing",          kr:"빙" },         url:"https://www.bing.com/search?q={q}",                  color:"pastel", enabled:true, icon:"🔵" },
-    { id:"wikipedia",  name:{ en:"Wikipedia",     kr:"위키피디아" },  url:"https://en.wikipedia.org/wiki/Special:Search?search={q}", color:"gray", enabled:true, icon:"📚" },
+    { id:"wikipedia",  name:{ en:"Wikipedia",     kr:"위키피디아" },  url:wikipediaUrl(guessDefaultLang()), color:"gray", enabled:true, icon:"📚" },
     { id:"perplexity", name:{ en:"Perplexity AI", kr:"퍼플렉시티" },  url:"https://www.perplexity.ai/search?q={q}",             color:"violet", enabled:true, icon:"🤖", isAI:true },
     { id:"chatgpt",    name:{ en:"ChatGPT",       kr:"챗GPT" },      url:"https://chatgpt.com/?q={q}&hints=search",            color:"gray",   enabled:true, icon:"💬", isAI:true },
     { id:"claude",     name:{ en:"Claude",        kr:"클로드" },      url:"https://claude.ai/new?q={q}",                       color:"peach",  enabled:true, icon:"✨", isAI:true },
