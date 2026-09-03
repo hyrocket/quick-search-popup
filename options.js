@@ -2,6 +2,41 @@
 // TapTap - Quick Search v1.1 — options.js
 // =====================================================================
 
+// ── 다국어 ──
+// 번역 테이블은 i18n-options.js (options.html 에서 먼저 로드된다).
+// 폴백: 현재 언어 -> en -> 키 문자열 그대로.
+// 키를 못 찾으면 키 이름이 화면에 노출되므로 오탈자가 바로 눈에 띈다.
+function t(key, vars) {
+  const tbl = (typeof OPT_I18N !== "undefined" && OPT_I18N) || {};
+  let v = (tbl[state.lang] && tbl[state.lang][key]) || (tbl.en && tbl.en[key]) || key;
+  if (vars) for (const k in vars) v = v.split("{" + k + "}").join(vars[k]);
+  return v;
+}
+
+// data-i18n="키"      -> textContent
+// data-i18n-html="키" -> innerHTML  (마크업이 든 문자열 전용)
+// data-i18n-ph="키"   -> placeholder
+// About 본문은 통 HTML 이라 ABOUT_HTML 에서 따로 꽂는다.
+function applyI18n() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+    el.placeholder = t(el.dataset.i18nPh);
+  });
+
+  const body = document.getElementById("aboutBody");
+  if (body && typeof ABOUT_HTML !== "undefined") {
+    body.innerHTML = ABOUT_HTML[state.lang] || ABOUT_HTML.en;
+  }
+
+  document.title = t("ui.pageTitle");
+  document.documentElement.lang = state.lang === "kr" ? "ko" : state.lang;
+}
+
 const K_LANG     = "shiftsearch:lang";
 const K_ENGS     = "shiftsearch:engines";
 const K_LAST     = "shiftsearch:lastEngineId";
@@ -13,15 +48,12 @@ const THEME_IDS = ["classic", "mono", "midnight", "glass", "paper", "terminal"];
 const FONT_IDS  = ["system", "serif", "mono"];
 const DEFAULT_APPEARANCE = { theme:"classic", autoDark:true, engineTint:true, font:"system" };
 
-// 카드 라벨. 색상값은 options.html의 .themeCard[data-theme=...] 블록에 있다.
-const THEME_META = [
-  { id:"classic",  name:"Classic",  desc:"Follows the selected engine's color." },
-  { id:"mono",     name:"Mono",     desc:"Neutral black and white." },
-  { id:"midnight", name:"Midnight", desc:"Dark, muted violet accent." },
-  { id:"glass",    name:"Glass",    desc:"Translucent with a blurred backdrop." },
-  { id:"paper",    name:"Paper",    desc:"Warm off-white, serif text." },
-  { id:"terminal", name:"Terminal", desc:"Dark console green, monospace." },
-];
+// 카드 라벨/설명은 i18n-options.js 의 "theme.<id>" / "theme.<id>Desc" 에서 온다.
+// 키를 테마 id 와 일치시켰으므로 여기서는 id 목록만 있으면 된다.
+// 색상값은 options.html의 .themeCard[data-theme=...] 블록에 있다.
+// classic 의 표시 이름은 "Chameleon"(선택한 엔진 색을 따라간다는 뜻).
+// 내부 키를 바꾸면 content.js 선택자와 기존 저장값이 깨지므로 라벨만 다르다.
+const THEME_META = THEME_IDS.map(id => ({ id }));
 
 function normalizeAppearance(v) {
   const a = (v && typeof v === "object") ? v : {};
@@ -201,7 +233,7 @@ function updateScPreview() {
   if (_scMode === "double") {
     const k = document.querySelector(".kbKey.mod[data-dtkey].selected")?.dataset.dtkey || "Shift";
     const sym = {"Shift":"⇧ Shift","Control":"⌃ Ctrl","Alt":"⌥ Alt"}[k] || k;
-    disp.innerHTML = `<span class="scKeyBadge">${sym}</span><span class="scPlus">×2</span><span style="font-size:12px;color:var(--muted)">double tap</span>`;
+    disp.innerHTML = `<span class="scKeyBadge">${sym}</span><span class="scPlus">×2</span><span style="font-size:12px;color:var(--muted)">${t("sc.doubleTap")}</span>`;
     state.shortcut = { type:"double", key: k };
   } else {
     const modLabel = _selectedMod.replace("Ctrl","⌃").replace("Shift","⇧").replace("Alt","⌥");
@@ -220,7 +252,7 @@ function updateScPreview() {
       disp.innerHTML = `<span class="scKeyBadge">${dispMod}</span><span class="scPlus">+</span><span class="scKeyBadge">${_selectedKey}</span>`;
       state.shortcut = { type:"single", key: combo };
     } else {
-      disp.innerHTML = `<span style="font-size:12px;color:var(--muted)">Select modifier + key</span>`;
+      disp.innerHTML = `<span style="font-size:12px;color:var(--muted)">${t("sc.selectPrompt")}</span>`;
     }
   }
 }
@@ -327,7 +359,7 @@ function renderEmojiPicker(anchor, currentIcon, onChange, small) {
   btn.type = "button";
   btn.className = "emojiBtn" + (small ? " sm" : "");
   btn.textContent = currentIcon || "\u{1F50D}";
-  btn.title = "Click to change icon";
+  btn.title = t("ui.iconChange");
 
   const pop = document.createElement("div");
   pop.className = "emojiPopover";
@@ -341,7 +373,7 @@ function renderEmojiPicker(anchor, currentIcon, onChange, small) {
   inp.type = "text";
   inp.className = "emojiInline";
   inp.maxLength = 8;   // ZWJ 조합 이모지는 코드유닛이 길다
-  inp.placeholder = "Type or paste";
+  inp.placeholder = t("ui.typeOrPaste");
   inp.value = currentIcon || "";
   const hint = document.createElement("span");
   hint.className = "emojiHint";
@@ -430,7 +462,7 @@ function renderColorPicker(anchor, currentColor, onChange) {
   swatch.type = "button";
   swatch.className = "colorSwatch active";
   swatch.style.background = swatchColor;
-  swatch.title = "Click to change color";
+  swatch.title = t("ui.colorChange");
 
   // ── Popover ──
   const pop = document.createElement("div");
@@ -440,7 +472,7 @@ function renderColorPicker(anchor, currentColor, onChange) {
 
   const popTitle = document.createElement("div");
   popTitle.className = "popTitle";
-  popTitle.textContent = "Pick color";
+  popTitle.textContent = t("ui.pickColor");
 
   const dotGrid = document.createElement("div");
   dotGrid.className = "dotGrid";
@@ -474,7 +506,7 @@ function renderColorPicker(anchor, currentColor, onChange) {
   const nativePicker = document.createElement("input");
   nativePicker.type = "color";
   nativePicker.value = isHex ? currentColor : swatchColor;
-  nativePicker.title = "Open color palette";
+  nativePicker.title = t("ui.openPalette");
   nativePicker.style.cssText = "width:28px;height:28px;border:none;padding:0;cursor:pointer;border-radius:6px;overflow:hidden;flex-shrink:0;background:none;";
   nativePicker.addEventListener("click", (e) => e.stopPropagation());
   nativePicker.addEventListener("input", () => {
@@ -610,7 +642,7 @@ function renderEngineList() {
     // AI 토글 (URL 자동감지 결과 + 수동 override)
     const aiToggleLabel = document.createElement("label");
     aiToggleLabel.style.cssText = "display:flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0;margin-left:4px";
-    aiToggleLabel.title = "Mark as AI engine (shows AI badge)";
+    aiToggleLabel.title = t("ui.markAI");
 
     const aiCheckbox = document.createElement("input");
     aiCheckbox.type = "checkbox";
@@ -694,17 +726,17 @@ function renderEngineList() {
 
     const upBtn = document.createElement("button");
     upBtn.type = "button"; upBtn.className = "orderBtn"; upBtn.textContent = "↑";
-    upBtn.title = "Move up";
+    upBtn.title = t("ui.moveUp");
     upBtn.addEventListener("click", () => { if (idx > 0) { swap(idx, -1); renderEngineList(); }});
 
     const dnBtn = document.createElement("button");
     dnBtn.type = "button"; dnBtn.className = "orderBtn"; dnBtn.textContent = "↓";
-    dnBtn.title = "Move down";
+    dnBtn.title = t("ui.moveDown");
     dnBtn.addEventListener("click", () => { if (idx < state.engines.length-1) { swap(idx, +1); renderEngineList(); }});
 
     const delBtn = document.createElement("button");
     delBtn.type = "button"; delBtn.className = "orderBtn delBtn"; delBtn.textContent = "🗑";
-    delBtn.title = "Remove engine";
+    delBtn.title = t("ui.removeEngine");
     delBtn.addEventListener("click", () => {
       if (confirm(`Remove "${engineDisplayName(en)}"?`)) {
         state.engines.splice(idx, 1);
@@ -783,7 +815,11 @@ function renderLangSelect() {
 
 langSelect.addEventListener("change", () => {
   state.lang = langSelect.value;
-  renderEngineList();
+  applyI18n();        // 정적 라벨 + About 본문
+  renderEngineList(); // 엔진 이름은 언어별 표시명을 쓴다
+  renderThemeGrid();  // 테마 카드 이름/설명
+  syncAutoDarkRow();  // 동적 설명 두 줄
+  renderPreview();
 });
 
 // =====================
@@ -793,7 +829,7 @@ function renderPreview() {
   previewStrip.innerHTML = "";
   const enabled = state.engines.filter(e => e.enabled !== false);
   if (!enabled.length) {
-    previewStrip.textContent = "No engines enabled.";
+    previewStrip.textContent = t("pv.none");
     return;
   }
   enabled.forEach((en, i) => {
@@ -971,7 +1007,7 @@ function renderRecommended() {
     if (added) {
       const tag = document.createElement("span");
       tag.className = "recAdded";
-      tag.textContent = "Added";
+      tag.textContent = t("ui.added");
       row.appendChild(tag);
     }
     recGrid.appendChild(row);
@@ -984,7 +1020,7 @@ function renderRecommended() {
 
 function updateRecFoot() {
   const n = _recSelected.size;
-  recSel.textContent = `${n} selected`;
+  recSel.textContent = t("eng.recSelected", { n });
   recAddBtn.disabled = n === 0;
 }
 
@@ -1071,6 +1107,10 @@ function loadAll() {
     state.shortcut = res?.[K_SHORTCUT] || { type:"double", key:"Shift" };
     state.appearance = normalizeAppearance(res?.[K_APPEARANCE]);
 
+    // state.lang 이 정해진 뒤에 불러야 한다.
+    // 그 전에 부르면 저장된 언어가 아니라 en 으로 그려진다.
+    applyI18n();
+
     renderLangSelect();
     renderEngineList();
     initAddColorPicker();
@@ -1109,20 +1149,19 @@ function syncAutoDarkRow() {
   autoDarkChk.disabled = !isClassic;
   autoDarkRow.classList.toggle("disabled", !isClassic);
   autoDarkDesc.textContent = isClassic
-    ? "Follow your system dark mode."
-    : "Not used — the " + state.appearance.theme + " theme has a fixed light/dark look.";
-  engineTintDesc.textContent = isClassic
-    ? "Tint the popup with the selected engine's color."
-    : "Show the engine color on the search box and the active engine outline.";
+    ? t("ap.autoDarkOn")
+    : t("ap.autoDarkOff", { theme: t("theme." + state.appearance.theme) });
+  engineTintDesc.textContent = isClassic ? t("ap.tintOn") : t("ap.tintOff");
 }
 
 function renderThemeGrid() {
   themeGrid.innerHTML = "";
-  for (const t of THEME_META) {
+  // 루프 변수를 th 로 둔다. t 로 두면 번역 함수 t() 를 가린다.
+  for (const th of THEME_META) {
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "themeCard" + (t.id === state.appearance.theme ? " active" : "");
-    card.dataset.theme = t.id;
+    card.className = "themeCard" + (th.id === state.appearance.theme ? " active" : "");
+    card.dataset.theme = th.id;
     card.innerHTML =
       '<div class="tPrevWrap">' +
         '<div class="tPrev">' +
@@ -1139,10 +1178,10 @@ function renderThemeGrid() {
         '</div>' +
       '</div>' +
       '<div class="tName"></div><div class="tDesc"></div>';
-    card.querySelector(".tName").textContent = t.name;
-    card.querySelector(".tDesc").textContent = t.desc;
+    card.querySelector(".tName").textContent = t("theme." + th.id);
+    card.querySelector(".tDesc").textContent = t("theme." + th.id + "Desc");
     card.addEventListener("click", () => {
-      state.appearance.theme = t.id;
+      state.appearance.theme = th.id;
       themeGrid.querySelectorAll(".themeCard").forEach(c =>
         c.classList.toggle("active", c.dataset.theme === t.id));
       syncAutoDarkRow();
@@ -1166,13 +1205,13 @@ saveBtn.addEventListener("click", () => {
     const err = chrome.runtime.lastError;
     if (err) {
       console.warn("[TapTap] save failed:", err.message);
-      savedMsg.textContent = "⚠ Save failed — settings too large. Remove a few engines.";
+      savedMsg.textContent = t("ui.saveFailed");
       savedMsg.style.color = "#EF4444";
       savedMsg.style.display = "inline";
       setTimeout(() => (savedMsg.style.display = "none"), 6000);
       return;
     }
-    savedMsg.textContent = "✓ Saved!";
+    savedMsg.textContent = t("ui.saved");
     savedMsg.style.color = "";   // CSS 기본색(초록)으로 복귀
     savedMsg.style.display = "inline";
     setTimeout(() => (savedMsg.style.display = "none"), 1800);

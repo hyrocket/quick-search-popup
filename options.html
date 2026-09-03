@@ -509,6 +509,17 @@
       font-size:12px;color:var(--muted);margin-top:8px;
       font-family:monospace;
     }
+    /* About 산문 카드 — ABOUT_HTML 이 언어별로 이 클래스들을 쓴다.
+       인라인 스타일로 두면 13개 언어에 그대로 복제된다. */
+    .abtP{font-size:13px;line-height:1.8;color:var(--text);margin:0 0 12px}
+    .abtP:last-child{margin-bottom:0}
+    .abtSub{font-size:12px;color:var(--muted);margin:0 0 10px}
+    .abtList{font-size:13px;line-height:2;color:var(--text);padding-left:18px;margin:0}
+    .abtSteps{font-size:13px;line-height:2.1;color:var(--text);padding-left:18px;margin:0}
+    .abtKbd{background:var(--bg);color:var(--text);padding:2px 6px;border-radius:4px;
+            font-size:11px;border:1px solid var(--border)}
+    .abtKbdA{background:var(--accent-soft);color:var(--accent);padding:2px 7px;
+             border-radius:5px;font-size:12px;font-weight:700}
   </style>
 </head>
 <body>
@@ -520,23 +531,17 @@
       <span class="brand">TapTap</span><span class="brandSub">- Quick Search</span>
     </div>
     <button class="navItem active" data-tab="engines">
-      <span class="navIcon">🔍</span>Search Engines
-    </button>
+      <span class="navIcon">🔍</span><span data-i18n="nav.engines">Search Engines</span></button>
     <button class="navItem" data-tab="shortcut">
-      <span class="navIcon">⌨️</span>Shortcut
-    </button>
+      <span class="navIcon">⌨️</span><span data-i18n="nav.shortcut">Shortcut</span></button>
     <button class="navItem" data-tab="appearance">
-      <span class="navIcon">🎨</span>Appearance
-    </button>
+      <span class="navIcon">🎨</span><span data-i18n="nav.appearance">Appearance</span></button>
     <button class="navItem" data-tab="general">
-      <span class="navIcon">🌐</span>Language
-    </button>
+      <span class="navIcon">🌐</span><span data-i18n="nav.language">Language</span></button>
     <button class="navItem" data-tab="preview">
-      <span class="navIcon">👁️</span>Preview
-    </button>
+      <span class="navIcon">👁️</span><span data-i18n="nav.preview">Preview</span></button>
     <button class="navItem" data-tab="about">
-      <span class="navIcon">ℹ️</span>About
-    </button>
+      <span class="navIcon">ℹ️</span><span data-i18n="nav.about">About</span></button>
     <div class="sideFooter" id="versionLabel"></div>
   </nav>
 
@@ -545,79 +550,79 @@
 
     <!-- ── ENGINES ── -->
     <div class="section active" id="tab-engines">
-      <div class="pageTitle" id="engPageTitle">Search Engines</div>
-      <div class="pageSub" id="engPageSub">Enable, reorder, rename and color your engines.</div>
+      <div class="pageTitle" id="engPageTitle" data-i18n="eng.title">Search Engines</div>
+      <div class="pageSub" id="engPageSub" data-i18n="eng.sub">Enable, reorder, rename and color your engines.</div>
 
       <div class="card">
         <div class="recPanel" id="recPanel">
           <div class="recHead">
-            <span>✨</span><span>Recommended engines</span>
+            <span>✨</span><span data-i18n="eng.recTitle">Recommended engines</span>
             <span class="recCount" id="recCount"></span>
           </div>
           <div class="recGrid" id="recGrid"></div>
           <button type="button" class="recMore" id="recMore"></button>
           <div class="recFoot">
-            <span class="recSel" id="recSel">0 selected</span>
-            <button type="button" class="recAddBtn" id="recAddBtn" disabled>Add selected</button>
+            <span class="recSel" id="recSel"></span>
+            <button type="button" class="recAddBtn" id="recAddBtn" disabled data-i18n="eng.recAdd">Add selected</button>
           </div>
         </div>
 
-        <div class="cardTitle" id="engListTitle">Active Engines</div>
+        <div class="cardTitle" id="engListTitle" data-i18n="eng.active">Active Engines</div>
         <div class="engList" id="engineList"></div>
 
         <!-- Add new -->
         <div class="addForm" id="addForm">
-          <input type="text" id="addName" class="sm" placeholder="Name"/>
+          <input type="text" id="addName" class="sm" placeholder="Name" data-i18n-ph="eng.addName"/>
           <input type="text" id="addUrl" placeholder="https://example.com/search?q={q}"/>
           <div id="addIconWrap" class="emojiAnchor"></div>
-          <button class="saveBtn" id="addBtn" style="padding:8px 14px;font-size:13px">+ Add</button>
+          <button class="saveBtn" id="addBtn" style="padding:8px 14px;font-size:13px" data-i18n="eng.addBtn">+ Add</button>
           <div class="addRow2">
-            <span style="font-size:12px;color:var(--muted)">Color:</span>
+            <span style="font-size:12px;color:var(--muted)" data-i18n="eng.colorLabel">Color:</span>
             <div id="addColorRow" class="colorRow"></div>
             <input type="text" id="addHexInput" class="colorHexInput" placeholder="#7C3AED" maxlength="7"/>
           </div>
         </div>
-        <div class="urlHintBox" id="urlHintBox">URL template: use <strong>{q}</strong> for search term &mdash; e.g. <code>https://www.google.com/search?q={q}</code></div>
+        <div class="urlHintBox" id="urlHintBox" data-i18n-html="eng.urlHint">URL template: use <strong>{q}</strong> for search term &mdash; e.g. <code>https://www.google.com/search?q={q}</code></div>
       </div>
     </div>
 
     <!-- ── SHORTCUT ── -->
     <div class="section" id="tab-shortcut">
-      <div class="pageTitle">Trigger Shortcut</div>
-      <div class="pageSub">Set the key combination to open TapTap.</div>
+      <div class="pageTitle" data-i18n="sc.title">Trigger Shortcut</div>
+      <div class="pageSub" data-i18n="sc.sub">Set the key combination to open TapTap.</div>
 
       <!-- 현재 단축키 표시 -->
       <div class="card">
-        <div class="cardTitle">Current Shortcut</div>
+        <div class="cardTitle" data-i18n="sc.current">Current Shortcut</div>
         <div class="scCurrentDisplay" id="scCurrentDisplay">
           <span class="scKeyBadge">⇧ Shift</span>
           <span class="scPlus">×2</span>
-          <span style="font-size:12px;color:var(--muted)">double tap</span>
+          <span style="font-size:12px;color:var(--muted)"></span>
         </div>
 
         <!-- 모드 선택 -->
         <div class="scModeRow">
-          <button class="scModeBtn active" id="scModeDouble">⬡ Double-tap key</button>
-          <button class="scModeBtn" id="scModeCombo">⌨ Key combination</button>
+          <button class="scModeBtn active" id="scModeDouble" data-i18n="sc.modeDouble">⬡ Double-tap key</button>
+          <button class="scModeBtn" id="scModeCombo" data-i18n="sc.modeCombo">⌨ Key combination</button>
         </div>
 
         <!-- Double-tap 섹션 -->
         <div id="scDoubleSection">
-          <div class="cardTitle" style="margin-bottom:8px">Choose key to double-tap</div>
+          <div class="cardTitle" style="margin-bottom:8px" data-i18n="sc.chooseDouble">Choose key to double-tap</div>
           <div class="kbRow" style="justify-content:flex-start;gap:8px;flex-wrap:wrap">
             <button class="kbKey mod selected" data-dtkey="Shift">⇧ Shift</button>
             <button class="kbKey mod" data-dtkey="Control">⌃ Ctrl</button>
             <button class="kbKey mod" data-dtkey="Alt">⌥ Alt</button>
           </div>
-          <div class="scNote">Double-tap the same key twice within 400ms to trigger.</div>
+          <div class="scNote" data-i18n="sc.note400">Double-tap the same key twice within 400ms to trigger.</div>
         </div>
 
         <!-- Combo 섹션 -->
         <div id="scComboSection" style="display:none">
-          <div class="cardTitle" style="margin-bottom:8px">Choose modifier + key</div>
+          <div class="cardTitle" style="margin-bottom:8px" data-i18n="sc.chooseCombo">Choose modifier + key</div>
 
           <!-- Modifier row -->
-          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Modifier (required)</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em" data-i18n="sc.modifier">Modifier (required)</div>
           <div class="kbRow" style="justify-content:flex-start;gap:6px;margin-bottom:12px">
             <button class="kbKey mod" data-mod="Ctrl">⌃ Ctrl</button>
             <button class="kbKey mod" data-mod="Alt">⌥ Alt</button>
@@ -626,7 +631,7 @@
           </div>
 
           <!-- Key keyboard layout -->
-          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Key</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em" data-i18n="sc.key">Key</div>
           <div class="kbGrid" id="kbGrid">
             <!-- 숫자 행 -->
             <div class="kbRow">
@@ -703,73 +708,73 @@
     <!-- ── LANGUAGE ── -->
     <!-- ── APPEARANCE ── -->
     <div class="section" id="tab-appearance">
-      <div class="pageTitle">Appearance</div>
-      <div class="pageSub">Choose how the search overlay looks. Layout and behavior stay the same.</div>
+      <div class="pageTitle" data-i18n="ap.title">Appearance</div>
+      <div class="pageSub" data-i18n="ap.sub">Choose how the search overlay looks. Layout and behavior stay the same.</div>
 
       <div class="card">
-        <div class="cardTitle">Theme</div>
+        <div class="cardTitle" data-i18n="ap.theme">Theme</div>
         <div class="themeGrid" id="themeGrid"></div>
       </div>
 
       <div class="card">
-        <div class="cardTitle">Options</div>
+        <div class="cardTitle" data-i18n="ap.options">Options</div>
 
         <div class="optRow" id="autoDarkRow">
           <input type="checkbox" id="autoDarkChk"/>
           <div class="optMain">
-            <div class="optName">Auto dark</div>
-            <div class="optDesc" id="autoDarkDesc">Follow your system dark mode. Classic theme only.</div>
+            <div class="optName" data-i18n="ap.autoDark">Auto dark</div>
+            <div class="optDesc" id="autoDarkDesc"></div>
           </div>
         </div>
 
         <div class="optRow">
           <input type="checkbox" id="engineTintChk"/>
           <div class="optMain">
-            <div class="optName">Engine tint</div>
-            <div class="optDesc" id="engineTintDesc">Tint the popup with the selected engine's color.</div>
+            <div class="optName" data-i18n="ap.engineTint">Engine tint</div>
+            <div class="optDesc" id="engineTintDesc"></div>
           </div>
         </div>
 
         <div class="optRow">
           <div class="optMain">
-            <div class="optName">Font</div>
-            <div class="optDesc">Override the theme's default font.</div>
+            <div class="optName" data-i18n="ap.font">Font</div>
+            <div class="optDesc" data-i18n="ap.fontDesc">Override the theme's default font.</div>
           </div>
           <select id="fontSelect">
-            <option value="system">System</option>
-            <option value="serif">Serif</option>
-            <option value="mono">Mono</option>
+            <option value="system" data-i18n="ap.fontSystem">System</option>
+            <option value="serif" data-i18n="ap.fontSerif">Serif</option>
+            <option value="mono" data-i18n="ap.fontMono">Mono</option>
           </select>
         </div>
       </div>
     </div>
 
     <div class="section" id="tab-general">
-      <div class="pageTitle" id="genPageTitle">Language</div>
-      <div class="pageSub" id="genPageSub">Set the language of the search popup.</div>
+      <div class="pageTitle" id="genPageTitle" data-i18n="lang.title">Language</div>
+      <div class="pageSub" id="genPageSub" data-i18n="lang.sub">Set the language of the search popup.</div>
       <div class="card">
         <div class="row">
-          <label class="lbl" id="langLabel">Language</label>
+          <label class="lbl" id="langLabel" data-i18n="lang.label">Language</label>
           <select id="langSelect"></select>
         </div>
-        <div class="hint" id="langNote">Applies to the search popup and engine names. This settings page stays in English.</div>
+        <div class="hint" id="langNote" data-i18n="lang.note">Applies to the search popup, engine names and this settings page.</div>
       </div>
     </div>
 
     <!-- ── PREVIEW ── -->
     <div class="section" id="tab-preview">
-      <div class="pageTitle">Preview</div>
-      <div class="pageSub">See how your engine chips will look in the overlay.</div>
+      <div class="pageTitle" data-i18n="pv.title">Preview</div>
+      <div class="pageSub" data-i18n="pv.sub">See how your engine chips will look in the overlay.</div>
       <div class="card">
-        <div class="previewLabel">Engine Strip Preview</div>
+        <div class="previewLabel" data-i18n="pv.stripLabel">Engine Strip Preview</div>
         <div class="previewStrip" id="previewStrip"></div>
       </div>
     </div>
 
     <!-- ── ABOUT ── -->
     <div class="section" id="tab-about">
-      <div class="pageTitle">About</div>
-      <div class="pageSub">TapTap - Quick Search — open-source browser extension</div>
+      <div class="pageTitle" data-i18n="ab.title">About</div>
+      <div class="pageSub" data-i18n="ab.sub">TapTap - Quick Search — open-source browser extension</div>
 
       <div class="card" style="text-align:center;padding:32px 24px">
         <img src="icons/icon128.png" width="72" height="72" style="border-radius:18px;margin-bottom:16px;box-shadow:0 4px 20px rgba(79,70,229,.3)"/>
@@ -789,91 +794,27 @@
              style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;
                     border-radius:9px;background:#FFDD00;color:#000000;
                     font-weight:800;font-size:13px;text-decoration:none;border:none;">
-            ☕ Buy me a coffee
+            <span data-i18n="ab.coffee">☕ Buy me a coffee</span>
           </a>
         </div>
       </div>
 
-      <div class="card">
-        <div class="cardTitle">What is TapTap?</div>
-        <p style="font-size:13px;line-height:1.8;color:var(--text);margin-bottom:12px">
-          <strong>TapTap - Quick Search</strong> is a lightweight Chrome extension that lets you search the web instantly
-          without leaving the page you're on. Press <kbd style="background:var(--accent-soft);color:var(--accent);padding:2px 7px;border-radius:5px;font-size:12px;font-weight:700">Shift</kbd> twice
-          and a sleek search overlay appears — no mouse clicks, no tab switching, just type and go.
-        </p>
-        <p style="font-size:13px;line-height:1.8;color:var(--text)">
-          Inspired by the classic Opera browser's quick-dial search, rebuilt for the modern web with AI-powered search engines,
-          full customization, and a clean keyboard-first experience.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">🆕 What&#39;s new in v1.2.1</div>
-        <p style="font-size:12px;color:var(--muted);margin:0 0 10px">Everything added since v1.0.0.</p>
-        <ul style="font-size:13px;line-height:2;color:var(--text);padding-left:18px;margin:0">
-          <li><strong>Renamed to TapTap</strong> — the extension is now <strong>TapTap - Quick Search</strong></li>
-          <li><strong>6 UI themes</strong> — Classic, Glass, Midnight, Mono, Paper and Terminal, with a live preview</li>
-          <li><strong>Per-engine colors</strong> — 9 preset palettes or your own hex code for each engine</li>
-          <li><strong>Automatic dark mode</strong> — follows your system setting, switching live while the popup is open</li>
-          <li><strong>Engine dropdown in the popup</strong> — plus an Enter hint icon on the search button</li>
-          <li><strong>Emoji icon picker &amp; 27 recommended engines</strong> in Settings — add several at once</li>
-          <li><strong>Wikipedia now follows your browser language</strong> instead of always opening the English wiki</li>
-          <li><strong>Opening results in a new tab</strong> is the default for fresh installs</li>
-          <li><strong>Fewer accidental triggers</strong> — holding Shift to type capitals no longer counts as a double-tap</li>
-          <li><strong>Warns when settings are too large to sync</strong> instead of failing silently</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">✨ Features</div>
-        <ul style="font-size:13px;line-height:2;color:var(--text);padding-left:18px;margin:0">
-          <li><strong>⚡ Instant overlay</strong> — Double-tap Shift (or custom shortcut) to open from any page</li>
-          <li><strong>🤖 AI Search built-in</strong> — Perplexity AI, ChatGPT, Claude ready to use</li>
-          <li><strong>🔽 Engine dropdown</strong> — Pick any engine right inside the popup, no scrolling needed</li>
-          <li><strong>🖱️ Mouse wheel engine switch</strong> — Scroll on the panel to cycle search engines</li>
-          <li><strong>📝 Auto-fill selected text</strong> — Highlight text on a page, then trigger to search it instantly</li>
-          <li><strong>🕐 Search history</strong> — Recent searches appear as you type</li>
-          <li><strong>🎨 6 UI themes</strong> — Classic, Glass, Midnight, Mono, Paper, Terminal</li>
-          <li><strong>🌈 Per-engine colors</strong> — 9 preset palettes + custom hex for every engine</li>
-          <li><strong>➕ 27 recommended engines</strong> — Add popular engines in one click, or bring your own URL</li>
-          <li><strong>😀 Emoji icon picker</strong> — Give each engine its own icon</li>
-          <li><strong>🌐 13 languages supported</strong> — Korean, English, Japanese, Chinese, and more</li>
-          <li><strong>📑 Open in a new tab</strong> — Keep the page you're on, or search in place</li>
-          <li><strong>🔒 Zero data collection</strong> — All settings stored locally. No servers, no tracking.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">🚀 How to use</div>
-        <ol style="font-size:13px;line-height:2.1;color:var(--text);padding-left:18px;margin:0">
-          <li>Press <kbd style="background:var(--accent-soft);color:var(--accent);padding:2px 7px;border-radius:5px;font-size:12px;font-weight:700">Shift</kbd> twice quickly on any webpage</li>
-          <li>Type your search query (or it auto-fills if you had text selected)</li>
-          <li>Use <kbd style="background:var(--bg);color:var(--text);padding:2px 6px;border-radius:4px;font-size:11px;border:1px solid var(--border)">↑</kbd> <kbd style="background:var(--bg);color:var(--text);padding:2px 6px;border-radius:4px;font-size:11px;border:1px solid var(--border)">↓</kbd> or mouse wheel to switch engines</li>
-          <li>Press <kbd style="background:var(--bg);color:var(--text);padding:2px 6px;border-radius:4px;font-size:11px;border:1px solid var(--border)">Enter</kbd> to search · <kbd style="background:var(--bg);color:var(--text);padding:2px 6px;border-radius:4px;font-size:11px;border:1px solid var(--border)">Esc</kbd> to close</li>
-        </ol>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">📄 License &amp; Credits</div>
-        <p style="font-size:13px;line-height:1.8;color:var(--text);margin-bottom:8px">
-          Released under the <strong>MIT License</strong>. Free to use, modify, and distribute.
-        </p>
-        <p style="font-size:13px;line-height:1.8;color:var(--muted)">
-          Built by <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp;
-          Contributions welcome on GitHub &nbsp;·&nbsp;
-          Found a bug? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Open an issue</a>
-        </p>
-      </div>
+      <!-- 산문 카드는 i18n-options.js 의 ABOUT_HTML 이 언어별로 채운다.
+           산문을 문장 단위로 쪼개면 언어마다 어순이 안 맞아 어색해지므로
+           블록째 언어별로 쓴다. 헤더 카드(위)는 SVG가 커서 정적으로 둔다. -->
+      <div id="aboutBody"></div>
     </div>
 
-    <!-- Save bar -->
+<!-- Save bar -->
     <div class="saveBar">
-      <button class="saveBtn" id="saveBtn">💾 Save</button>
-      <span class="savedMsg" id="savedMsg">✓ Saved!</span>
+      <button class="saveBtn" id="saveBtn" data-i18n="ui.save">💾 Save</button>
+      <span class="savedMsg" id="savedMsg"></span>
     </div>
   </div>
 </div>
 
+<!-- 번역 테이블은 options.js 보다 먼저 로드돼야 한다 (t() 가 참조) -->
+<script src="i18n-options.js"></script>
 <script src="options.js"></script>
 </body>
 </html>
