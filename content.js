@@ -291,59 +291,58 @@ function buildCustomPalette(hex) {
 // =======================
 // Default engines (including AI)
 // =======================
-function fillAllLangs(label) {
-  const obj = {};
-  for (const l of LANGS) obj[l] = label;
-  return obj;
-}
-
+/* 엔진 이름은 "스파스 다국어 객체"다.
+   en은 항상 존재하고, en과 다른 이름을 쓰는 언어만 키로 둔다.
+   읽기는 engineLabel()의 lang -> en -> kr 폴백이 처리한다.
+   (13개 언어를 전부 채우면 12개가 영어 문자열의 복사본이라
+    chrome.storage.sync 키당 8KB 한도를 금방 먹는다) */
 function defaultEngines() {
   return [
     {
       id: "google",
-      name: { ...fillAllLangs("Google"), kr:"구글" },
+      name: { en:"Google", kr:"구글" },
       url: "https://www.google.com/search?q={q}",
       color: "sky", enabled: true, icon: "🔍"
     },
     {
       id: "naver",
-      name: { ...fillAllLangs("Naver"), kr:"네이버" },
+      name: { en:"Naver", kr:"네이버" },
       url: "https://search.naver.com/search.naver?query={q}",
       color: "mint", enabled: true, icon: "🟢"
     },
     {
       id: "bing",
-      name: { ...fillAllLangs("Bing"), kr:"빙" },
+      name: { en:"Bing", kr:"빙" },
       url: "https://www.bing.com/search?q={q}",
       color: "pastel", enabled: true, icon: "🔵"
     },
     {
       id: "wikipedia",
-      name: { ...fillAllLangs("Wikipedia"), kr:"위키피디아" },
+      name: { en:"Wikipedia", kr:"위키피디아" },
       url: "https://en.wikipedia.org/wiki/Special:Search?search={q}",
       color: "gray", enabled: true, icon: "📚"
     },
     {
       id: "perplexity",
-      name: { ...fillAllLangs("Perplexity AI"), kr:"퍼플렉시티" },
+      name: { en:"Perplexity AI", kr:"퍼플렉시티" },
       url: "https://www.perplexity.ai/search?q={q}",
       color: "violet", enabled: true, icon: "🤖"
     },
     {
       id: "chatgpt",
-      name: { ...fillAllLangs("ChatGPT"), kr:"챗GPT" },
+      name: { en:"ChatGPT", kr:"챗GPT" },
       url: "https://chatgpt.com/?q={q}&hints=search",
       color: "gray", enabled: true, icon: "💬"
     },
     {
       id: "claude",
-      name: { ...fillAllLangs("Claude"), kr:"클로드" },
+      name: { en:"Claude", kr:"클로드" },
       url: "https://claude.ai/new?q={q}",
       color: "peach", enabled: true, icon: "✨"
     },
     {
       id: "youtube",
-      name: { ...fillAllLangs("YouTube"), kr:"유튜브" },
+      name: { en:"YouTube", kr:"유튜브" },
       url: "https://www.youtube.com/results?search_query={q}",
       color: "rose", enabled: true, icon: "▶️"
     }
@@ -1822,17 +1821,30 @@ function closePanel() {
 // =======================
 // Storage helpers
 // =======================
-function fillAllLangsNorm(label) {
-  const obj = {};
-  for (const l of LANGS) obj[l] = label;
-  return obj;
+/* 어떤 형태로 저장돼 있든 스파스 이름 객체로 정리한다.
+   - 문자열이면 { en: 문자열 }  (팩/추천 엔진처럼 단일 이름으로 들어온 경우)
+   - 13언어 객체(구버전)면 en과 같은 값인 키를 버려서 압축
+   기존 사용자 데이터는 여기서 메모리상 압축되고, 다음 저장 때 실제로 줄어든다. */
+function compactEngineName(name, id) {
+  if (typeof name === "string" && name.trim()) return { en: name.trim() };
+  if (!name || typeof name !== "object") return { en: id };
+  const en = (typeof name.en === "string" && name.en) ? name.en
+           : (typeof name.kr === "string" && name.kr) ? name.kr
+           : id;
+  const out = { en };
+  for (const l of LANGS) {
+    if (l === "en") continue;
+    const v = name[l];
+    if (typeof v === "string" && v && v !== en) out[l] = v;
+  }
+  return out;
 }
+
 function normalizeEngines(engs) {
   const out = Array.isArray(engs) ? engs.filter(Boolean) : [];
   for (const e of out) {
     if (!e.id) e.id = `u_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-    if (!e.name || typeof e.name !== "object") e.name = fillAllLangsNorm(e.id);
-    for (const l of LANGS) if (typeof e.name[l] !== "string") e.name[l] = e.name.en || e.name.kr || e.id;
+    e.name = compactEngineName(e.name, e.id);
     if (typeof e.url !== "string") e.url = "https://www.google.com/search?q={q}";
     if (typeof e.enabled !== "boolean") e.enabled = true;
     if (!e.icon) e.icon = "🔍";

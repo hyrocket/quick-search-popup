@@ -399,10 +399,22 @@ function renderColorPicker(anchor, currentColor, onChange) {
 // =====================
 function genId() { return `u_${Date.now()}_${Math.random().toString(16).slice(2,8)}`; }
 
-function fillAllLangs(label) {
-  const obj = {};
-  for (const [c] of LANGS) obj[c] = label;
-  return obj;
+/* 엔진 이름은 "스파스 다국어 객체"다.
+   en은 항상 존재하고, en과 다른 이름을 쓰는 언어만 키로 둔다.
+   ⚠ content.js의 compactEngineName()과 동일한 규칙 — 한쪽만 고치지 말 것 */
+function compactEngineName(name, id) {
+  if (typeof name === "string" && name.trim()) return { en: name.trim() };
+  if (!name || typeof name !== "object") return { en: id };
+  const en = (typeof name.en === "string" && name.en) ? name.en
+           : (typeof name.kr === "string" && name.kr) ? name.kr
+           : id;
+  const out = { en };
+  for (const [c] of LANGS) {
+    if (c === "en") continue;
+    const v = name[c];
+    if (typeof v === "string" && v && v !== en) out[c] = v;
+  }
+  return out;
 }
 
 function engineDisplayName(en) {
@@ -411,11 +423,13 @@ function engineDisplayName(en) {
 }
 
 function setEngineName(en, val) {
-  if (!en.name || typeof en.name !== "object") en.name = fillAllLangs(val);
-  en.name[state.lang] = val;
-  for (const [c] of LANGS) {
-    if (!en.name[c] || en.name[c].trim() === "") en.name[c] = val;
-  }
+  if (!en.name || typeof en.name !== "object") en.name = { en: val };
+  if (state.lang === "en") { en.name.en = val; return; }
+  // 영어 이름이 비어 있으면 이 값을 영어 이름으로도 쓴다
+  if (typeof en.name.en !== "string" || !en.name.en) en.name.en = val;
+  // en과 같으면 굳이 따로 저장하지 않는다 (스파스 유지)
+  if (val === en.name.en) delete en.name[state.lang];
+  else en.name[state.lang] = val;
 }
 
 function colorSwatch(colorKey) {
@@ -598,7 +612,7 @@ addBtn.addEventListener("click", () => {
   const colorVal = addColor;
   state.engines.push({
     id: genId(),
-    name: fillAllLangs(name),
+    name: { en: name },
     url, icon,
     color: colorVal,
     enabled: true,
@@ -672,8 +686,7 @@ function normalizeEngines(engs) {
   const out = Array.isArray(engs) ? engs.filter(Boolean) : [];
   for (const e of out) {
     if (!e.id) e.id = genId();
-    if (!e.name || typeof e.name !== "object") e.name = fillAllLangs(e.id);
-    for (const [c] of LANGS) if (typeof e.name[c] !== "string") e.name[c] = e.name.en || e.name.kr || e.id;
+    e.name = compactEngineName(e.name, e.id);
     if (typeof e.url !== "string") e.url = "https://www.google.com/search?q={q}";
     if (typeof e.enabled !== "boolean") e.enabled = true;
     if (!e.icon) e.icon = "🔍";
@@ -683,17 +696,17 @@ function normalizeEngines(engs) {
   return out;
 }
 
+// ⚠ content.js의 defaultEngines()와 반드시 동일하게 유지 (CLAUDE.md 금지항목 #2)
 function defaultEngines() {
-  function fa(label) { const obj={}; for(const[c] of LANGS) obj[c]=label; return obj; }
   return [
-    { id:"google",     name:{...fa("Google"),    kr:"구글"},      url:"https://www.google.com/search?q={q}",                color:"sky",    enabled:true, icon:"🔍" },
-    { id:"naver",      name:{...fa("Naver"),     kr:"네이버"},     url:"https://search.naver.com/search.naver?query={q}",    color:"mint",   enabled:true, icon:"🟢" },
-    { id:"bing",       name:{...fa("Bing"),      kr:"빙"},         url:"https://www.bing.com/search?q={q}",                  color:"pastel", enabled:true, icon:"🔵" },
-    { id:"wikipedia",  name:{...fa("Wikipedia"), kr:"위키피디아"},  url:"https://en.wikipedia.org/wiki/Special:Search?search={q}", color:"gray", enabled:true, icon:"📚" },
-    { id:"perplexity", name:{...fa("Perplexity AI"), kr:"퍼플렉시티"}, url:"https://www.perplexity.ai/search?q={q}",         color:"violet", enabled:true, icon:"🤖", isAI:true },
-    { id:"chatgpt",    name:{...fa("ChatGPT"),   kr:"챗GPT"},      url:"https://chatgpt.com/?q={q}&hints=search",            color:"gray",   enabled:true, icon:"💬", isAI:true },
-    { id:"claude",     name:{...fa("Claude"),    kr:"클로드"},      url:"https://claude.ai/new?q={q}",                       color:"peach",  enabled:true, icon:"✨", isAI:true },
-    { id:"youtube",    name:{...fa("YouTube"),   kr:"유튜브"},      url:"https://www.youtube.com/results?search_query={q}",  color:"rose",   enabled:true, icon:"▶️" }
+    { id:"google",     name:{ en:"Google",        kr:"구글" },      url:"https://www.google.com/search?q={q}",                color:"sky",    enabled:true, icon:"🔍" },
+    { id:"naver",      name:{ en:"Naver",         kr:"네이버" },     url:"https://search.naver.com/search.naver?query={q}",    color:"mint",   enabled:true, icon:"🟢" },
+    { id:"bing",       name:{ en:"Bing",          kr:"빙" },         url:"https://www.bing.com/search?q={q}",                  color:"pastel", enabled:true, icon:"🔵" },
+    { id:"wikipedia",  name:{ en:"Wikipedia",     kr:"위키피디아" },  url:"https://en.wikipedia.org/wiki/Special:Search?search={q}", color:"gray", enabled:true, icon:"📚" },
+    { id:"perplexity", name:{ en:"Perplexity AI", kr:"퍼플렉시티" },  url:"https://www.perplexity.ai/search?q={q}",             color:"violet", enabled:true, icon:"🤖", isAI:true },
+    { id:"chatgpt",    name:{ en:"ChatGPT",       kr:"챗GPT" },      url:"https://chatgpt.com/?q={q}&hints=search",            color:"gray",   enabled:true, icon:"💬", isAI:true },
+    { id:"claude",     name:{ en:"Claude",        kr:"클로드" },      url:"https://claude.ai/new?q={q}",                       color:"peach",  enabled:true, icon:"✨", isAI:true },
+    { id:"youtube",    name:{ en:"YouTube",       kr:"유튜브" },      url:"https://www.youtube.com/results?search_query={q}",  color:"rose",   enabled:true, icon:"▶️" }
   ];
 }
 
@@ -796,10 +809,21 @@ saveBtn.addEventListener("click", () => {
     [K_SHORTCUT]: state.shortcut,
     [K_APPEARANCE]: state.appearance
   }, () => {
+    // chrome.storage.sync 는 키당 8KB 한도가 있고, 넘으면 set 이 예외 없이 실패한다.
+    // lastError 를 안 보면 저장이 안 됐는데도 "Saved!" 가 뜬다.
+    const err = chrome.runtime.lastError;
+    if (err) {
+      console.warn("[TapTap] save failed:", err.message);
+      savedMsg.textContent = "⚠ Save failed — settings too large. Remove a few engines.";
+      savedMsg.style.color = "#EF4444";
+      savedMsg.style.display = "inline";
+      setTimeout(() => (savedMsg.style.display = "none"), 6000);
+      return;
+    }
+    savedMsg.textContent = "✓ Saved!";
+    savedMsg.style.color = "";   // CSS 기본색(초록)으로 복귀
     savedMsg.style.display = "inline";
     setTimeout(() => (savedMsg.style.display = "none"), 1800);
-    // 저장된 값 콘솔 확인용
-    console.log("[QSP] Saved shortcut:", JSON.stringify(state.shortcut));
   });
 });
 
