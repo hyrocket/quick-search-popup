@@ -1,5 +1,5 @@
 // =====================================================================
-// Quick Search Popup v0.9 — content.js
+// TapTap - Quick Search v1.1 — content.js
 // New in v3: AI engines, text-selection auto-fill, search history,
 //            custom trigger shortcut, custom hex color support
 // =====================================================================
@@ -486,7 +486,7 @@ function clearHistory() {
 // Shadow DOM — panel refs
 // =======================
 let host, sr, overlay, panelWrap, panelEl, inputEl, selectEl, hintEl, newTabEl;
-let historyDropEl, engStripEl, selBadgeEl, titleHintEl;
+let historyDropEl, engineDropEl, engStripEl, selBadgeEl, titleHintEl;
 let overlayOpen = false;
 
 // 편집 가능한 요소인가 (입력을 절대 막으면 안 되는 대상)
@@ -524,15 +524,18 @@ function installGlobalTraps() {
   document.addEventListener("keydown", (e) => {
     if (!overlayOpen) return;
     const histOpen = historyDropEl?.classList.contains("open");
+    const engOpen  = isEngDropOpen();
     if (e.key === "ArrowUp") {
       e.preventDefault(); e.stopPropagation();
-      if (!histOpen) { cycleEngine(-1); inputEl?.focus(); }
+      if (engOpen) navigateEngineDrop(-1);
+      else if (!histOpen) { cycleEngine(-1); inputEl?.focus(); }
       else navigateHistory(-1);
       return;
     }
     if (e.key === "ArrowDown") {
       e.preventDefault(); e.stopPropagation();
-      if (!histOpen) { cycleEngine(+1); inputEl?.focus(); }
+      if (engOpen) navigateEngineDrop(+1);
+      else if (!histOpen) { cycleEngine(+1); inputEl?.focus(); }
       else navigateHistory(+1);
       return;
     }
@@ -592,6 +595,7 @@ function ensurePanel() {
       --ss-divider:  color-mix(in oklab,var(--ss-border,#CBD5E1) 40%,transparent);
       --ss-fg-muted: color-mix(in oklab,var(--ss-panel-fg,#111827) 40%,transparent);
       --ss-title-fg: #6366F1;
+      --ss-bolt: #F5B301;   /* 로고 번개 — 테마와 무관하게 항상 노란색 */
 
       /* 검색 입력창 + 엔진 버튼 (tint 지점 ①) */
       --ss-input-bg: var(--ss-sub-bg,#f6f7fb);
@@ -710,6 +714,7 @@ function ensurePanel() {
 
     /* ── midnight ── */
     :host([data-ss-theme="midnight"]){
+      --ss-bolt:#FBBF24;
       --ss-panel-bg:#1C1C22; --ss-panel-fg:#F0F0F4;
       --ss-sub-bg:#26262E;   --ss-border:#34343E;
       --ss-accent:#7F77DD;   --ss-on-accent:#16161A;
@@ -761,6 +766,7 @@ function ensurePanel() {
 
     /* ── terminal ── */
     :host([data-ss-theme="terminal"]){
+      --ss-bolt:#D9A521;
       --ss-panel-bg:#0D1117; --ss-panel-fg:#A9B7C1;
       --ss-sub-bg:#161B22;   --ss-border:#21313D;
       --ss-accent:#238636;   --ss-on-accent:#E6FFED;
@@ -840,10 +846,24 @@ function ensurePanel() {
     .titleIcon{
       width:20px;height:20px;border-radius:5px;flex-shrink:0;
     }
+    /* icon32.png 로드 실패 시 대체되는 번개 */
+    .titleBolt{
+      display:flex;align-items:center;flex-shrink:0;
+      color:var(--ss-bolt);
+    }
+    .titleBolt svg{ display:block;width:15px;height:15px }
     .titleText{
-      font-size:11px;font-weight:800;letter-spacing:.03em;
-      color:var(--ss-title-fg); /* 엔진 테마 영향 없이 고정 */
+      display:flex;align-items:baseline;gap:4px;
       white-space:nowrap;user-select:none;
+    }
+    .titleName{
+      font-size:14px;font-weight:800;letter-spacing:-.02em;
+      color:var(--ss-title-fg); /* 엔진 테마 영향 없이 고정 */
+    }
+    .titleSub{
+      font-size:11px;font-weight:500;letter-spacing:0;
+      /* muted 그대로면 너무 흐리다. 본문 색 쪽으로 한 단계 당겨온다 */
+      color:color-mix(in oklab,var(--ss-fg-muted) 60%,var(--ss-panel-fg));
     }
     .titleHint{
       font-size:10px;color:var(--ss-fg-muted);
@@ -880,7 +900,65 @@ function ensurePanel() {
       color:var(--ss-aitag-fg);border-radius:4px;padding:1px 4px;
       flex-shrink:0;
     }
-    .engine .arrow{font-size:10px;color:var(--ss-accent,#94A3B8);flex-shrink:0;margin-left:2px}
+    .engine .arrow{
+      font-size:10px;color:var(--ss-accent,#94A3B8);flex-shrink:0;margin-left:2px;
+      display:inline-block;transition:transform .15s;
+    }
+    .engine.open{border-color:var(--ss-input-focus-bd)}
+    .engine.open .arrow{transform:rotate(180deg)}
+
+    /* ── Engine dropdown ──
+       histDrop과 같은 이유로 panelWrap 기준 absolute
+       (panel의 overflow:hidden 안에 넣으면 잘린다 — CLAUDE.md 참고) */
+    .engDrop{
+      position:absolute;top:0;left:0;
+      background:var(--ss-drop-bg);
+      backdrop-filter:var(--ss-backdrop);
+      border:1px solid var(--ss-drop-bd);
+      border-radius:12px;
+      box-shadow:var(--ss-drop-shadow);
+      z-index:60;
+      display:none;
+      padding:4px;
+      max-height:280px;overflow-y:auto;
+      scrollbar-color:var(--ss-scrollbar);
+    }
+    .engDrop.open{display:block}
+    .engDropItem{
+      display:flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:8px;
+      font-size:13px;font-weight:600;
+      color:var(--ss-panel-fg,#374151);
+      cursor:pointer;white-space:nowrap;
+    }
+    .engDropItem .edIcon{font-size:16px;flex-shrink:0}
+    .engDropItem .edName{flex:1}
+    .engDropItem .edCheck{font-size:12px;color:var(--ss-accent);flex-shrink:0}
+    .engDropItem .aiTag{
+      font-size:9px;font-weight:700;letter-spacing:.04em;
+      background:var(--ss-aitag-bg);color:var(--ss-aitag-fg);
+      border-radius:4px;padding:1px 4px;flex-shrink:0;
+    }
+    .engDropItem.current{color:var(--ss-accent);font-weight:800}
+    /* --ss-hover-bg(히스토리용)는 목록에서 너무 옅다.
+       본문 색을 섞어 라이트/다크 어느 쪽에서든 확실히 보이게 한다. */
+    .engDropItem:hover,.engDropItem.active{
+      background:color-mix(in oklab,var(--ss-panel-fg) 14%,var(--ss-drop-bg));
+    }
+    /* classic은 accent가 엔진 고유색이라 연한 엔진(ChatGPT 등)에서 글자가 묻힌다.
+       색 대신 본문 색 + 배경 tint로 현재 항목을 구분한다. */
+    :host([data-ss-theme="classic"]) .engDropItem.current{
+      color:var(--ss-panel-fg);
+      background:color-mix(in oklab,var(--ss-accent) 20%,transparent);
+    }
+    :host([data-ss-theme="classic"]) .engDropItem.current .edCheck{
+      color:var(--ss-panel-fg);opacity:.65;
+    }
+    /* 위 셀렉터가 hover보다 특이도가 높으므로 hover를 같은 특이도로 다시 준다 */
+    :host([data-ss-theme="classic"]) .engDropItem.current:hover,
+    :host([data-ss-theme="classic"]) .engDropItem.current.active{
+      background:color-mix(in oklab,var(--ss-panel-fg) 14%,var(--ss-drop-bg));
+    }
 
     /* ── Search input wrapper ── */
     .inputWrap{position:relative;overflow:visible;}
@@ -928,6 +1006,9 @@ function ensurePanel() {
       color:var(--ss-on-accent);
     }
     .btn.primary:hover{background:var(--ss-primary-bg-hover);border-color:var(--ss-primary-bg-hover)}
+    /* ↵ 글리프는 폰트에 따라 거의 안 보인다 → 인라인 SVG 사용 */
+    .btn .btnIcon{display:flex;align-items:center;flex-shrink:0}
+    .btn .btnIcon svg{display:block;width:15px;height:15px}
     .iconBtn{
       width:36px;height:36px;padding:0;
       border:1.5px solid var(--ss-iconbtn-bd);border-radius:10px;
@@ -1042,6 +1123,7 @@ function ensurePanel() {
         --ss-border:#45475A;
 
         --ss-title-fg:#818CF8;
+        --ss-bolt:#FBBF24;   /* 어두운 배경에서는 한 톤 밝게 */
         --ss-chip-bg:rgba(255,255,255,.07);
         --ss-chip-hover-bg:rgba(255,255,255,.13);
         --ss-pill-active-bg:color-mix(in oklab,var(--ss-accent,#818CF8) 20%,var(--ss-panel-bg,#1E1E2E));
@@ -1069,17 +1151,28 @@ function ensurePanel() {
   panelEl = document.createElement("div");
   panelEl.className = "panel";
 
-  // Engine display button (click = cycle, shows current engine)
+  // Engine display button (click = 목록 펼치기, shows current engine)
   const engineBtn = document.createElement("div");
   engineBtn.className = "engine";
   engineBtn.tabIndex = 0;
-  engineBtn.title = "Click or ↑/↓ to change engine";
-  engineBtn.addEventListener("click", () => { cycleEngine(+1); inputEl.focus(); });
+  engineBtn.title = "Click to pick an engine (↑/↓ to move, Enter to select)";
+  // overlay mousedown 핸들러가 곧바로 다시 닫지 않도록 전파를 끊는다
+  engineBtn.addEventListener("mousedown", (e) => e.stopPropagation());
+  engineBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleEngineDrop(); });
   engineBtn.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowUp") { e.preventDefault(); cycleEngine(-1); }
-    if (e.key === "ArrowDown") { e.preventDefault(); cycleEngine(+1); }
+    if (e.key === "ArrowUp")   { e.preventDefault(); isEngDropOpen() ? navigateEngineDrop(-1) : openEngineDrop(); return; }
+    if (e.key === "ArrowDown") { e.preventDefault(); isEngDropOpen() ? navigateEngineDrop(+1) : openEngineDrop(); return; }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault(); isEngDropOpen() ? pickHighlightedEngine() : openEngineDrop(); return;
+    }
+    if (e.key === "Escape")    { e.preventDefault(); closeEngineDrop(); inputEl?.focus(); return; }
   });
   selectEl = engineBtn; // reuse ref name for compatibility
+
+  // 엔진 드롭다운 — panelWrap 직접 자식으로 붙는다 (아래 panelWrap.append 참고)
+  engineDropEl = document.createElement("div");
+  engineDropEl.className = "engDrop";
+  engineDropEl.addEventListener("mousedown", (e) => e.stopPropagation());
 
   // Input wrapper
   const inputWrap = document.createElement("div");
@@ -1110,25 +1203,41 @@ function ensurePanel() {
     // 약간의 딜레이: 히스토리 아이템 mousedown이 blur보다 먼저 처리되도록
     setTimeout(() => hideHistoryDrop(), 80);
   });
-  inputEl.addEventListener("input", () => { filterHistoryDrop(inputEl.value); });
+  inputEl.addEventListener("input", () => {
+    closeEngineDrop();   // 타이핑을 시작했으면 엔진 선택은 끝난 것
+    filterHistoryDrop(inputEl.value);
+  });
   inputEl.addEventListener("keydown", (e) => {
     // stopImmediatePropagation: 같은 요소의 다른 핸들러 + 버블링 모두 차단
     e.stopImmediatePropagation();
     e.stopPropagation();
     const histOpen = historyDropEl.classList.contains("open");
+    const engOpen  = isEngDropOpen();
     if (e.key === "ArrowUp") {
       e.preventDefault();
+      if (engOpen)  { navigateEngineDrop(-1); return; }
       if (histOpen) { navigateHistory(-1); return; }
       cycleEngine(-1); return;
     }
     if (e.key === "ArrowDown") {
       e.preventDefault();
+      if (engOpen)  { navigateEngineDrop(+1); return; }
       if (histOpen) { navigateHistory(+1); return; }
       cycleEngine(+1); return;
     }
-    if (e.key === "Escape") { e.preventDefault(); if (histOpen) { hideHistoryDrop(); } else { closePanel(); } return; }
-    if (e.key === "Enter") { e.preventDefault(); doSearch(); return; }
-    if (e.key === "Tab") { e.preventDefault(); cycleEngine(+1); return; }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      if (engOpen) { closeEngineDrop(); }
+      else if (histOpen) { hideHistoryDrop(); }
+      else { closePanel(); }
+      return;
+    }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (engOpen) { pickHighlightedEngine(); return; }
+      doSearch(); return;
+    }
+    if (e.key === "Tab") { e.preventDefault(); if (!engOpen) cycleEngine(+1); return; }
   }, true)  // capture:true — 페이지 핸들러보다 먼저 실행;
 
   // Action buttons
@@ -1138,7 +1247,11 @@ function ensurePanel() {
   const searchBtnEl = document.createElement("button");
   searchBtnEl.type = "button";
   searchBtnEl.className = "btn primary";
-  searchBtnEl.innerHTML = `<span>↵</span><span class="btnLabel">Search</span>`;
+  searchBtnEl.innerHTML =
+    `<span class="btnIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+    `stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">` +
+    `<path d="M20 5v6a4 4 0 0 1-4 4H5"/><path d="M9 11l-4 4 4 4"/>` +
+    `</svg></span><span class="btnLabel">Search</span>`;
   searchBtnEl.addEventListener("click", () => doSearch());
 
   const closeBtnEl = document.createElement("button");
@@ -1159,17 +1272,23 @@ function ensurePanel() {
   const titleIcon = document.createElement("img");
   titleIcon.className = "titleIcon";
   titleIcon.src = chrome.runtime.getURL("icons/icon32.png");
-  titleIcon.alt = "QSP";
+  titleIcon.alt = "TapTap";
   titleIcon.onerror = () => {
+    // 폴백은 이모지 대신 인라인 SVG. currentColor 라서 --ss-bolt 로만 색이 결정된다
     titleIcon.style.display = "none";
     const fb = document.createElement("span");
-    fb.textContent = "⚡"; fb.style.cssText = "font-size:18px;flex-shrink:0";
+    fb.className = "titleBolt";
+    fb.innerHTML =
+      `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">` +
+      `<path d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"/>` +
+      `</svg>`;
     titlePill.insertBefore(fb, titleText);
   };
 
   const titleText = document.createElement("span");
   titleText.className = "titleText";
-  titleText.textContent = "Quick Search Popup";
+  titleText.innerHTML =
+    `<span class="titleName">TapTap</span><span class="titleSub">- Quick Search</span>`;
 
   titlePill.append(titleIcon, titleText);
 
@@ -1193,6 +1312,8 @@ function ensurePanel() {
 
   // ── Wheel on panel → cycle engine ──
   panelEl.addEventListener("wheel", (e) => {
+    // 드롭다운이 열려 있으면 목록 스크롤이 우선 — 뒤에서 엔진이 바뀌면 안 된다
+    if (isEngDropOpen()) return;
     e.preventDefault();
     cycleEngine(e.deltaY > 0 ? +1 : -1);
   }, { passive: false });
@@ -1235,8 +1356,9 @@ function ensurePanel() {
   bottomBar.append(bottomLeft, bottomRight);
 
   panelWrap.append(panelEl, bottomBar);
-  // histDrop은 panelWrap 직접 자식 (panel overflow:hidden 밖)
+  // histDrop / engDrop은 panelWrap 직접 자식 (panel overflow:hidden 밖)
   panelWrap.appendChild(historyDropEl);
+  panelWrap.appendChild(engineDropEl);
   overlay.append(panelWrap);
   sr.append(style, overlay);
   document.documentElement.appendChild(host);
@@ -1247,6 +1369,8 @@ function ensurePanel() {
   overlay.addEventListener("mousedown", (e) => {
     const path = e.composedPath?.() || [];
     if (!path.includes(inputWrap)) hideHistoryDrop();
+    // 엔진 버튼과 드롭다운은 각자 mousedown 전파를 끊으므로 여기 오면 바깥 클릭이다
+    closeEngineDrop();
   });
 }
 
@@ -1412,6 +1536,128 @@ function engineLabel(en) {
 }
 
 // =======================
+// Engine dropdown
+// =======================
+let engDropIdx = -1;
+
+function isEngDropOpen() { return !!engineDropEl?.classList.contains("open"); }
+
+function buildEngineDrop() {
+  engineDropEl.innerHTML = "";
+  const enabled = getEnabledEngines();
+  const curId = getCurrentEngine()?.id;
+
+  enabled.forEach((en, i) => {
+    const row = document.createElement("div");
+    row.className = "engDropItem" + (en.id === curId ? " current" : "");
+
+    const ic = document.createElement("span");
+    ic.className = "edIcon";
+    ic.textContent = en.icon || "🔍";
+
+    const nm = document.createElement("span");
+    nm.className = "edName";
+    nm.textContent = engineLabel(en);
+
+    row.append(ic, nm);
+
+    if (en.isAI) {
+      const ai = document.createElement("span");
+      ai.className = "aiTag";
+      ai.textContent = "AI";
+      row.appendChild(ai);
+    }
+    if (en.id === curId) {
+      const ck = document.createElement("span");
+      ck.className = "edCheck";
+      ck.textContent = "✓";
+      row.appendChild(ck);
+    }
+
+    // mousedown 기본동작을 막아야 입력창 포커스가 안 빠진다 (histDrop과 같은 이유)
+    row.addEventListener("mousedown", (e) => { e.preventDefault(); e.stopPropagation(); });
+    row.addEventListener("click", (e) => { e.stopPropagation(); pickEngine(en.id); });
+    row.addEventListener("mousemove", () => highlightEngDrop(i, false));
+
+    engineDropEl.appendChild(row);
+  });
+}
+
+/* 엔진 버튼 기준으로 배치.
+   offsetLeft는 부모(panelSearchRow) 기준이라 어긋난다 → rect 차이로 계산 (CLAUDE.md 참고) */
+function positionEngineDrop() {
+  if (!engineDropEl || !selectEl || !panelWrap) return;
+  const wrapR = panelWrap.getBoundingClientRect();
+  const btnR  = selectEl.getBoundingClientRect();
+  const gap = 6;
+
+  engineDropEl.style.left = (btnR.left - wrapR.left) + "px";
+  engineDropEl.style.minWidth = btnR.width + "px";
+
+  const dh = engineDropEl.offsetHeight;
+  const roomBelow = window.innerHeight - btnR.bottom;
+  const flipUp = roomBelow < dh + gap + 8 && btnR.top > dh + gap + 8;
+  engineDropEl.style.top = flipUp
+    ? (btnR.top - wrapR.top - dh - gap) + "px"
+    : (btnR.bottom - wrapR.top + gap) + "px";
+}
+
+function highlightEngDrop(idx, scroll) {
+  const items = engineDropEl.querySelectorAll(".engDropItem");
+  if (!items.length) return;
+  engDropIdx = Math.max(0, Math.min(items.length - 1, idx));
+  items.forEach((el, i) => el.classList.toggle("active", i === engDropIdx));
+  if (scroll) items[engDropIdx].scrollIntoView({ block: "nearest" });
+}
+
+function openEngineDrop() {
+  if (!engineDropEl) return;
+  hideHistoryDrop();
+  buildEngineDrop();
+  if (!engineDropEl.children.length) return;
+  engineDropEl.classList.add("open");
+  selectEl?.classList.add("open");
+  positionEngineDrop();
+  // 현재 엔진에서 시작
+  const enabled = getEnabledEngines();
+  highlightEngDrop(Math.max(0, enabled.findIndex(e => e.id === getCurrentEngine()?.id)), true);
+}
+
+function closeEngineDrop() {
+  engineDropEl?.classList.remove("open");
+  selectEl?.classList.remove("open");
+  engDropIdx = -1;
+}
+
+function toggleEngineDrop() {
+  if (isEngDropOpen()) { closeEngineDrop(); inputEl?.focus(); }
+  else openEngineDrop();
+}
+
+function navigateEngineDrop(delta) {
+  const items = engineDropEl?.querySelectorAll(".engDropItem");
+  if (!items?.length) return;
+  highlightEngDrop((engDropIdx + delta + items.length) % items.length, true);
+}
+
+function pickEngine(id) {
+  if (!getEngineById(id)) return;
+  state.lastEngineId = id;
+  chrome.storage?.sync?.set?.({ [K_LAST]: id });
+  closeEngineDrop();
+  applyTheme();
+  updateHint();
+  rebuildEngineStrip();
+  inputEl?.focus();
+}
+
+function pickHighlightedEngine() {
+  const en = getEnabledEngines()[engDropIdx];
+  if (en) pickEngine(en.id);
+  else closeEngineDrop();
+}
+
+// =======================
 // Theme
 // =======================
 function applyTheme() {
@@ -1552,6 +1798,7 @@ function _showPanel() {
   if (selBadgeEl) selBadgeEl.classList.toggle("visible", sel.length > 0);
 
   hideHistoryDrop();
+  closeEngineDrop();
   inputEl.focus();
   if (sel) inputEl.select();
 
@@ -1569,6 +1816,7 @@ function closePanel() {
   if (overlay) overlay.style.display = "none";
   overlayOpen = false;
   hideHistoryDrop();
+  closeEngineDrop();
 }
 
 // =======================
