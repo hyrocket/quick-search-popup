@@ -384,13 +384,32 @@ chrome.storage?.sync?.onChanged?.addListener((changes) => {
 // =======================
 // Trigger detection (configurable)
 // =======================
-let lastKeyUpTime = 0;
-let keyUpCount = 0;
-const DOUBLE_THRESHOLD = 400;
+let lastTapTime = 0;      // 마지막으로 "인정된" 탭의 시각
+let tapCount = 0;
+let modDownTime = 0;      // 트리거 키가 눌린 시각 (0 = 안 눌려 있음)
+let modDirty = false;     // 이번 누름 중에 다른 키가 같이 눌렸는가
+const DOUBLE_THRESHOLD = 300;   // 인정된 탭 사이의 최대 간격
+const TAP_MAX_HOLD     = 250;   // 탭 하나로 인정되는 최대 누름 지속시간
+
+function resetTapHold() { modDownTime = 0; modDirty = false; }
+
+// 포커스가 빠지면 keyup이 안 오므로 눌림 상태를 버린다
+window.addEventListener("blur", () => { resetTapHold(); tapCount = 0; });
 
 function isImeComposing(e) { return e.isComposing === true || e.key === "Process"; }
 
 document.addEventListener("keydown", (e) => {
+  // 더블탭 누름 추적. IME 조합 중에도 "다른 키가 눌렸다"는 사실은 기록해야 하므로
+  // isImeComposing 조기 반환보다 위에 둔다.
+  const dsc = state.shortcut;
+  if (dsc.type === "double") {
+    if (e.key === dsc.key) {
+      if (!e.repeat) { modDownTime = Date.now(); modDirty = false; }
+    } else if (modDownTime) {
+      modDirty = true;   // 이 누름은 조합키 용도 → 탭으로 인정하지 않는다
+    }
+  }
+
   if (isImeComposing(e)) return;
   // Single-key combos (e.g. Ctrl+Space)
   const sc = state.shortcut;
@@ -422,17 +441,28 @@ document.addEventListener("keydown", (e) => {
 }, { capture: true });
 
 document.addEventListener("keyup", (e) => {
-  if (isImeComposing(e)) return;
   const sc = state.shortcut;
   if (sc.type !== "double") return;
   if (e.key !== sc.key) return;
 
-  const now = Date.now();
-  keyUpCount = (now - lastKeyUpTime <= DOUBLE_THRESHOLD) ? keyUpCount + 1 : 1;
-  lastKeyUpTime = now;
+  const downTime = modDownTime;
+  const dirty    = modDirty;
+  resetTapHold();
 
-  if (keyUpCount >= 2) {
-    keyUpCount = 0;
+  const now  = Date.now();
+  const held = downTime ? now - downTime : Infinity;
+
+  // 짧게 눌렀다 뗐고, 그 사이 다른 키를 쓰지 않았고, IME 조합 중이 아닐 때만 탭으로 인정
+  if (held > TAP_MAX_HOLD || dirty || isImeComposing(e)) {
+    tapCount = 0;   // 대문자 입력용 긴 누름 / 조합키 사용 → 카운터를 버린다
+    return;
+  }
+
+  tapCount = (now - lastTapTime <= DOUBLE_THRESHOLD) ? tapCount + 1 : 1;
+  lastTapTime = now;
+
+  if (tapCount >= 2) {
+    tapCount = 0;
     e.preventDefault();
     openPanel();
   }
