@@ -537,7 +537,7 @@
     <button class="navItem" data-tab="about">
       <span class="navIcon">ℹ️</span>About
     </button>
-    <div class="sideFooter" id="versionLabel">v1.1.0</div>
+    <div class="sideFooter" id="versionLabel"></div>
   </nav>
 
   <!-- Main content -->
@@ -774,7 +774,7 @@
       <div class="card" style="text-align:center;padding:32px 24px">
         <img src="icons/icon128.png" width="72" height="72" style="border-radius:18px;margin-bottom:16px;box-shadow:0 4px 20px rgba(79,70,229,.3)"/>
         <div style="font-size:20px;font-weight:800;margin-bottom:4px">TapTap - Quick Search</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:20px">v1.1.0 &nbsp;·&nbsp; Manifest V3 &nbsp;·&nbsp; Chrome Extension</div>
+        <div id="aboutVersion" style="font-size:13px;color:var(--muted);margin-bottom:20px"></div>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <a href="https://github.com/hyrocket/quick-search-popup" target="_blank"
              style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;
@@ -808,15 +808,33 @@
       </div>
 
       <div class="card">
+        <div class="cardTitle">🆕 What&#39;s new in v1.2.0</div>
+        <ul style="font-size:13px;line-height:2;color:var(--text);padding-left:18px;margin:0">
+          <li><strong>Renamed to TapTap</strong> — the extension is now <strong>TapTap - Quick Search</strong></li>
+          <li><strong>Engine dropdown in the popup</strong> — plus an Enter hint icon on the search button</li>
+          <li><strong>Emoji icon picker &amp; 27 recommended engines</strong> in Settings — add several at once</li>
+          <li><strong>Wikipedia now follows your browser language</strong> instead of always opening the English wiki</li>
+          <li><strong>Opening results in a new tab</strong> is the default for fresh installs</li>
+          <li><strong>Fewer accidental triggers</strong> — holding Shift to type capitals no longer counts as a double-tap</li>
+          <li><strong>Warns when settings are too large to sync</strong> instead of failing silently</li>
+        </ul>
+      </div>
+
+      <div class="card">
         <div class="cardTitle">✨ Features</div>
         <ul style="font-size:13px;line-height:2;color:var(--text);padding-left:18px;margin:0">
           <li><strong>⚡ Instant overlay</strong> — Double-tap Shift (or custom shortcut) to open from any page</li>
           <li><strong>🤖 AI Search built-in</strong> — Perplexity AI, ChatGPT, Claude ready to use</li>
+          <li><strong>🔽 Engine dropdown</strong> — Pick any engine right inside the popup, no scrolling needed</li>
           <li><strong>🖱️ Mouse wheel engine switch</strong> — Scroll on the panel to cycle search engines</li>
           <li><strong>📝 Auto-fill selected text</strong> — Highlight text on a page, then trigger to search it instantly</li>
           <li><strong>🕐 Search history</strong> — Recent searches appear as you type</li>
-          <li><strong>🎨 Full theme control</strong> — 9 preset colors + custom hex per engine</li>
+          <li><strong>🎨 6 UI themes</strong> — Classic, Glass, Midnight, Mono, Paper, Terminal</li>
+          <li><strong>🌈 Per-engine colors</strong> — 9 preset palettes + custom hex for every engine</li>
+          <li><strong>➕ 27 recommended engines</strong> — Add popular engines in one click, or bring your own URL</li>
+          <li><strong>😀 Emoji icon picker</strong> — Give each engine its own icon</li>
           <li><strong>🌐 13 languages supported</strong> — Korean, English, Japanese, Chinese, and more</li>
+          <li><strong>📑 Open in a new tab</strong> — Keep the page you're on, or search in place</li>
           <li><strong>🔒 Zero data collection</strong> — All settings stored locally. No servers, no tracking.</li>
         </ul>
       </div>

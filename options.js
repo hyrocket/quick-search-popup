@@ -180,6 +180,15 @@ function setScMode(mode) {
 }
 // scMode 버튼 이벤트 (HTML onclick 대신 JS에서 등록 — 타이밍 안전)
 document.addEventListener("DOMContentLoaded", () => {
+  // 버전 표기는 manifest 단일 출처에서 읽는다.
+  // HTML에 박아두면 릴리스마다 사이드바/About 두 곳을 손으로 맞춰야 하고,
+  // 실제로 1.1.0 -> 1.2.0 때 둘 다 어긋난 채로 남았다.
+  const ver = "v" + chrome.runtime.getManifest().version;
+  const sideVer  = document.getElementById("versionLabel");
+  const aboutVer = document.getElementById("aboutVersion");
+  if (sideVer)  sideVer.textContent  = ver;
+  if (aboutVer) aboutVer.textContent = ver + " ·  Manifest V3  ·  Chrome Extension";
+
   const btnDouble = document.getElementById("scModeDouble");
   const btnCombo  = document.getElementById("scModeCombo");
   if (btnDouble) btnDouble.addEventListener("click", () => setScMode("double"));
