@@ -296,6 +296,18 @@ function buildCustomPalette(hex) {
    읽기는 engineLabel()의 lang -> en -> kr 폴백이 처리한다.
    (13개 언어를 전부 채우면 12개가 영어 문자열의 복사본이라
     chrome.storage.sync 키당 8KB 한도를 금방 먹는다) */
+/* Wikipedia는 언어별로 도메인이 다르다. www.wikipedia.org 는 포털이라 검색이 안 되고
+   /wiki/ 경로는 영문판으로 리다이렉트된다. 그래서 설치 시점의 브라우저 언어로 시드한다.
+   ⚠ content.js / options.js 양쪽에 같은 매핑이 있다 (CLAUDE.md 금지항목 #2) */
+const WIKI_HOST = {
+  kr:"ko", en:"en", ja:"ja", "zh-CN":"zh", "zh-TW":"zh", es:"es", fr:"fr",
+  de:"de", ru:"ru", vn:"vi", ms:"ms", th:"th", id:"id"
+};
+function wikipediaUrl(lang) {
+  const h = WIKI_HOST[lang] || "en";
+  return `https://${h}.wikipedia.org/wiki/Special:Search?search={q}`;
+}
+
 function defaultEngines() {
   return [
     {
@@ -319,7 +331,7 @@ function defaultEngines() {
     {
       id: "wikipedia",
       name: { en:"Wikipedia", kr:"위키피디아" },
-      url: "https://en.wikipedia.org/wiki/Special:Search?search={q}",
+      url: wikipediaUrl(guessDefaultLang()),
       color: "gray", enabled: true, icon: "📚"
     },
     {
@@ -1877,6 +1889,9 @@ function loadAll(cb) {
     [K_LANG, K_NEWTAB, K_ENGS, K_LAST, K_HISTORY, K_SHORTCUT, K_APPEARANCE, "shiftsearch:engineColorMap"],
     (res) => {
       const lang = normalizeLang(res?.[K_LANG]);
+      // 폴백 false 는 "저장된 적 없는 기존 사용자"용이다. 여기를 true 로 바꾸면
+      // 한 번도 토글한 적 없는 기존 사용자까지 새 탭으로 바뀐다.
+      // 신규 설치 기본값은 background.js 의 onInstalled 가 실제 값으로 써둔다.
       const openInNewTab = typeof res?.[K_NEWTAB] === "boolean" ? res[K_NEWTAB] : false;
       let engines = normalizeEngines(migrateIfNeeded(res));
       const history = Array.isArray(res?.[K_HISTORY]) ? res[K_HISTORY] : [];
