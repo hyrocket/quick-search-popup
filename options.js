@@ -1,5 +1,5 @@
 // =====================================================================
-// Shift Quick Search v0.9 — options.js
+// TapTap - Quick Search v1.1 — options.js
 // =====================================================================
 
 const K_LANG     = "shiftsearch:lang";

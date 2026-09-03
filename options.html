@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Quick Search Popup — Settings</title>
+  <title>TapTap - Quick Search — Settings</title>
   <style>
     :root {
       --bg: #F8F9FB;
@@ -46,10 +46,14 @@
 
     /* ── Sidebar ── */
     .sideTitle{
-      font-size:12px;font-weight:700;letter-spacing:.07em;
-      color:var(--muted);text-transform:uppercase;
-      padding:4px 10px 8px;
+      display:flex;align-items:baseline;gap:5px;
+      padding:4px 10px 10px;
+      white-space:nowrap;user-select:none;
     }
+    .sideTitle .bolt{ color:#F5B301;align-self:center;display:flex }
+    .sideTitle .bolt svg{ display:block;width:15px;height:15px }
+    .sideTitle .brand{ font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--text) }
+    .sideTitle .brandSub{ font-size:11px;font-weight:500;color:var(--muted) }
     .navItem{
       display:flex;align-items:center;gap:9px;
       padding:8px 10px;border-radius:9px;
@@ -406,7 +410,10 @@
 <div class="layout">
   <!-- Sidebar -->
   <nav class="sidebar">
-    <div class="sideTitle">⚡ Quick Search Popup</div>
+    <div class="sideTitle">
+      <span class="bolt"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"/></svg></span>
+      <span class="brand">TapTap</span><span class="brandSub">- Quick Search</span>
+    </div>
     <button class="navItem active" data-tab="engines">
       <span class="navIcon">🔍</span>Search Engines
     </button>
@@ -459,7 +466,7 @@
     <!-- ── SHORTCUT ── -->
     <div class="section" id="tab-shortcut">
       <div class="pageTitle">Trigger Shortcut</div>
-      <div class="pageSub">Set the key combination to open Quick Search Popup.</div>
+      <div class="pageSub">Set the key combination to open TapTap.</div>
 
       <!-- 현재 단축키 표시 -->
       <div class="card">
@@ -644,11 +651,11 @@
     <!-- ── ABOUT ── -->
     <div class="section" id="tab-about">
       <div class="pageTitle">About</div>
-      <div class="pageSub">Quick Search Popup — open-source browser extension</div>
+      <div class="pageSub">TapTap - Quick Search — open-source browser extension</div>
 
       <div class="card" style="text-align:center;padding:32px 24px">
         <img src="icons/icon128.png" width="72" height="72" style="border-radius:18px;margin-bottom:16px;box-shadow:0 4px 20px rgba(79,70,229,.3)"/>
-        <div style="font-size:20px;font-weight:800;margin-bottom:4px">Quick Search Popup</div>
+        <div style="font-size:20px;font-weight:800;margin-bottom:4px">TapTap - Quick Search</div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:20px">v1.1.0 &nbsp;·&nbsp; Manifest V3 &nbsp;·&nbsp; Chrome Extension</div>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <a href="https://github.com/hyrocket/quick-search-popup" target="_blank"
@@ -670,9 +677,9 @@
       </div>
 
       <div class="card">
-        <div class="cardTitle">What is Quick Search Popup?</div>
+        <div class="cardTitle">What is TapTap?</div>
         <p style="font-size:13px;line-height:1.8;color:var(--text);margin-bottom:12px">
-          <strong>Quick Search Popup</strong> is a lightweight Chrome extension that lets you search the web instantly
+          <strong>TapTap - Quick Search</strong> is a lightweight Chrome extension that lets you search the web instantly
           without leaving the page you're on. Press <kbd style="background:var(--accent-soft);color:var(--accent);padding:2px 7px;border-radius:5px;font-size:12px;font-weight:700">Shift</kbd> twice
           and a sleek search overlay appears — no mouse clicks, no tab switching, just type and go.
         </p>
