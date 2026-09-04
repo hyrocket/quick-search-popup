@@ -1057,7 +1057,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 How to use</div>
         <ol class="abtSteps">
-          <li>Press <kbd class="abtKbdA">Shift</kbd> twice on any web page</li>
+          <li>Press <kbd class="abtKbdA">Shift</kbd> twice on any web page (you can change this key in Shortcut)</li>
           <li>Type your query — or it is already filled in if you had selected text</li>
           <li>Change engine with <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> or the mouse wheel</li>
           <li><kbd class="abtKbd">Enter</kbd> to search, <kbd class="abtKbd">Esc</kbd> to close</li>
@@ -1096,7 +1096,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 사용법</div>
         <ol class="abtSteps">
-          <li>아무 웹페이지에서 <kbd class="abtKbdA">Shift</kbd> 를 두 번 누릅니다</li>
+          <li>아무 웹페이지에서 <kbd class="abtKbdA">Shift</kbd> 를 두 번 누릅니다 (단축키 탭에서 다른 키로 바꿀 수 있습니다)</li>
           <li>검색어를 입력합니다 — 글자를 선택해 뒀다면 이미 채워져 있습니다</li>
           <li><kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> 또는 마우스 휠로 엔진을 바꿉니다</li>
           <li><kbd class="abtKbd">Enter</kbd> 로 검색, <kbd class="abtKbd">Esc</kbd> 로 닫기</li>
@@ -1135,7 +1135,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 使い方</div>
         <ol class="abtSteps">
-          <li>どのウェブページでも <kbd class="abtKbdA">Shift</kbd> を2回押します</li>
+          <li>どのウェブページでも <kbd class="abtKbdA">Shift</kbd> を2回押します（ショートカットタブで別のキーに変更できます）</li>
           <li>検索語を入力します — 文字を選んでいた場合はすでに入っています</li>
           <li><kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> かマウスホイールでエンジンを変えます</li>
           <li><kbd class="abtKbd">Enter</kbd> で検索、<kbd class="abtKbd">Esc</kbd> で閉じる</li>
@@ -1174,7 +1174,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 使用方法</div>
         <ol class="abtSteps">
-          <li>在任意网页上连按两次 <kbd class="abtKbdA">Shift</kbd></li>
+          <li>在任意网页上连按两次 <kbd class="abtKbdA">Shift</kbd>（可在“快捷键”中换成其他键）</li>
           <li>输入搜索内容 —— 如果事先选中了文字，则已自动填入</li>
           <li>用 <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> 或滚轮切换引擎</li>
           <li><kbd class="abtKbd">Enter</kbd> 搜索，<kbd class="abtKbd">Esc</kbd> 关闭</li>
@@ -1213,7 +1213,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 使用方式</div>
         <ol class="abtSteps">
-          <li>在任何網頁上連按兩次 <kbd class="abtKbdA">Shift</kbd></li>
+          <li>在任何網頁上連按兩次 <kbd class="abtKbdA">Shift</kbd>（可在「快速鍵」中換成其他按鍵）</li>
           <li>輸入搜尋內容 —— 若事先選取了文字，則已自動填入</li>
           <li>用 <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> 或滾輪切換引擎</li>
           <li><kbd class="abtKbd">Enter</kbd> 搜尋，<kbd class="abtKbd">Esc</kbd> 關閉</li>
@@ -1252,7 +1252,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Cómo se usa</div>
         <ol class="abtSteps">
-          <li>Pulsa <kbd class="abtKbdA">Shift</kbd> dos veces en cualquier página web</li>
+          <li>Pulsa <kbd class="abtKbdA">Shift</kbd> dos veces en cualquier página web (puedes cambiar esta tecla en Atajo)</li>
           <li>Escribe tu búsqueda; si habías seleccionado texto, ya estará escrito</li>
           <li>Cambia de buscador con <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> o con la rueda del ratón</li>
           <li><kbd class="abtKbd">Intro</kbd> para buscar, <kbd class="abtKbd">Esc</kbd> para cerrar</li>
@@ -1291,7 +1291,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Comment l'utiliser</div>
         <ol class="abtSteps">
-          <li>Appuyez deux fois sur <kbd class="abtKbdA">Shift</kbd> sur n'importe quelle page web</li>
+          <li>Appuyez deux fois sur <kbd class="abtKbdA">Shift</kbd> sur n'importe quelle page web (vous pouvez changer cette touche dans Raccourci)</li>
           <li>Saisissez votre recherche — si vous aviez sélectionné du texte, il est déjà rempli</li>
           <li>Changez de moteur avec <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> ou la molette</li>
           <li><kbd class="abtKbd">Entrée</kbd> pour rechercher, <kbd class="abtKbd">Échap</kbd> pour fermer</li>
@@ -1330,7 +1330,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 So wird es benutzt</div>
         <ol class="abtSteps">
-          <li>Drücke auf einer beliebigen Webseite zweimal <kbd class="abtKbdA">Shift</kbd></li>
+          <li>Drücke auf einer beliebigen Webseite zweimal <kbd class="abtKbdA">Shift</kbd> (die Taste lässt sich unter Tastenkürzel ändern)</li>
           <li>Gib deinen Suchbegriff ein — hattest du Text markiert, steht er schon da</li>
           <li>Wechsle die Suchmaschine mit <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> oder dem Mausrad</li>
           <li><kbd class="abtKbd">Enter</kbd> zum Suchen, <kbd class="abtKbd">Esc</kbd> zum Schließen</li>
@@ -1369,7 +1369,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Как пользоваться</div>
         <ol class="abtSteps">
-          <li>Нажмите <kbd class="abtKbdA">Shift</kbd> дважды на любой веб-странице</li>
+          <li>Нажмите <kbd class="abtKbdA">Shift</kbd> дважды на любой веб-странице (клавишу можно изменить в разделе «Горячая клавиша»)</li>
           <li>Введите запрос — если текст был выделен, он уже подставлен</li>
           <li>Меняйте поисковик клавишами <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> или колесом мыши</li>
           <li><kbd class="abtKbd">Enter</kbd> — искать, <kbd class="abtKbd">Esc</kbd> — закрыть</li>
@@ -1408,7 +1408,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Cách dùng</div>
         <ol class="abtSteps">
-          <li>Nhấn <kbd class="abtKbdA">Shift</kbd> hai lần trên bất kỳ trang web nào</li>
+          <li>Nhấn <kbd class="abtKbdA">Shift</kbd> hai lần trên bất kỳ trang web nào (bạn có thể đổi phím này trong Phím tắt)</li>
           <li>Gõ từ khoá — nếu bạn đã bôi đen chữ thì nó có sẵn rồi</li>
           <li>Đổi công cụ bằng <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> hoặc con lăn chuột</li>
           <li><kbd class="abtKbd">Enter</kbd> để tìm, <kbd class="abtKbd">Esc</kbd> để đóng</li>
@@ -1447,7 +1447,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Cara menggunakannya</div>
         <ol class="abtSteps">
-          <li>Tekan <kbd class="abtKbdA">Shift</kbd> dua kali pada mana-mana halaman web</li>
+          <li>Tekan <kbd class="abtKbdA">Shift</kbd> dua kali pada mana-mana halaman web (anda boleh menukar kekunci ini dalam Pintasan)</li>
           <li>Taip carian anda — jika anda telah memilih teks, ia sudah terisi</li>
           <li>Tukar enjin dengan <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> atau roda tetikus</li>
           <li><kbd class="abtKbd">Enter</kbd> untuk mencari, <kbd class="abtKbd">Esc</kbd> untuk menutup</li>
@@ -1486,7 +1486,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 วิธีใช้</div>
         <ol class="abtSteps">
-          <li>กด <kbd class="abtKbdA">Shift</kbd> สองครั้งบนหน้าเว็บใดก็ได้</li>
+          <li>กด <kbd class="abtKbdA">Shift</kbd> สองครั้งบนหน้าเว็บใดก็ได้ (เปลี่ยนปุ่มนี้ได้ที่ ปุ่มลัด)</li>
           <li>พิมพ์คำค้นหา — ถ้าคุณเลือกข้อความไว้ก่อนแล้ว ระบบจะใส่ให้อัตโนมัติ</li>
           <li>เปลี่ยนเครื่องมือด้วย <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> หรือลูกกลิ้งเมาส์</li>
           <li><kbd class="abtKbd">Enter</kbd> เพื่อค้นหา, <kbd class="abtKbd">Esc</kbd> เพื่อปิด</li>
@@ -1525,7 +1525,7 @@ const ABOUT_HTML = {
       <div class="card">
         <div class="cardTitle">🚀 Cara memakainya</div>
         <ol class="abtSteps">
-          <li>Tekan <kbd class="abtKbdA">Shift</kbd> dua kali di halaman web mana pun</li>
+          <li>Tekan <kbd class="abtKbdA">Shift</kbd> dua kali di halaman web mana pun (Anda bisa mengganti tombol ini di Pintasan)</li>
           <li>Ketik kata kunci — jika tadi Anda memilih teks, kolomnya sudah terisi</li>
           <li>Ganti mesin dengan <kbd class="abtKbd">↑</kbd> <kbd class="abtKbd">↓</kbd> atau roda tetikus</li>
           <li><kbd class="abtKbd">Enter</kbd> untuk mencari, <kbd class="abtKbd">Esc</kbd> untuk menutup</li>
