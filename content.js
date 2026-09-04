@@ -1,5 +1,5 @@
 // =====================================================================
-// TapTap - Quick Search v1.1 — content.js
+// TapTap - Quick Search — content.js
 // New in v3: AI engines, text-selection auto-fill, search history,
 //            custom trigger shortcut, custom hex color support
 // =====================================================================

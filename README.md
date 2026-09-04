@@ -1,9 +1,10 @@
-# ⚡ Quick Search Popup
+# ⚡ TapTap - Quick Search
 
 > Double-tap **Shift** on any webpage to instantly open a search overlay.  
 > Google, Naver, AI search (ChatGPT, Claude, Perplexity) and more — without leaving your page.
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-v1.0.0-blue?logo=googlechrome)](https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/bdodpnpniemjlacmdjcaeeagndkmliac?logo=googlechrome&label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac)
+[![Users](https://img.shields.io/chrome-web-store/users/bdodpnpniemjlacmdjcaeeagndkmliac)](https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95-yellow)](https://buymeacoffee.com/hyrocket)
 
 ---
@@ -13,7 +14,7 @@
 Press **Shift** twice quickly → search overlay appears → type → **Enter**
 
 ```
-⇧ Shift  +  ⇧ Shift  →  [ Quick Search Popup ]  →  Enter
+⇧ Shift  +  ⇧ Shift  →  [ TapTap - Quick Search ]  →  Enter
 ```
 
 ---
@@ -118,7 +119,7 @@ quick-search-popup/
 
 ## ☕ Support
 
-If Quick Search Popup saves you time every day, consider buying me a coffee!
+If TapTap - Quick Search saves you time every day, consider buying me a coffee!
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95%20hyrocket-FFDD00?style=for-the-badge&labelColor=000)](https://buymeacoffee.com/hyrocket)
 
@@ -126,12 +127,5 @@ If Quick Search Popup saves you time every day, consider buying me a coffee!
 
 ## 🙏 Changelog
 
-### v1.0.0 (2025)
-- 🎉 First stable release
-- AI engine auto-detection (26 AI domains)
-- Custom shortcut with keyboard UI + conflict detection  
-- Search history with keyboard navigation
-- Dark mode follows browser setting
-- 9 color presets + custom hex + native color picker
-- Engine strip auto-scroll when switching
-- Fully fixed popup width (720px max)
+버전별 변경 내용은 [Releases](https://github.com/hyrocket/quick-search-popup/releases) 를 보세요.
+(git 태그가 곧 이력입니다. 여기에 손으로 옮겨 적으면 반드시 낡습니다.)
