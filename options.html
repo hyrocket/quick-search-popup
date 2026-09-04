@@ -520,6 +520,10 @@
             font-size:11px;border:1px solid var(--border)}
     .abtKbdA{background:var(--accent-soft);color:var(--accent);padding:2px 7px;
              border-radius:5px;font-size:12px;font-weight:700}
+    /* 좌측 메뉴의 Language 항목에만 붙는 영어 병기.
+       UI 가 읽을 수 없는 언어로 바뀌었을 때 되돌아올 길을 남기는 용도라
+       라벨이 아니라 힌트다. 작게 두면 사이드바 220px 안에도 여유 있게 들어간다. */
+    .navEn{font-size:11px;opacity:.6;font-weight:400}
   </style>
 </head>
 <body>
@@ -537,7 +541,7 @@
     <button class="navItem" data-tab="appearance">
       <span class="navIcon">🎨</span><span data-i18n="nav.appearance">Appearance</span></button>
     <button class="navItem" data-tab="general">
-      <span class="navIcon">🌐</span><span data-i18n="nav.language">Language</span></button>
+      <span class="navIcon">🌐</span><span data-i18n-html="nav.language">Language</span></button>
     <button class="navItem" data-tab="preview">
       <span class="navIcon">👁️</span><span data-i18n="nav.preview">Preview</span></button>
     <button class="navItem" data-tab="about">
