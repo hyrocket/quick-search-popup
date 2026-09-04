@@ -29,7 +29,7 @@ const OPT_I18N = {
 
     "ab.title":"About",
     "ui.pageTitle":"TapTap - Quick Search — Settings",
-    "ab.sub":"TapTap - Quick Search — open-source browser extension",
+    "ab.sub":"TapTap - Quick Search — a lightweight browser extension",
     "ab.coffee":"☕ Buy me a coffee",
 
     "eng.title":"Search Engines",
@@ -105,7 +105,7 @@ const OPT_I18N = {
 
     "ab.title":"정보",
     "ui.pageTitle":"TapTap - Quick Search — 설정",
-    "ab.sub":"TapTap - Quick Search — 오픈소스 브라우저 확장",
+    "ab.sub":"TapTap - Quick Search — 가벼운 브라우저 확장",
     "ab.coffee":"☕ 커피 한 잔 사주기",
 
     "eng.title":"검색 엔진",
@@ -181,7 +181,7 @@ const OPT_I18N = {
 
     "ab.title":"情報",
     "ui.pageTitle":"TapTap - Quick Search — 設定",
-    "ab.sub":"TapTap - Quick Search — オープンソースのブラウザ拡張機能",
+    "ab.sub":"TapTap - Quick Search — 軽量なブラウザ拡張機能",
     "ab.coffee":"☕ コーヒーをおごる",
 
     "eng.title":"検索エンジン",
@@ -257,7 +257,7 @@ const OPT_I18N = {
 
     "ab.title":"关于",
     "ui.pageTitle":"TapTap - Quick Search —— 设置",
-    "ab.sub":"TapTap - Quick Search —— 开源浏览器扩展",
+    "ab.sub":"TapTap - Quick Search —— 轻量的浏览器扩展",
     "ab.coffee":"☕ 请我喝杯咖啡",
 
     "eng.title":"搜索引擎",
@@ -333,7 +333,7 @@ const OPT_I18N = {
 
     "ab.title":"關於",
     "ui.pageTitle":"TapTap - Quick Search —— 設定",
-    "ab.sub":"TapTap - Quick Search —— 開源瀏覽器擴充功能",
+    "ab.sub":"TapTap - Quick Search —— 輕量的瀏覽器擴充功能",
     "ab.coffee":"☕ 請我喝杯咖啡",
 
     "eng.title":"搜尋引擎",
@@ -409,7 +409,7 @@ const OPT_I18N = {
 
     "ab.title":"Acerca de",
     "ui.pageTitle":"TapTap - Quick Search — Ajustes",
-    "ab.sub":"TapTap - Quick Search: extensión de navegador de código abierto",
+    "ab.sub":"TapTap - Quick Search: una extensión de navegador ligera",
     "ab.coffee":"☕ Invítame a un café",
 
     "eng.title":"Buscadores",
@@ -485,7 +485,7 @@ const OPT_I18N = {
 
     "ab.title":"À propos",
     "ui.pageTitle":"TapTap - Quick Search — Réglages",
-    "ab.sub":"TapTap - Quick Search — extension de navigateur open source",
+    "ab.sub":"TapTap - Quick Search — une extension de navigateur légère",
     "ab.coffee":"☕ Offrez-moi un café",
 
     "eng.title":"Moteurs de recherche",
@@ -561,7 +561,7 @@ const OPT_I18N = {
 
     "ab.title":"Info",
     "ui.pageTitle":"TapTap - Quick Search — Einstellungen",
-    "ab.sub":"TapTap - Quick Search — quelloffene Browser-Erweiterung",
+    "ab.sub":"TapTap - Quick Search — eine schlanke Browser-Erweiterung",
     "ab.coffee":"☕ Spendier mir einen Kaffee",
 
     "eng.title":"Suchmaschinen",
@@ -637,7 +637,7 @@ const OPT_I18N = {
 
     "ab.title":"О расширении",
     "ui.pageTitle":"TapTap - Quick Search — Настройки",
-    "ab.sub":"TapTap - Quick Search — расширение браузера с открытым кодом",
+    "ab.sub":"TapTap - Quick Search — лёгкое расширение браузера",
     "ab.coffee":"☕ Купить мне кофе",
 
     "eng.title":"Поисковые системы",
@@ -713,7 +713,7 @@ const OPT_I18N = {
 
     "ab.title":"Giới thiệu",
     "ui.pageTitle":"TapTap - Quick Search — Cài đặt",
-    "ab.sub":"TapTap - Quick Search — tiện ích trình duyệt mã nguồn mở",
+    "ab.sub":"TapTap - Quick Search — tiện ích trình duyệt gọn nhẹ",
     "ab.coffee":"☕ Mời tôi một ly cà phê",
 
     "eng.title":"Công cụ tìm kiếm",
@@ -789,7 +789,7 @@ const OPT_I18N = {
 
     "ab.title":"Perihal",
     "ui.pageTitle":"TapTap - Quick Search — Tetapan",
-    "ab.sub":"TapTap - Quick Search — sambungan pelayar sumber terbuka",
+    "ab.sub":"TapTap - Quick Search — sambungan pelayar yang ringan",
     "ab.coffee":"☕ Belanja saya kopi",
 
     "eng.title":"Enjin Carian",
@@ -865,7 +865,7 @@ const OPT_I18N = {
 
     "ab.title":"เกี่ยวกับ",
     "ui.pageTitle":"TapTap - Quick Search — การตั้งค่า",
-    "ab.sub":"TapTap - Quick Search — ส่วนขยายเบราว์เซอร์โอเพนซอร์ส",
+    "ab.sub":"TapTap - Quick Search — ส่วนขยายเบราว์เซอร์ขนาดเล็ก",
     "ab.coffee":"☕ เลี้ยงกาแฟสักแก้ว",
 
     "eng.title":"เครื่องมือค้นหา",
@@ -941,7 +941,7 @@ const OPT_I18N = {
 
     "ab.title":"Tentang",
     "ui.pageTitle":"TapTap - Quick Search — Pengaturan",
-    "ab.sub":"TapTap - Quick Search — ekstensi peramban sumber terbuka",
+    "ab.sub":"TapTap - Quick Search — ekstensi peramban yang ringan",
     "ab.coffee":"☕ Traktir saya kopi",
 
     "eng.title":"Mesin Pencari",
@@ -1065,9 +1065,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 License &amp; Credits</div>
-        <p class="abtP">Released under the <strong>MIT License</strong>. Free to use, modify and share.</p>
-        <p class="abtP" style="color:var(--muted)">Built by <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Contributions are welcome on GitHub &nbsp;·&nbsp; Found a bug? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Open an issue</a></p>
+        <div class="cardTitle">📄 Credits</div>
+        <p class="abtP" style="color:var(--muted)">Built by <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs and ideas are welcome on <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   kr: `
@@ -1104,9 +1103,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 라이선스 &amp; 만든 사람</div>
-        <p class="abtP"><strong>MIT 라이선스</strong>로 공개돼 있습니다. 자유롭게 쓰고, 고치고, 나눠도 됩니다.</p>
-        <p class="abtP" style="color:var(--muted)">만든 사람 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; GitHub 에서 기여를 환영합니다 &nbsp;·&nbsp; 버그를 찾으셨나요? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">이슈 남기기</a></p>
+        <div class="cardTitle">📄 크레딧</div>
+        <p class="abtP" style="color:var(--muted)">만든 사람 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; 버그 제보와 제안은 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> 으로</p>
       </div>`,
 
   ja: `
@@ -1143,9 +1141,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 ライセンスとクレジット</div>
-        <p class="abtP"><strong>MIT ライセンス</strong>で公開しています。自由に使い、改変し、共有できます。</p>
-        <p class="abtP" style="color:var(--muted)">制作 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; GitHub での貢献を歓迎します &nbsp;·&nbsp; バグを見つけたら <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Issue を作成</a></p>
+        <div class="cardTitle">📄 クレジット</div>
+        <p class="abtP" style="color:var(--muted)">制作 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; バグ報告と提案は <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> へ</p>
       </div>`,
 
   "zh-CN": `
@@ -1182,9 +1179,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 许可与致谢</div>
-        <p class="abtP">以 <strong>MIT 许可证</strong>发布。可自由使用、修改和分享。</p>
-        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 开发 &nbsp;·&nbsp; 欢迎在 GitHub 上参与贡献 &nbsp;·&nbsp; 发现问题？<a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">提交 issue</a></p>
+        <div class="cardTitle">📄 致谢</div>
+        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 开发 &nbsp;·&nbsp; 问题反馈与建议请到 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   "zh-TW": `
@@ -1221,9 +1217,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 授權與致謝</div>
-        <p class="abtP">以 <strong>MIT 授權條款</strong>發布。可自由使用、修改與分享。</p>
-        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 開發 &nbsp;·&nbsp; 歡迎在 GitHub 上參與貢獻 &nbsp;·&nbsp; 發現問題？<a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">提交 issue</a></p>
+        <div class="cardTitle">📄 致謝</div>
+        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 開發 &nbsp;·&nbsp; 問題回報與建議請到 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   es: `
@@ -1260,9 +1255,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Licencia y créditos</div>
-        <p class="abtP">Publicado bajo la <strong>licencia MIT</strong>. Puedes usarlo, modificarlo y compartirlo libremente.</p>
-        <p class="abtP" style="color:var(--muted)">Creado por <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Las contribuciones son bienvenidas en GitHub &nbsp;·&nbsp; ¿Has encontrado un fallo? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Abre una incidencia</a></p>
+        <div class="cardTitle">📄 Créditos</div>
+        <p class="abtP" style="color:var(--muted)">Creado por <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Errores e ideas son bienvenidos en <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   fr: `
@@ -1299,9 +1293,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Licence et crédits</div>
-        <p class="abtP">Publié sous <strong>licence MIT</strong>. Libre d'utilisation, de modification et de partage.</p>
-        <p class="abtP" style="color:var(--muted)">Réalisé par <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Les contributions sont bienvenues sur GitHub &nbsp;·&nbsp; Vous avez trouvé un bug ? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Ouvrez un ticket</a></p>
+        <div class="cardTitle">📄 Crédits</div>
+        <p class="abtP" style="color:var(--muted)">Réalisé par <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs et idées sont les bienvenus sur <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   de: `
@@ -1338,9 +1331,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Lizenz &amp; Danksagung</div>
-        <p class="abtP">Veröffentlicht unter der <strong>MIT-Lizenz</strong>. Frei nutzbar, veränderbar und weitergebbar.</p>
-        <p class="abtP" style="color:var(--muted)">Entwickelt von <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Beiträge sind auf GitHub willkommen &nbsp;·&nbsp; Einen Fehler gefunden? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Melde ihn als Issue</a></p>
+        <div class="cardTitle">📄 Danksagung</div>
+        <p class="abtP" style="color:var(--muted)">Entwickelt von <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Fehler und Ideen sind auf <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> willkommen</p>
       </div>`,
 
   ru: `
@@ -1377,9 +1369,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Лицензия и авторы</div>
-        <p class="abtP">Распространяется по <strong>лицензии MIT</strong>. Можно свободно использовать, изменять и передавать.</p>
-        <p class="abtP" style="color:var(--muted)">Разработано <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Будем рады вкладу на GitHub &nbsp;·&nbsp; Нашли ошибку? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Создайте issue</a></p>
+        <div class="cardTitle">📄 Авторы</div>
+        <p class="abtP" style="color:var(--muted)">Разработано <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Сообщения об ошибках и идеи — на <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   vn: `
@@ -1416,9 +1407,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Giấy phép &amp; ghi công</div>
-        <p class="abtP">Phát hành theo <strong>giấy phép MIT</strong>. Bạn được tự do dùng, sửa và chia sẻ.</p>
-        <p class="abtP" style="color:var(--muted)">Thực hiện bởi <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Hoan nghênh đóng góp trên GitHub &nbsp;·&nbsp; Phát hiện lỗi? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Hãy tạo issue</a></p>
+        <div class="cardTitle">📄 Ghi công</div>
+        <p class="abtP" style="color:var(--muted)">Thực hiện bởi <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Báo lỗi và góp ý xin gửi trên <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   ms: `
@@ -1455,9 +1445,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Lesen &amp; penghargaan</div>
-        <p class="abtP">Dikeluarkan di bawah <strong>Lesen MIT</strong>. Bebas untuk digunakan, diubah suai dan dikongsi.</p>
-        <p class="abtP" style="color:var(--muted)">Dibina oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Sumbangan dialu-alukan di GitHub &nbsp;·&nbsp; Jumpa pepijat? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Buka satu issue</a></p>
+        <div class="cardTitle">📄 Penghargaan</div>
+        <p class="abtP" style="color:var(--muted)">Dibina oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan pepijat dan idea dialu-alukan di <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   th: `
@@ -1494,9 +1483,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 สัญญาอนุญาตและเครดิต</div>
-        <p class="abtP">เผยแพร่ภายใต้ <strong>สัญญาอนุญาต MIT</strong> ใช้ แก้ไข และแบ่งปันได้อย่างอิสระ</p>
-        <p class="abtP" style="color:var(--muted)">พัฒนาโดย <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; ยินดีรับการมีส่วนร่วมบน GitHub &nbsp;·&nbsp; พบข้อผิดพลาด? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">แจ้ง issue ได้เลย</a></p>
+        <div class="cardTitle">📄 เครดิต</div>
+        <p class="abtP" style="color:var(--muted)">พัฒนาโดย <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; แจ้งบั๊กและข้อเสนอแนะได้ที่ <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`,
 
   id: `
@@ -1533,9 +1521,8 @@ const ABOUT_HTML = {
       </div>
 
       <div class="card">
-        <div class="cardTitle">📄 Lisensi &amp; kredit</div>
-        <p class="abtP">Dirilis di bawah <strong>Lisensi MIT</strong>. Bebas dipakai, diubah, dan dibagikan.</p>
-        <p class="abtP" style="color:var(--muted)">Dibuat oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Kontribusi disambut di GitHub &nbsp;·&nbsp; Menemukan bug? <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent)">Buat issue</a></p>
+        <div class="cardTitle">📄 Kredit</div>
+        <p class="abtP" style="color:var(--muted)">Dibuat oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan bug dan ide disambut di <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
       </div>`
 
 };

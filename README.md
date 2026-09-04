@@ -4,7 +4,6 @@
 > Google, Naver, AI search (ChatGPT, Claude, Perplexity) and more — without leaving your page.
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-v1.0.0-blue?logo=googlechrome)](https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95-yellow)](https://buymeacoffee.com/hyrocket)
 
 ---
@@ -122,12 +121,6 @@ quick-search-popup/
 If Quick Search Popup saves you time every day, consider buying me a coffee!
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95%20hyrocket-FFDD00?style=for-the-badge&labelColor=000)](https://buymeacoffee.com/hyrocket)
-
----
-
-## 📄 License
-
-MIT License — free to use, modify, and distribute.
 
 ---
 
