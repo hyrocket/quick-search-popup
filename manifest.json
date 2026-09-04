@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TapTap - Quick Search",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Quick search popup on any page. Google, Naver, AI search (ChatGPT, Claude, Perplexity) built-in. Custom engines, history & hotkey.",
   "permissions": [
     "storage"

@@ -1043,16 +1043,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Opens anywhere</strong> — double-tap Shift, or set your own shortcut</li>
           <li><strong>🤖 AI search built in</strong> — Perplexity, ChatGPT and Claude are ready to use</li>
-          <li><strong>🔽 Engine dropdown</strong> — pick any engine inside the popup</li>
           <li><strong>🖱️ Switch by mouse wheel</strong> — scroll on the popup to change engine</li>
           <li><strong>📝 Uses selected text</strong> — select text on a page, then open TapTap to search it</li>
           <li><strong>🕐 Search history</strong> — recent searches appear as you type</li>
           <li><strong>🎨 6 themes</strong> — Chameleon, Mono, Midnight, Glass, Paper and Terminal</li>
           <li><strong>🌈 A color per engine</strong> — 9 palettes, or your own hex code</li>
-          <li><strong>➕ 27 recommended engines</strong> — add them in one click, or enter your own URL</li>
-          <li><strong>😀 Emoji icons</strong> — give each engine its own icon</li>
+          <li><strong>➕ 27 recommended engines</strong> — add them in one click, or add your own</li>
           <li><strong>🌐 13 languages</strong> — English, Korean, Japanese, Chinese and more</li>
-          <li><strong>📑 Opens in a new tab</strong> — or in the current one, as you prefer</li>
           <li><strong>🔒 Collects nothing</strong> — settings stay in your browser. No server, no tracking.</li>
         </ul>
       </div>
@@ -1085,16 +1082,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ 어디서나 열림</strong> — Shift 두 번, 또는 원하는 단축키로</li>
           <li><strong>🤖 AI 검색 내장</strong> — Perplexity, ChatGPT, Claude 를 바로 사용</li>
-          <li><strong>🔽 엔진 드롭다운</strong> — 팝업 안에서 엔진을 골라 쓰기</li>
           <li><strong>🖱️ 휠로 엔진 전환</strong> — 팝업 위에서 스크롤하면 엔진이 바뀜</li>
           <li><strong>📝 선택한 글자로 검색</strong> — 페이지에서 글자를 드래그한 뒤 열면 자동으로 채워짐</li>
           <li><strong>🕐 검색 기록</strong> — 입력하는 동안 최근 검색어가 나타남</li>
           <li><strong>🎨 테마 6종</strong> — 카멜레온, 모노, 미드나이트, 글래스, 페이퍼, 터미널</li>
           <li><strong>🌈 엔진마다 색상</strong> — 팔레트 9종, 또는 직접 지정하는 hex 코드</li>
-          <li><strong>➕ 추천 엔진 27개</strong> — 클릭 한 번으로 추가, 원하는 URL 도 직접 등록</li>
-          <li><strong>😀 이모지 아이콘</strong> — 엔진마다 아이콘을 따로 지정</li>
+          <li><strong>➕ 추천 엔진 27개</strong> — 클릭 한 번으로 추가, 직접 추가도 가능</li>
           <li><strong>🌐 13개 언어</strong> — 한국어, 영어, 일본어, 중국어 등</li>
-          <li><strong>📑 새 탭에서 열기</strong> — 원하면 현재 탭에서 열 수도 있음</li>
           <li><strong>🔒 아무것도 수집하지 않음</strong> — 설정은 브라우저 안에만. 서버도 추적도 없음</li>
         </ul>
       </div>
@@ -1127,16 +1121,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ どこでも開く</strong> — Shift 2回、または好きなショートカットで</li>
           <li><strong>🤖 AI 検索を内蔵</strong> — Perplexity、ChatGPT、Claude をすぐ使える</li>
-          <li><strong>🔽 エンジンのドロップダウン</strong> — ポップアップの中でエンジンを選べる</li>
           <li><strong>🖱️ ホイールで切り替え</strong> — ポップアップ上でスクロールするとエンジンが変わる</li>
           <li><strong>📝 選択した文字で検索</strong> — ページで文字を選んでから開くと自動で入る</li>
           <li><strong>🕐 検索履歴</strong> — 入力中に最近の検索語が出る</li>
           <li><strong>🎨 テーマ6種</strong> — カメレオン、モノ、ミッドナイト、グラス、ペーパー、ターミナル</li>
           <li><strong>🌈 エンジンごとの色</strong> — パレット9種、または自分で決める hex コード</li>
-          <li><strong>➕ おすすめエンジン27件</strong> — ワンクリックで追加、好きな URL も登録可</li>
-          <li><strong>😀 絵文字アイコン</strong> — エンジンごとにアイコンを設定</li>
+          <li><strong>➕ おすすめエンジン27件</strong> — ワンクリックで追加、自分で追加もできる</li>
           <li><strong>🌐 13言語</strong> — 日本語、英語、韓国語、中国語など</li>
-          <li><strong>📑 新しいタブで開く</strong> — 今のタブで開くこともできる</li>
           <li><strong>🔒 何も集めない</strong> — 設定はブラウザの中だけ。サーバーも追跡もなし</li>
         </ul>
       </div>
@@ -1169,16 +1160,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ 随处可开</strong> —— 连按两次 Shift，或自定义快捷键</li>
           <li><strong>🤖 内置 AI 搜索</strong> —— Perplexity、ChatGPT、Claude 开箱即用</li>
-          <li><strong>🔽 引擎下拉菜单</strong> —— 在弹窗内直接选择引擎</li>
           <li><strong>🖱️ 滚轮切换</strong> —— 在弹窗上滚动即可更换引擎</li>
           <li><strong>📝 使用选中的文字</strong> —— 先在页面选中文字，再打开 TapTap 即自动填入</li>
           <li><strong>🕐 搜索历史</strong> —— 输入时显示最近搜索过的内容</li>
           <li><strong>🎨 6 种主题</strong> —— 变色龙、单色、午夜、玻璃、纸张、终端</li>
           <li><strong>🌈 每个引擎一种颜色</strong> —— 9 组配色，或自定义十六进制色值</li>
-          <li><strong>➕ 27 个推荐引擎</strong> —— 一键添加，也可自行填写 URL</li>
-          <li><strong>😀 表情图标</strong> —— 为每个引擎设置专属图标</li>
+          <li><strong>➕ 27 个推荐引擎</strong> —— 一键添加，也可自行添加</li>
           <li><strong>🌐 13 种语言</strong> —— 中文、英文、韩文、日文等</li>
-          <li><strong>📑 在新标签页打开</strong> —— 也可以在当前标签页打开</li>
           <li><strong>🔒 不收集任何数据</strong> —— 设置只保存在你的浏览器里。没有服务器，没有追踪。</li>
         </ul>
       </div>
@@ -1211,16 +1199,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ 隨處可開</strong> —— 連按兩次 Shift，或自訂快速鍵</li>
           <li><strong>🤖 內建 AI 搜尋</strong> —— Perplexity、ChatGPT、Claude 立即可用</li>
-          <li><strong>🔽 引擎下拉選單</strong> —— 在彈出視窗內直接選擇引擎</li>
           <li><strong>🖱️ 滾輪切換</strong> —— 在彈出視窗上捲動即可更換引擎</li>
           <li><strong>📝 使用選取的文字</strong> —— 先在頁面選取文字，再開啟 TapTap 即自動填入</li>
           <li><strong>🕐 搜尋紀錄</strong> —— 輸入時顯示最近搜尋過的內容</li>
           <li><strong>🎨 6 種主題</strong> —— 變色龍、單色、午夜、玻璃、紙張、終端機</li>
           <li><strong>🌈 每個引擎一種顏色</strong> —— 9 組配色，或自訂十六進位色碼</li>
-          <li><strong>➕ 27 個推薦引擎</strong> —— 一鍵加入，也可自行填寫 URL</li>
-          <li><strong>😀 表情圖示</strong> —— 為每個引擎設定專屬圖示</li>
+          <li><strong>➕ 27 個推薦引擎</strong> —— 一鍵加入，也可自行加入</li>
           <li><strong>🌐 13 種語言</strong> —— 中文、英文、韓文、日文等</li>
-          <li><strong>📑 在新分頁開啟</strong> —— 也可以在目前的分頁開啟</li>
           <li><strong>🔒 不收集任何資料</strong> —— 設定只保存在你的瀏覽器裡。沒有伺服器，沒有追蹤。</li>
         </ul>
       </div>
@@ -1253,16 +1238,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Se abre en cualquier sitio</strong>: pulsa Shift dos veces o define tu propio atajo</li>
           <li><strong>🤖 Búsqueda con IA incluida</strong>: Perplexity, ChatGPT y Claude listos para usar</li>
-          <li><strong>🔽 Lista de buscadores</strong>: elige cualquiera desde la propia ventana</li>
           <li><strong>🖱️ Cambio con la rueda del ratón</strong>: desplázate sobre la ventana para cambiar de buscador</li>
           <li><strong>📝 Usa el texto seleccionado</strong>: selecciona texto y abre TapTap para buscarlo</li>
           <li><strong>🕐 Historial de búsquedas</strong>: las búsquedas recientes aparecen mientras escribes</li>
           <li><strong>🎨 6 temas</strong>: Camaleón, Mono, Medianoche, Cristal, Papel y Terminal</li>
           <li><strong>🌈 Un color por buscador</strong>: 9 paletas o tu propio código hexadecimal</li>
-          <li><strong>➕ 27 buscadores recomendados</strong>: añádelos con un clic o escribe tu propia URL</li>
-          <li><strong>😀 Iconos con emojis</strong>: da a cada buscador su propio icono</li>
+          <li><strong>➕ 27 buscadores recomendados</strong>: añádelos con un clic o añade el tuyo</li>
           <li><strong>🌐 13 idiomas</strong>: español, inglés, coreano, japonés, chino y más</li>
-          <li><strong>📑 Se abre en una pestaña nueva</strong>: o en la actual, como prefieras</li>
           <li><strong>🔒 No recopila nada</strong>: los ajustes se quedan en tu navegador. Sin servidores ni rastreo.</li>
         </ul>
       </div>
@@ -1295,16 +1277,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ S'ouvre partout</strong> — deux appuis sur Shift, ou votre propre raccourci</li>
           <li><strong>🤖 Recherche IA intégrée</strong> — Perplexity, ChatGPT et Claude prêts à l'emploi</li>
-          <li><strong>🔽 Liste des moteurs</strong> — choisissez un moteur depuis la fenêtre elle-même</li>
           <li><strong>🖱️ Changement à la molette</strong> — faites défiler sur la fenêtre pour changer de moteur</li>
           <li><strong>📝 Utilise le texte sélectionné</strong> — sélectionnez du texte, puis ouvrez TapTap pour le rechercher</li>
           <li><strong>🕐 Historique de recherche</strong> — les recherches récentes apparaissent pendant la saisie</li>
           <li><strong>🎨 6 thèmes</strong> — Caméléon, Mono, Minuit, Verre, Papier et Terminal</li>
           <li><strong>🌈 Une couleur par moteur</strong> — 9 palettes, ou votre propre code hexadécimal</li>
-          <li><strong>➕ 27 moteurs recommandés</strong> — ajoutez-les en un clic, ou saisissez votre propre URL</li>
-          <li><strong>😀 Icônes emoji</strong> — donnez à chaque moteur sa propre icône</li>
+          <li><strong>➕ 27 moteurs recommandés</strong> — ajoutez-les en un clic, ou ajoutez le vôtre</li>
           <li><strong>🌐 13 langues</strong> — français, anglais, coréen, japonais, chinois et d'autres</li>
-          <li><strong>📑 Ouverture dans un nouvel onglet</strong> — ou dans l'onglet actuel, à votre convenance</li>
           <li><strong>🔒 Ne collecte rien</strong> — vos réglages restent dans votre navigateur. Aucun serveur, aucun suivi.</li>
         </ul>
       </div>
@@ -1337,16 +1316,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Öffnet sich überall</strong> — zweimal Shift, oder ein eigenes Tastenkürzel</li>
           <li><strong>🤖 KI-Suche eingebaut</strong> — Perplexity, ChatGPT und Claude sofort einsatzbereit</li>
-          <li><strong>🔽 Auswahlliste</strong> — jede Suchmaschine direkt im Fenster wählen</li>
           <li><strong>🖱️ Wechsel per Mausrad</strong> — über dem Fenster scrollen wechselt die Suchmaschine</li>
           <li><strong>📝 Nutzt markierten Text</strong> — Text auf der Seite markieren, dann TapTap öffnen</li>
           <li><strong>🕐 Suchverlauf</strong> — frühere Suchen erscheinen beim Tippen</li>
           <li><strong>🎨 6 Designs</strong> — Chamäleon, Mono, Mitternacht, Glas, Papier und Terminal</li>
           <li><strong>🌈 Eine Farbe je Suchmaschine</strong> — 9 Paletten, oder dein eigener Hex-Code</li>
-          <li><strong>➕ 27 empfohlene Suchmaschinen</strong> — mit einem Klick hinzufügen, oder eigene URL eintragen</li>
-          <li><strong>😀 Emoji-Symbole</strong> — jede Suchmaschine bekommt ihr eigenes Symbol</li>
+          <li><strong>➕ 27 empfohlene Suchmaschinen</strong> — mit einem Klick hinzufügen, oder eigene hinzufügen</li>
           <li><strong>🌐 13 Sprachen</strong> — Deutsch, Englisch, Koreanisch, Japanisch, Chinesisch und mehr</li>
-          <li><strong>📑 Öffnet in neuem Tab</strong> — oder im aktuellen, wie du möchtest</li>
           <li><strong>🔒 Sammelt nichts</strong> — Einstellungen bleiben im Browser. Kein Server, kein Tracking.</li>
         </ul>
       </div>
@@ -1379,16 +1355,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Открывается везде</strong> — двойное нажатие Shift или своя комбинация</li>
           <li><strong>🤖 Встроенный ИИ-поиск</strong> — Perplexity, ChatGPT и Claude готовы к работе</li>
-          <li><strong>🔽 Список поисковиков</strong> — выбирайте любой прямо в окне поиска</li>
           <li><strong>🖱️ Переключение колесом мыши</strong> — прокрутка над окном меняет поисковик</li>
           <li><strong>📝 Берёт выделенный текст</strong> — выделите текст на странице и откройте TapTap</li>
           <li><strong>🕐 История поиска</strong> — прошлые запросы появляются по мере ввода</li>
           <li><strong>🎨 6 тем</strong> — Хамелеон, Моно, Полночь, Стекло, Бумага и Терминал</li>
           <li><strong>🌈 Свой цвет для каждого поисковика</strong> — 9 палитр или ваш HEX-код</li>
-          <li><strong>➕ 27 рекомендованных поисковиков</strong> — добавьте в один клик или впишите свой URL</li>
-          <li><strong>😀 Значки-эмодзи</strong> — свой значок для каждого поисковика</li>
+          <li><strong>➕ 27 рекомендованных поисковиков</strong> — добавьте в один клик или добавьте свой</li>
           <li><strong>🌐 13 языков</strong> — русский, английский, корейский, японский, китайский и другие</li>
-          <li><strong>📑 Открывает в новой вкладке</strong> — или в текущей, как вам удобнее</li>
           <li><strong>🔒 Ничего не собирает</strong> — настройки остаются в браузере. Ни сервера, ни слежки.</li>
         </ul>
       </div>
@@ -1421,16 +1394,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Mở được ở mọi nơi</strong> — nhấn Shift hai lần, hoặc đặt phím tắt riêng</li>
           <li><strong>🤖 Tích hợp sẵn tìm kiếm AI</strong> — Perplexity, ChatGPT và Claude dùng được ngay</li>
-          <li><strong>🔽 Danh sách công cụ</strong> — chọn công cụ ngay trong cửa sổ tìm kiếm</li>
           <li><strong>🖱️ Đổi bằng con lăn chuột</strong> — cuộn trên cửa sổ để đổi công cụ</li>
           <li><strong>📝 Dùng chữ đã bôi đen</strong> — bôi đen chữ trên trang rồi mở TapTap để tìm</li>
           <li><strong>🕐 Lịch sử tìm kiếm</strong> — các từ khoá gần đây hiện ra khi bạn gõ</li>
           <li><strong>🎨 6 chủ đề</strong> — Tắc kè hoa, Đơn sắc, Nửa đêm, Kính, Giấy và Dòng lệnh</li>
           <li><strong>🌈 Mỗi công cụ một màu</strong> — 9 bảng màu, hoặc mã hex của riêng bạn</li>
-          <li><strong>➕ 27 công cụ gợi ý</strong> — thêm bằng một cú nhấp, hoặc tự nhập URL</li>
-          <li><strong>😀 Biểu tượng emoji</strong> — đặt biểu tượng riêng cho từng công cụ</li>
+          <li><strong>➕ 27 công cụ gợi ý</strong> — thêm bằng một cú nhấp, hoặc tự thêm công cụ của bạn</li>
           <li><strong>🌐 13 ngôn ngữ</strong> — tiếng Việt, tiếng Anh, tiếng Hàn, tiếng Nhật, tiếng Trung và nhiều hơn nữa</li>
-          <li><strong>📑 Mở ở tab mới</strong> — hoặc ở tab hiện tại, tuỳ bạn</li>
           <li><strong>🔒 Không thu thập gì</strong> — cài đặt chỉ nằm trong trình duyệt của bạn. Không máy chủ, không theo dõi.</li>
         </ul>
       </div>
@@ -1463,16 +1433,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Boleh dibuka di mana-mana</strong> — tekan Shift dua kali, atau tetapkan pintasan sendiri</li>
           <li><strong>🤖 Carian AI terbina dalam</strong> — Perplexity, ChatGPT dan Claude sedia digunakan</li>
-          <li><strong>🔽 Senarai enjin</strong> — pilih mana-mana enjin di dalam tetingkap carian</li>
           <li><strong>🖱️ Tukar dengan roda tetikus</strong> — tatal pada tetingkap untuk menukar enjin</li>
           <li><strong>📝 Guna teks yang dipilih</strong> — pilih teks pada halaman, kemudian buka TapTap</li>
           <li><strong>🕐 Sejarah carian</strong> — carian terbaharu muncul semasa anda menaip</li>
           <li><strong>🎨 6 tema</strong> — Bunglon, Mono, Tengah Malam, Kaca, Kertas dan Terminal</li>
           <li><strong>🌈 Satu warna bagi setiap enjin</strong> — 9 palet, atau kod heks anda sendiri</li>
-          <li><strong>➕ 27 enjin disyorkan</strong> — tambah dengan satu klik, atau masukkan URL sendiri</li>
-          <li><strong>😀 Ikon emoji</strong> — beri setiap enjin ikonnya sendiri</li>
+          <li><strong>➕ 27 enjin disyorkan</strong> — tambah dengan satu klik, atau tambah enjin anda sendiri</li>
           <li><strong>🌐 13 bahasa</strong> — Melayu, Inggeris, Korea, Jepun, Cina dan lain-lain</li>
-          <li><strong>📑 Buka dalam tab baharu</strong> — atau dalam tab semasa, ikut pilihan anda</li>
           <li><strong>🔒 Tidak mengumpul apa-apa</strong> — tetapan kekal dalam pelayar anda. Tiada pelayan, tiada penjejakan.</li>
         </ul>
       </div>
@@ -1505,16 +1472,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ เปิดได้ทุกที่</strong> — กด Shift สองครั้ง หรือตั้งปุ่มลัดเอง</li>
           <li><strong>🤖 มีการค้นหาแบบ AI ในตัว</strong> — Perplexity, ChatGPT และ Claude พร้อมใช้งาน</li>
-          <li><strong>🔽 รายการเครื่องมือค้นหา</strong> — เลือกเครื่องมือได้ในหน้าต่างค้นหาเลย</li>
           <li><strong>🖱️ เปลี่ยนด้วยลูกกลิ้งเมาส์</strong> — เลื่อนบนหน้าต่างเพื่อเปลี่ยนเครื่องมือ</li>
           <li><strong>📝 ใช้ข้อความที่เลือกไว้</strong> — เลือกข้อความบนหน้าเว็บ แล้วเปิด TapTap เพื่อค้นหา</li>
           <li><strong>🕐 ประวัติการค้นหา</strong> — คำค้นหาล่าสุดจะปรากฏขณะพิมพ์</li>
           <li><strong>🎨 6 ธีม</strong> — กิ้งก่า, ขาวดำ, เที่ยงคืน, กระจก, กระดาษ และเทอร์มินัล</li>
           <li><strong>🌈 หนึ่งสีต่อหนึ่งเครื่องมือ</strong> — 9 ชุดสี หรือรหัสสีฐานสิบหกของคุณเอง</li>
-          <li><strong>➕ เครื่องมือค้นหาแนะนำ 27 รายการ</strong> — เพิ่มได้ในคลิกเดียว หรือใส่ URL เอง</li>
-          <li><strong>😀 ไอคอนอิโมจิ</strong> — ตั้งไอคอนเฉพาะให้แต่ละเครื่องมือ</li>
+          <li><strong>➕ เครื่องมือค้นหาแนะนำ 27 รายการ</strong> — เพิ่มได้ในคลิกเดียว หรือเพิ่มของคุณเอง</li>
           <li><strong>🌐 13 ภาษา</strong> — ไทย, อังกฤษ, เกาหลี, ญี่ปุ่น, จีน และอื่น ๆ</li>
-          <li><strong>📑 เปิดในแท็บใหม่</strong> — หรือในแท็บปัจจุบัน ตามที่คุณต้องการ</li>
           <li><strong>🔒 ไม่เก็บข้อมูลใด ๆ</strong> — การตั้งค่าอยู่ในเบราว์เซอร์ของคุณเท่านั้น ไม่มีเซิร์ฟเวอร์ ไม่มีการติดตาม</li>
         </ul>
       </div>
@@ -1547,16 +1511,13 @@ const ABOUT_HTML = {
         <ul class="abtList">
           <li><strong>⚡ Bisa dibuka di mana saja</strong> — tekan Shift dua kali, atau atur pintasan sendiri</li>
           <li><strong>🤖 Pencarian AI bawaan</strong> — Perplexity, ChatGPT, dan Claude siap dipakai</li>
-          <li><strong>🔽 Daftar mesin pencari</strong> — pilih mesin apa pun langsung di jendela pencarian</li>
           <li><strong>🖱️ Ganti dengan roda tetikus</strong> — gulir di atas jendela untuk mengganti mesin</li>
           <li><strong>📝 Memakai teks yang dipilih</strong> — pilih teks di halaman, lalu buka TapTap</li>
           <li><strong>🕐 Riwayat pencarian</strong> — pencarian terakhir muncul saat Anda mengetik</li>
           <li><strong>🎨 6 tema</strong> — Bunglon, Mono, Tengah Malam, Kaca, Kertas, dan Terminal</li>
           <li><strong>🌈 Satu warna untuk tiap mesin</strong> — 9 palet, atau kode heks Anda sendiri</li>
-          <li><strong>➕ 27 mesin pencari yang disarankan</strong> — tambahkan sekali klik, atau isi URL sendiri</li>
-          <li><strong>😀 Ikon emoji</strong> — beri ikon tersendiri untuk tiap mesin</li>
+          <li><strong>➕ 27 mesin pencari yang disarankan</strong> — tambahkan sekali klik, atau tambahkan milik Anda sendiri</li>
           <li><strong>🌐 13 bahasa</strong> — Indonesia, Inggris, Korea, Jepang, Mandarin, dan lainnya</li>
-          <li><strong>📑 Membuka di tab baru</strong> — atau di tab saat ini, sesuai keinginan Anda</li>
           <li><strong>🔒 Tidak mengumpulkan apa pun</strong> — pengaturan tetap di peramban Anda. Tanpa server, tanpa pelacakan.</li>
         </ul>
       </div>
