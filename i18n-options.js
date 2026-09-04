@@ -1066,7 +1066,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Credits</div>
-        <p class="abtP" style="color:var(--muted)">Built by <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs and ideas are welcome on <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Built by <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs and ideas are welcome on the <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">Support page</a></p>
       </div>`,
 
   kr: `
@@ -1104,7 +1104,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 크레딧</div>
-        <p class="abtP" style="color:var(--muted)">만든 사람 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; 버그 제보와 제안은 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> 으로</p>
+        <p class="abtP" style="color:var(--muted)">만든 사람 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; 버그 제보와 제안은 <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">지원 페이지</a>로 보내주세요</p>
       </div>`,
 
   ja: `
@@ -1142,7 +1142,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 クレジット</div>
-        <p class="abtP" style="color:var(--muted)">制作 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; バグ報告と提案は <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> へ</p>
+        <p class="abtP" style="color:var(--muted)">制作 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; バグ報告と提案は<a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">サポートページ</a>へ</p>
       </div>`,
 
   "zh-CN": `
@@ -1180,7 +1180,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 致谢</div>
-        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 开发 &nbsp;·&nbsp; 问题反馈与建议请到 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 开发 &nbsp;·&nbsp; 问题反馈与建议请到<a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">支持页面</a></p>
       </div>`,
 
   "zh-TW": `
@@ -1218,7 +1218,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 致謝</div>
-        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 開發 &nbsp;·&nbsp; 問題回報與建議請到 <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">由 <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> 開發 &nbsp;·&nbsp; 問題回報與建議請到<a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">支援頁面</a></p>
       </div>`,
 
   es: `
@@ -1256,7 +1256,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Créditos</div>
-        <p class="abtP" style="color:var(--muted)">Creado por <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Errores e ideas son bienvenidos en <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Creado por <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Errores e ideas son bienvenidos en la <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">página de soporte</a></p>
       </div>`,
 
   fr: `
@@ -1294,7 +1294,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Crédits</div>
-        <p class="abtP" style="color:var(--muted)">Réalisé par <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs et idées sont les bienvenus sur <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Réalisé par <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Bugs et idées sont les bienvenus sur la <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">page d'assistance</a></p>
       </div>`,
 
   de: `
@@ -1332,7 +1332,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Danksagung</div>
-        <p class="abtP" style="color:var(--muted)">Entwickelt von <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Fehler und Ideen sind auf <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a> willkommen</p>
+        <p class="abtP" style="color:var(--muted)">Entwickelt von <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Fehler und Ideen sind auf der <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">Supportseite</a> willkommen</p>
       </div>`,
 
   ru: `
@@ -1370,7 +1370,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Авторы</div>
-        <p class="abtP" style="color:var(--muted)">Разработано <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Сообщения об ошибках и идеи — на <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Разработано <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Сообщения об ошибках и идеи — на <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">странице поддержки</a></p>
       </div>`,
 
   vn: `
@@ -1408,7 +1408,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Ghi công</div>
-        <p class="abtP" style="color:var(--muted)">Thực hiện bởi <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Báo lỗi và góp ý xin gửi trên <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Thực hiện bởi <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Báo lỗi và góp ý xin gửi trên <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">trang hỗ trợ</a></p>
       </div>`,
 
   ms: `
@@ -1446,7 +1446,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Penghargaan</div>
-        <p class="abtP" style="color:var(--muted)">Dibina oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan pepijat dan idea dialu-alukan di <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Dibina oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan pepijat dan idea dialu-alukan di <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">halaman Sokongan</a></p>
       </div>`,
 
   th: `
@@ -1484,7 +1484,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 เครดิต</div>
-        <p class="abtP" style="color:var(--muted)">พัฒนาโดย <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; แจ้งบั๊กและข้อเสนอแนะได้ที่ <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">พัฒนาโดย <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; แจ้งบั๊กและข้อเสนอแนะได้ที่<a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">หน้าสนับสนุน</a></p>
       </div>`,
 
   id: `
@@ -1522,7 +1522,7 @@ const ABOUT_HTML = {
 
       <div class="card">
         <div class="cardTitle">📄 Kredit</div>
-        <p class="abtP" style="color:var(--muted)">Dibuat oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan bug dan ide disambut di <a href="https://github.com/hyrocket/quick-search-popup/issues" target="_blank" style="color:var(--accent);font-weight:600">GitHub</a></p>
+        <p class="abtP" style="color:var(--muted)">Dibuat oleh <a href="https://github.com/hyrocket" target="_blank" style="color:var(--accent);font-weight:600">@hyrocket</a> &nbsp;·&nbsp; Laporan bug dan ide disambut di <a href="https://chromewebstore.google.com/detail/quick-search-popup/bdodpnpniemjlacmdjcaeeagndkmliac/support" target="_blank" style="color:var(--accent);font-weight:600">halaman Dukungan</a></p>
       </div>`
 
 };
