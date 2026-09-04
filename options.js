@@ -172,7 +172,6 @@ document.querySelectorAll(".navItem[data-tab]").forEach(btn => {
     btn.classList.add("active");
     const tab = $("tab-" + btn.dataset.tab);
     if (tab) { tab.classList.add("active"); }
-    if (btn.dataset.tab === "preview") renderPreview();
     // About 탭: 저장 바 숨김
     const sb = document.querySelector(".saveBar");
     if (sb) sb.style.display = btn.dataset.tab === "about" ? "none" : "flex";
@@ -616,6 +615,7 @@ function renderEngineList() {
     toggleInput.addEventListener("change", () => {
       en.enabled = !!toggleInput.checked;
       card.classList.toggle("disabled", !en.enabled);
+      renderPreview();
     });
     toggleWrap.append(toggleInput, slider);
 
@@ -637,7 +637,10 @@ function renderEngineList() {
     nameInput.type = "text";
     nameInput.className = "engNameInput";
     nameInput.value = engineDisplayName(en);
-    nameInput.addEventListener("input", () => setEngineName(en, nameInput.value.trim() || en.id));
+    nameInput.addEventListener("input", () => {
+      setEngineName(en, nameInput.value.trim() || en.id);
+      renderPreview();
+    });
 
     // AI 토글 (URL 자동감지 결과 + 수동 override)
     const aiToggleLabel = document.createElement("label");
@@ -655,6 +658,7 @@ function renderEngineList() {
       aiAutoSpan.textContent = autoDetected && !en.isAI ? "AI (auto-off)" :
                                !autoDetected && en.isAI ? "AI ✎" : "AI";
       aiAutoSpan.style.opacity = en.isAI ? "1" : "0.45";
+      renderPreview();
     });
 
     const aiAutoSpan = document.createElement("span");
@@ -718,6 +722,7 @@ function renderEngineList() {
     renderColorPicker(colorWrap, en.color || "pastel", (colorVal) => {
       en.color = colorVal;
       updateCardAccent(colorVal);
+      renderPreview();
     });
 
     // Order + delete
@@ -751,6 +756,8 @@ function renderEngineList() {
   });
   // 목록이 바뀌면 추천 패널의 Added 판정도 다시 한다
   renderRecommended();
+  // 프리뷰가 같은 화면 하단에 있다. 최초 로드·순서변경·삭제·추가가 모두 여기를 지난다.
+  renderPreview();
 }
 
 function swap(idx, delta) {
@@ -826,6 +833,8 @@ langSelect.addEventListener("change", () => {
 // Preview
 // =====================
 function renderPreview() {
+  // 선택한 테마의 색 토큰을 그대로 쓴다 (CSS 의 .previewStrip[data-theme=...]).
+  previewStrip.dataset.theme = state.appearance.theme;
   previewStrip.innerHTML = "";
   const enabled = state.engines.filter(e => e.enabled !== false);
   if (!enabled.length) {
@@ -835,8 +844,10 @@ function renderPreview() {
   enabled.forEach((en, i) => {
     const chip = document.createElement("div");
     chip.className = "previewChip" + (i === 0 ? " active" : "");
-    const sw = colorSwatch(en.color || "pastel");
-    if (i === 0) {
+    // 엔진 색을 활성 칩에 얹는 건 classic 에서만.
+    // 다른 테마는 accent 를 테마가 소유한다 (금지항목 #12).
+    if (i === 0 && state.appearance.theme === "classic") {
+      const sw = colorSwatch(en.color || "pastel");
       chip.style.background = `${sw}22`;
       chip.style.borderColor = sw;
       chip.style.color = sw;
@@ -1183,8 +1194,9 @@ function renderThemeGrid() {
     card.addEventListener("click", () => {
       state.appearance.theme = th.id;
       themeGrid.querySelectorAll(".themeCard").forEach(c =>
-        c.classList.toggle("active", c.dataset.theme === t.id));
+        c.classList.toggle("active", c.dataset.theme === th.id));
       syncAutoDarkRow();
+      renderPreview();   // 프리뷰가 테마를 반영하므로 같이 다시 그린다
     });
     themeGrid.appendChild(card);
   }

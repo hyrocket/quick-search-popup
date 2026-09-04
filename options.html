@@ -130,19 +130,29 @@
 
     .themeCard[data-theme="classic"]{
       --t-bg:#F8FAFF;--t-sub:#EFF6FF;--t-bd:#B6D4FE;--t-accent:#3B82F6;--t-tint:#3B82F6;--t-pill-bg:#DCEAFE}
-    .themeCard[data-theme="mono"]{
-      --t-bg:#FFFFFF;--t-sub:#FAFAFA;--t-bd:#D4D4D4;--t-accent:#171717;--t-tint:#171717;--t-pill-bg:transparent}
-    .themeCard[data-theme="midnight"]{
-      --t-bg:#1C1C22;--t-sub:#26262E;--t-bd:#34343E;--t-accent:#7F77DD;--t-tint:#7F77DD;--t-pill-bg:#2A2A33}
-    .themeCard[data-theme="glass"]{
+    /* classic 은 엔진 색을 따라가므로 프리뷰는 중립 패널로 두고
+       엔진 색은 renderPreview() 가 활성 칩에 인라인으로 얹는다. */
+    .previewStrip[data-theme="classic"]{
+      --t-bg:#FFFFFF;--t-sub:#F6F7FB;--t-bd:#CBD5E1;--t-accent:#94A3B8;--t-tint:#94A3B8;
+      --t-pill-bg:#EEF2F7;--t-fg:#111827;--t-muted:#6B7280;--t-pill-fg:#111827;--t-on-accent:#FFFFFF}
+    .themeCard[data-theme="mono"], .previewStrip[data-theme="mono"]{
+      --t-bg:#FFFFFF;--t-sub:#FAFAFA;--t-bd:#D4D4D4;--t-accent:#171717;--t-tint:#171717;--t-pill-bg:transparent;
+      --t-fg:#171717;--t-muted:#737373;--t-pill-fg:#171717;--t-on-accent:#FAFAFA}
+    .themeCard[data-theme="midnight"], .previewStrip[data-theme="midnight"]{
+      --t-bg:#1C1C22;--t-sub:#26262E;--t-bd:#34343E;--t-accent:#7F77DD;--t-tint:#7F77DD;--t-pill-bg:#2A2A33;
+      --t-fg:#F0F0F4;--t-muted:#8E8E9A;--t-pill-fg:#F0F0F4;--t-on-accent:#16161A}
+    .themeCard[data-theme="glass"], .previewStrip[data-theme="glass"]{
       --t-bg:rgba(255,255,255,.72);--t-sub:rgba(255,255,255,.55);--t-bd:rgba(255,255,255,.6);
-      --t-accent:#1A1A20;--t-tint:#1A1A20;--t-pill-bg:rgba(255,255,255,.75)}
+      --t-accent:#1A1A20;--t-tint:#1A1A20;--t-pill-bg:rgba(255,255,255,.75);
+      --t-fg:#1A1A20;--t-muted:#4B4B55;--t-pill-fg:#1A1A20;--t-on-accent:#F5F5F7}
     .themeCard[data-theme="glass"] .tPrevWrap{
       background:linear-gradient(120deg,#8EC5FC 0%,#E0C3FC 100%);padding:6px}
-    .themeCard[data-theme="paper"]{
-      --t-bg:#FAF5EC;--t-sub:#F2EADB;--t-bd:#E3D9C6;--t-accent:#99532A;--t-tint:#99532A;--t-pill-bg:#F0E7D6}
-    .themeCard[data-theme="terminal"]{
-      --t-bg:#0D1117;--t-sub:#161B22;--t-bd:#21313D;--t-accent:#238636;--t-tint:#2A4A35;--t-pill-bg:transparent}
+    .themeCard[data-theme="paper"], .previewStrip[data-theme="paper"]{
+      --t-bg:#FAF5EC;--t-sub:#F2EADB;--t-bd:#E3D9C6;--t-accent:#99532A;--t-tint:#99532A;--t-pill-bg:#F0E7D6;
+      --t-fg:#3E3324;--t-muted:#8A7A61;--t-pill-fg:#3E3324;--t-on-accent:#FAF0E4}
+    .themeCard[data-theme="terminal"], .previewStrip[data-theme="terminal"]{
+      --t-bg:#0D1117;--t-sub:#161B22;--t-bd:#21313D;--t-accent:#238636;--t-tint:#2A4A35;--t-pill-bg:transparent;
+      --t-fg:#A9B7C1;--t-muted:#58707E;--t-pill-fg:#3FB950;--t-on-accent:#E6FFED}
 
     /* ── Appearance: option rows ── */
     .optRow{
@@ -467,38 +477,53 @@
       position:sticky;bottom:0;
       background:var(--bg);border-top:1px solid var(--border);
       padding:12px 32px;
-      display:flex;align-items:center;gap:12px;
+      display:flex;align-items:center;justify-content:flex-end;gap:14px;
       margin:-28px -32px 0;
       margin-top:24px;
     }
     .saveBtn{
-      padding:9px 22px;border-radius:9px;
+      padding:11px 20px;min-width:200px;border-radius:9px;
       background:var(--accent);color:#fff;border:none;
-      font-size:14px;font-weight:700;cursor:pointer;
-      transition:filter .15s;
+      font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.01em;
+      box-shadow:0 2px 10px rgba(99,102,241,.35);
+      transition:filter .15s,box-shadow .15s;
     }
+    .saveBtn:active{box-shadow:0 1px 4px rgba(99,102,241,.3)}
     .saveBtn:hover{filter:brightness(1.1)}
     .savedMsg{font-size:13px;color:#22C55E;display:none;font-weight:600}
 
     /* ── Preview chip ── */
     .previewWrap{margin-top:16px}
     .previewLabel{font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+    /* 엔진 스트립 프리뷰 — 선택한 테마를 그대로 반영한다.
+       예전엔 background:#1a1a2e 고정이라 Paper 를 골라도 어두운 상자였다.
+       토큰 값은 content.js 의 :host([data-ss-theme=...]) 와 맞출 것 (금지항목 #7).
+       기본값은 classic — 밝은 패널에 엔진 색이 활성 칩으로 나타난다. */
     .previewStrip{
+      --t-bg:#FFFFFF;--t-sub:#F6F7FB;--t-bd:#CBD5E1;
+      --t-accent:#94A3B8;--t-tint:#94A3B8;--t-pill-bg:#EEF2F7;
+      --t-fg:#111827;--t-muted:#6B7280;--t-pill-fg:#111827;--t-on-accent:#FFFFFF;
       display:flex;gap:6px;flex-wrap:wrap;padding:12px;
-      background:#1a1a2e;border-radius:12px;
+      background:var(--t-bg);border:1px solid var(--t-bd);border-radius:12px;
+      transition:background .15s,border-color .15s;
+    }
+    /* glass 는 뒤가 비쳐야 의미가 있으므로 배경을 깔아준다 */
+    .previewStrip[data-theme="glass"]{
+      background:linear-gradient(120deg,#8EC5FC 0%,#E0C3FC 100%);
     }
     .previewChip{
       display:inline-flex;align-items:center;gap:4px;
       padding:5px 11px;border-radius:20px;border:1.5px solid transparent;
-      font-size:12px;font-weight:600;color:#D1D5DB;cursor:default;
-      background:rgba(255,255,255,.08);
+      font-size:12px;font-weight:600;cursor:default;
+      color:var(--t-fg);background:var(--t-sub);
     }
     .previewChip.active{
-      background:rgba(99,102,241,.2);
-      border-color:#818CF8;color:#C7D2FE;
+      background:var(--t-pill-bg);
+      border-color:var(--t-tint);color:var(--t-pill-fg);
     }
     .previewChip .preAI{
-      font-size:8px;font-weight:700;background:#818CF8;color:#fff;
+      font-size:8px;font-weight:700;
+      background:var(--t-accent);color:var(--t-on-accent);
       border-radius:3px;padding:1px 3px;letter-spacing:.04em;
     }
 
@@ -542,8 +567,6 @@
       <span class="navIcon">🎨</span><span data-i18n="nav.appearance">Appearance</span></button>
     <button class="navItem" data-tab="general">
       <span class="navIcon">🌐</span><span data-i18n-html="nav.language">Language</span></button>
-    <button class="navItem" data-tab="preview">
-      <span class="navIcon">👁️</span><span data-i18n="nav.preview">Preview</span></button>
     <button class="navItem" data-tab="about">
       <span class="navIcon">ℹ️</span><span data-i18n="nav.about">About</span></button>
     <div class="sideFooter" id="versionLabel"></div>
@@ -587,6 +610,13 @@
           </div>
         </div>
         <div class="urlHintBox" id="urlHintBox" data-i18n-html="eng.urlHint">URL template: use <strong>{q}</strong> for search term &mdash; e.g. <code>https://www.google.com/search?q={q}</code></div>
+      </div>
+
+      <!-- 엔진을 고치는 화면 바로 아래에 결과가 보이는 게 맞다.
+           별도 Preview 탭이었을 땐 엔진을 바꾼 뒤 탭을 옮겨야 확인이 됐다. -->
+      <div class="card">
+        <div class="previewLabel" data-i18n="pv.stripLabel">Engine Strip Preview</div>
+        <div class="previewStrip" id="previewStrip"></div>
       </div>
     </div>
 
@@ -766,15 +796,6 @@
     </div>
 
     <!-- ── PREVIEW ── -->
-    <div class="section" id="tab-preview">
-      <div class="pageTitle" data-i18n="pv.title">Preview</div>
-      <div class="pageSub" data-i18n="pv.sub">See how your engine chips will look in the overlay.</div>
-      <div class="card">
-        <div class="previewLabel" data-i18n="pv.stripLabel">Engine Strip Preview</div>
-        <div class="previewStrip" id="previewStrip"></div>
-      </div>
-    </div>
-
     <!-- ── ABOUT ── -->
     <div class="section" id="tab-about">
       <div class="pageTitle" data-i18n="ab.title">About</div>
@@ -811,8 +832,8 @@
 
 <!-- Save bar -->
     <div class="saveBar">
-      <button class="saveBtn" id="saveBtn" data-i18n="ui.save">💾 Save</button>
       <span class="savedMsg" id="savedMsg"></span>
+      <button class="saveBtn" id="saveBtn" data-i18n="ui.save">💾 Save</button>
     </div>
   </div>
 </div>

@@ -25,7 +25,7 @@ const OPT_I18N = {
 
   en: {
     "nav.engines":"Search Engines", "nav.shortcut":"Shortcut", "nav.appearance":"Appearance",
-    "nav.language":"Language", "nav.preview":"Preview", "nav.about":"About",
+    "nav.language":"Language", "nav.about":"About",
 
     "ab.title":"About",
     "ui.pageTitle":"TapTap - Quick Search — Settings",
@@ -81,9 +81,6 @@ const OPT_I18N = {
     "lang.sub":"Set the language of TapTap.",
     "lang.label":"Language",
     "lang.note":"Applies to the search popup, engine names and this settings page.",
-
-    "pv.title":"Preview",
-    "pv.sub":"See how your engine chips will look in the popup.",
     "pv.stripLabel":"Engine Strip Preview",
     "pv.none":"No engines enabled.",
 
@@ -104,7 +101,7 @@ const OPT_I18N = {
 
   kr: {
     "nav.engines":"검색 엔진", "nav.shortcut":"단축키", "nav.appearance":"모양",
-    "nav.language":"언어 <span class=\"navEn\">(Language)</span>", "nav.preview":"미리보기", "nav.about":"정보",
+    "nav.language":"언어 <span class=\"navEn\">(Language)</span>", "nav.about":"정보",
 
     "ab.title":"정보",
     "ui.pageTitle":"TapTap - Quick Search — 설정",
@@ -160,9 +157,6 @@ const OPT_I18N = {
     "lang.sub":"TapTap 의 언어를 정합니다.",
     "lang.label":"언어",
     "lang.note":"검색 팝업, 엔진 이름, 이 설정 페이지에 모두 적용됩니다.",
-
-    "pv.title":"미리보기",
-    "pv.sub":"엔진 칩이 팝업에서 어떻게 보이는지 확인합니다.",
     "pv.stripLabel":"엔진 스트립 미리보기",
     "pv.none":"켜진 엔진이 없습니다.",
 
@@ -183,7 +177,7 @@ const OPT_I18N = {
 
   ja: {
     "nav.engines":"検索エンジン", "nav.shortcut":"ショートカット", "nav.appearance":"外観",
-    "nav.language":"言語 <span class=\"navEn\">(Language)</span>", "nav.preview":"プレビュー", "nav.about":"情報",
+    "nav.language":"言語 <span class=\"navEn\">(Language)</span>", "nav.about":"情報",
 
     "ab.title":"情報",
     "ui.pageTitle":"TapTap - Quick Search — 設定",
@@ -239,9 +233,6 @@ const OPT_I18N = {
     "lang.sub":"TapTap の言語を設定します。",
     "lang.label":"言語",
     "lang.note":"検索ポップアップ、エンジン名、この設定ページすべてに適用されます。",
-
-    "pv.title":"プレビュー",
-    "pv.sub":"エンジンチップがポップアップでどう見えるか確認します。",
     "pv.stripLabel":"エンジンストリップのプレビュー",
     "pv.none":"有効なエンジンがありません。",
 
@@ -262,7 +253,7 @@ const OPT_I18N = {
 
   "zh-CN": {
     "nav.engines":"搜索引擎", "nav.shortcut":"快捷键", "nav.appearance":"外观",
-    "nav.language":"语言 <span class=\"navEn\">(Language)</span>", "nav.preview":"预览", "nav.about":"关于",
+    "nav.language":"语言 <span class=\"navEn\">(Language)</span>", "nav.about":"关于",
 
     "ab.title":"关于",
     "ui.pageTitle":"TapTap - Quick Search —— 设置",
@@ -318,9 +309,6 @@ const OPT_I18N = {
     "lang.sub":"设置 TapTap 的语言。",
     "lang.label":"语言",
     "lang.note":"适用于搜索弹窗、引擎名称以及本设置页面。",
-
-    "pv.title":"预览",
-    "pv.sub":"查看引擎标签在弹窗中的显示效果。",
     "pv.stripLabel":"引擎栏预览",
     "pv.none":"没有启用任何引擎。",
 
@@ -341,7 +329,7 @@ const OPT_I18N = {
 
   "zh-TW": {
     "nav.engines":"搜尋引擎", "nav.shortcut":"快速鍵", "nav.appearance":"外觀",
-    "nav.language":"語言 <span class=\"navEn\">(Language)</span>", "nav.preview":"預覽", "nav.about":"關於",
+    "nav.language":"語言 <span class=\"navEn\">(Language)</span>", "nav.about":"關於",
 
     "ab.title":"關於",
     "ui.pageTitle":"TapTap - Quick Search —— 設定",
@@ -397,9 +385,6 @@ const OPT_I18N = {
     "lang.sub":"設定 TapTap 的語言。",
     "lang.label":"語言",
     "lang.note":"適用於搜尋彈出視窗、引擎名稱以及本設定頁面。",
-
-    "pv.title":"預覽",
-    "pv.sub":"查看引擎標籤在彈出視窗中的顯示效果。",
     "pv.stripLabel":"引擎列預覽",
     "pv.none":"沒有啟用任何引擎。",
 
@@ -420,7 +405,7 @@ const OPT_I18N = {
 
   es: {
     "nav.engines":"Buscadores", "nav.shortcut":"Atajo", "nav.appearance":"Apariencia",
-    "nav.language":"Idioma <span class=\"navEn\">(Language)</span>", "nav.preview":"Vista previa", "nav.about":"Acerca de",
+    "nav.language":"Idioma <span class=\"navEn\">(Language)</span>", "nav.about":"Acerca de",
 
     "ab.title":"Acerca de",
     "ui.pageTitle":"TapTap - Quick Search — Ajustes",
@@ -476,9 +461,6 @@ const OPT_I18N = {
     "lang.sub":"Elige el idioma de TapTap.",
     "lang.label":"Idioma",
     "lang.note":"Se aplica a la ventana de búsqueda, a los nombres de los buscadores y a esta página de ajustes.",
-
-    "pv.title":"Vista previa",
-    "pv.sub":"Mira cómo se verán las fichas de buscadores en la ventana.",
     "pv.stripLabel":"Vista previa de la barra de buscadores",
     "pv.none":"No hay buscadores activos.",
 
@@ -499,7 +481,7 @@ const OPT_I18N = {
 
   fr: {
     "nav.engines":"Moteurs de recherche", "nav.shortcut":"Raccourci", "nav.appearance":"Apparence",
-    "nav.language":"Langue <span class=\"navEn\">(Language)</span>", "nav.preview":"Aperçu", "nav.about":"À propos",
+    "nav.language":"Langue <span class=\"navEn\">(Language)</span>", "nav.about":"À propos",
 
     "ab.title":"À propos",
     "ui.pageTitle":"TapTap - Quick Search — Réglages",
@@ -555,9 +537,6 @@ const OPT_I18N = {
     "lang.sub":"Choisissez la langue de TapTap.",
     "lang.label":"Langue",
     "lang.note":"S'applique à la fenêtre de recherche, aux noms des moteurs et à cette page de réglages.",
-
-    "pv.title":"Aperçu",
-    "pv.sub":"Voyez le rendu des pastilles de moteurs dans la fenêtre.",
     "pv.stripLabel":"Aperçu de la barre de moteurs",
     "pv.none":"Aucun moteur activé.",
 
@@ -578,7 +557,7 @@ const OPT_I18N = {
 
   de: {
     "nav.engines":"Suchmaschinen", "nav.shortcut":"Tastenkürzel", "nav.appearance":"Darstellung",
-    "nav.language":"Sprache <span class=\"navEn\">(Language)</span>", "nav.preview":"Vorschau", "nav.about":"Info",
+    "nav.language":"Sprache <span class=\"navEn\">(Language)</span>", "nav.about":"Info",
 
     "ab.title":"Info",
     "ui.pageTitle":"TapTap - Quick Search — Einstellungen",
@@ -634,9 +613,6 @@ const OPT_I18N = {
     "lang.sub":"Lege die Sprache von TapTap fest.",
     "lang.label":"Sprache",
     "lang.note":"Gilt für das Suchfenster, die Namen der Suchmaschinen und diese Einstellungsseite.",
-
-    "pv.title":"Vorschau",
-    "pv.sub":"Sieh dir an, wie die Suchmaschinen-Chips im Fenster aussehen.",
     "pv.stripLabel":"Vorschau der Suchmaschinenleiste",
     "pv.none":"Keine Suchmaschine aktiviert.",
 
@@ -657,7 +633,7 @@ const OPT_I18N = {
 
   ru: {
     "nav.engines":"Поисковые системы", "nav.shortcut":"Горячая клавиша", "nav.appearance":"Оформление",
-    "nav.language":"Язык <span class=\"navEn\">(Language)</span>", "nav.preview":"Предпросмотр", "nav.about":"О расширении",
+    "nav.language":"Язык <span class=\"navEn\">(Language)</span>", "nav.about":"О расширении",
 
     "ab.title":"О расширении",
     "ui.pageTitle":"TapTap - Quick Search — Настройки",
@@ -713,9 +689,6 @@ const OPT_I18N = {
     "lang.sub":"Выберите язык TapTap.",
     "lang.label":"Язык",
     "lang.note":"Применяется к окну поиска, названиям систем и этой странице настроек.",
-
-    "pv.title":"Предпросмотр",
-    "pv.sub":"Посмотрите, как значки систем выглядят в окне поиска.",
     "pv.stripLabel":"Предпросмотр панели систем",
     "pv.none":"Нет включённых систем.",
 
@@ -736,7 +709,7 @@ const OPT_I18N = {
 
   vn: {
     "nav.engines":"Công cụ tìm kiếm", "nav.shortcut":"Phím tắt", "nav.appearance":"Giao diện",
-    "nav.language":"Ngôn ngữ <span class=\"navEn\">(Language)</span>", "nav.preview":"Xem trước", "nav.about":"Giới thiệu",
+    "nav.language":"Ngôn ngữ <span class=\"navEn\">(Language)</span>", "nav.about":"Giới thiệu",
 
     "ab.title":"Giới thiệu",
     "ui.pageTitle":"TapTap - Quick Search — Cài đặt",
@@ -792,9 +765,6 @@ const OPT_I18N = {
     "lang.sub":"Chọn ngôn ngữ cho TapTap.",
     "lang.label":"Ngôn ngữ",
     "lang.note":"Áp dụng cho cửa sổ tìm kiếm, tên công cụ và trang cài đặt này.",
-
-    "pv.title":"Xem trước",
-    "pv.sub":"Xem các thẻ công cụ hiển thị thế nào trong cửa sổ tìm kiếm.",
     "pv.stripLabel":"Xem trước thanh công cụ",
     "pv.none":"Chưa bật công cụ nào.",
 
@@ -815,7 +785,7 @@ const OPT_I18N = {
 
   ms: {
     "nav.engines":"Enjin Carian", "nav.shortcut":"Pintasan", "nav.appearance":"Penampilan",
-    "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.preview":"Pratonton", "nav.about":"Perihal",
+    "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.about":"Perihal",
 
     "ab.title":"Perihal",
     "ui.pageTitle":"TapTap - Quick Search — Tetapan",
@@ -871,9 +841,6 @@ const OPT_I18N = {
     "lang.sub":"Tetapkan bahasa TapTap.",
     "lang.label":"Bahasa",
     "lang.note":"Digunakan pada tetingkap carian, nama enjin dan halaman tetapan ini.",
-
-    "pv.title":"Pratonton",
-    "pv.sub":"Lihat rupa cip enjin di dalam tetingkap carian.",
     "pv.stripLabel":"Pratonton Jalur Enjin",
     "pv.none":"Tiada enjin diaktifkan.",
 
@@ -894,7 +861,7 @@ const OPT_I18N = {
 
   th: {
     "nav.engines":"เครื่องมือค้นหา", "nav.shortcut":"ปุ่มลัด", "nav.appearance":"รูปลักษณ์",
-    "nav.language":"ภาษา <span class=\"navEn\">(Language)</span>", "nav.preview":"ตัวอย่าง", "nav.about":"เกี่ยวกับ",
+    "nav.language":"ภาษา <span class=\"navEn\">(Language)</span>", "nav.about":"เกี่ยวกับ",
 
     "ab.title":"เกี่ยวกับ",
     "ui.pageTitle":"TapTap - Quick Search — การตั้งค่า",
@@ -950,9 +917,6 @@ const OPT_I18N = {
     "lang.sub":"กำหนดภาษาของ TapTap",
     "lang.label":"ภาษา",
     "lang.note":"มีผลกับหน้าต่างค้นหา ชื่อเครื่องมือค้นหา และหน้าตั้งค่านี้",
-
-    "pv.title":"ตัวอย่าง",
-    "pv.sub":"ดูว่าชิปเครื่องมือค้นหาจะแสดงอย่างไรในหน้าต่างค้นหา",
     "pv.stripLabel":"ตัวอย่างแถบเครื่องมือค้นหา",
     "pv.none":"ยังไม่ได้เปิดใช้เครื่องมือค้นหาใด",
 
@@ -973,7 +937,7 @@ const OPT_I18N = {
 
   id: {
     "nav.engines":"Mesin Pencari", "nav.shortcut":"Pintasan", "nav.appearance":"Tampilan",
-    "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.preview":"Pratinjau", "nav.about":"Tentang",
+    "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.about":"Tentang",
 
     "ab.title":"Tentang",
     "ui.pageTitle":"TapTap - Quick Search — Pengaturan",
@@ -1029,9 +993,6 @@ const OPT_I18N = {
     "lang.sub":"Tentukan bahasa TapTap.",
     "lang.label":"Bahasa",
     "lang.note":"Berlaku untuk jendela pencarian, nama mesin pencari, dan halaman pengaturan ini.",
-
-    "pv.title":"Pratinjau",
-    "pv.sub":"Lihat tampilan chip mesin pencari di dalam jendela pencarian.",
     "pv.stripLabel":"Pratinjau Bilah Mesin Pencari",
     "pv.none":"Tidak ada mesin pencari yang aktif.",
 
