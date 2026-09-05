@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TapTap - Quick Search",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Custom engines, themes, 13 languages.",
   "permissions": [
     "storage"

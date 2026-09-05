@@ -33,6 +33,17 @@ function normalizeAppearance(v) {
 const LEGACY_K_COLORMAP = "shiftsearch:engineColorMap";
 
 const MAX_HISTORY = 30;
+// 드래그로 문단을 통째로 잡아도 안전한 상한.
+// 안 자르면 ① 검색 URL 이 414 로 거부되고 ② history 키가 sync 8KB 를 넘겨
+// set 이 조용히 실패한다(검색 기록이 통째로 멈춤).
+//
+// 상한은 "글자 수"가 아니라 **인코딩 후 URL 길이**로 잡는다.
+// 한글 1자는 encodeURIComponent 에서 9자(%XX%XX%XX)가 되므로
+// 글자 수로 자르면 언어마다 실제 URL 길이가 9배까지 벌어진다.
+// 넉넉한 쪽으로 최대한 — 자를 수 있는 만큼이 아니라 넣을 수 있는 만큼 넣는다.
+const SAFE_URL_LEN = 2000;        // 전체 URL 상한. Google 이 ~2048 에서 414 를 낸다
+const HARD_QUERY_CHARS = 8000;    // 축소 루프에 들어가기 전 바운드 (기사 통째 드래그 대비)
+const HISTORY_QUOTA_BYTES = 7500; // sync 는 키당 8192 - 키 이름/오버헤드 여유
 
 // =======================
 // Languages
@@ -484,8 +495,57 @@ document.addEventListener("keyup", (e) => {
 // =======================
 function addToHistory(q) {
   if (!q || q.length < 2) return;
-  state.history = [q, ...state.history.filter(h => h !== q)].slice(0, MAX_HISTORY);
-  chrome.storage?.sync?.set?.({ [K_HISTORY]: state.history });
+  const item = capQuery(q);
+  const list = [item, ...state.history.filter(h => h !== item)].slice(0, MAX_HISTORY);
+  // 한 항목이 짧아도 30개가 쌓이면 8KB 를 넘을 수 있다 — 들어갈 만큼만 남긴다
+  while (list.length > 1 && utf8Len(JSON.stringify(list)) > HISTORY_QUOTA_BYTES) list.pop();
+  state.history = list;
+  chrome.storage?.sync?.set?.({ [K_HISTORY]: list }, () => {
+    const err = chrome.runtime?.lastError;
+    if (err) console.warn("[QuickSearch] history save failed:", err.message);
+  });
+}
+
+// slice 가 서로게이트 쌍(이모지) 한가운데를 자르면 홀로 남은 코드유닛 때문에
+// encodeURIComponent 가 URIError 를 던진다 — 마지막 하이 서로게이트는 버린다
+function sliceSafe(str, n) {
+  let out = str.slice(0, n);
+  const last = out.charCodeAt(out.length - 1);
+  if (last >= 0xD800 && last <= 0xDBFF) out = out.slice(0, -1);
+  return out;
+}
+
+function encLen(str) {
+  try { return encodeURIComponent(str).length; }
+  catch { return str.length * 12; } // 인코딩 실패 시 최악값으로 쳐서 더 자르게 한다
+}
+
+// 활성 엔진 중 base URL 이 가장 긴 것을 기준으로 예산을 잡는다.
+// 팝업을 연 뒤 엔진을 바꿔도 URL 이 상한을 넘지 않게 하기 위함.
+function queryBudget() {
+  let base = 0;
+  for (const e of getEnabledEngines()) {
+    const len = String(e?.url || "").replace("{q}", "").length;
+    if (len > base) base = len;
+  }
+  return Math.max(64, SAFE_URL_LEN - base);
+}
+
+// 인코딩 후 길이가 예산에 들어올 때까지 비례 축소. 보통 1~2회면 수렴한다
+function capQuery(str) {
+  const lim = queryBudget();
+  let out = sliceSafe(String(str || ""), HARD_QUERY_CHARS);
+  for (let i = 0; i < 16; i++) {
+    const enc = encLen(out);
+    if (enc <= lim) break;
+    out = sliceSafe(out, Math.max(1, Math.floor(out.length * lim / enc)));
+  }
+  return out;
+}
+
+function utf8Len(str) {
+  try { return new TextEncoder().encode(str).length; }
+  catch { return str.length * 3; }
 }
 
 function clearHistory() {
@@ -1119,6 +1179,11 @@ function ensurePanel() {
       cursor:pointer;transition:background .1s;
     }
     .histItem:hover{background:var(--ss-hover-bg)}
+    /* 긴 문단을 드래그해 검색하면 기록 한 줄이 수십 줄로 늘어난다 — 한 줄 고정 */
+    .histItem > span:last-child{
+      min-width:0;flex:1 1 auto;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
     .histItem .histIcon{font-size:12px;color:var(--ss-accent,#9CA3AF);opacity:.6}
     .histEmpty{padding:10px 12px;font-size:12px;color:var(--ss-panel-fg,#9CA3AF);opacity:.5;text-align:center}
 
@@ -1803,7 +1868,7 @@ function _showPanel() {
   rebuildEngineStrip();
 
   // 선택 텍스트 자동 입력
-  const sel = window.getSelection?.()?.toString?.()?.trim?.() || "";
+  const sel = capQuery(window.getSelection?.()?.toString?.()?.trim?.() || "");
   inputEl.value = sel;
 
   if (selBadgeEl) selBadgeEl.classList.toggle("visible", sel.length > 0);
