@@ -1,6 +1,6 @@
 # 크롬 웹스토어 등록정보 초안
 
-TapTap - Quick Search · 2026-09-04 작성 (v1.4.4 제출용)
+TapTap - Quick Search · 2026-09-04 작성 / 2026-09-06 갱신 (v1.4.7 제출용)
 
 이 파일은 **확장 코드가 아니다.** 제출 ZIP 에 넣지 말 것.
 스토어 대시보드에 붙여넣을 원고를 여기서 관리한다.
@@ -14,7 +14,7 @@ TapTap - Quick Search · 2026-09-04 작성 (v1.4.4 제출용)
 
 현재 게시된 등록정보(2026-09-04 확인):
 - 제목: `Quick Search Popup` ← 구 이름
-- 짧은 설명: manifest 의 `description` (130자)
+- 짧은 설명: manifest 의 `description` (132자 — **한도에 정확히 붙어 있어 여유 0자**)
 - 사용자 22명 · 별점 5.0 (2개)
 - 본문에 **"The extension is open source"** 가 있다 → 라이선스 주장을 걷어냈으므로 제거 필요
 
@@ -110,6 +110,11 @@ Browser pages such as chrome:// cannot run extensions, so the popup does not
 open there. That is a Chrome security policy, not a limitation of TapTap.
 ```
 
+### v1.4.7 반영 여부 — 본문 수정 불필요
+드래그 선택 길이 상한(v1.4.7)은 내부 안전장치다. 원고의
+"📝 Uses the text you selected" 문구는 그대로 맞다.
+아주 긴 문단은 잘려 들어가지만 스토어 설명에 적을 만한 사양은 아니다.
+
 ### 이 원고에서 의도적으로 뺀 것
 
 - **"open source" / MIT** — 라이선스를 붙이지 않기로 했으므로 부정확한 주장이 된다
@@ -125,7 +130,10 @@ open there. That is a Chrome security policy, not a limitation of TapTap.
       (특히 Preview 탭이 없어졌고 좌측 메뉴가 5개로 줄었다)
 - [ ] **프로모 타일/아이콘** — 이름이 박혀 있으면 교체
 - [ ] 카테고리는 `Functionality & UI` 유지
-- [ ] 지원 URL: `https://github.com/hyrocket/quick-search-popup/issues`
+- [ ] **지원 URL — 비워둘 것.** 09-04 항목 14 에서 피드백 창구를 **스토어 지원 탭**
+      으로 옮겼다. 여기에 GitHub 을 넣으면 "지원" 클릭이 다시 GitHub 으로 가서
+      그 결정이 무효가 된다. 비우면 스토어가 자체 지원 탭을 쓴다.
+      (`docs`/`privacy` 의 문의처를 GitHub 으로 남긴 건 독자가 개발자라서다 — 여기와 다름)
 - [ ] 개인정보처리방침 URL: `https://hyrocket.github.io/quick-search-popup/privacy.html`
 
 ---
@@ -133,6 +141,7 @@ open there. That is a Chrome security policy, not a limitation of TapTap.
 ## 5. 제출 체크리스트
 
 - [ ] 로컬 테스트 전 스토어 설치본 토글 OFF (CLAUDE.md 테스트 0번)
-- [ ] `submit-v1.4.x.zip` 에 `i18n-options.js` 포함 확인 — 빠지면 설정 페이지가 통째로 깨진다
-- [ ] `manifest.json` 의 `description` 을 위 문안으로 바꿨는지
+- [ ] `submit-v1.4.7.zip` 에 `i18n-options.js` 포함 확인 — 빠지면 설정 페이지가 통째로 깨진다
+      (2026-09-06 확인 완료: 93,398 bytes, 10파일, manifest 최상위, 버전 1.4.7)
+- [x] `manifest.json` 의 `description` 을 위 문안으로 바꿨는지 (커밋 `76ee0f1`)
 - [ ] 제목/설명/스크린샷이 서로 같은 이름을 쓰는지 (심사에서 어긋나면 반려)
