@@ -138,6 +138,8 @@ This extension uses only the storage permission to save your
 preferences locally. It does not collect, transmit, or share
 any personal data. Your searches go directly to the engine you choose.
 
+Source code: github.com/hyrocket/quick-search-popup
+
 
 NOTE
 
@@ -148,8 +150,9 @@ limitation of TapTap.
 
 SUPPORT
 
-Found a bug or have a feature request?
-Use the Support tab on this page — I read every message.
+Found a bug? Missing an engine? Have an idea that would make this
+better? I want to hear all of it — suggestions just as much as bugs.
+github.com/hyrocket/quick-search-popup/issues
 ```
 
 ### ⚠ 고칠 때 규칙 — 도입부는 사양서가 아니라 후킹 카피다
@@ -179,12 +182,11 @@ are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만
 
 ### 이 원고에서 의도적으로 뺀 것
 
-- **"open source" / MIT** — 라이선스를 붙이지 않기로 했으므로 부정확한 주장이 된다
-- **`SUPPORT` 섹션 안의 GitHub issues 링크** — 09-04 에 피드백 창구를
-  스토어 지원 탭으로 옮겼다(`177a6e0`). 본문에 GitHub 링크가 남으면 그 결정이
-  무효가 된다.
-  **단 섹션 자체는 게시본에 있던 것이라 유지한다.** 링크만 지원 탭 안내로 바꿨다.
-  (2026-09-06 에 섹션을 통째로 지웠다가 되돌렸다 — 지울 필요가 없었다)
+- **"open source" / MIT** — `LICENSE` 파일이 없다. 저장소는 공개(`private:false`)
+  지만 라이선스가 없으면 법적으로 저작권 전부 보유 상태라 "open source" 는
+  부정확하다. **`Source code:` 로 바꿔 링크만 남겼다** — 소스가 공개돼 있다는
+  사실만 말하므로 정확하다.
+  (`Open source` 라고 쓰고 싶으면 `LICENSE` 파일을 먼저 추가할 것)
 - **버전 번호** — 스토어가 알아서 표시한다. 적으면 반드시 낡는다 (금지항목 17)
 
 ### v1.0.0 게시본에서 고친 사실 오류 (2026-09-06)
@@ -196,6 +198,23 @@ are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만
 | `13 Languages` 인데 나열은 12개 | `Chinese` 를 Simplified/Traditional 로 분리 | `options.js:100` |
 | `a instant` | `an instant` | 원본 문법 오류 |
 | `Popular search engines` (모호) | 기본 8개 + 추천 27개 | `content.js:322`, `options.js:904` |
+
+### `SUPPORT` 링크는 GitHub Issues 다 (2026-09-06 재확정)
+
+09-04 에 피드백 창구를 스토어 지원 탭으로 옮겼지만(`177a6e0`),
+**Support 탭에는 자체 문의 폼이 없다.** 탭 본문은 한 문장뿐이고
+대시보드의 "지원 URL" 을 그대로 링크한다 (2026-09-06 라이브 페이지에서 실측):
+
+> For help with questions, suggestions, or problems,
+> visit the developer's **support site**.  → [지원 URL 필드]
+
+즉 지원 URL 을 비우면 탭이 가리킬 곳이 없다. 그리고 지원 URL 에 GitHub 을
+넣는 이상 `About → /support → GitHub` 로 한 번 더 돌 뿐 장벽은 그대로다.
+
+→ **본문에서 GitHub Issues 를 직접 링크한다.** 클릭이 한 번 줄어든다.
+
+문구는 **버그만이 아니라 제안도 받는다**는 쪽으로 썼다.
+사용자 27명 규모에서 진짜 문제는 중복 제보가 아니라 **아무도 말을 안 하는 것**이다.
 
 ### `NOTE` 문단은 유지한다
 
