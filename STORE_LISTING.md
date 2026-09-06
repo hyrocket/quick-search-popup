@@ -144,6 +144,12 @@ NOTE
 Browser pages such as chrome:// cannot run extensions, so the popup
 does not open there. That is a Chrome security policy, not a
 limitation of TapTap.
+
+
+SUPPORT
+
+Found a bug or have a feature request?
+Use the Support tab on this page — I read every message.
 ```
 
 ### ⚠ 고칠 때 규칙 — 도입부는 사양서가 아니라 후킹 카피다
@@ -174,8 +180,11 @@ are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만
 ### 이 원고에서 의도적으로 뺀 것
 
 - **"open source" / MIT** — 라이선스를 붙이지 않기로 했으므로 부정확한 주장이 된다
-- **`SUPPORT` 섹션(GitHub issues)** — 09-04 에 피드백 창구를 스토어 지원 탭으로
-  옮겼다. 본문에 GitHub 링크가 남으면 그 결정이 무효가 된다
+- **`SUPPORT` 섹션 안의 GitHub issues 링크** — 09-04 에 피드백 창구를
+  스토어 지원 탭으로 옮겼다(`177a6e0`). 본문에 GitHub 링크가 남으면 그 결정이
+  무효가 된다.
+  **단 섹션 자체는 게시본에 있던 것이라 유지한다.** 링크만 지원 탭 안내로 바꿨다.
+  (2026-09-06 에 섹션을 통째로 지웠다가 되돌렸다 — 지울 필요가 없었다)
 - **버전 번호** — 스토어가 알아서 표시한다. 적으면 반드시 낡는다 (금지항목 17)
 
 ### v1.0.0 게시본에서 고친 사실 오류 (2026-09-06)
