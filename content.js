@@ -1554,10 +1554,15 @@ function filterHistoryDrop(q) {
   const clearBtn = document.createElement("button");
   clearBtn.className = "histClear";
   clearBtn.textContent = t(state.lang, "clearHistory");
-  clearBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
+  // click 이 아니라 mousedown 이어야 한다.
+  // click 을 쓰면 mousedown 이 overlay 까지 버블링 -> hideHistoryDrop() ->
+  // display:none 이 되어 mouseup 때 버튼이 사라지고 click 이 아예 안 뜬다.
+  // (histDrop 은 panelWrap 의 자식이라 overlay 의 inputWrap 검사에 걸리지 않는다)
+  clearBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();   // 입력창 포커스 유지 (blur 타이머도 안 돈다)
+    e.stopPropagation();  // overlay 가 먼저 닫지 못하게
     clearHistory();
-    historyDropEl.classList.remove("open");
+    hideHistoryDrop();    // histHighlightIdx 도 같이 리셋
     inputEl.focus();
   });
   header.append(titleSpan, clearBtn);
