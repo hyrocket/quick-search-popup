@@ -51,77 +51,147 @@ Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perple
 
 ## 3. 상세 설명 (본문)
 
+> **이 블록이 정본이다.** 대시보드 `설명*` 칸에 통째로 붙여넣는다.
+> 아래 "고칠 때 규칙"을 먼저 읽을 것.
+
 ```
-Search the web without leaving the page you are on.
+⚡ TapTap - Quick Search — Boost Your Browsing Speed
 
-Press Shift twice and a search box appears on top of the page. Type your
-query and press Enter. No mouse, no new tab, no losing your place.
+Stop switching tabs. Stop clicking the address bar.
+TapTap brings an instant search overlay to any webpage
+with a single keyboard shortcut — keeping you in the flow and
+getting you answers faster than ever.
 
-WHAT YOU GET
+Just press your shortcut → type → press Enter. Done.
 
-⚡ Opens anywhere
-   Double-tap Shift on any web page. Prefer a different key? Set your own
-   shortcut, including modifier combinations. Conflicts with the page are
-   detected for you.
 
-🤖 AI search built in
-   Perplexity, ChatGPT and Claude are ready to use out of the box, next to
-   Google, Naver, Bing, Wikipedia and YouTube.
+WHY YOU'LL LOVE IT
 
-📝 Uses the text you selected
-   Highlight something on the page, then open TapTap — your selection is
-   already in the box.
+TapTap is designed to eliminate the small frictions
+that slow you down every day. Whether you're researching, reading,
+or working — search anything without ever leaving the page you're on.
+Over time, this adds up to a dramatically faster and more efficient
+browsing experience.
 
-🕐 Search history
-   Recent searches appear as you type, and you can pick one with the
-   keyboard.
 
-🖱️ Switch engines the way you like
-   Arrow keys, the mouse wheel, or a dropdown inside the popup.
+KEY FEATURES
 
-➕ Make it yours
-   27 recommended engines you can add in one click, or add your own with a
-   URL template. Rename, reorder, and give each engine its own emoji icon.
+⚡ Instant Search Overlay
+Open a search popup on any webpage with a keyboard shortcut.
+No mouse clicks, no tab switching — just type and go.
 
-🎨 Six themes
-   Chameleon (follows the colour of the engine you picked), Mono, Midnight,
-   Glass, Paper and Terminal. Nine colour palettes per engine, or your own
-   hex code. Automatic dark mode follows your system setting.
+🔍 Your Engines, Your Way
+Popular search engines are built-in and ready to use.
+More importantly, you can easily add, edit, and reorder
+any search engine you love — make it truly yours.
 
-🌐 13 languages
-   English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish,
-   French, German, Russian, Vietnamese, Malay, Thai and Indonesian — in the
-   search popup and the settings page.
+📝 Auto-Fill Selected Text
+Highlight any text on a page, trigger the popup, and it fills in
+automatically. Perfect for instant lookups without retyping.
 
-🔒 Collects nothing
-   Your settings stay in your browser. No server, no analytics, no tracking.
-   Your searches go straight to the engine you picked, exactly as they would
-   from the address bar.
+🤖 AI Search Ready
+AI-powered search engines are supported out of the box — and you can
+add any engine that accepts a search URL, including the latest AI
+search tools.
 
-HOW TO USE
+🖱️ Flexible Engine Switching
+Use arrow keys or mouse wheel to cycle through your engines.
+Find the right source without lifting your hands off the keyboard.
 
-1. Press Shift twice on any web page
-2. Type your query — or it is already filled in if you had selected text
-3. Change engine with the arrow keys or the mouse wheel
-4. Enter to search, Esc to close
+🕐 Search History
+Your recent searches appear as you type — jump back to any
+previous query in one click.
+
+🎨 Full Theme Control
+Six themes plus nine color palettes and a custom hex color picker
+per engine. Adapts automatically to your browser's dark mode.
+
+⌨️ Custom Shortcut
+Set any trigger key combination that suits your workflow.
+Built-in conflict detection prevents clashes with browser shortcuts.
+
+🌐 13 Languages Supported
+Korean, English, Japanese, Chinese (Simplified), Chinese (Traditional),
+Spanish, French, German, Russian, Vietnamese, Malay, Thai,
+and Indonesian.
+
+🔒 Zero Data Collection
+All settings are stored locally. No servers, no analytics,
+no tracking. Ever.
+
+
+CUSTOMIZATION
+
+Click the settings icon in the popup to open Settings:
+- Add, edit, and reorder your favorite search engines
+- Set a unique color theme per engine
+- Change the trigger shortcut to fit your workflow
+- Switch UI language
+
+A "new tab" switch sits at the bottom of the popup itself, so you can
+choose whether results open in the current tab or a new one.
+
+
+PRIVACY
+
+This extension uses only the storage permission to save your
+preferences locally. It does not collect, transmit, or share
+any personal data. Your searches go directly to the engine you choose.
+
 
 NOTE
-Browser pages such as chrome:// cannot run extensions, so the popup does not
-open there. That is a Chrome security policy, not a limitation of TapTap.
+
+Browser pages such as chrome:// cannot run extensions, so the popup
+does not open there. That is a Chrome security policy, not a
+limitation of TapTap.
 ```
 
-### v1.4.7 / v1.4.8 반영 여부 — 본문 수정 불필요
-드래그 선택 길이 상한(v1.4.7)과 기록 Clear 버튼 수정(v1.4.8)은
-둘 다 내부 수정이다. 원고의
-"📝 Uses the text you selected" 문구는 그대로 맞다.
-아주 긴 문단은 잘려 들어가지만 스토어 설명에 적을 만한 사양은 아니다.
+### ⚠ 고칠 때 규칙 — 도입부는 사양서가 아니라 후킹 카피다
+
+**스토어 상세 설명의 첫 5줄은 사람을 끄는 문구여야 한다.**
+사용자는 기능 목록을 읽으러 오지 않는다. *"이게 내 문제를 푸나"* 만
+3초 안에 판단하고 나간다. 정확하지만 밋밋한 문장은 정확해서 실패한다.
+
+지금 도입부가 하고 있는 일 — **이 구조를 건드리지 말 것**:
+1. **문제 제기부터** — `Stop switching tabs. Stop clicking the address bar.`
+   (명령형 2연타. 기능 소개보다 먼저 온다)
+2. **해결을 한 문장으로** — `keeping you in the flow`
+3. **쉽다는 증명** — `→ type → press Enter. Done.` (`Done.` 한 단어로 끊는다)
+4. **감정 단락** — `WHY YOU'LL LOVE IT` 은 정보량이 0에 가깝지만
+   *"매일 쌓이면 크다"* 를 납득시킨다. 지우고 싶어지는 단락이지만 지우지 말 것
+
+**2026-09-06 에 실제로 겪은 실패:**
+사실 검증에 치중해 도입부를 `Search the web without leaving the page you
+are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만 후킹이 죽었다.
+
+→ **규칙: 사실 오류는 고치되 도입부의 감정·리듬 구조는 손대지 않는다.**
+  사실 수정은 `KEY FEATURES` 이하에서 한다.
+
+**본문 안에서 제품명은 `TapTap` 만 쓴다.**
+`TapTap - Quick Search` 를 문장 주어로 넣으면 하이픈 때문에 리듬이 끊긴다.
+정식 명칭은 **헤드라인 한 곳**이 책임진다 (패키지 제목과 달라지면 심사에서 걸림).
 
 ### 이 원고에서 의도적으로 뺀 것
 
 - **"open source" / MIT** — 라이선스를 붙이지 않기로 했으므로 부정확한 주장이 된다
-- **버전 번호** — 스토어가 알아서 표시한다. 적으면 반드시 낡는다
-- **"9 preset color themes"** — 현재 게시본의 표현인데 팔레트(9)와 테마(6)를 섞어
-  쓰고 있었다. 위 원고는 둘을 나눠 적었다
+- **`SUPPORT` 섹션(GitHub issues)** — 09-04 에 피드백 창구를 스토어 지원 탭으로
+  옮겼다. 본문에 GitHub 링크가 남으면 그 결정이 무효가 된다
+- **버전 번호** — 스토어가 알아서 표시한다. 적으면 반드시 낡는다 (금지항목 17)
+
+### v1.0.0 게시본에서 고친 사실 오류 (2026-09-06)
+
+| 기존 | 실제 | 근거 |
+|---|---|---|
+| `9 preset color themes` | 테마 **6종** + 팔레트 **9종** | `content.js:20`, `content.js:262` — 둘을 한 숫자로 뭉뚱그리고 있었다 |
+| `Toggle new tab mode` 가 설정 페이지 항목 | 그 스위치는 **팝업 하단** | `content.js:1410`. 설정 좌측 메뉴는 5개뿐 (`options.html:562`) |
+| `13 Languages` 인데 나열은 12개 | `Chinese` 를 Simplified/Traditional 로 분리 | `options.js:100` |
+| `a instant` | `an instant` | 원본 문법 오류 |
+| `Popular search engines` (모호) | 기본 8개 + 추천 27개 | `content.js:322`, `options.js:904` |
+
+### v1.4.7 / v1.4.8 반영 여부 — 본문 수정 불필요
+드래그 선택 길이 상한(v1.4.7)과 기록 Clear 버튼 수정(v1.4.8)은
+둘 다 내부 수정이다. 원고의
+"📝 Auto-Fill Selected Text" 문구는 그대로 맞다.
 
 ---
 
