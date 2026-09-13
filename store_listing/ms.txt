@@ -1,0 +1,100 @@
+⚡ TapTap - Quick Search — Layari Web Dengan Lebih Pantas
+
+Tiada lagi bertukar-tukar tab. Tiada lagi klik bar alamat.
+TapTap memaparkan kotak carian segera di atas mana-mana halaman web
+dengan satu pintasan papan kekunci sahaja — anda kekal fokus dan
+mendapat jawapan lebih pantas daripada sebelum ini.
+
+Tekan pintasan anda → taip → tekan Enter. Siap.
+
+
+KENAPA ANDA AKAN SUKAKANNYA
+
+TapTap direka untuk menghapuskan gangguan kecil
+yang melambatkan anda setiap hari. Sama ada anda sedang membuat kajian, membaca
+atau bekerja — cari apa sahaja tanpa meninggalkan halaman yang sedang dibuka.
+Lama-kelamaan, semua itu menjadikan pengalaman melayari web jauh lebih pantas
+dan cekap.
+
+
+CIRI-CIRI UTAMA
+
+⚡ Tetingkap Carian Segera
+Buka tetingkap carian di mana-mana halaman web dengan pintasan papan kekunci.
+Tiada klik tetikus, tiada tukar tab — taip dan terus cari.
+
+🔍 Enjin Carian Ikut Cara Anda
+Enjin carian popular sudah terbina dalam dan sedia digunakan.
+Lebih penting lagi, anda boleh menambah, mengedit dan menyusun semula
+mana-mana enjin carian kegemaran anda dengan mudah — jadikan ia benar-benar milik anda.
+
+📝 Isi Automatik Teks Dipilih
+Serlahkan mana-mana teks pada halaman, buka tetingkap carian, dan teks itu
+diisi secara automatik. Sesuai untuk carian pantas tanpa menaip semula.
+
+🤖 Sedia untuk Carian AI
+Enjin carian berkuasa AI disokong terus — dan anda boleh menambah
+mana-mana enjin yang menerima URL carian, termasuk alat carian AI terkini.
+
+🖱️ Tukar Enjin dengan Fleksibel
+Gunakan kekunci anak panah atau roda tetikus untuk bertukar antara enjin.
+Cari sumber yang tepat tanpa mengangkat tangan dari papan kekunci.
+
+🕐 Sejarah Carian
+Carian terkini anda muncul semasa anda menaip — kembali ke
+mana-mana carian sebelumnya dengan satu klik.
+
+🎨 Kawalan Tema Penuh
+Enam tema, sembilan palet warna dan pemilih warna hex tersuai
+untuk setiap enjin. Menyesuaikan diri secara automatik dengan mod gelap pelayar anda.
+
+⌨️ Pintasan Tersuai
+Tetapkan sebarang gabungan kekunci pencetus yang sesuai dengan cara kerja anda.
+Pengesanan konflik terbina dalam mengelakkan pertembungan dengan pintasan pelayar.
+
+🌐 Menyokong 13 Bahasa
+Bahasa Korea, Inggeris, Jepun, Cina (Ringkas), Cina (Tradisional),
+Sepanyol, Perancis, Jerman, Rusia, Vietnam, Melayu, Thai
+dan Indonesia.
+
+☁️ Tetapan Mengikut Anda
+Sediakan sekali sahaja. Enjin, tema dan pintasan anda menumpang penyegerakan
+Chrome sendiri, jadi setiap komputer yang anda log masuk sudah pun sedia.
+
+🔒 Sifar Pengumpulan Data
+Tiada pelayan saya, tiada analitik, tiada penjejakan. Tidak sekali-kali.
+Tetapan anda kekal dalam pelayar anda — dan, jika penyegerakan Chrome
+dihidupkan, dalam akaun Google anda sendiri.
+
+
+PENYESUAIAN
+
+Klik ikon tetapan dalam tetingkap carian untuk membuka Tetapan:
+- Tambah, edit dan susun semula enjin carian kegemaran anda
+- Tetapkan tema warna tersendiri untuk setiap enjin
+- Tukar pintasan pencetus mengikut cara kerja anda
+- Tukar bahasa antara muka
+
+Suis "Tab baharu" terletak di bahagian bawah tetingkap carian, jadi anda
+boleh memilih sama ada hasil dibuka dalam tab semasa atau tab baharu.
+
+
+PRIVASI
+
+Sambungan ini hanya menggunakan kebenaran storage untuk menyimpan
+tetapan anda. Ia tidak mengumpul, menghantar atau berkongsi
+sebarang data peribadi. Carian anda terus dihantar ke enjin carian pilihan anda.
+
+Tetapan itu disimpan dalam storan sync Chrome, jadi apabila penyegerakan
+Chrome dihidupkan, ia berpindah antara peranti anda sendiri melalui akaun
+Google anda. Itu penyegerakan Chrome, bukan pelayan TapTap — TapTap
+langsung tiada pelayan.
+
+Kod sumber: github.com/hyrocket/quick-search-popup
+
+
+SOKONGAN
+
+Jumpa pepijat? Enjin carian yang anda mahu tiada? Ada idea untuk menjadikannya lebih baik?
+Saya mahu dengar semuanya — cadangan sama pentingnya dengan laporan pepijat.
+github.com/hyrocket/quick-search-popup/issues

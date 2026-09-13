@@ -1,0 +1,6 @@
+{
+  "appDesc": {
+    "message": "Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Custom engines, themes, 13 languages.",
+    "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
+  }
+}

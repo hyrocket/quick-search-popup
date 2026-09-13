@@ -1,0 +1,102 @@
+⚡ TapTap - Quick Search — Navega más rápido
+
+Deja de cambiar de pestaña. Deja de hacer clic en la barra de direcciones.
+TapTap abre un buscador instantáneo sobre cualquier página web
+con un solo atajo de teclado: no pierdes el ritmo y
+encuentras respuestas más rápido que nunca.
+
+Pulsa tu atajo → escribe → pulsa Enter. Listo.
+
+
+POR QUÉ TE VA A ENCANTAR
+
+TapTap está pensado para eliminar esas pequeñas fricciones
+que te frenan cada día. Ya sea que estés investigando, leyendo
+o trabajando, busca lo que quieras sin salir de la página en la que estás.
+Con el tiempo, todo eso suma una navegación mucho más rápida
+y eficiente.
+
+
+FUNCIONES PRINCIPALES
+
+⚡ Búsqueda instantánea superpuesta
+Abre una ventana de búsqueda en cualquier página con un atajo de teclado.
+Sin clics, sin cambiar de pestaña: escribe y listo.
+
+🔍 Tus buscadores, a tu manera
+Los buscadores más populares vienen incluidos y listos para usar.
+Y lo mejor: puedes añadir, editar y reordenar fácilmente
+cualquier buscador que te guste. Hazlo realmente tuyo.
+
+📝 Autocompletado con el texto seleccionado
+Selecciona cualquier texto de la página, abre la ventana y se rellena
+automáticamente. Ideal para consultas rápidas sin volver a escribir.
+
+🤖 Listo para la búsqueda con IA
+Compatible de serie con buscadores de IA, y puedes añadir cualquier
+buscador que acepte una URL de búsqueda, incluidas las herramientas
+de búsqueda con IA más recientes.
+
+🖱️ Cambio de buscador flexible
+Usa las flechas o la rueda del ratón para recorrer tus buscadores.
+Encuentra la fuente adecuada sin quitar las manos del teclado.
+
+🕐 Historial de búsqueda
+Tus búsquedas recientes aparecen mientras escribes: vuelve a cualquier
+búsqueda anterior con un clic.
+
+🎨 Control total del tema
+Seis temas, nueve paletas de color y un selector de color hexadecimal
+para cada buscador. Se adapta automáticamente al modo oscuro del navegador.
+
+⌨️ Atajo personalizable
+Elige la combinación de teclas que mejor se adapte a tu forma de trabajar.
+La detección de conflictos integrada evita choques con los atajos del navegador.
+
+🌐 13 idiomas
+Coreano, inglés, japonés, chino (simplificado), chino (tradicional),
+español, francés, alemán, ruso, vietnamita, malayo, tailandés
+e indonesio.
+
+☁️ Tu configuración te acompaña
+Configúralo una vez. Tus buscadores, temas y atajo viajan con la
+sincronización propia de Chrome: cada ordenador en el que inicias sesión
+ya está listo.
+
+🔒 Cero recopilación de datos
+Sin servidores míos, sin analíticas, sin rastreo. Nunca. Tu configuración
+se queda en tu navegador y, si tienes activada la sincronización de Chrome,
+en tu propia cuenta de Google.
+
+
+PERSONALIZACIÓN
+
+Haz clic en el icono de configuración de la ventana para abrir la Configuración:
+- Añade, edita y reordena tus buscadores favoritos
+- Asigna un color de tema propio a cada buscador
+- Cambia el atajo de activación según tu forma de trabajar
+- Cambia el idioma de la interfaz
+
+En la parte inferior de la ventana hay un interruptor "Nueva pestaña"
+para elegir si los resultados se abren en la pestaña actual o en una nueva.
+
+
+PRIVACIDAD
+
+Esta extensión solo usa el permiso storage para guardar tus
+preferencias. No recopila, transmite ni comparte
+ningún dato personal. Tus búsquedas van directamente al buscador que elijas.
+
+Esas preferencias se guardan en el almacenamiento sync de Chrome, así que
+si tienes activada la sincronización de Chrome viajan entre tus propios
+dispositivos a través de tu cuenta de Google. Es la sincronización de Chrome,
+no un servidor de TapTap: TapTap no tiene ningún servidor.
+
+Código fuente: github.com/hyrocket/quick-search-popup
+
+
+SOPORTE
+
+¿Encontraste un error? ¿Falta algún buscador? ¿Tienes una idea para
+mejorarlo? Quiero escucharlo todo: las sugerencias tanto como los errores.
+github.com/hyrocket/quick-search-popup/issues

@@ -1,0 +1,100 @@
+⚡ TapTap - Quick Search — Lướt web nhanh hơn
+
+Không còn chuyển tab qua lại. Không còn bấm vào thanh địa chỉ.
+TapTap mở ô tìm kiếm tức thì ngay trên mọi trang web
+chỉ với một phím tắt — giúp bạn giữ mạch làm việc và
+tìm ra câu trả lời nhanh hơn bao giờ hết.
+
+Nhấn phím tắt → gõ → nhấn Enter. Xong.
+
+
+VÌ SAO BẠN SẼ THÍCH
+
+TapTap được tạo ra để loại bỏ những phiền toái nhỏ
+làm bạn chậm lại mỗi ngày. Dù bạn đang tra cứu, đọc
+hay làm việc — hãy tìm kiếm mọi thứ mà không phải rời khỏi trang đang xem.
+Lâu dần, những khoảnh khắc ấy cộng lại thành trải nghiệm duyệt web
+nhanh và hiệu quả hơn hẳn.
+
+
+TÍNH NĂNG CHÍNH
+
+⚡ Ô tìm kiếm hiện ngay
+Mở cửa sổ tìm kiếm trên mọi trang web bằng một phím tắt.
+Không cần bấm chuột, không cần chuyển tab — cứ gõ là tìm.
+
+🔍 Công cụ tìm kiếm theo cách của bạn
+Các công cụ tìm kiếm phổ biến đã có sẵn, dùng được ngay.
+Quan trọng hơn, bạn có thể dễ dàng thêm, sửa và sắp xếp lại
+bất kỳ công cụ tìm kiếm nào bạn thích — biến nó thành của riêng bạn.
+
+📝 Tự điền văn bản đã chọn
+Bôi đen đoạn văn bản trên trang, mở cửa sổ tìm kiếm — nội dung được
+điền sẵn tự động. Tra cứu tức thì mà không phải gõ lại.
+
+🤖 Sẵn sàng cho tìm kiếm AI
+Hỗ trợ sẵn các công cụ tìm kiếm AI — và bạn có thể thêm bất kỳ công cụ nào
+nhận URL tìm kiếm, kể cả những công cụ tìm kiếm AI mới nhất.
+
+🖱️ Chuyển công cụ linh hoạt
+Dùng phím mũi tên hoặc con lăn chuột để chuyển giữa các công cụ tìm kiếm.
+Tìm đúng nguồn mà không cần rời tay khỏi bàn phím.
+
+🕐 Lịch sử tìm kiếm
+Các tìm kiếm gần đây hiện ra ngay khi bạn gõ — quay lại
+bất kỳ tìm kiếm nào chỉ với một cú nhấp.
+
+🎨 Toàn quyền tùy chỉnh chủ đề
+Sáu chủ đề, chín bảng màu và bộ chọn màu HEX riêng
+cho từng công cụ. Tự động theo chế độ tối của trình duyệt.
+
+⌨️ Tùy chỉnh phím tắt
+Đặt bất kỳ tổ hợp phím nào hợp với cách làm việc của bạn.
+Tính năng phát hiện xung đột giúp tránh trùng với phím tắt của trình duyệt.
+
+🌐 Hỗ trợ 13 ngôn ngữ
+Tiếng Hàn, tiếng Anh, tiếng Nhật, tiếng Trung (Giản thể), tiếng Trung (Phồn thể),
+tiếng Tây Ban Nha, tiếng Pháp, tiếng Đức, tiếng Nga, tiếng Việt, tiếng Mã Lai,
+tiếng Thái và tiếng Indonesia.
+
+☁️ Cài đặt đi theo bạn
+Chỉ cần thiết lập một lần. Công cụ, chủ đề và phím tắt đi cùng tính năng
+đồng bộ sẵn có của Chrome, nên máy nào bạn đăng nhập cũng đã sẵn sàng.
+
+🔒 Không thu thập dữ liệu
+Không máy chủ của tôi, không phân tích, không theo dõi. Mãi mãi. Cài đặt
+của bạn nằm trong trình duyệt — và nếu bật đồng bộ Chrome thì nằm trong
+tài khoản Google của chính bạn.
+
+
+TÙY CHỈNH
+
+Nhấp vào biểu tượng cài đặt trong cửa sổ tìm kiếm để mở Cài đặt:
+- Thêm, sửa và sắp xếp các công cụ tìm kiếm yêu thích
+- Đặt màu chủ đề riêng cho từng công cụ
+- Đổi phím tắt kích hoạt cho hợp với cách làm việc
+- Đổi ngôn ngữ giao diện
+
+Ngay dưới cửa sổ tìm kiếm có công tắc "Tab mới" để bạn chọn
+mở kết quả trong tab hiện tại hay trong tab mới.
+
+
+QUYỀN RIÊNG TƯ
+
+Tiện ích này chỉ dùng quyền storage để lưu cài đặt của bạn.
+Không thu thập, truyền đi hay chia sẻ bất kỳ dữ liệu cá nhân nào.
+Nội dung tìm kiếm được gửi thẳng đến công cụ tìm kiếm bạn chọn.
+
+Cài đặt được lưu trong bộ nhớ sync của Chrome, nên khi bạn bật đồng bộ
+Chrome, chúng di chuyển giữa các thiết bị của chính bạn qua tài khoản Google.
+Đó là đồng bộ của Chrome, không phải máy chủ TapTap — TapTap không có
+máy chủ nào cả.
+
+Mã nguồn: github.com/hyrocket/quick-search-popup
+
+
+HỖ TRỢ
+
+Bạn phát hiện lỗi? Thiếu công cụ tìm kiếm bạn cần? Có ý tưởng giúp nó tốt hơn?
+Tôi muốn nghe tất cả — góp ý cũng quý như báo lỗi.
+github.com/hyrocket/quick-search-popup/issues

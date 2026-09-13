@@ -1,6 +1,6 @@
 # 크롬 웹스토어 등록정보 초안
 
-TapTap - Quick Search · 2026-09-04 작성 / 2026-09-06 갱신 (v1.4.8 제출용)
+TapTap - Quick Search · 2026-09-04 작성 / 2026-09-13 갱신 (v1.4.9 — 다국어 등록정보, 동기화 문구)
 
 이 파일은 **확장 코드가 아니다.** 제출 ZIP 에 넣지 말 것.
 스토어 대시보드에 붙여넣을 원고를 여기서 관리한다.
@@ -9,8 +9,13 @@ TapTap - Quick Search · 2026-09-04 작성 / 2026-09-06 갱신 (v1.4.8 제출용
 
 ## ⚠ 먼저 알아야 할 것
 
-**"짧은 설명"은 대시보드에서 못 고친다.** `manifest.json` 의 `description`
-필드가 그대로 올라간다. 바꾸려면 코드를 고치고 재제출해야 한다.
+**"짧은 설명"은 대시보드에서 못 고친다.** `_locales/<언어>/messages.json` 의
+`appDesc` 가 그대로 올라간다 (v1.4.9 부터. manifest 의 `description` 은 `__MSG_appDesc__` 참조뿐).
+바꾸려면 코드를 고치고 재제출해야 한다.
+
+**등록정보 언어 = 패키지의 `_locales` 폴더 목록이다.** 대시보드는 여기 있는 언어만
+언어 선택 메뉴에 띄운다. v1.4.8 까지는 `_locales` 가 없어서 영어 한 벌뿐이었다.
+→ **v1.4.9 패키지를 먼저 올려야** 12개 언어 상세 설명을 붙여넣을 수 있다.
 
 현재 게시된 등록정보(2026-09-04 확인):
 - 제목: `Quick Search Popup` ← 구 이름
@@ -30,7 +35,12 @@ TapTap - Quick Search
 
 ---
 
-## 2. 짧은 설명 (132자 제한, manifest.json 의 description)
+## 2. 짧은 설명 (132자 제한, `_locales/<언어>/messages.json` 의 `appDesc`)
+
+> 아래 영어가 `_locales/en` 이다. 12개 언어 번역은 각 `messages.json` 이 정본 —
+> 여기 복사하지 않는다 (두 곳에 두면 어긋난다).
+> 서양어·동남아어는 132자에 맞추려고 **`Naver` 를 뺐다** (한국 전용 엔진이라 손실 적음).
+> 한·중·일은 여유가 있어 그대로 넣었다.
 
 **권장안** — 132자
 
@@ -45,7 +55,7 @@ Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perple
 | A | 131 | `Double-tap Shift to search from any page without leaving it. Google, Naver and AI engines built in. Custom engines, themes, hotkey.` |
 | B | 124 | `Tap Shift twice to open a search box on any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Add your own engines.` |
 
-바꾸려면 `manifest.json` 의 `description` 을 고칠 것.
+바꾸려면 `_locales/en/messages.json` 을 고치고, **나머지 12개 언어도** 132자 이내로 같이 고칠 것.
 
 ---
 
@@ -115,9 +125,14 @@ Korean, English, Japanese, Chinese (Simplified), Chinese (Traditional),
 Spanish, French, German, Russian, Vietnamese, Malay, Thai,
 and Indonesian.
 
+☁️ Settings Follow You
+Set it up once. Your engines, themes, and shortcut ride along on
+Chrome's own sync, so every computer you sign in to is ready to go.
+
 🔒 Zero Data Collection
-All settings are stored locally. No servers, no analytics,
-no tracking. Ever.
+No servers of mine, no analytics, no tracking. Ever. Your settings
+stay in your browser — and, if Chrome sync is on, in your own
+Google account.
 
 
 CUSTOMIZATION
@@ -135,17 +150,15 @@ choose whether results open in the current tab or a new one.
 PRIVACY
 
 This extension uses only the storage permission to save your
-preferences locally. It does not collect, transmit, or share
-any personal data. Your searches go directly to the engine you choose.
+preferences. It does not collect, transmit, or share any personal
+data. Your searches go directly to the engine you choose.
+
+Those preferences are saved with Chrome's sync storage, so when you
+have Chrome sync turned on they travel between your own devices
+through your Google account. That is Chrome's sync, not a TapTap
+server — TapTap has no server at all.
 
 Source code: github.com/hyrocket/quick-search-popup
-
-
-NOTE
-
-Browser pages such as chrome:// cannot run extensions, so the popup
-does not open there. That is a Chrome security policy, not a
-limitation of TapTap.
 
 
 SUPPORT
@@ -216,17 +229,48 @@ are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만
 문구는 **버그만이 아니라 제안도 받는다**는 쪽으로 썼다.
 사용자 27명 규모에서 진짜 문제는 중복 제보가 아니라 **아무도 말을 안 하는 것**이다.
 
-### `NOTE` 문단은 유지한다
+### `NOTE` 문단은 뺀다 (2026-09-13 확정)
 
-맨 끝 `NOTE` (chrome:// 에서는 안 뜬다)는 **원고 최초 작성(`76ee0f1`, 09-04)
-때부터 있던 문단이다.** 현재 게시본(v1.0.0)에는 없고 이 원고에만 있다.
+맨 끝 `NOTE` (chrome:// 에서는 안 뜬다)는 원고 최초 작성(`76ee0f1`, 09-04)
+때부터 있던 문단이지만, **게시본에는 한 번도 올라간 적이 없다.**
 
-남기는 이유: 심사자가 `chrome://` 에서 눌러보고 "동작 안 함"으로 판단하면
-반려 사유가 된다. 미리 밝히면 그 경로가 막힌다.
-분량이 3줄이고 맨 끝이라 도입부 흡인력을 해치지 않는다.
+빼는 이유: 남긴 근거는 "심사자가 `chrome://` 에서 눌러보고 반려할까 봐"였는데,
+**사용자가 이 문단 없이 제출해 실제로 문제없이 통과했다.** 가정이 틀린 게 확인됐다.
+원고에만 남겨두면 게시본·12개 번역본과 계속 어긋난다.
 
-→ **2026-09-06 에 이 문단을 "내가 새로 넣은 것"으로 착각해 지웠다가 되돌렸다.
-  기존 문단이다. 지우지 말 것.**
+→ **다시 넣지 말 것.** 되살리려면 "빼서 반려됐다"는 실제 사례가 먼저 있어야 한다.
+  (chrome:// 제약 자체는 `CLAUDE.md` 의 알려진 제약에 그대로 남아 있다)
+
+### 동기화 문구 — "로컬 저장"은 부정확했다 (2026-09-13)
+
+코드는 `chrome.storage.sync` 를 쓴다 (`options.js:1113`, `background.js:16`).
+크롬 동기화를 켠 사용자는 설정이 **본인 구글 계정을 통해 기기 사이를 오간다.**
+그런데 원고엔 `stored locally` / `No servers` 라고만 적혀 있었다 — 틀린 말이다.
+
+숨기는 대신 **강점으로 바꿨다.** 한 번 설정하면 로그인한 모든 컴퓨터에서
+그대로 쓸 수 있다는 건 실제로 편리한 기능이다.
+
+- `KEY FEATURES` 에 `☁️ Settings Follow You` 항목 추가 (🌐 다음, 🔒 앞)
+- `🔒 Zero Data Collection` → `No servers of mine` 로. "내 서버가 없다"와
+  "설정이 구글 계정에 있다"는 서로 모순이 아니다. 둘을 한 문단에서 같이 말한다
+- `PRIVACY` 에 한 문단 추가: **크롬의 동기화이지 TapTap 의 서버가 아니다**
+  (TapTap 엔 서버가 아예 없다). 심사 쪽에도 이 편이 안전하다
+- 짧은 설명(`_locales` 의 `appDesc`)엔 "로컬" 주장이 없었다 → 수정 불필요
+- 12개 번역본 전부 같이 반영됐다
+
+### 다국어 번역본 — `store_listing/<언어>.txt` (2026-09-11)
+
+위 영어 정본의 12개 언어 번역. 대시보드에서 언어를 고른 뒤 해당 파일을 통째로 붙여넣는다.
+파일명은 웹스토어 로케일 코드다: `ko ja zh_CN zh_TW es fr de ru vi ms th id`
+
+- **정본은 영어다.** 영어를 고치면 12개 파일도 같이 고칠 것 (금지항목 16 의 About 과 같은 구조)
+- `☁️` 항목과 `PRIVACY` 의 동기화 문단은 12개 전부에 들어가 있다 (2026-09-13)
+- 번역 기준은 **2026-09-11 게시본**(사용자가 붙여준 라이브 텍스트). `NOTE` 문단은 영어 정본에서도 뺐다(위 참조)
+- 도입부는 직역이 아니라 언어별로 **2연타 명령형 → `Done.` 한 단어 끊기** 리듬을 살렸다
+- 팝업 안의 실제 표기에 맞췄다: `설정`/`Settings`, `새 탭`/`New tab` 스위치 이름은 `content.js` 의 `settings`/`openNewTab` 번역과 같다.
+  독일어는 설정 페이지처럼 `du`, 테마는 `Designs`
+- 번역하지 않은 것: 제목 `TapTap - Quick Search`, 엔진명, URL, `Shift`/`Enter`, 권한명 `storage`
+- 짧은 설명(Overview 첫 줄)은 여기 없다 — `_locales/<언어>/messages.json` 에 있다 (위 2번)
 
 ### v1.4.7 / v1.4.8 반영 여부 — 본문 수정 불필요
 드래그 선택 길이 상한(v1.4.7)과 기록 Clear 버튼 수정(v1.4.8)은
@@ -265,3 +309,9 @@ are on.` 로 바꾼 초안을 냈다가 반려됐다. 사실은 다 맞았지만
       (v1.4.7 빌드는 폐기. Clear 버튼 버그가 들어 있다 — 절대 올리지 말 것)
 - [x] `manifest.json` 의 `description` 을 위 문안으로 바꿨는지 (커밋 `76ee0f1`)
 - [ ] 제목/설명/스크린샷이 서로 같은 이름을 쓰는지 (심사에서 어긋나면 반려)
+
+### v1.4.9 (다국어 등록정보) 추가 체크
+- [ ] `submit-v1.4.9.zip` 에 `_locales/` 13개 폴더 포함 — 빠지면 `default_locale` 때문에 로드 실패
+- [ ] 압축해제 로드 후 `chrome://extensions` 에 설명이 `__MSG_appDesc__` 로 **안** 보이는지
+- [ ] 패키지 업로드 후 대시보드 등록정보에 언어 선택 메뉴가 생겼는지
+- [ ] 언어별로 `store_listing/<언어>.txt` 붙여넣기 (영어는 위 3번 블록)

@@ -1,0 +1,102 @@
+⚡ TapTap - Quick Search — Jelajahi Web Lebih Cepat
+
+Tak perlu lagi pindah-pindah tab. Tak perlu lagi mengeklik bilah alamat.
+TapTap menghadirkan kotak pencarian instan di atas halaman web mana pun
+hanya dengan satu pintasan keyboard — Anda tetap fokus dan
+mendapat jawaban lebih cepat dari sebelumnya.
+
+Tekan pintasan → ketik → tekan Enter. Selesai.
+
+
+KENAPA ANDA AKAN MENYUKAINYA
+
+TapTap dirancang untuk menghilangkan hambatan-hambatan kecil
+yang memperlambat Anda setiap hari. Saat riset, membaca,
+atau bekerja — cari apa saja tanpa meninggalkan halaman yang sedang Anda buka.
+Lama-kelamaan, semua itu membuat pengalaman menjelajah web
+jauh lebih cepat dan efisien.
+
+
+FITUR UTAMA
+
+⚡ Pencarian Instan di Atas Halaman
+Buka jendela pencarian di halaman web mana pun dengan pintasan keyboard.
+Tanpa klik mouse, tanpa pindah tab — ketik dan langsung cari.
+
+🔍 Mesin Pencari Sesuai Selera Anda
+Mesin pencari populer sudah tersedia dan siap dipakai.
+Lebih dari itu, Anda bisa dengan mudah menambah, mengedit, dan mengurutkan ulang
+mesin pencari favorit Anda — jadikan benar-benar milik Anda.
+
+📝 Isi Otomatis dari Teks yang Dipilih
+Sorot teks apa pun di halaman, buka jendela pencarian, dan teks itu terisi
+otomatis. Cocok untuk mencari cepat tanpa mengetik ulang.
+
+🤖 Siap untuk Pencarian AI
+Mesin pencari berbasis AI langsung didukung — dan Anda bisa menambahkan
+mesin apa pun yang menerima URL pencarian, termasuk alat pencarian AI terbaru.
+
+🖱️ Ganti Mesin dengan Fleksibel
+Gunakan tombol panah atau roda mouse untuk berpindah antar mesin pencari.
+Temukan sumber yang tepat tanpa melepas tangan dari keyboard.
+
+🕐 Riwayat Pencarian
+Pencarian terbaru muncul saat Anda mengetik — kembali ke
+pencarian sebelumnya dengan sekali klik.
+
+🎨 Kendali Penuh atas Tema
+Enam tema, sembilan palet warna, dan pemilih warna hex khusus
+untuk setiap mesin. Otomatis menyesuaikan dengan mode gelap browser Anda.
+
+⌨️ Pintasan Kustom
+Atur kombinasi tombol pemicu yang sesuai dengan cara kerja Anda.
+Deteksi konflik bawaan mencegah bentrok dengan pintasan browser.
+
+🌐 Mendukung 13 Bahasa
+Korea, Inggris, Jepang, Tionghoa (Sederhana), Tionghoa (Tradisional),
+Spanyol, Prancis, Jerman, Rusia, Vietnam, Melayu, Thai,
+dan Indonesia.
+
+☁️ Pengaturan Ikut ke Mana Saja
+Atur sekali saja. Mesin pencari, tema, dan pintasan Anda ikut lewat
+sinkronisasi bawaan Chrome, jadi setiap komputer tempat Anda masuk sudah
+siap pakai.
+
+🔒 Tanpa Pengumpulan Data
+Tanpa server saya, tanpa analitik, tanpa pelacakan. Selamanya. Pengaturan
+Anda tetap di peramban — dan, jika sinkronisasi Chrome aktif, di akun
+Google Anda sendiri.
+
+
+PENYESUAIAN
+
+Klik ikon pengaturan di jendela pencarian untuk membuka Pengaturan:
+- Tambah, edit, dan urutkan ulang mesin pencari favorit Anda
+- Atur tema warna tersendiri untuk setiap mesin
+- Ubah pintasan pemicu sesuai cara kerja Anda
+- Ganti bahasa antarmuka
+
+Sakelar "Tab baru" ada di bagian bawah jendela pencarian, jadi Anda bisa
+memilih apakah hasil dibuka di tab saat ini atau di tab baru.
+
+
+PRIVASI
+
+Ekstensi ini hanya menggunakan izin storage untuk menyimpan
+preferensi Anda. Ekstensi ini tidak mengumpulkan, mengirim,
+atau membagikan data pribadi apa pun. Pencarian Anda langsung dikirim
+ke mesin pencari yang Anda pilih.
+
+Preferensi itu disimpan di penyimpanan sync Chrome, jadi bila sinkronisasi
+Chrome aktif, preferensi berpindah antar perangkat Anda sendiri melalui akun
+Google Anda. Itu sinkronisasi Chrome, bukan server TapTap — TapTap sama
+sekali tidak punya server.
+
+Kode sumber: github.com/hyrocket/quick-search-popup
+
+
+DUKUNGAN
+
+Menemukan bug? Mesin pencari yang Anda cari tidak ada? Punya ide agar lebih baik?
+Saya ingin mendengar semuanya — saran sama pentingnya dengan laporan bug.
+github.com/hyrocket/quick-search-popup/issues

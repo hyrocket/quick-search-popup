@@ -1,0 +1,102 @@
+⚡ TapTap - Quick Search — Schneller surfen
+
+Schluss mit Tab-Wechseln. Schluss mit Klicks in die Adressleiste.
+TapTap öffnet mit einem einzigen Tastenkürzel eine Sofortsuche
+über jeder Webseite — so bleibst du im Flow und
+bekommst Antworten schneller als je zuvor.
+
+Tastenkürzel drücken → tippen → Enter. Fertig.
+
+
+WARUM DU ES LIEBEN WIRST
+
+TapTap wurde entwickelt, um die kleinen Reibungen zu beseitigen,
+die dich jeden Tag ausbremsen. Ob du recherchierst, liest
+oder arbeitest — such alles, ohne die Seite zu verlassen, auf der du gerade bist.
+Mit der Zeit summiert sich das zu einem deutlich schnelleren und
+effizienteren Surferlebnis.
+
+
+HAUPTFUNKTIONEN
+
+⚡ Sofortsuche als Overlay
+Öffne auf jeder Webseite per Tastenkürzel ein Such-Popup.
+Keine Mausklicks, kein Tab-Wechsel — einfach tippen und los.
+
+🔍 Deine Suchmaschinen, dein Stil
+Beliebte Suchmaschinen sind bereits eingebaut und sofort einsatzbereit.
+Vor allem aber kannst du jede Suchmaschine, die du magst, ganz einfach
+hinzufügen, bearbeiten und neu anordnen — ganz nach deinem Geschmack.
+
+📝 Markierten Text automatisch einfügen
+Markiere einen Text auf der Seite, öffne das Popup — und er wird
+automatisch eingefügt. Perfekt zum sofortigen Nachschlagen ohne Abtippen.
+
+🤖 Bereit für KI-Suche
+KI-Suchmaschinen werden direkt unterstützt — und du kannst jede Suchmaschine
+hinzufügen, die eine Such-URL akzeptiert, auch die neuesten KI-Suchtools.
+
+🖱️ Flexibler Suchmaschinenwechsel
+Wechsle mit den Pfeiltasten oder dem Mausrad zwischen deinen Suchmaschinen.
+Finde die richtige Quelle, ohne die Hände von der Tastatur zu nehmen.
+
+🕐 Suchverlauf
+Deine letzten Suchen erscheinen schon beim Tippen — mit einem Klick
+zurück zu jeder früheren Suche.
+
+🎨 Volle Kontrolle über das Design
+Sechs Designs, neun Farbpaletten und ein eigener Hex-Farbwähler
+für jede Suchmaschine. Passt sich automatisch an den Dunkelmodus deines Browsers an.
+
+⌨️ Eigenes Tastenkürzel
+Lege jede Tastenkombination fest, die zu deiner Arbeitsweise passt.
+Die integrierte Konflikterkennung verhindert Überschneidungen mit Browser-Tastenkürzeln.
+
+🌐 13 Sprachen
+Koreanisch, Englisch, Japanisch, Chinesisch (vereinfacht), Chinesisch (traditionell),
+Spanisch, Französisch, Deutsch, Russisch, Vietnamesisch, Malaiisch, Thailändisch
+und Indonesisch.
+
+☁️ Deine Einstellungen kommen mit
+Einmal einrichten. Suchmaschinen, Designs und Tastenkürzel reisen über die
+Chrome-eigene Synchronisierung mit — jeder Computer, an dem du angemeldet
+bist, ist schon fertig eingerichtet.
+
+🔒 Keine Datenerfassung
+Keine Server von mir, keine Analysen, kein Tracking. Niemals. Deine
+Einstellungen bleiben in deinem Browser — und, wenn die Chrome-Synchronisierung
+aktiv ist, in deinem eigenen Google-Konto.
+
+
+ANPASSUNG
+
+Klicke im Popup auf das Einstellungssymbol, um die Einstellungen zu öffnen:
+- Lieblingssuchmaschinen hinzufügen, bearbeiten und neu anordnen
+- Für jede Suchmaschine eine eigene Farbe festlegen
+- Das Tastenkürzel an deine Arbeitsweise anpassen
+- Die Sprache der Oberfläche wechseln
+
+Unten im Popup gibt es einen Schalter „Neuer Tab“: Damit legst du fest,
+ob Ergebnisse im aktuellen Tab oder in einem neuen geöffnet werden.
+
+
+DATENSCHUTZ
+
+Diese Erweiterung nutzt nur die Berechtigung storage, um deine
+Einstellungen zu speichern. Sie erfasst, überträgt und teilt
+keinerlei persönliche Daten. Deine Suchanfragen gehen direkt an die
+Suchmaschine deiner Wahl.
+
+Diese Einstellungen liegen im sync-Speicher von Chrome: Ist die
+Chrome-Synchronisierung aktiv, wandern sie über dein eigenes Google-Konto
+zwischen deinen Geräten. Das ist die Synchronisierung von Chrome, kein
+TapTap-Server — TapTap hat überhaupt keinen Server.
+
+Quellcode: github.com/hyrocket/quick-search-popup
+
+
+SUPPORT
+
+Einen Fehler gefunden? Eine Suchmaschine fehlt? Eine Idee, wie es noch besser wird?
+Ich will alles hören — Vorschläge genauso wie Fehlerberichte.
+github.com/hyrocket/quick-search-popup/issues

@@ -1,0 +1,6 @@
+{
+  "appDesc": {
+    "message": "Tapez deux fois Shift pour chercher sur toute page. Google, ChatGPT, Claude, Perplexity inclus. Vos moteurs, thèmes, 13 langues.",
+    "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
+  }
+}

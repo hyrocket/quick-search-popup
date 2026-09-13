@@ -1,0 +1,6 @@
+{
+  "appDesc": {
+    "message": "กด Shift สองครั้ง ค้นหาได้จากทุกหน้า มี Google, ChatGPT, Claude, Perplexity ในตัว เพิ่มเครื่องมือค้นหาเองได้ มีธีม รองรับ 13 ภาษา",
+    "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
+  }
+}

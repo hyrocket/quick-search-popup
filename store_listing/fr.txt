@@ -1,0 +1,102 @@
+⚡ TapTap - Quick Search — Naviguez plus vite
+
+Fini les allers-retours entre onglets. Fini les clics dans la barre d'adresse.
+TapTap affiche une recherche instantanée par-dessus n'importe quelle page
+avec un simple raccourci clavier — vous restez dans le flow et
+obtenez vos réponses plus vite que jamais.
+
+Appuyez sur votre raccourci → tapez → Entrée. C'est tout.
+
+
+POURQUOI VOUS ALLEZ L'ADORER
+
+TapTap est conçu pour éliminer ces petites frictions
+qui vous ralentissent chaque jour. Que vous fassiez des recherches, lisiez
+ou travailliez, cherchez n'importe quoi sans jamais quitter la page.
+À la longue, votre navigation devient nettement plus rapide
+et plus efficace.
+
+
+FONCTIONNALITÉS CLÉS
+
+⚡ Recherche instantanée en surimpression
+Ouvrez une fenêtre de recherche sur n'importe quelle page avec un raccourci clavier.
+Pas de clic, pas de changement d'onglet — tapez et c'est parti.
+
+🔍 Vos moteurs, à votre façon
+Les moteurs de recherche populaires sont intégrés et prêts à l'emploi.
+Surtout, vous pouvez facilement ajouter, modifier et réorganiser
+tous les moteurs que vous aimez — pour un outil vraiment à vous.
+
+📝 Remplissage automatique du texte sélectionné
+Surlignez du texte sur une page, ouvrez la fenêtre : il est saisi
+automatiquement. Idéal pour une recherche immédiate sans retaper.
+
+🤖 Prêt pour la recherche IA
+Les moteurs de recherche IA sont pris en charge d'emblée — et vous pouvez
+ajouter tout moteur qui accepte une URL de recherche, y compris les derniers
+outils de recherche IA.
+
+🖱️ Changement de moteur flexible
+Utilisez les flèches ou la molette de la souris pour passer d'un moteur à l'autre.
+Trouvez la bonne source sans lâcher le clavier.
+
+🕐 Historique de recherche
+Vos recherches récentes s'affichent pendant la saisie — retrouvez
+une recherche précédente en un clic.
+
+🎨 Contrôle total des thèmes
+Six thèmes, neuf palettes de couleurs et un sélecteur de couleur hexadécimale
+pour chaque moteur. S'adapte automatiquement au mode sombre du navigateur.
+
+⌨️ Raccourci personnalisable
+Choisissez la combinaison de touches qui convient à votre façon de travailler.
+La détection de conflits intégrée évite les collisions avec les raccourcis du navigateur.
+
+🌐 13 langues prises en charge
+Coréen, anglais, japonais, chinois (simplifié), chinois (traditionnel),
+espagnol, français, allemand, russe, vietnamien, malais, thaï
+et indonésien.
+
+☁️ Vos réglages vous suivent
+Un seul réglage, une seule fois. Vos moteurs, vos thèmes et votre raccourci
+voyagent avec la synchronisation propre à Chrome : chaque ordinateur où vous
+vous connectez est déjà prêt.
+
+🔒 Aucune collecte de données
+Aucun serveur de ma part, pas d'analyse, pas de pistage. Jamais. Vos réglages
+restent dans votre navigateur — et, si la synchronisation Chrome est activée,
+dans votre propre compte Google.
+
+
+PERSONNALISATION
+
+Cliquez sur l'icône des paramètres dans la fenêtre pour ouvrir les Paramètres :
+- Ajoutez, modifiez et réorganisez vos moteurs de recherche favoris
+- Attribuez une couleur de thème à chaque moteur
+- Changez le raccourci de déclenchement selon votre façon de travailler
+- Changez la langue de l'interface
+
+Un interrupteur « Nouvel onglet » se trouve en bas de la fenêtre : choisissez
+d'ouvrir les résultats dans l'onglet actuel ou dans un nouvel onglet.
+
+
+CONFIDENTIALITÉ
+
+Cette extension utilise uniquement l'autorisation storage pour enregistrer
+vos préférences. Elle ne collecte, ne transmet et ne partage
+aucune donnée personnelle. Vos recherches vont directement au moteur choisi.
+
+Ces préférences sont enregistrées dans le stockage sync de Chrome : si la
+synchronisation Chrome est activée, elles circulent entre vos propres appareils
+via votre compte Google. C'est la synchronisation de Chrome, pas un serveur
+TapTap — TapTap n'a aucun serveur.
+
+Code source : github.com/hyrocket/quick-search-popup
+
+
+ASSISTANCE
+
+Un bug ? Un moteur manquant ? Une idée pour l'améliorer ?
+Je veux tout entendre — les suggestions autant que les bugs.
+github.com/hyrocket/quick-search-popup/issues
