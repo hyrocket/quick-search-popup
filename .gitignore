@@ -10,6 +10,11 @@ logs/
 # 작업 지시서 (로컬에만 보관)
 THEME_SPEC.md
 
+# 홍보 영상 녹화 도구 산출물 (브라우저 프로필·프레임·영상)
+promo/node_modules/
+promo/.profile/
+promo/out/
+
 # 스토어 제출용 ZIP 파일들
 *.zip
 
