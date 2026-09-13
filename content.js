@@ -1437,6 +1437,19 @@ function ensurePanel() {
   panelWrap.appendChild(engineDropEl);
   overlay.append(panelWrap);
   sr.append(style, overlay);
+
+  // ── 포커스 트랩 방어 ──
+  // 부트스트랩 모달(_enforceFocus)은 document 에 focusin 을 걸어두고,
+  // "모달 밖에서 포커스가 났다" 싶으면 모달로 포커스를 도로 끌어간다.
+  //   focusin 은 composed 라 섀도 밖으로 새어나가고, target 은 host 로 리타깃된다
+  //   → 우리 입력창이 포커스를 받는 순간 페이지가 도로 뺏어간다
+  //   → 팝업은 떠 있는데 타이핑은 페이지로 들어간다 (samsonite.co.kr 이미지 미리보기)
+  // host 에서 전파를 끊으면 document 핸들러가 아예 못 본다.
+  // 우리 섀도 안에서 난 이벤트만 막으므로 페이지 자신의 포커스 처리에는 영향이 없다.
+  ["focusin", "focusout"].forEach((t) =>
+    host.addEventListener(t, (e) => e.stopPropagation())
+  );
+
   document.documentElement.appendChild(host);
 
   installGlobalTraps();
