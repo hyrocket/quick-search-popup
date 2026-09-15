@@ -454,7 +454,8 @@ document.addEventListener("keydown", (e) => {
       e.altKey    === needAlt   &&
       e.shiftKey  === needShift &&
       e.metaKey   === needMeta  &&
-      !e.repeat
+      !e.repeat &&
+      extAlive()   // 고아 스크립트가 페이지의 단축키(예: Ctrl+K)를 삼키면 안 된다
     ) {
       e.preventDefault();
       openPanel();
@@ -590,6 +591,26 @@ function installGlobalTraps() {
     if (e.type === "keydown" || e.type === "keypress" || e.type === "keyup") e.preventDefault();
   };
   ["keydown","keypress","keyup"].forEach((t) => document.addEventListener(t, trap, { capture: true }));
+
+  // ── 포커스 트랩 방어 (금지항목 #19) ──
+  // 부트스트랩 모달(_enforceFocus)은 "모달 밖에서 포커스가 났다" 싶으면 모달로
+  // 포커스를 도로 끌어간다. focus 는 composed 라 target 이 host 로 리타깃되어
+  // 페이지 눈엔 "모달 밖"이다 → 입력창이 포커스를 받자마자 뺏긴다
+  // → 팝업은 떠 있는데 타이핑은 페이지로 간다 (samsonite.co.kr 이미지 미리보기)
+  //
+  // host 에서 막으면 안 된다. jQuery 3.7 은 focusin 을 document 의 focus **캡처**로
+  // 흉내내므로 host 보다 먼저 실행된다 (2026-09-13 에 host 에서 막았다가 실패).
+  // window 캡처는 document 캡처보다 항상 먼저다 → 여기서 끊는다.
+  // 우리 host 안으로 가는 포커스만 막으므로 페이지와 다른 확장 인스턴스는 그대로다.
+  const guardFocus = (e) => {
+    if (!overlayOpen) return;
+    const path = e.composedPath?.() || [];
+    if (!path.includes(host)) return;
+    e.stopPropagation();
+    // 전파를 끊으면 타깃 자신의 리스너도 안 불린다 → 입력창 focus 처리는 여기서
+    if (e.type === "focus" && path[0] === inputEl) showHistoryDrop();
+  };
+  ["focus", "focusin"].forEach((t) => window.addEventListener(t, guardFocus, { capture: true }));
 
   // ── 방향키 전용 document-level 핸들러 (가장 확실한 방법) ──
   document.addEventListener("keydown", (e) => {
@@ -1274,7 +1295,8 @@ function ensurePanel() {
   // panelWrap에 붙여야 panel overflow:hidden 영향 안 받음
   // panelWrap.append 시점에 추가 (아래에서 처리)
 
-  inputEl.addEventListener("focus", () => showHistoryDrop());
+  // focus 리스너는 여기 없다 — installGlobalTraps() 의 포커스 가드가
+  // window 캡처에서 전파를 끊기 때문에 입력창까지 오지 못한다. 가드가 대신 부른다.
   inputEl.addEventListener("blur", () => {
     // 약간의 딜레이: 히스토리 아이템 mousedown이 blur보다 먼저 처리되도록
     setTimeout(() => hideHistoryDrop(), 80);
@@ -1437,19 +1459,6 @@ function ensurePanel() {
   panelWrap.appendChild(engineDropEl);
   overlay.append(panelWrap);
   sr.append(style, overlay);
-
-  // ── 포커스 트랩 방어 ──
-  // 부트스트랩 모달(_enforceFocus)은 document 에 focusin 을 걸어두고,
-  // "모달 밖에서 포커스가 났다" 싶으면 모달로 포커스를 도로 끌어간다.
-  //   focusin 은 composed 라 섀도 밖으로 새어나가고, target 은 host 로 리타깃된다
-  //   → 우리 입력창이 포커스를 받는 순간 페이지가 도로 뺏어간다
-  //   → 팝업은 떠 있는데 타이핑은 페이지로 들어간다 (samsonite.co.kr 이미지 미리보기)
-  // host 에서 전파를 끊으면 document 핸들러가 아예 못 본다.
-  // 우리 섀도 안에서 난 이벤트만 막으므로 페이지 자신의 포커스 처리에는 영향이 없다.
-  ["focusin", "focusout"].forEach((t) =>
-    host.addEventListener(t, (e) => e.stopPropagation())
-  );
-
   document.documentElement.appendChild(host);
 
   installGlobalTraps();
@@ -1864,7 +1873,14 @@ function doSearch() {
 // =======================
 // Open / Close
 // =======================
+// 확장이 새로고침·업데이트되면 이미 열려 있던 탭의 이 스크립트는 고아가 된다.
+// chrome.runtime 이 사라져 ensurePanel() 이 getURL 에서 죽고, 반쯤 만든 패널이 남아
+// 다음 시도부터는 newTabEl undefined 로 또 죽는다. 스토어 자동 업데이트 때마다 모든 탭에서 생긴다.
+// 새 스크립트는 탭을 새로고침해야 들어온다 (권한 없이는 주입 불가) → 여기선 조용히 물러난다.
+function extAlive() { return !!globalThis.chrome?.runtime?.id; }
+
 function openPanel() {
+  if (!extAlive()) return;
   // 아직 초기 로드 안됐으면 로드 후 열기
   if (!_stateReady) {
     _pendingOpen = true;
