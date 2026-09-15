@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "连按两下 Shift，在任何页面即刻搜索。内置 Google、Naver、ChatGPT、Claude、Perplexity。支持自定义引擎、主题和 13 种语言。",
+    "message": "双击 Shift，随时随地开始搜索。内置 Google、Naver、ChatGPT、Claude、Perplexity。可添加搜索引擎、切换主题，支持 13 种语言。",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

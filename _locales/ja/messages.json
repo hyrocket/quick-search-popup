@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "Shiftを2回押すだけで、どのページからでもすぐ検索。Google・Naver・ChatGPT・Claude・Perplexityを標準搭載。エンジン追加、テーマ、13言語対応。",
+    "message": "Shiftを2回押すだけでどこでも検索。Google、Naver、ChatGPT、Claude、Perplexityを標準搭載。検索エンジン追加、テーマ、13言語対応。",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

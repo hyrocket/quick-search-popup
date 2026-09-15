@@ -39,21 +39,18 @@ TapTap - Quick Search
 
 > 아래 영어가 `_locales/en` 이다. 12개 언어 번역은 각 `messages.json` 이 정본 —
 > 여기 복사하지 않는다 (두 곳에 두면 어긋난다).
-> 서양어·동남아어는 132자에 맞추려고 **`Naver` 를 뺐다** (한국 전용 엔진이라 손실 적음).
-> 한·중·일은 여유가 있어 그대로 넣었다.
+> 2026-09-16 전면 교체: 13개 언어 모두 **`Naver` 를 다시 넣었다**
+> (대신 서양어·동남아어는 기능 나열을 줄였다. 예: es 는 테마를 뺌).
+> vi·th·ms 는 **132자에 정확히 붙어 있어 여유 0자**.
 
-**권장안** — 132자
+**현재안** — 126자
 
 ```
-Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Custom engines, themes, 13 languages.
+Tap Shift twice, search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Add engines, themes, 13 languages.
 ```
 
-대안:
-
-| # | 길이 | 문안 |
-|---|---:|---|
-| A | 131 | `Double-tap Shift to search from any page without leaving it. Google, Naver and AI engines built in. Custom engines, themes, hotkey.` |
-| B | 124 | `Tap Shift twice to open a search box on any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Add your own engines.` |
+이전안 (v1.4.9 초안, 132자):
+`Double-tap Shift to search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Custom engines, themes, 13 languages.`
 
 바꾸려면 `_locales/en/messages.json` 을 고치고, **나머지 12개 언어도** 132자 이내로 같이 고칠 것.
 
