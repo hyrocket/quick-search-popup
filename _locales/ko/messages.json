@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "어디서든 Shift 두 번이면 검색창 등장. Google, Naver, ChatGPT, Claude, Perplexity 한 번에. 엔진 추가, 테마 꾸미기, 13개 언어 지원.",
+    "message": "Shift를 두 번 눌러 어느 페이지에서나 바로 검색하세요. Google, ChatGPT 등 다양한 검색엔진을 흐름을 끊지 않고 전환할 수 있습니다.",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "Tap Shift twice, search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Add engines, themes, 13 languages.",
+    "message": "Double-tap Shift to search instantly from any page. Switch between Google, ChatGPT and more without breaking your flow.",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "Nhấn Shift hai lần, tìm kiếm ở bất kỳ đâu. Có sẵn Google, Naver, ChatGPT, Claude, Perplexity. Thêm công cụ, đổi chủ đề, 13 ngôn ngữ.",
+    "message": "Nhấn Shift hai lần để tìm kiếm ngay từ bất kỳ trang nào. Chuyển giữa Google, ChatGPT và nhiều công cụ khác mà không mất nhịp.",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

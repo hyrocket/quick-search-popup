@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "Дважды нажмите Shift и ищите с любой страницы. Google, Naver, ChatGPT, Claude, Perplexity встроены. Поисковики, темы, 13 языков.",
+    "message": "Дважды нажмите Shift и ищите прямо с любой страницы. Переключайтесь между Google, ChatGPT и другими сервисами, не отвлекаясь.",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

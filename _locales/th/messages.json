@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "แตะ Shift สองครั้ง ค้นหาได้ทุกที่ มี Google, Naver, ChatGPT, Claude, Perplexity ในตัว เพิ่มเครื่องมือค้นหา เปลี่ยนธีม รองรับ 13 ภาษา",
+    "message": "กด Shift สองครั้งเพื่อค้นหาได้ทันทีจากทุกหน้า สลับระหว่าง Google, ChatGPT และบริการอื่น ๆ โดยไม่สะดุดการใช้งาน",
     "description": "Short description shown on the Chrome Web Store and chrome://extensions. Max 132 characters."
   }
 }

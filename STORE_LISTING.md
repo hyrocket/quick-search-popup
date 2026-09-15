@@ -39,14 +39,14 @@ TapTap - Quick Search
 
 > 아래 영어가 `_locales/en` 이다. 12개 언어 번역은 각 `messages.json` 이 정본 —
 > 여기 복사하지 않는다 (두 곳에 두면 어긋난다).
-> 2026-09-16 전면 교체: 13개 언어 모두 **`Naver` 를 다시 넣었다**
-> (대신 서양어·동남아어는 기능 나열을 줄였다. 예: es 는 테마를 뺌).
-> vi·th·ms 는 **132자에 정확히 붙어 있어 여유 0자**.
+> 2026-09-16 전면 교체: 엔진·기능 나열 대신 **"흐름을 끊지 않고 검색"** 을 앞세운 문장형.
+> 엔진은 Google·ChatGPT 만 이름을 들고 나머지는 "등/and more" 로 묶었다 (Naver 없음).
+> ms 는 **132자에 정확히 붙어 있어 여유 0자**. de 127 · fr 130 · id 129 도 빠듯하다.
 
-**현재안** — 126자
+**현재안** — 119자
 
 ```
-Tap Shift twice, search from any page. Google, Naver, ChatGPT, Claude, Perplexity built in. Add engines, themes, 13 languages.
+Double-tap Shift to search instantly from any page. Switch between Google, ChatGPT and more without breaking your flow.
 ```
 
 이전안 (v1.4.9 초안, 132자):
