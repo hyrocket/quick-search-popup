@@ -14,6 +14,11 @@ const K_LAST    = "shiftsearch:lastEngineId";
 const K_HISTORY = "shiftsearch:history";
 const K_SHORTCUT= "shiftsearch:shortcut";   // { type:"double", key:"Shift" } | { type:"single", key:"Ctrl+Space" }
 const K_APPEARANCE = "shiftsearch:appearance"; // { theme, autoDark, engineTint, font }
+// 툴바 아이콘 팝업(popup.js)이 "이 탭에서 팝업을 열어라"를 적는 자리 — storage.local.
+// sync 가 아닌 이유: 기기 간 동기화할 값이 아니고 sync 는 쓰기 횟수 제한이 있다.
+const K_OPENREQ = "shiftsearch:openRequest";  // { tabId, ts }  팝업 -> content script
+const K_OPENACK = "shiftsearch:openAck";      // { tabId, ts }  content script -> 팝업 (열었다는 응답)
+const OPEN_REQ_TTL = 3000;                    // 이보다 오래된 요청은 무시 (지난 클릭의 잔재)
 
 // 테마/외형 — 기본값 조합이 곧 현행 모습이다 (classic + autoDark + engineTint).
 // 이 기본값을 바꾸면 기존 사용자의 팝업이 달라진다.
@@ -388,6 +393,38 @@ let state = {
 // 최초 한 번만 storage에서 로드, 이후 메모리 캐시 사용
 let _stateReady = false;
 let _pendingOpen = false;  // 로딩 중 openPanel 요청 대기
+
+// ── 툴바 아이콘 팝업의 "탭탭 열기" 신호 ──
+// 팝업은 현재 탭에 직접 메시지를 못 보낸다 (activeTab 권한이 필요한데 권한은 늘리지 않는다).
+// 그래서 팝업이 storage.local 에 요청을 적고, 모든 탭의 content script 가 그걸 보고
+// "내 탭 번호"일 때만 연다. 자기 탭 번호는 background 만 아니까 필요할 때 한 번 물어 캐시한다.
+let _myTabId = null;
+function withMyTabId(cb) {
+  if (_myTabId !== null) { cb(_myTabId); return; }
+  if (!extAlive()) return;
+  chrome.runtime.sendMessage({ type: "MY_TAB_ID" }, (res) => {
+    if (chrome.runtime.lastError) return;   // 서비스 워커 무응답 — 조용히 포기
+    if (typeof res?.tabId !== "number") return;
+    _myTabId = res.tabId;
+    cb(_myTabId);
+  });
+}
+
+chrome.storage?.local?.onChanged?.addListener((changes) => {
+  const req = changes[K_OPENREQ]?.newValue;
+  if (!req || !extAlive()) return;
+  // 이 요청은 모든 탭의 content script 에 전달된다. 보이지 않는 탭은 대상일 리 없으니
+  // 여기서 걸러 서비스 워커에 탭 번호를 묻는 왕복을 아낀다.
+  if (document.hidden) return;
+  if (Date.now() - (req.ts || 0) > OPEN_REQ_TTL) return;
+  withMyTabId((id) => {
+    if (id !== req.tabId) return;
+    openPanel();
+    // 팝업은 이 응답을 기다린다. 없으면 "이 페이지에선 못 연다"고 안내한다
+    // (chrome:// 페이지, 확장 업데이트 후 새로고침 안 한 탭 등).
+    chrome.storage.local.set({ [K_OPENACK]: { tabId: id, ts: Date.now() } });
+  });
+});
 
 // storage 변경 감지 → 메모리 자동 동기화 (다른 탭 설정 변경 대응)
 chrome.storage?.sync?.onChanged?.addListener((changes) => {

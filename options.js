@@ -1231,6 +1231,40 @@ saveBtn.addEventListener("click", () => {
 });
 
 // =====================
+// 설치 직후 안내 카드
+// =====================
+// background.js 가 설치 때 options.html?welcome=1 로 이 페이지를 연다.
+// 설치 전부터 열려 있던 탭에는 content script 가 없어 팝업이 안 뜨는데,
+// 스크립트를 밀어 넣으려면 scripting 권한이 필요하다 → 안내로 푼다.
+// 한 번 닫으면 K_WELCOME 에 적어 두고 다시 띄우지 않는다 (URL 을 다시 열어도 마찬가지).
+const K_WELCOME = "shiftsearch:welcomeSeen";
+
+function goTab(name) {
+  const btn = document.querySelector('.navItem[data-tab="' + name + '"]');
+  if (btn) { btn.click(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+}
+
+function initWelcome() {
+  const card = $("welcomeCard");
+  if (!card) return;
+  if (new URLSearchParams(location.search).get("welcome") !== "1") return;
+
+  chrome.storage.sync.get([K_WELCOME], (res) => {
+    if (chrome.runtime.lastError || res?.[K_WELCOME]) return;
+    card.classList.add("show");
+  });
+
+  $("welClose").addEventListener("click", () => {
+    card.classList.remove("show");
+    chrome.storage.sync.set({ [K_WELCOME]: true });
+  });
+  // 언어 탭의 data-tab 은 "general" 이다 (사이드바 라벨만 Language).
+  $("welToShortcut").addEventListener("click", () => goTab("shortcut"));
+  $("welToLang").addEventListener("click", () => goTab("general"));
+}
+
+// =====================
 // Init
 // =====================
 loadAll();
+initWelcome();

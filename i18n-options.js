@@ -27,6 +27,21 @@ const OPT_I18N = {
     "nav.engines":"Search Engines", "nav.shortcut":"Shortcut", "nav.appearance":"Appearance",
     "nav.language":"Language", "nav.about":"About",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Tap <kbd>Shift</kbd> twice on any page to open the search box.",
+    "pop.openBtn":"Open search on this page",
+    "pop.settingsBtn":"Open settings",
+    "pop.failed":"Can't open it here. Reload the tab and try again — browser pages such as chrome:// are off limits.",
+    "pop.hint":"Just installed or updated? Tabs that were already open need a reload.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 TapTap is ready",
+    "wel.use":"Tap <kbd class=\"welKbd\">Shift</kbd> twice → type → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Select text on a page first and the box opens already filled in.",
+    "wel.reload":"⚠️ <strong>Tabs you already had open need a reload</strong> before the shortcut works there. New tabs work right away.",
+    "wel.toShortcut":"Change shortcut",
+    "wel.toLang":"Change language",
+
     "ab.title":"About",
     "ui.pageTitle":"TapTap - Quick Search — Settings",
     "ab.sub":"TapTap - Quick Search — a lightweight browser extension",
@@ -102,6 +117,21 @@ const OPT_I18N = {
   kr: {
     "nav.engines":"검색 엔진", "nav.shortcut":"단축키", "nav.appearance":"모양",
     "nav.language":"언어 <span class=\"navEn\">(Language)</span>", "nav.about":"정보",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"어느 페이지에서나 <kbd>Shift</kbd> 를 두 번 누르면 검색창이 열립니다.",
+    "pop.openBtn":"이 페이지에서 검색창 열기",
+    "pop.settingsBtn":"설정 열기",
+    "pop.failed":"이 페이지에서는 열 수 없습니다. 탭을 새로고침해 보세요 — chrome:// 같은 브라우저 페이지에서는 동작하지 않습니다.",
+    "pop.hint":"방금 설치하거나 업데이트했다면, 이미 열어 둔 탭은 새로고침해야 합니다.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 설치 완료, 바로 쓸 수 있습니다",
+    "wel.use":"<kbd class=\"welKbd\">Shift</kbd> 두 번 → 검색어 입력 → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"페이지에서 글자를 선택한 뒤 열면 검색창에 그 글자가 채워져 있습니다.",
+    "wel.reload":"⚠️ <strong>이미 열어 둔 탭은 새로고침해야</strong> 단축키가 동작합니다. 새로 여는 탭은 바로 됩니다.",
+    "wel.toShortcut":"단축키 바꾸기",
+    "wel.toLang":"언어 바꾸기",
 
     "ab.title":"정보",
     "ui.pageTitle":"TapTap - Quick Search — 설정",
@@ -179,6 +209,21 @@ const OPT_I18N = {
     "nav.engines":"検索エンジン", "nav.shortcut":"ショートカット", "nav.appearance":"外観",
     "nav.language":"言語 <span class=\"navEn\">(Language)</span>", "nav.about":"情報",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"どのページでも <kbd>Shift</kbd> を２回押すと検索ボックスが開きます。",
+    "pop.openBtn":"このページで検索ボックスを開く",
+    "pop.settingsBtn":"設定を開く",
+    "pop.failed":"このページでは開けません。タブを再読み込みしてください。chrome:// などのブラウザページでは動作しません。",
+    "pop.hint":"インストールや更新の直後は、すでに開いていたタブの再読み込みが必要です。",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 インストール完了、すぐ使えます",
+    "wel.use":"<kbd class=\"welKbd\">Shift</kbd> を２回 → 入力 → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"ページ上で文字を選択してから開くと、その文字が入力欄に入ります。",
+    "wel.reload":"⚠️ <strong>すでに開いていたタブは再読み込みが必要です。</strong>新しく開くタブではすぐに使えます。",
+    "wel.toShortcut":"ショートカットを変更",
+    "wel.toLang":"言語を変更",
+
     "ab.title":"情報",
     "ui.pageTitle":"TapTap - Quick Search — 設定",
     "ab.sub":"TapTap - Quick Search — 軽量なブラウザ拡張機能",
@@ -254,6 +299,21 @@ const OPT_I18N = {
   "zh-CN": {
     "nav.engines":"搜索引擎", "nav.shortcut":"快捷键", "nav.appearance":"外观",
     "nav.language":"语言 <span class=\"navEn\">(Language)</span>", "nav.about":"关于",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"在任何页面连按两下 <kbd>Shift</kbd> 即可打开搜索框。",
+    "pop.openBtn":"在当前页面打开搜索框",
+    "pop.settingsBtn":"打开设置",
+    "pop.failed":"无法在此页面打开。请刷新标签页重试，chrome:// 等浏览器页面不支持。",
+    "pop.hint":"刚安装或更新？此前已打开的标签页需要刷新。",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 安装完成，马上就能用",
+    "wel.use":"连按两下 <kbd class=\"welKbd\">Shift</kbd> → 输入 → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"先在页面上选中文字再打开，搜索框会自动填入。",
+    "wel.reload":"⚠️ <strong>此前已打开的标签页需要刷新</strong>后快捷键才生效。新打开的标签页可直接使用。",
+    "wel.toShortcut":"更改快捷键",
+    "wel.toLang":"更改语言",
 
     "ab.title":"关于",
     "ui.pageTitle":"TapTap - Quick Search —— 设置",
@@ -331,6 +391,21 @@ const OPT_I18N = {
     "nav.engines":"搜尋引擎", "nav.shortcut":"快速鍵", "nav.appearance":"外觀",
     "nav.language":"語言 <span class=\"navEn\">(Language)</span>", "nav.about":"關於",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"在任何頁面連按兩下 <kbd>Shift</kbd> 即可開啟搜尋框。",
+    "pop.openBtn":"在目前頁面開啟搜尋框",
+    "pop.settingsBtn":"開啟設定",
+    "pop.failed":"無法在此頁面開啟。請重新整理分頁再試，chrome:// 等瀏覽器頁面不支援。",
+    "pop.hint":"剛安裝或更新嗎？先前已開啟的分頁需要重新整理。",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 安裝完成，馬上就能用",
+    "wel.use":"連按兩下 <kbd class=\"welKbd\">Shift</kbd> → 輸入 → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"先在頁面上選取文字再開啟，搜尋框會自動填入。",
+    "wel.reload":"⚠️ <strong>先前已開啟的分頁需要重新整理</strong>，快速鍵才會生效。新開的分頁可直接使用。",
+    "wel.toShortcut":"變更快速鍵",
+    "wel.toLang":"變更語言",
+
     "ab.title":"關於",
     "ui.pageTitle":"TapTap - Quick Search —— 設定",
     "ab.sub":"TapTap - Quick Search —— 輕量的瀏覽器擴充功能",
@@ -406,6 +481,21 @@ const OPT_I18N = {
   es: {
     "nav.engines":"Buscadores", "nav.shortcut":"Atajo", "nav.appearance":"Apariencia",
     "nav.language":"Idioma <span class=\"navEn\">(Language)</span>", "nav.about":"Acerca de",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Pulsa <kbd>Shift</kbd> dos veces en cualquier página para abrir el buscador.",
+    "pop.openBtn":"Abrir el buscador en esta página",
+    "pop.settingsBtn":"Abrir ajustes",
+    "pop.failed":"Aquí no se puede abrir. Recarga la pestaña e inténtalo de nuevo; las páginas del navegador como chrome:// no lo permiten.",
+    "pop.hint":"¿Acabas de instalar o actualizar? Las pestañas que ya estaban abiertas necesitan recargarse.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Listo para usar",
+    "wel.use":"Pulsa <kbd class=\"welKbd\">Shift</kbd> dos veces → escribe → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Si seleccionas texto antes, el buscador se abre con ese texto.",
+    "wel.reload":"⚠️ <strong>Las pestañas que ya tenías abiertas necesitan recargarse</strong> para que funcione el atajo. Las nuevas funcionan enseguida.",
+    "wel.toShortcut":"Cambiar atajo",
+    "wel.toLang":"Cambiar idioma",
 
     "ab.title":"Acerca de",
     "ui.pageTitle":"TapTap - Quick Search — Ajustes",
@@ -483,6 +573,21 @@ const OPT_I18N = {
     "nav.engines":"Moteurs de recherche", "nav.shortcut":"Raccourci", "nav.appearance":"Apparence",
     "nav.language":"Langue <span class=\"navEn\">(Language)</span>", "nav.about":"À propos",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Appuyez deux fois sur <kbd>Shift</kbd> sur n’importe quelle page pour ouvrir la recherche.",
+    "pop.openBtn":"Ouvrir la recherche sur cette page",
+    "pop.settingsBtn":"Ouvrir les paramètres",
+    "pop.failed":"Impossible d’ouvrir ici. Rechargez l’onglet et réessayez ; les pages du navigateur comme chrome:// ne sont pas prises en charge.",
+    "pop.hint":"Installation ou mise à jour récente ? Les onglets déjà ouverts doivent être rechargés.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Prêt à l’emploi",
+    "wel.use":"Deux appuis sur <kbd class=\"welKbd\">Shift</kbd> → saisissez → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Sélectionnez du texte avant d’ouvrir : il est repris dans le champ.",
+    "wel.reload":"⚠️ <strong>Les onglets déjà ouverts doivent être rechargés</strong> pour que le raccourci fonctionne. Les nouveaux onglets fonctionnent tout de suite.",
+    "wel.toShortcut":"Changer le raccourci",
+    "wel.toLang":"Changer la langue",
+
     "ab.title":"À propos",
     "ui.pageTitle":"TapTap - Quick Search — Réglages",
     "ab.sub":"TapTap - Quick Search — une extension de navigateur légère",
@@ -558,6 +663,21 @@ const OPT_I18N = {
   de: {
     "nav.engines":"Suchmaschinen", "nav.shortcut":"Tastenkürzel", "nav.appearance":"Darstellung",
     "nav.language":"Sprache <span class=\"navEn\">(Language)</span>", "nav.about":"Info",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Zweimal <kbd>Shift</kbd> drücken – auf jeder Seite öffnet sich die Suche.",
+    "pop.openBtn":"Suche auf dieser Seite öffnen",
+    "pop.settingsBtn":"Einstellungen öffnen",
+    "pop.failed":"Hier lässt sie sich nicht öffnen. Lade den Tab neu; Browserseiten wie chrome:// werden nicht unterstützt.",
+    "pop.hint":"Gerade installiert oder aktualisiert? Bereits geöffnete Tabs müssen neu geladen werden.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Fertig – es kann losgehen",
+    "wel.use":"Zweimal <kbd class=\"welKbd\">Shift</kbd> → tippen → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Markiere vorher Text, dann steht er schon im Suchfeld.",
+    "wel.reload":"⚠️ <strong>Bereits geöffnete Tabs musst du neu laden</strong>, damit das Tastenkürzel dort wirkt. Neue Tabs funktionieren sofort.",
+    "wel.toShortcut":"Tastenkürzel ändern",
+    "wel.toLang":"Sprache ändern",
 
     "ab.title":"Info",
     "ui.pageTitle":"TapTap - Quick Search — Einstellungen",
@@ -635,6 +755,21 @@ const OPT_I18N = {
     "nav.engines":"Поисковые системы", "nav.shortcut":"Горячая клавиша", "nav.appearance":"Оформление",
     "nav.language":"Язык <span class=\"navEn\">(Language)</span>", "nav.about":"О расширении",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Дважды нажмите <kbd>Shift</kbd> на любой странице — откроется строка поиска.",
+    "pop.openBtn":"Открыть поиск на этой странице",
+    "pop.settingsBtn":"Открыть настройки",
+    "pop.failed":"Здесь открыть нельзя. Обновите вкладку и попробуйте снова: страницы браузера вроде chrome:// не поддерживаются.",
+    "pop.hint":"Только что установили или обновили? Вкладки, открытые раньше, нужно обновить.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Готово к работе",
+    "wel.use":"Дважды <kbd class=\"welKbd\">Shift</kbd> → ввод → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Выделите текст заранее — он подставится в строку поиска.",
+    "wel.reload":"⚠️ <strong>Вкладки, открытые до установки, нужно обновить</strong>, иначе сочетание там не сработает. Новые вкладки работают сразу.",
+    "wel.toShortcut":"Изменить сочетание",
+    "wel.toLang":"Изменить язык",
+
     "ab.title":"О расширении",
     "ui.pageTitle":"TapTap - Quick Search — Настройки",
     "ab.sub":"TapTap - Quick Search — лёгкое расширение браузера",
@@ -710,6 +845,21 @@ const OPT_I18N = {
   vn: {
     "nav.engines":"Công cụ tìm kiếm", "nav.shortcut":"Phím tắt", "nav.appearance":"Giao diện",
     "nav.language":"Ngôn ngữ <span class=\"navEn\">(Language)</span>", "nav.about":"Giới thiệu",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Nhấn <kbd>Shift</kbd> hai lần trên bất kỳ trang nào để mở ô tìm kiếm.",
+    "pop.openBtn":"Mở ô tìm kiếm trên trang này",
+    "pop.settingsBtn":"Mở cài đặt",
+    "pop.failed":"Không mở được ở đây. Hãy tải lại tab và thử lại; các trang của trình duyệt như chrome:// không hỗ trợ.",
+    "pop.hint":"Vừa cài hoặc cập nhật? Những tab đang mở từ trước cần được tải lại.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Sẵn sàng sử dụng",
+    "wel.use":"Nhấn <kbd class=\"welKbd\">Shift</kbd> hai lần → gõ → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Bôi đen văn bản trước khi mở, ô tìm kiếm sẽ tự điền.",
+    "wel.reload":"⚠️ <strong>Các tab đang mở từ trước cần được tải lại</strong> thì phím tắt mới hoạt động. Tab mở mới dùng được ngay.",
+    "wel.toShortcut":"Đổi phím tắt",
+    "wel.toLang":"Đổi ngôn ngữ",
 
     "ab.title":"Giới thiệu",
     "ui.pageTitle":"TapTap - Quick Search — Cài đặt",
@@ -787,6 +937,21 @@ const OPT_I18N = {
     "nav.engines":"Enjin Carian", "nav.shortcut":"Pintasan", "nav.appearance":"Penampilan",
     "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.about":"Perihal",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Tekan <kbd>Shift</kbd> dua kali pada mana-mana halaman untuk membuka kotak carian.",
+    "pop.openBtn":"Buka kotak carian di halaman ini",
+    "pop.settingsBtn":"Buka tetapan",
+    "pop.failed":"Tidak boleh dibuka di sini. Muat semula tab dan cuba lagi; halaman pelayar seperti chrome:// tidak disokong.",
+    "pop.hint":"Baru dipasang atau dikemas kini? Tab yang sudah dibuka perlu dimuat semula.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Sedia digunakan",
+    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali → taip → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Pilih teks dahulu, kotak carian akan terisi dengan teks itu.",
+    "wel.reload":"⚠️ <strong>Tab yang sudah dibuka perlu dimuat semula</strong> sebelum pintasan berfungsi di situ. Tab baharu terus berfungsi.",
+    "wel.toShortcut":"Tukar pintasan",
+    "wel.toLang":"Tukar bahasa",
+
     "ab.title":"Perihal",
     "ui.pageTitle":"TapTap - Quick Search — Tetapan",
     "ab.sub":"TapTap - Quick Search — sambungan pelayar yang ringan",
@@ -863,6 +1028,21 @@ const OPT_I18N = {
     "nav.engines":"เครื่องมือค้นหา", "nav.shortcut":"ปุ่มลัด", "nav.appearance":"รูปลักษณ์",
     "nav.language":"ภาษา <span class=\"navEn\">(Language)</span>", "nav.about":"เกี่ยวกับ",
 
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"กด <kbd>Shift</kbd> สองครั้งบนหน้าใดก็ได้เพื่อเปิดช่องค้นหา",
+    "pop.openBtn":"เปิดช่องค้นหาในหน้านี้",
+    "pop.settingsBtn":"เปิดการตั้งค่า",
+    "pop.failed":"เปิดในหน้านี้ไม่ได้ ลองรีเฟรชแท็บอีกครั้ง หน้าของเบราว์เซอร์อย่าง chrome:// ใช้ไม่ได้",
+    "pop.hint":"เพิ่งติดตั้งหรืออัปเดตใช่ไหม แท็บที่เปิดค้างไว้ต้องรีเฟรชก่อน",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 พร้อมใช้งานแล้ว",
+    "wel.use":"กด <kbd class=\"welKbd\">Shift</kbd> สองครั้ง → พิมพ์ → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"เลือกข้อความบนหน้าเว็บก่อน ช่องค้นหาจะใส่ข้อความนั้นให้",
+    "wel.reload":"⚠️ <strong>แท็บที่เปิดค้างไว้ต้องรีเฟรชก่อน</strong> คีย์ลัดจึงจะทำงาน แท็บที่เปิดใหม่ใช้ได้ทันที",
+    "wel.toShortcut":"เปลี่ยนคีย์ลัด",
+    "wel.toLang":"เปลี่ยนภาษา",
+
     "ab.title":"เกี่ยวกับ",
     "ui.pageTitle":"TapTap - Quick Search — การตั้งค่า",
     "ab.sub":"TapTap - Quick Search — ส่วนขยายเบราว์เซอร์ขนาดเล็ก",
@@ -938,6 +1118,21 @@ const OPT_I18N = {
   id: {
     "nav.engines":"Mesin Pencari", "nav.shortcut":"Pintasan", "nav.appearance":"Tampilan",
     "nav.language":"Bahasa <span class=\"navEn\">(Language)</span>", "nav.about":"Tentang",
+
+    // 툴바 아이콘 팝업(popup.html) — 아이콘을 눌러도 아무 일이 없으면 안 되는 확장처럼 보인다
+    "pop.tagline":"Tekan <kbd>Shift</kbd> dua kali di halaman mana pun untuk membuka kotak pencarian.",
+    "pop.openBtn":"Buka kotak pencarian di halaman ini",
+    "pop.settingsBtn":"Buka pengaturan",
+    "pop.failed":"Tidak bisa dibuka di sini. Muat ulang tab lalu coba lagi; halaman peramban seperti chrome:// tidak didukung.",
+    "pop.hint":"Baru memasang atau memperbarui? Tab yang sudah terbuka perlu dimuat ulang.",
+
+    // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
+    "wel.title":"🎉 Siap dipakai",
+    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali → ketik → <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"Pilih teks lebih dulu, kotak pencarian akan terisi otomatis.",
+    "wel.reload":"⚠️ <strong>Tab yang sudah terbuka perlu dimuat ulang</strong> agar pintasan bekerja di sana. Tab baru langsung bisa.",
+    "wel.toShortcut":"Ubah pintasan",
+    "wel.toLang":"Ubah bahasa",
 
     "ab.title":"Tentang",
     "ui.pageTitle":"TapTap - Quick Search — Pengaturan",
