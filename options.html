@@ -64,6 +64,7 @@
     .navItem:hover{background:rgba(99,102,241,.07);color:var(--accent)}
     .navItem.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
     .navItem .navIcon{font-size:17px;flex-shrink:0}
+    .navSep{height:1px;background:var(--border);margin:6px 10px}
     .sideFooter{margin-top:auto;padding:10px;font-size:11px;color:var(--muted);text-align:center}
 
     /* ── Page sections (tabs) ── */
@@ -632,6 +633,10 @@
       <span class="navIcon">🌐</span><span data-i18n-html="nav.language">Language</span></button>
     <button class="navItem" data-tab="about">
       <span class="navIcon">ℹ️</span><span data-i18n="nav.about">About</span></button>
+    <!-- 노트는 별도 페이지(notes.html). 탭이 아니라 링크라서 data-tab 이 없다 -->
+    <div class="navSep"></div>
+    <a class="navItem" href="notes.html">
+      <span class="navIcon">📒</span><span data-i18n="nav.notes">Notes</span></a>
     <div class="sideFooter" id="versionLabel"></div>
   </nav>
 

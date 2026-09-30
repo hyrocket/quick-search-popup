@@ -42,6 +42,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Tabs you already had open need a reload</strong> before the shortcut works there. New tabs work right away.",
     "wel.toShortcut":"Change shortcut",
     "wel.toLang":"Change language",
+    "nav.notes":"Notes",
+    "nav.settings":"Settings",
+    "pop.notesBtn":"Open notes",
+    "n.pageTitle":"TapTap — Notes",
+    "n.title":"Notes",
+    "n.search":"Search notes",
+    "n.localOnly":"Notes are kept only in this browser. Uninstalling TapTap deletes them — export anything you want to keep.",
+    "n.emptyHow":"No notes yet.<br>Select text on a page, tap <kbd>Shift</kbd> twice, then press <b>Note</b>.",
+    "n.pick":"Pick a note from the list.",
+    "n.noResult":"No matching notes",
+    "n.untitled":"Untitled",
+    "n.created":"Saved",
+    "n.edited":"Edited",
+    "n.saving":"Saving…",
+    "n.saved":"Saved",
+    "n.saveFail":"Couldn't save",
+    "n.export":"Export HTML",
+    "n.delete":"Delete",
+    "n.confirmDel":"Delete this note? This can't be undone.",
+    "n.bold":"Bold",
+    "n.italic":"Italic",
+    "n.ul":"Bulleted list",
+    "n.ol":"Numbered list",
+    "n.quote":"Quote",
+    "n.clear":"Clear formatting",
 
     "ab.title":"About",
     "ui.pageTitle":"TapTap - Quick Search — Settings",
@@ -134,6 +159,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>이미 열어 둔 탭은 새로고침해야</strong> 단축키가 동작합니다. 새로 여는 탭은 바로 됩니다.",
     "wel.toShortcut":"단축키 바꾸기",
     "wel.toLang":"언어 바꾸기",
+    "nav.notes":"노트",
+    "nav.settings":"설정",
+    "pop.notesBtn":"노트 보기",
+    "n.pageTitle":"TapTap — 노트",
+    "n.title":"노트",
+    "n.search":"노트 검색",
+    "n.localOnly":"노트는 이 브라우저에만 저장됩니다. TapTap 을 삭제하면 노트도 함께 지워지니, 남기고 싶은 노트는 내보내 두세요.",
+    "n.emptyHow":"아직 노트가 없습니다.<br>페이지에서 글자를 선택하고 <kbd>Shift</kbd> 를 두 번 누른 뒤 <b>노트</b>를 누르세요.",
+    "n.pick":"목록에서 노트를 고르세요.",
+    "n.noResult":"일치하는 노트가 없습니다",
+    "n.untitled":"제목 없음",
+    "n.created":"저장",
+    "n.edited":"수정",
+    "n.saving":"저장 중…",
+    "n.saved":"저장됨",
+    "n.saveFail":"저장 실패",
+    "n.export":"HTML 내보내기",
+    "n.delete":"삭제",
+    "n.confirmDel":"이 노트를 삭제할까요? 되돌릴 수 없습니다.",
+    "n.bold":"굵게",
+    "n.italic":"기울임",
+    "n.ul":"글머리 목록",
+    "n.ol":"번호 목록",
+    "n.quote":"인용",
+    "n.clear":"서식 지우기",
 
     "ab.title":"정보",
     "ui.pageTitle":"TapTap - Quick Search — 설정",
@@ -226,6 +276,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>すでに開いていたタブは再読み込みが必要です。</strong>新しく開くタブではすぐに使えます。",
     "wel.toShortcut":"ショートカットを変更",
     "wel.toLang":"言語を変更",
+    "nav.notes":"ノート",
+    "nav.settings":"設定",
+    "pop.notesBtn":"ノートを開く",
+    "n.pageTitle":"TapTap — ノート",
+    "n.title":"ノート",
+    "n.search":"ノートを検索",
+    "n.localOnly":"ノートはこのブラウザにのみ保存されます。TapTap を削除するとノートも消えるので、残したいものはエクスポートしてください。",
+    "n.emptyHow":"まだノートがありません。<br>ページで文字を選択し、<kbd>Shift</kbd> を２回押してから <b>ノート</b> を押してください。",
+    "n.pick":"一覧からノートを選んでください。",
+    "n.noResult":"一致するノートはありません",
+    "n.untitled":"無題",
+    "n.created":"保存",
+    "n.edited":"編集",
+    "n.saving":"保存中…",
+    "n.saved":"保存しました",
+    "n.saveFail":"保存できませんでした",
+    "n.export":"HTML で書き出す",
+    "n.delete":"削除",
+    "n.confirmDel":"このノートを削除しますか？元に戻せません。",
+    "n.bold":"太字",
+    "n.italic":"斜体",
+    "n.ul":"箇条書き",
+    "n.ol":"番号付きリスト",
+    "n.quote":"引用",
+    "n.clear":"書式をクリア",
 
     "ab.title":"情報",
     "ui.pageTitle":"TapTap - Quick Search — 設定",
@@ -318,6 +393,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>此前已打开的标签页需要刷新</strong>后快捷键才生效。新打开的标签页可直接使用。",
     "wel.toShortcut":"更改快捷键",
     "wel.toLang":"更改语言",
+    "nav.notes":"笔记",
+    "nav.settings":"设置",
+    "pop.notesBtn":"打开笔记",
+    "n.pageTitle":"TapTap — 笔记",
+    "n.title":"笔记",
+    "n.search":"搜索笔记",
+    "n.localOnly":"笔记只保存在此浏览器中。卸载 TapTap 会一并删除笔记，想保留的请先导出。",
+    "n.emptyHow":"还没有笔记。<br>在页面上选中文字，连按两下 <kbd>Shift</kbd>，再点 <b>笔记</b>。",
+    "n.pick":"请从列表中选择一条笔记。",
+    "n.noResult":"没有匹配的笔记",
+    "n.untitled":"无标题",
+    "n.created":"保存于",
+    "n.edited":"编辑于",
+    "n.saving":"保存中…",
+    "n.saved":"已保存",
+    "n.saveFail":"保存失败",
+    "n.export":"导出 HTML",
+    "n.delete":"删除",
+    "n.confirmDel":"要删除这条笔记吗？此操作无法撤销。",
+    "n.bold":"加粗",
+    "n.italic":"斜体",
+    "n.ul":"项目符号列表",
+    "n.ol":"编号列表",
+    "n.quote":"引用",
+    "n.clear":"清除格式",
 
     "ab.title":"关于",
     "ui.pageTitle":"TapTap - Quick Search —— 设置",
@@ -410,6 +510,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>先前已開啟的分頁需要重新整理</strong>，快速鍵才會生效。新開的分頁可直接使用。",
     "wel.toShortcut":"變更快速鍵",
     "wel.toLang":"變更語言",
+    "nav.notes":"筆記",
+    "nav.settings":"設定",
+    "pop.notesBtn":"開啟筆記",
+    "n.pageTitle":"TapTap — 筆記",
+    "n.title":"筆記",
+    "n.search":"搜尋筆記",
+    "n.localOnly":"筆記只儲存在此瀏覽器中。移除 TapTap 會一併刪除筆記，想保留的請先匯出。",
+    "n.emptyHow":"還沒有筆記。<br>在頁面上選取文字，連按兩下 <kbd>Shift</kbd>，再按 <b>筆記</b>。",
+    "n.pick":"請從清單中選擇一則筆記。",
+    "n.noResult":"沒有符合的筆記",
+    "n.untitled":"未命名",
+    "n.created":"儲存於",
+    "n.edited":"編輯於",
+    "n.saving":"儲存中…",
+    "n.saved":"已儲存",
+    "n.saveFail":"儲存失敗",
+    "n.export":"匯出 HTML",
+    "n.delete":"刪除",
+    "n.confirmDel":"要刪除這則筆記嗎？此動作無法復原。",
+    "n.bold":"粗體",
+    "n.italic":"斜體",
+    "n.ul":"項目符號清單",
+    "n.ol":"編號清單",
+    "n.quote":"引用",
+    "n.clear":"清除格式",
 
     "ab.title":"關於",
     "ui.pageTitle":"TapTap - Quick Search —— 設定",
@@ -502,6 +627,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Las pestañas que ya tenías abiertas necesitan recargarse</strong> para que funcione el atajo. Las nuevas funcionan enseguida.",
     "wel.toShortcut":"Cambiar atajo",
     "wel.toLang":"Cambiar idioma",
+    "nav.notes":"Notas",
+    "nav.settings":"Configuración",
+    "pop.notesBtn":"Abrir notas",
+    "n.pageTitle":"TapTap — Notas",
+    "n.title":"Notas",
+    "n.search":"Buscar en notas",
+    "n.localOnly":"Las notas se guardan solo en este navegador. Si desinstalas TapTap, se borran; exporta las que quieras conservar.",
+    "n.emptyHow":"Aún no hay notas.<br>Selecciona texto en una página, pulsa <kbd>Shift</kbd> dos veces y luego <b>Nota</b>.",
+    "n.pick":"Elige una nota de la lista.",
+    "n.noResult":"Ninguna nota coincide",
+    "n.untitled":"Sin título",
+    "n.created":"Guardada",
+    "n.edited":"Editada",
+    "n.saving":"Guardando…",
+    "n.saved":"Guardado",
+    "n.saveFail":"No se pudo guardar",
+    "n.export":"Exportar HTML",
+    "n.delete":"Eliminar",
+    "n.confirmDel":"¿Eliminar esta nota? No se puede deshacer.",
+    "n.bold":"Negrita",
+    "n.italic":"Cursiva",
+    "n.ul":"Lista con viñetas",
+    "n.ol":"Lista numerada",
+    "n.quote":"Cita",
+    "n.clear":"Quitar formato",
 
     "ab.title":"Acerca de",
     "ui.pageTitle":"TapTap - Quick Search — Ajustes",
@@ -594,6 +744,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Les onglets déjà ouverts doivent être rechargés</strong> pour que le raccourci fonctionne. Les nouveaux onglets fonctionnent tout de suite.",
     "wel.toShortcut":"Changer le raccourci",
     "wel.toLang":"Changer la langue",
+    "nav.notes":"Notes",
+    "nav.settings":"Paramètres",
+    "pop.notesBtn":"Ouvrir les notes",
+    "n.pageTitle":"TapTap — Notes",
+    "n.title":"Notes",
+    "n.search":"Rechercher dans les notes",
+    "n.localOnly":"Les notes restent uniquement dans ce navigateur. Désinstaller TapTap les supprime : exportez celles que vous voulez garder.",
+    "n.emptyHow":"Aucune note pour l’instant.<br>Sélectionnez du texte, appuyez deux fois sur <kbd>Shift</kbd>, puis sur <b>Note</b>.",
+    "n.pick":"Choisissez une note dans la liste.",
+    "n.noResult":"Aucune note correspondante",
+    "n.untitled":"Sans titre",
+    "n.created":"Enregistrée",
+    "n.edited":"Modifiée",
+    "n.saving":"Enregistrement…",
+    "n.saved":"Enregistré",
+    "n.saveFail":"Échec de l’enregistrement",
+    "n.export":"Exporter en HTML",
+    "n.delete":"Supprimer",
+    "n.confirmDel":"Supprimer cette note ? Action irréversible.",
+    "n.bold":"Gras",
+    "n.italic":"Italique",
+    "n.ul":"Liste à puces",
+    "n.ol":"Liste numérotée",
+    "n.quote":"Citation",
+    "n.clear":"Effacer la mise en forme",
 
     "ab.title":"À propos",
     "ui.pageTitle":"TapTap - Quick Search — Réglages",
@@ -686,6 +861,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Bereits geöffnete Tabs musst du neu laden</strong>, damit das Tastenkürzel dort wirkt. Neue Tabs funktionieren sofort.",
     "wel.toShortcut":"Tastenkürzel ändern",
     "wel.toLang":"Sprache ändern",
+    "nav.notes":"Notizen",
+    "nav.settings":"Einstellungen",
+    "pop.notesBtn":"Notizen öffnen",
+    "n.pageTitle":"TapTap — Notizen",
+    "n.title":"Notizen",
+    "n.search":"Notizen durchsuchen",
+    "n.localOnly":"Notizen liegen nur in diesem Browser. Beim Deinstallieren von TapTap werden sie gelöscht – exportiere, was du behalten willst.",
+    "n.emptyHow":"Noch keine Notizen.<br>Markiere Text, tippe zweimal <kbd>Shift</kbd> und drücke dann <b>Notiz</b>.",
+    "n.pick":"Wähle links eine Notiz aus.",
+    "n.noResult":"Keine passenden Notizen",
+    "n.untitled":"Ohne Titel",
+    "n.created":"Gespeichert",
+    "n.edited":"Bearbeitet",
+    "n.saving":"Speichern…",
+    "n.saved":"Gespeichert",
+    "n.saveFail":"Speichern fehlgeschlagen",
+    "n.export":"Als HTML exportieren",
+    "n.delete":"Löschen",
+    "n.confirmDel":"Diese Notiz löschen? Das lässt sich nicht rückgängig machen.",
+    "n.bold":"Fett",
+    "n.italic":"Kursiv",
+    "n.ul":"Aufzählung",
+    "n.ol":"Nummerierte Liste",
+    "n.quote":"Zitat",
+    "n.clear":"Formatierung entfernen",
 
     "ab.title":"Info",
     "ui.pageTitle":"TapTap - Quick Search — Einstellungen",
@@ -778,6 +978,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Вкладки, открытые до установки, нужно обновить</strong>, иначе сочетание там не сработает. Новые вкладки работают сразу.",
     "wel.toShortcut":"Изменить сочетание",
     "wel.toLang":"Изменить язык",
+    "nav.notes":"Заметки",
+    "nav.settings":"Настройки",
+    "pop.notesBtn":"Открыть заметки",
+    "n.pageTitle":"TapTap — Заметки",
+    "n.title":"Заметки",
+    "n.search":"Поиск по заметкам",
+    "n.localOnly":"Заметки хранятся только в этом браузере. При удалении TapTap они удаляются — экспортируйте то, что хотите сохранить.",
+    "n.emptyHow":"Заметок пока нет.<br>Выделите текст, дважды нажмите <kbd>Shift</kbd>, затем — <b>Заметка</b>.",
+    "n.pick":"Выберите заметку в списке.",
+    "n.noResult":"Ничего не найдено",
+    "n.untitled":"Без названия",
+    "n.created":"Сохранено",
+    "n.edited":"Изменено",
+    "n.saving":"Сохранение…",
+    "n.saved":"Сохранено",
+    "n.saveFail":"Не удалось сохранить",
+    "n.export":"Экспорт в HTML",
+    "n.delete":"Удалить",
+    "n.confirmDel":"Удалить эту заметку? Отменить будет нельзя.",
+    "n.bold":"Жирный",
+    "n.italic":"Курсив",
+    "n.ul":"Маркированный список",
+    "n.ol":"Нумерованный список",
+    "n.quote":"Цитата",
+    "n.clear":"Очистить формат",
 
     "ab.title":"О расширении",
     "ui.pageTitle":"TapTap - Quick Search — Настройки",
@@ -870,6 +1095,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Các tab đang mở từ trước cần được tải lại</strong> thì phím tắt mới hoạt động. Tab mở mới dùng được ngay.",
     "wel.toShortcut":"Đổi phím tắt",
     "wel.toLang":"Đổi ngôn ngữ",
+    "nav.notes":"Ghi chú",
+    "nav.settings":"Cài đặt",
+    "pop.notesBtn":"Mở ghi chú",
+    "n.pageTitle":"TapTap — Ghi chú",
+    "n.title":"Ghi chú",
+    "n.search":"Tìm trong ghi chú",
+    "n.localOnly":"Ghi chú chỉ lưu trong trình duyệt này. Gỡ TapTap sẽ xoá luôn ghi chú — hãy xuất những ghi chú bạn muốn giữ.",
+    "n.emptyHow":"Chưa có ghi chú nào.<br>Bôi đen chữ trên trang, nhấn <kbd>Shift</kbd> hai lần rồi bấm <b>Ghi chú</b>.",
+    "n.pick":"Chọn một ghi chú trong danh sách.",
+    "n.noResult":"Không có ghi chú phù hợp",
+    "n.untitled":"Không tiêu đề",
+    "n.created":"Đã lưu",
+    "n.edited":"Đã sửa",
+    "n.saving":"Đang lưu…",
+    "n.saved":"Đã lưu",
+    "n.saveFail":"Không lưu được",
+    "n.export":"Xuất HTML",
+    "n.delete":"Xoá",
+    "n.confirmDel":"Xoá ghi chú này? Không thể hoàn tác.",
+    "n.bold":"Đậm",
+    "n.italic":"Nghiêng",
+    "n.ul":"Danh sách dấu chấm",
+    "n.ol":"Danh sách số",
+    "n.quote":"Trích dẫn",
+    "n.clear":"Xoá định dạng",
 
     "ab.title":"Giới thiệu",
     "ui.pageTitle":"TapTap - Quick Search — Cài đặt",
@@ -962,6 +1212,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Tab yang sudah dibuka perlu dimuat semula</strong> sebelum pintasan berfungsi di situ. Tab baharu terus berfungsi.",
     "wel.toShortcut":"Tukar pintasan",
     "wel.toLang":"Tukar bahasa",
+    "nav.notes":"Nota",
+    "nav.settings":"Tetapan",
+    "pop.notesBtn":"Buka nota",
+    "n.pageTitle":"TapTap — Nota",
+    "n.title":"Nota",
+    "n.search":"Cari nota",
+    "n.localOnly":"Nota disimpan dalam pelayar ini sahaja. Membuang TapTap akan memadamkannya — eksport nota yang anda mahu simpan.",
+    "n.emptyHow":"Belum ada nota.<br>Pilih teks pada halaman, tekan <kbd>Shift</kbd> dua kali, kemudian tekan <b>Nota</b>.",
+    "n.pick":"Pilih nota daripada senarai.",
+    "n.noResult":"Tiada nota sepadan",
+    "n.untitled":"Tanpa tajuk",
+    "n.created":"Disimpan",
+    "n.edited":"Diedit",
+    "n.saving":"Menyimpan…",
+    "n.saved":"Disimpan",
+    "n.saveFail":"Gagal menyimpan",
+    "n.export":"Eksport HTML",
+    "n.delete":"Padam",
+    "n.confirmDel":"Padam nota ini? Tindakan ini tidak boleh dibatalkan.",
+    "n.bold":"Tebal",
+    "n.italic":"Condong",
+    "n.ul":"Senarai berbulet",
+    "n.ol":"Senarai bernombor",
+    "n.quote":"Petikan",
+    "n.clear":"Kosongkan format",
 
     "ab.title":"Perihal",
     "ui.pageTitle":"TapTap - Quick Search — Tetapan",
@@ -1054,6 +1329,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>แท็บที่เปิดค้างไว้ต้องรีเฟรชก่อน</strong> คีย์ลัดจึงจะทำงาน แท็บที่เปิดใหม่ใช้ได้ทันที",
     "wel.toShortcut":"เปลี่ยนคีย์ลัด",
     "wel.toLang":"เปลี่ยนภาษา",
+    "nav.notes":"โน้ต",
+    "nav.settings":"การตั้งค่า",
+    "pop.notesBtn":"เปิดโน้ต",
+    "n.pageTitle":"TapTap — โน้ต",
+    "n.title":"โน้ต",
+    "n.search":"ค้นหาโน้ต",
+    "n.localOnly":"โน้ตเก็บไว้ในเบราว์เซอร์นี้เท่านั้น หากถอนการติดตั้ง TapTap โน้ตจะถูกลบไปด้วย ส่งออกโน้ตที่ต้องการเก็บไว้ก่อน",
+    "n.emptyHow":"ยังไม่มีโน้ต<br>เลือกข้อความบนหน้าเว็บ กด <kbd>Shift</kbd> สองครั้ง แล้วกด <b>โน้ต</b>",
+    "n.pick":"เลือกโน้ตจากรายการ",
+    "n.noResult":"ไม่พบโน้ตที่ตรงกัน",
+    "n.untitled":"ไม่มีชื่อ",
+    "n.created":"บันทึก",
+    "n.edited":"แก้ไข",
+    "n.saving":"กำลังบันทึก…",
+    "n.saved":"บันทึกแล้ว",
+    "n.saveFail":"บันทึกไม่สำเร็จ",
+    "n.export":"ส่งออก HTML",
+    "n.delete":"ลบ",
+    "n.confirmDel":"ลบโน้ตนี้หรือไม่? ย้อนกลับไม่ได้",
+    "n.bold":"ตัวหนา",
+    "n.italic":"ตัวเอียง",
+    "n.ul":"รายการสัญลักษณ์",
+    "n.ol":"รายการตัวเลข",
+    "n.quote":"อ้างอิง",
+    "n.clear":"ล้างรูปแบบ",
 
     "ab.title":"เกี่ยวกับ",
     "ui.pageTitle":"TapTap - Quick Search — การตั้งค่า",
@@ -1146,6 +1446,31 @@ const OPT_I18N = {
     "wel.reload":"⚠️ <strong>Tab yang sudah terbuka perlu dimuat ulang</strong> agar pintasan bekerja di sana. Tab baru langsung bisa.",
     "wel.toShortcut":"Ubah pintasan",
     "wel.toLang":"Ubah bahasa",
+    "nav.notes":"Catatan",
+    "nav.settings":"Pengaturan",
+    "pop.notesBtn":"Buka catatan",
+    "n.pageTitle":"TapTap — Catatan",
+    "n.title":"Catatan",
+    "n.search":"Cari catatan",
+    "n.localOnly":"Catatan hanya disimpan di browser ini. Menghapus TapTap juga menghapus catatan — ekspor yang ingin Anda simpan.",
+    "n.emptyHow":"Belum ada catatan.<br>Pilih teks di halaman, tekan <kbd>Shift</kbd> dua kali, lalu tekan <b>Catatan</b>.",
+    "n.pick":"Pilih catatan dari daftar.",
+    "n.noResult":"Tidak ada catatan yang cocok",
+    "n.untitled":"Tanpa judul",
+    "n.created":"Disimpan",
+    "n.edited":"Diedit",
+    "n.saving":"Menyimpan…",
+    "n.saved":"Tersimpan",
+    "n.saveFail":"Gagal menyimpan",
+    "n.export":"Ekspor HTML",
+    "n.delete":"Hapus",
+    "n.confirmDel":"Hapus catatan ini? Tindakan ini tidak bisa dibatalkan.",
+    "n.bold":"Tebal",
+    "n.italic":"Miring",
+    "n.ul":"Daftar poin",
+    "n.ol":"Daftar bernomor",
+    "n.quote":"Kutipan",
+    "n.clear":"Hapus format",
 
     "ab.title":"Tentang",
     "ui.pageTitle":"TapTap - Quick Search — Pengaturan",
@@ -1253,6 +1578,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 AI search built in</strong> — Perplexity, ChatGPT and Claude are ready to use</li>
           <li><strong>🖱️ Switch by mouse wheel</strong> — scroll on the popup to change engine</li>
           <li><strong>📝 Uses selected text</strong> — select text on a page, then open TapTap to search it</li>
+          <li><strong>📒 Notes</strong> — press Note to keep the selected part of a page, images included, and edit it later</li>
           <li><strong>🕐 Search history</strong> — recent searches appear as you type</li>
           <li><strong>🎨 6 themes</strong> — Chameleon, Mono, Midnight, Glass, Paper and Terminal</li>
           <li><strong>🌈 A color per engine</strong> — 9 palettes, or your own hex code</li>
@@ -1291,6 +1617,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 AI 검색 내장</strong> — Perplexity, ChatGPT, Claude 를 바로 사용</li>
           <li><strong>🖱️ 휠로 엔진 전환</strong> — 팝업 위에서 스크롤하면 엔진이 바뀜</li>
           <li><strong>📝 선택한 글자로 검색</strong> — 페이지에서 글자를 드래그한 뒤 열면 자동으로 채워짐</li>
+          <li><strong>📒 노트</strong> — 선택한 부분을 이미지까지 그대로 저장하고, 나중에 고칠 수 있음</li>
           <li><strong>🕐 검색 기록</strong> — 입력하는 동안 최근 검색어가 나타남</li>
           <li><strong>🎨 테마 6종</strong> — 카멜레온, 모노, 미드나이트, 글래스, 페이퍼, 터미널</li>
           <li><strong>🌈 엔진마다 색상</strong> — 팔레트 9종, 또는 직접 지정하는 hex 코드</li>
@@ -1329,6 +1656,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 AI 検索を内蔵</strong> — Perplexity、ChatGPT、Claude をすぐ使える</li>
           <li><strong>🖱️ ホイールで切り替え</strong> — ポップアップ上でスクロールするとエンジンが変わる</li>
           <li><strong>📝 選択した文字で検索</strong> — ページで文字を選んでから開くと自動で入る</li>
+          <li><strong>📒 ノート</strong> — 選択した部分を画像ごと保存し、あとから編集できる</li>
           <li><strong>🕐 検索履歴</strong> — 入力中に最近の検索語が出る</li>
           <li><strong>🎨 テーマ6種</strong> — カメレオン、モノ、ミッドナイト、グラス、ペーパー、ターミナル</li>
           <li><strong>🌈 エンジンごとの色</strong> — パレット9種、または自分で決める hex コード</li>
@@ -1367,6 +1695,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 内置 AI 搜索</strong> —— Perplexity、ChatGPT、Claude 开箱即用</li>
           <li><strong>🖱️ 滚轮切换</strong> —— 在弹窗上滚动即可更换引擎</li>
           <li><strong>📝 使用选中的文字</strong> —— 先在页面选中文字，再打开 TapTap 即自动填入</li>
+          <li><strong>📒 笔记</strong> —— 把选中的部分连同图片一起保存，之后还能编辑</li>
           <li><strong>🕐 搜索历史</strong> —— 输入时显示最近搜索过的内容</li>
           <li><strong>🎨 6 种主题</strong> —— 变色龙、单色、午夜、玻璃、纸张、终端</li>
           <li><strong>🌈 每个引擎一种颜色</strong> —— 9 组配色，或自定义十六进制色值</li>
@@ -1405,6 +1734,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 內建 AI 搜尋</strong> —— Perplexity、ChatGPT、Claude 立即可用</li>
           <li><strong>🖱️ 滾輪切換</strong> —— 在彈出視窗上捲動即可更換引擎</li>
           <li><strong>📝 使用選取的文字</strong> —— 先在頁面選取文字，再開啟 TapTap 即自動填入</li>
+          <li><strong>📒 筆記</strong> —— 把選取的部分連同圖片一起儲存，之後還能編輯</li>
           <li><strong>🕐 搜尋紀錄</strong> —— 輸入時顯示最近搜尋過的內容</li>
           <li><strong>🎨 6 種主題</strong> —— 變色龍、單色、午夜、玻璃、紙張、終端機</li>
           <li><strong>🌈 每個引擎一種顏色</strong> —— 9 組配色，或自訂十六進位色碼</li>
@@ -1443,6 +1773,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Búsqueda con IA incluida</strong>: Perplexity, ChatGPT y Claude listos para usar</li>
           <li><strong>🖱️ Cambio con la rueda del ratón</strong>: desplázate sobre la ventana para cambiar de buscador</li>
           <li><strong>📝 Usa el texto seleccionado</strong>: selecciona texto y abre TapTap para buscarlo</li>
+          <li><strong>📒 Notas</strong>: pulsa Nota para guardar la parte seleccionada de la página, con imágenes, y editarla después</li>
           <li><strong>🕐 Historial de búsquedas</strong>: las búsquedas recientes aparecen mientras escribes</li>
           <li><strong>🎨 6 temas</strong>: Camaleón, Mono, Medianoche, Cristal, Papel y Terminal</li>
           <li><strong>🌈 Un color por buscador</strong>: 9 paletas o tu propio código hexadecimal</li>
@@ -1481,6 +1812,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Recherche IA intégrée</strong> — Perplexity, ChatGPT et Claude prêts à l'emploi</li>
           <li><strong>🖱️ Changement à la molette</strong> — faites défiler sur la fenêtre pour changer de moteur</li>
           <li><strong>📝 Utilise le texte sélectionné</strong> — sélectionnez du texte, puis ouvrez TapTap pour le rechercher</li>
+          <li><strong>📒 Notes</strong> — appuyez sur Note pour garder la partie sélectionnée, images comprises, et la modifier plus tard</li>
           <li><strong>🕐 Historique de recherche</strong> — les recherches récentes apparaissent pendant la saisie</li>
           <li><strong>🎨 6 thèmes</strong> — Caméléon, Mono, Minuit, Verre, Papier et Terminal</li>
           <li><strong>🌈 Une couleur par moteur</strong> — 9 palettes, ou votre propre code hexadécimal</li>
@@ -1519,6 +1851,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 KI-Suche eingebaut</strong> — Perplexity, ChatGPT und Claude sofort einsatzbereit</li>
           <li><strong>🖱️ Wechsel per Mausrad</strong> — über dem Fenster scrollen wechselt die Suchmaschine</li>
           <li><strong>📝 Nutzt markierten Text</strong> — Text auf der Seite markieren, dann TapTap öffnen</li>
+          <li><strong>📒 Notizen</strong> — mit „Notiz“ den markierten Teil samt Bildern speichern und später bearbeiten</li>
           <li><strong>🕐 Suchverlauf</strong> — frühere Suchen erscheinen beim Tippen</li>
           <li><strong>🎨 6 Designs</strong> — Chamäleon, Mono, Mitternacht, Glas, Papier und Terminal</li>
           <li><strong>🌈 Eine Farbe je Suchmaschine</strong> — 9 Paletten, oder dein eigener Hex-Code</li>
@@ -1557,6 +1890,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Встроенный ИИ-поиск</strong> — Perplexity, ChatGPT и Claude готовы к работе</li>
           <li><strong>🖱️ Переключение колесом мыши</strong> — прокрутка над окном меняет поисковик</li>
           <li><strong>📝 Берёт выделенный текст</strong> — выделите текст на странице и откройте TapTap</li>
+          <li><strong>📒 Заметки</strong> — кнопка «Заметка» сохраняет выделенный фрагмент вместе с картинками, его можно править потом</li>
           <li><strong>🕐 История поиска</strong> — прошлые запросы появляются по мере ввода</li>
           <li><strong>🎨 6 тем</strong> — Хамелеон, Моно, Полночь, Стекло, Бумага и Терминал</li>
           <li><strong>🌈 Свой цвет для каждого поисковика</strong> — 9 палитр или ваш HEX-код</li>
@@ -1595,6 +1929,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Tích hợp sẵn tìm kiếm AI</strong> — Perplexity, ChatGPT và Claude dùng được ngay</li>
           <li><strong>🖱️ Đổi bằng con lăn chuột</strong> — cuộn trên cửa sổ để đổi công cụ</li>
           <li><strong>📝 Dùng chữ đã bôi đen</strong> — bôi đen chữ trên trang rồi mở TapTap để tìm</li>
+          <li><strong>📒 Ghi chú</strong> — bấm Ghi chú để lưu phần đã chọn kèm hình ảnh, sau đó có thể sửa</li>
           <li><strong>🕐 Lịch sử tìm kiếm</strong> — các từ khoá gần đây hiện ra khi bạn gõ</li>
           <li><strong>🎨 6 chủ đề</strong> — Tắc kè hoa, Đơn sắc, Nửa đêm, Kính, Giấy và Dòng lệnh</li>
           <li><strong>🌈 Mỗi công cụ một màu</strong> — 9 bảng màu, hoặc mã hex của riêng bạn</li>
@@ -1633,6 +1968,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Carian AI terbina dalam</strong> — Perplexity, ChatGPT dan Claude sedia digunakan</li>
           <li><strong>🖱️ Tukar dengan roda tetikus</strong> — tatal pada tetingkap untuk menukar enjin</li>
           <li><strong>📝 Guna teks yang dipilih</strong> — pilih teks pada halaman, kemudian buka TapTap</li>
+          <li><strong>📒 Nota</strong> — tekan Nota untuk menyimpan bahagian yang dipilih berserta imej, dan suntingnya kemudian</li>
           <li><strong>🕐 Sejarah carian</strong> — carian terbaharu muncul semasa anda menaip</li>
           <li><strong>🎨 6 tema</strong> — Bunglon, Mono, Tengah Malam, Kaca, Kertas dan Terminal</li>
           <li><strong>🌈 Satu warna bagi setiap enjin</strong> — 9 palet, atau kod heks anda sendiri</li>
@@ -1671,6 +2007,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 มีการค้นหาแบบ AI ในตัว</strong> — Perplexity, ChatGPT และ Claude พร้อมใช้งาน</li>
           <li><strong>🖱️ เปลี่ยนด้วยลูกกลิ้งเมาส์</strong> — เลื่อนบนหน้าต่างเพื่อเปลี่ยนเครื่องมือ</li>
           <li><strong>📝 ใช้ข้อความที่เลือกไว้</strong> — เลือกข้อความบนหน้าเว็บ แล้วเปิด TapTap เพื่อค้นหา</li>
+          <li><strong>📒 โน้ต</strong> — กดโน้ตเพื่อเก็บส่วนที่เลือกไว้พร้อมรูปภาพ และแก้ไขภายหลังได้</li>
           <li><strong>🕐 ประวัติการค้นหา</strong> — คำค้นหาล่าสุดจะปรากฏขณะพิมพ์</li>
           <li><strong>🎨 6 ธีม</strong> — กิ้งก่า, ขาวดำ, เที่ยงคืน, กระจก, กระดาษ และเทอร์มินัล</li>
           <li><strong>🌈 หนึ่งสีต่อหนึ่งเครื่องมือ</strong> — 9 ชุดสี หรือรหัสสีฐานสิบหกของคุณเอง</li>
@@ -1709,6 +2046,7 @@ const ABOUT_HTML = {
           <li><strong>🤖 Pencarian AI bawaan</strong> — Perplexity, ChatGPT, dan Claude siap dipakai</li>
           <li><strong>🖱️ Ganti dengan roda tetikus</strong> — gulir di atas jendela untuk mengganti mesin</li>
           <li><strong>📝 Memakai teks yang dipilih</strong> — pilih teks di halaman, lalu buka TapTap</li>
+          <li><strong>📒 Catatan</strong> — tekan Catatan untuk menyimpan bagian yang dipilih beserta gambar, lalu edit nanti</li>
           <li><strong>🕐 Riwayat pencarian</strong> — pencarian terakhir muncul saat Anda mengetik</li>
           <li><strong>🎨 6 tema</strong> — Bunglon, Mono, Tengah Malam, Kaca, Kertas, dan Terminal</li>
           <li><strong>🌈 Satu warna untuk tiap mesin</strong> — 9 palet, atau kode heks Anda sendiri</li>

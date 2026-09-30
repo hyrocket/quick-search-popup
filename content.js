@@ -86,6 +86,11 @@ const I18N = {
     historyTitle: "최근 검색",
     clearHistory: "기록 지우기",
     noHistory: "검색 기록 없음",
+    noteBtn: "노트",
+    noteSaving: "저장 중…",
+    noteSaved: "노트에 저장됨",
+    noteOpen: "노트 보기",
+    noteFail: "저장 실패",
     hint: (engine, newTab) => `${engine} · ↑/↓: 엔진 변경 · ${newTab ? "새탭 ON" : "새탭 OFF"}`
   },
   en: {
@@ -98,6 +103,11 @@ const I18N = {
     historyTitle: "Recent",
     clearHistory: "Clear",
     noHistory: "No recent searches",
+    noteBtn: "Note",
+    noteSaving: "Saving…",
+    noteSaved: "Saved to notes",
+    noteOpen: "Open notes",
+    noteFail: "Couldn't save",
     hint: (engine, newTab) => `${engine} · ↑/↓: change engine · ${newTab ? "New tab ON" : "New tab OFF"}`
   },
   ja: {
@@ -110,6 +120,11 @@ const I18N = {
     historyTitle: "最近の検索",
     clearHistory: "履歴を消去",
     noHistory: "検索履歴なし",
+    noteBtn: "ノート",
+    noteSaving: "保存中…",
+    noteSaved: "ノートに保存しました",
+    noteOpen: "ノートを見る",
+    noteFail: "保存できませんでした",
     hint: (engine, newTab) => `${engine} · ↑/↓: エンジン変更 · ${newTab ? "新タブ ON" : "新タブ OFF"}`
   },
   "zh-CN": {
@@ -122,6 +137,11 @@ const I18N = {
     historyTitle: "最近搜索",
     clearHistory: "清除",
     noHistory: "无搜索历史",
+    noteBtn: "笔记",
+    noteSaving: "保存中…",
+    noteSaved: "已保存到笔记",
+    noteOpen: "查看笔记",
+    noteFail: "保存失败",
     hint: (engine, newTab) => `${engine} · ↑/↓: 切换 · ${newTab ? "新标签 ON" : "OFF"}`
   },
   "zh-TW": {
@@ -134,6 +154,11 @@ const I18N = {
     historyTitle: "最近搜尋",
     clearHistory: "清除",
     noHistory: "無搜尋記錄",
+    noteBtn: "筆記",
+    noteSaving: "儲存中…",
+    noteSaved: "已儲存到筆記",
+    noteOpen: "查看筆記",
+    noteFail: "儲存失敗",
     hint: (engine, newTab) => `${engine} · ↑/↓: 切換 · ${newTab ? "新分頁 ON" : "OFF"}`
   },
   es: {
@@ -146,6 +171,11 @@ const I18N = {
     historyTitle: "Recientes",
     clearHistory: "Borrar",
     noHistory: "Sin historial",
+    noteBtn: "Nota",
+    noteSaving: "Guardando…",
+    noteSaved: "Guardado en notas",
+    noteOpen: "Ver notas",
+    noteFail: "No se pudo guardar",
     hint: (engine, newTab) => `${engine} · ↑/↓: cambiar · ${newTab ? "Nueva pestaña ON" : "OFF"}`
   },
   fr: {
@@ -158,6 +188,11 @@ const I18N = {
     historyTitle: "Récents",
     clearHistory: "Effacer",
     noHistory: "Aucun historique",
+    noteBtn: "Note",
+    noteSaving: "Enregistrement…",
+    noteSaved: "Enregistré dans les notes",
+    noteOpen: "Voir les notes",
+    noteFail: "Échec de l’enregistrement",
     hint: (engine, newTab) => `${engine} · ↑/↓: changer · ${newTab ? "Nouvel onglet ON" : "OFF"}`
   },
   de: {
@@ -170,6 +205,11 @@ const I18N = {
     historyTitle: "Zuletzt",
     clearHistory: "Löschen",
     noHistory: "Kein Verlauf",
+    noteBtn: "Notiz",
+    noteSaving: "Speichern…",
+    noteSaved: "In Notizen gespeichert",
+    noteOpen: "Notizen öffnen",
+    noteFail: "Speichern fehlgeschlagen",
     hint: (engine, newTab) => `${engine} · ↑/↓: wechseln · ${newTab ? "Neuer Tab AN" : "AUS"}`
   },
   ru: {
@@ -182,6 +222,11 @@ const I18N = {
     historyTitle: "Недавние",
     clearHistory: "Очистить",
     noHistory: "Нет истории",
+    noteBtn: "Заметка",
+    noteSaving: "Сохранение…",
+    noteSaved: "Сохранено в заметки",
+    noteOpen: "Открыть заметки",
+    noteFail: "Не удалось сохранить",
     hint: (engine, newTab) => `${engine} · ↑/↓: сменить · ${newTab ? "Новая вкл. ВКЛ" : "ВЫКЛ"}`
   },
   vn: {
@@ -194,6 +239,11 @@ const I18N = {
     historyTitle: "Gần đây",
     clearHistory: "Xóa",
     noHistory: "Không có lịch sử",
+    noteBtn: "Ghi chú",
+    noteSaving: "Đang lưu…",
+    noteSaved: "Đã lưu vào ghi chú",
+    noteOpen: "Xem ghi chú",
+    noteFail: "Không lưu được",
     hint: (engine, newTab) => `${engine} · ↑/↓: đổi · ${newTab ? "Tab mới ON" : "OFF"}`
   },
   ms: {
@@ -206,6 +256,11 @@ const I18N = {
     historyTitle: "Terkini",
     clearHistory: "Padam",
     noHistory: "Tiada sejarah",
+    noteBtn: "Nota",
+    noteSaving: "Menyimpan…",
+    noteSaved: "Disimpan ke nota",
+    noteOpen: "Buka nota",
+    noteFail: "Gagal menyimpan",
     hint: (engine, newTab) => `${engine} · ↑/↓: tukar · ${newTab ? "Tab baharu ON" : "OFF"}`
   },
   th: {
@@ -218,6 +273,11 @@ const I18N = {
     historyTitle: "ล่าสุด",
     clearHistory: "ล้าง",
     noHistory: "ไม่มีประวัติ",
+    noteBtn: "โน้ต",
+    noteSaving: "กำลังบันทึก…",
+    noteSaved: "บันทึกลงโน้ตแล้ว",
+    noteOpen: "ดูโน้ต",
+    noteFail: "บันทึกไม่สำเร็จ",
     hint: (engine, newTab) => `${engine} · ↑/↓: เปลี่ยน · ${newTab ? "แท็บใหม่ ON" : "OFF"}`
   },
   id: {
@@ -230,6 +290,11 @@ const I18N = {
     historyTitle: "Terkini",
     clearHistory: "Hapus",
     noHistory: "Tidak ada riwayat",
+    noteBtn: "Catatan",
+    noteSaving: "Menyimpan…",
+    noteSaved: "Tersimpan di catatan",
+    noteOpen: "Buka catatan",
+    noteFail: "Gagal menyimpan",
     hint: (engine, newTab) => `${engine} · ↑/↓: ganti · ${newTab ? "Tab baru ON" : "OFF"}`
   }
 };
@@ -596,6 +661,7 @@ function clearHistory() {
 // =======================
 let host, sr, overlay, panelWrap, panelEl, inputEl, selectEl, hintEl, newTabEl;
 let historyDropEl, engineDropEl, engStripEl, selBadgeEl, titleHintEl;
+let noteBtnEl, noteStatusEl;
 let overlayOpen = false;
 
 // 편집 가능한 요소인가 (입력을 절대 막으면 안 되는 대상)
@@ -1135,6 +1201,10 @@ function ensurePanel() {
       color:var(--ss-on-accent);
     }
     .btn.primary:hover{background:var(--ss-primary-bg-hover);border-color:var(--ss-primary-bg-hover)}
+    /* [노트] — 선택 영역이 있을 때만 보인다 (_showPanel) */
+    .btn.noteBtn{display:none}
+    .btn.noteBtn.visible{display:flex}
+    .btn.noteBtn:disabled{opacity:.55;cursor:default}
     /* ↵ 글리프는 폰트에 따라 거의 안 보인다 → 인라인 SVG 사용 */
     .btn .btnIcon{display:flex;align-items:center;flex-shrink:0}
     .btn .btnIcon svg{display:block;width:15px;height:15px}
@@ -1164,6 +1234,11 @@ function ensurePanel() {
     .opts label{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;font-size:12px}
     .opts input[type="checkbox"]{width:14px;height:14px;accent-color:var(--ss-accent,#3B82F6)}
     .hint{font-size:11px;color:var(--ss-hint-fg)}
+    /* 노트 저장 결과. accent 는 classic 에서 엔진 색이라 쓰지 않는다 (#12) */
+    .noteStatus{font-size:11.5px;font-weight:600;color:var(--ss-bar-fg);display:none;align-items:center;gap:6px}
+    .noteStatus.show{display:flex}
+    .noteStatus button{border:none;background:none;padding:0;font:inherit;cursor:pointer;
+      color:inherit;text-decoration:underline;text-underline-offset:2px}
 
     /* ── Engine strip: topRow 안에서 가로 스크롤 ── */
     .engStrip{
@@ -1395,7 +1470,18 @@ function ensurePanel() {
   closeBtnEl.innerHTML = `<span>✕</span>`;
   closeBtnEl.addEventListener("click", () => closePanel());
 
-  actBtns.append(searchBtnEl, closeBtnEl);
+  const noteBtn = document.createElement("button");
+  noteBtn.type = "button";
+  noteBtn.className = "btn noteBtn";
+  noteBtn.innerHTML =
+    `<span class="btnIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+    `stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">` +
+    `<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/>` +
+    `</svg></span><span class="noteLabel">Note</span>`;
+  noteBtn.addEventListener("click", () => saveNoteFromSelection());
+  noteBtnEl = noteBtn;
+
+  actBtns.append(searchBtnEl, noteBtn, closeBtnEl);
 
   // ── Top row: 타이틀 pill + 엔진 스트립 + 단축키 힌트 한 줄 ──
   const topRow = document.createElement("div");
@@ -1472,7 +1558,10 @@ function ensurePanel() {
     inputEl.focus();
   });
 
-  bottomLeft.append(newTabLabel);
+  noteStatusEl = document.createElement("div");
+  noteStatusEl.className = "noteStatus";
+
+  bottomLeft.append(newTabLabel, noteStatusEl);
 
   const bottomRight = document.createElement("div");
   bottomRight.className = "bottomRight";
@@ -1856,6 +1945,8 @@ function updateTexts() {
   if (newTabEl?.nextSibling) newTabEl.nextSibling.textContent = t(lang, "openNewTab");
   const lbl = sr?.querySelector(".btnLabel");
   if (lbl) lbl.textContent = t(lang, "enterBtn");
+  const noteLbl = sr?.querySelector(".noteLabel");
+  if (noteLbl) noteLbl.textContent = t(lang, "noteBtn");
   updateHint();
 }
 
@@ -1944,6 +2035,15 @@ function _showPanel() {
 
   if (selBadgeEl) selBadgeEl.classList.toggle("visible", sel.length > 0);
 
+  // [노트] 용 선택 범위. 여기선 복사만 해 둔다 (싸다) — HTML 추출·이미지 수집은 버튼을 누를 때만.
+  // 입력창에 포커스가 가면 페이지 선택이 풀리므로 지금 떠 둬야 한다.
+  clipRange = null;
+  const ws = window.getSelection?.();
+  if (sel && ws && ws.rangeCount && !ws.isCollapsed) clipRange = ws.getRangeAt(0).cloneRange();
+  noteBusy = false;
+  if (noteBtnEl) { noteBtnEl.disabled = false; noteBtnEl.classList.toggle("visible", !!clipRange); }
+  setNoteStatus(null);
+
   hideHistoryDrop();
   closeEngineDrop();
   inputEl.focus();
@@ -1957,6 +2057,143 @@ function _showPanel() {
       historyDropEl.style.top = (ph + gap) + "px";
     });
   }
+}
+
+// =======================
+// Note — 선택 영역을 HTML 로 떠서 노트에 저장
+// =======================
+// 저장 경로: 여기서 정리 → background(이미지를 받아 base64 로 채움) → IndexedDB (notes-db.js)
+// 여기서 하는 정리는 "용량·잡음 줄이기"다. 보안 경계는 notes.js 의 sanitizeNoteHtml() —
+// 노트를 화면에 그리기 전에 반드시 거기서 다시 거른다.
+// 모든 페이지에 로드되는 파일이라 무거운 일은 전부 버튼을 누른 뒤에만 한다.
+let clipRange = null;
+let noteBusy = false;
+
+const CLIP_DROP = new Set(["SCRIPT","STYLE","NOSCRIPT","IFRAME","OBJECT","EMBED","LINK","META","TEMPLATE",
+  "SVG","CANVAS","VIDEO","AUDIO","SOURCE","INPUT","BUTTON","SELECT","TEXTAREA","FORM","DIALOG"]);
+const CLIP_KEEP = new Set(["P","BR","HR","H1","H2","H3","H4","H5","H6","UL","OL","LI","DL","DT","DD",
+  "BLOCKQUOTE","PRE","CODE","B","STRONG","I","EM","U","S","SUB","SUP","MARK","SMALL","A","IMG",
+  "TABLE","THEAD","TBODY","TFOOT","TR","TD","TH","CAPTION","FIGURE","FIGCAPTION","DIV","SPAN"]);
+const CLIP_ATTRS = { A:["href"], IMG:["src","alt","width","height"], TD:["colspan","rowspan"],
+  TH:["colspan","rowspan"], OL:["start"] };
+
+function absUrl(u) { try { return new URL(u, document.baseURI).href; } catch { return ""; } }
+
+// 지연 로딩 이미지는 src 가 1px 자리표시자이고 진짜 주소는 data-* 에 있다
+function imgRealSrc(clone, orig) {
+  const isPlaceholder = (v) => !v || v.startsWith("data:image/gif") || v.startsWith("data:image/svg");
+  if (orig && !isPlaceholder(orig.currentSrc)) return orig.currentSrc;
+  for (const a of ["data-src","data-original","data-lazy-src","data-url","src"]) {
+    const v = clone.getAttribute(a);
+    if (v && !isPlaceholder(v)) return absUrl(v);
+  }
+  return "";
+}
+
+// 조각만 잘라내면 사라지는 서식 — 공통 조상이 이것이면 껍데기를 한 겹 씌운다
+function clipShell(ancEl) {
+  if (!ancEl) return null;
+  const tag = ancEl.tagName;
+  if (["PRE","CODE","BLOCKQUOTE","UL","OL"].includes(tag)) return [tag.toLowerCase()];
+  if (tag === "TR") return ["table", "tbody", "tr"];
+  if (["TABLE","TBODY","THEAD","TFOOT"].includes(tag)) return ["table", "tbody"];
+  return null;
+}
+
+function buildClip(range) {
+  // template 문서로 옮기면 비활성 상태가 된다 — 스크립트 실행·이미지 로드 없음
+  const tpl = document.createElement("template");
+  let root = tpl.content;
+  const anc = range.commonAncestorContainer;
+  const shell = clipShell(anc.nodeType === 1 ? anc : anc.parentElement);
+  if (shell) for (const tag of shell) root = root.appendChild(document.createElement(tag));
+  root.appendChild(range.cloneContents());
+
+  // 이미지: 원본과 복제를 문서 순서로 짝지어 currentSrc(실제로 보인 주소)를 얻는다.
+  // 순회하며 노드를 지우기 전에 번호를 매겨야 짝이 안 어긋난다. 개수가 다르면 짝짓기 포기.
+  const origImgs = [...document.images].filter(i => { try { return range.intersectsNode(i); } catch { return false; } });
+  const cloneImgs = [...tpl.content.querySelectorAll("img")];
+  const paired = origImgs.length === cloneImgs.length;
+  const token = "https://tt-img.invalid/" + Math.random().toString(36).slice(2);
+  const images = [];
+  cloneImgs.slice(0, 60).forEach((img, i) => {
+    const src = imgRealSrc(img, paired ? origImgs[i] : null);
+    if (!src) { img.remove(); return; }
+    img.setAttribute("src", `${token}/${images.length}`);
+    images.push(src);
+  });
+  cloneImgs.slice(60).forEach(img => img.remove());
+
+  const walk = (el) => {
+    for (const child of [...el.children]) {
+      const tag = child.tagName.toUpperCase();
+      if (CLIP_DROP.has(tag) || child.hidden) { child.remove(); continue; }
+      walk(child);
+      if (!CLIP_KEEP.has(tag)) { child.replaceWith(...child.childNodes); continue; }
+      if (tag === "A") {
+        const href = absUrl(child.getAttribute("href") || "");
+        if (/^https?:/i.test(href)) child.setAttribute("href", href); else child.removeAttribute("href");
+      }
+      const keep = CLIP_ATTRS[tag] || [];
+      for (const at of [...child.attributes]) if (!keep.includes(at.name)) child.removeAttribute(at.name);
+    }
+  };
+  walk(tpl.content);
+
+  // template 에서 바로 직렬화한다. 일반 div 로 옮기면 <img> 가 살아나 토큰 주소로 요청을 보낸다
+  return {
+    html: tpl.innerHTML,
+    text: (tpl.content.textContent || "").replace(/\s+/g, " ").trim(),
+    images, token
+  };
+}
+
+function setNoteStatus(kind) {
+  if (!noteStatusEl) return;
+  const lang = state.lang || "en";
+  noteStatusEl.textContent = "";
+  noteStatusEl.classList.toggle("show", !!kind);
+  if (!kind) return;
+  if (kind === "saving") { noteStatusEl.textContent = t(lang, "noteSaving"); return; }
+  if (kind === "fail")   { noteStatusEl.textContent = "⚠ " + t(lang, "noteFail"); return; }
+  const msg = document.createElement("span");
+  msg.textContent = "✓ " + t(lang, "noteSaved");
+  const open = document.createElement("button");
+  open.type = "button";
+  open.textContent = t(lang, "noteOpen");
+  open.addEventListener("click", () => {
+    if (extAlive()) chrome.runtime.sendMessage({ type: "OPEN_NOTES", id: noteStatusEl.dataset.id });
+    closePanel();
+  });
+  noteStatusEl.append(msg, open);
+}
+
+function saveNoteFromSelection() {
+  if (!clipRange || noteBusy || !extAlive()) return;
+  noteBusy = true;
+  noteBtnEl.disabled = true;
+  setNoteStatus("saving");
+  let clip = null;
+  try { clip = buildClip(clipRange); } catch {}
+  if (!clip || (!clip.text && !clip.images.length)) {
+    noteBusy = false; noteBtnEl.disabled = false; setNoteStatus("fail"); return;
+  }
+  chrome.runtime.sendMessage({
+    type: "NOTE_SAVE",
+    html: clip.html, text: clip.text, images: clip.images, token: clip.token,
+    url: location.href, title: document.title
+  }, (res) => {
+    noteBusy = false;
+    if (chrome.runtime.lastError || !res?.ok) {
+      noteBtnEl.disabled = false;
+      setNoteStatus("fail");
+      return;
+    }
+    // 같은 조각을 두 번 저장하지 않도록 버튼은 잠가 둔다 (다음에 팝업을 열면 풀린다)
+    noteStatusEl.dataset.id = res.id;
+    setNoteStatus("saved");
+    inputEl?.focus();
+  });
 }
 
 function closePanel() {

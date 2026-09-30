@@ -59,6 +59,11 @@ chrome.storage.sync.get([K_LANG], (res) => {
   applyI18n();
 });
 
+document.getElementById("notesBtn").addEventListener("click", () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL("notes.html") });
+  window.close();
+});
+
 optBtn.addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
   window.close();
