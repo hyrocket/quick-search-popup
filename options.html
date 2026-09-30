@@ -87,8 +87,49 @@
        닫으면 storage 에 적어 두고 다시 띄우지 않는다 (options.js 의 initWelcome). */
     .welCard{display:none;position:relative;border-color:var(--accent);background:var(--accent-soft)}
     .welCard.show{display:block}
-    .welTitle{font-size:16px;font-weight:700;margin-bottom:10px}
+    .welTitle{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
+    /* 메인 기능(더블탭)이 한 줄로 먼저 읽히게 헤드라인으로 키운다 */
+    .welHead{font-size:20px;font-weight:800;line-height:1.45;margin:0 0 14px;padding-right:28px}
+    .welHead .welKbd{font-size:16px;padding:2px 9px;vertical-align:2px}
     .welP{font-size:13px;margin:0 0 8px;line-height:1.6}
+    .welTip{font-size:12.5px;color:var(--muted);margin:0 0 8px;line-height:1.6}
+
+    /* 데모: Shift 두 번 → 팝업. 이미지 대신 CSS 로 그린다
+       (13개 언어마다 캡처할 필요 없음 · 다크모드 자동 · ZIP 크기 0).
+       글자는 키캡과 엔진 이름뿐 — 둘 다 번역 대상이 아니다 (#13) */
+    .welDemo{display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+      padding:18px 20px;margin:0 0 14px;border-radius:var(--radius-sm);
+      background:var(--card);border:1px solid var(--border)}
+    .wdKeys{display:flex;gap:8px;flex:none}
+    .wdKey{padding:9px 14px;border:1px solid var(--border);border-bottom-width:4px;border-radius:8px;
+      background:var(--card);font-size:14px;font-weight:700;color:var(--text);
+      animation:wdTap 4s infinite}
+    .wdKey:nth-child(2){animation-delay:.3s}
+    .wdArrow{font-size:20px;color:var(--muted);flex:none}
+    .wdPop{flex:1;min-width:240px;max-width:420px;padding:10px;border-radius:12px;
+      background:var(--card);border:1px solid var(--border);
+      box-shadow:0 10px 28px rgba(0,0,0,.14);transform-origin:center top;
+      animation:wdPop 4s infinite}
+    .wdChips{display:flex;gap:5px;margin-bottom:8px;overflow:hidden}
+    .wdChip{padding:3px 9px;border-radius:999px;border:1px solid var(--border);
+      font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+    .wdChip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+    .wdRow{display:flex;gap:6px}
+    .wdInput{flex:1;height:30px;border-radius:7px;border:1.5px solid var(--accent);
+      display:flex;align-items:center;padding:0 9px}
+    .wdCaret{width:1.5px;height:15px;background:var(--text);animation:wdBlink 1s steps(1) infinite}
+    .wdGo{width:38px;height:30px;border-radius:7px;background:var(--accent);
+      display:flex;align-items:center;justify-content:center}
+    .wdGo svg{width:15px;height:15px;stroke:#fff}
+    /* 0.0s·0.3s 에 키 눌림 → 0.7s 팝업 등장 → 3.4s 까지 유지 → 사라지고 반복 */
+    @keyframes wdTap{0%,4%{transform:none;border-bottom-width:4px;border-color:var(--border)}
+      2%{transform:translateY(3px);border-bottom-width:1px;border-color:var(--accent)}
+      100%{transform:none}}
+    @keyframes wdPop{0%,15%{opacity:0;transform:translateY(-6px) scale(.96)}
+      20%,85%{opacity:1;transform:none}
+      92%,100%{opacity:0;transform:translateY(-6px) scale(.96)}}
+    @keyframes wdBlink{50%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){.wdKey,.wdPop,.wdCaret{animation:none}}
     .welP:last-of-type{margin-bottom:0}
     .welWarn{font-size:13px;line-height:1.6;margin:10px 0 0;padding:10px 12px;
       border-radius:var(--radius-sm);background:var(--card);border:1px solid var(--border)}
@@ -605,8 +646,20 @@
       <div class="card welCard" id="welcomeCard">
         <button type="button" class="welClose" id="welClose" title="close">&#10005;</button>
         <div class="welTitle" data-i18n="wel.title">Welcome</div>
-        <p class="welP" data-i18n-html="wel.use"></p>
-        <p class="welP" data-i18n="wel.select"></p>
+        <p class="welHead" data-i18n-html="wel.use"></p>
+        <div class="welDemo" aria-hidden="true">
+          <div class="wdKeys"><span class="wdKey">⇧ Shift</span><span class="wdKey">⇧ Shift</span></div>
+          <div class="wdArrow">→</div>
+          <div class="wdPop">
+            <div class="wdChips"><span class="wdChip on">Google</span><span class="wdChip">ChatGPT</span><span class="wdChip">Perplexity</span><span class="wdChip">Wikipedia</span></div>
+            <div class="wdRow">
+              <div class="wdInput"><span class="wdCaret"></span></div>
+              <div class="wdGo"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <p class="welP" data-i18n-html="wel.how"></p>
+        <p class="welTip" data-i18n="wel.select"></p>
         <p class="welWarn" data-i18n-html="wel.reload"></p>
         <div class="welBtns">
           <button type="button" class="welBtn" id="welToShortcut" data-i18n="wel.toShortcut"></button>

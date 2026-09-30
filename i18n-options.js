@@ -36,8 +36,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 TapTap is ready",
-    "wel.use":"Tap <kbd class=\"welKbd\">Shift</kbd> twice → type → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Select text on a page first and the box opens already filled in.",
+    "wel.use":"Tap <kbd class=\"welKbd\">Shift</kbd> twice to search — on any page",
+    "wel.how":"A search box pops up right over the page. Type, then press <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Tip: select text first and the box opens already filled in.",
     "wel.reload":"⚠️ <strong>Tabs you already had open need a reload</strong> before the shortcut works there. New tabs work right away.",
     "wel.toShortcut":"Change shortcut",
     "wel.toLang":"Change language",
@@ -127,8 +128,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 설치 완료, 바로 쓸 수 있습니다",
-    "wel.use":"<kbd class=\"welKbd\">Shift</kbd> 두 번 → 검색어 입력 → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"페이지에서 글자를 선택한 뒤 열면 검색창에 그 글자가 채워져 있습니다.",
+    "wel.use":"어느 페이지에서든 <kbd class=\"welKbd\">Shift</kbd> 두 번이면 검색",
+    "wel.how":"페이지 위에 검색창이 바로 뜹니다. 검색어를 입력하고 <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"팁: 글자를 먼저 선택하고 열면 검색창에 그 글자가 채워져 있습니다.",
     "wel.reload":"⚠️ <strong>이미 열어 둔 탭은 새로고침해야</strong> 단축키가 동작합니다. 새로 여는 탭은 바로 됩니다.",
     "wel.toShortcut":"단축키 바꾸기",
     "wel.toLang":"언어 바꾸기",
@@ -218,8 +220,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 インストール完了、すぐ使えます",
-    "wel.use":"<kbd class=\"welKbd\">Shift</kbd> を２回 → 入力 → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"ページ上で文字を選択してから開くと、その文字が入力欄に入ります。",
+    "wel.use":"どのページでも <kbd class=\"welKbd\">Shift</kbd> を２回押すだけで検索",
+    "wel.how":"ページの上に検索ボックスが開きます。入力して <kbd class=\"welKbd\">Enter</kbd>。",
+    "wel.select":"ヒント：先に文字を選択しておくと、入力欄に入った状態で開きます。",
     "wel.reload":"⚠️ <strong>すでに開いていたタブは再読み込みが必要です。</strong>新しく開くタブではすぐに使えます。",
     "wel.toShortcut":"ショートカットを変更",
     "wel.toLang":"言語を変更",
@@ -309,8 +312,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 安装完成，马上就能用",
-    "wel.use":"连按两下 <kbd class=\"welKbd\">Shift</kbd> → 输入 → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"先在页面上选中文字再打开，搜索框会自动填入。",
+    "wel.use":"在任何页面，连按两下 <kbd class=\"welKbd\">Shift</kbd> 即可搜索",
+    "wel.how":"搜索框会直接浮现在页面上。输入后按 <kbd class=\"welKbd\">Enter</kbd>。",
+    "wel.select":"提示：先选中文字再打开，搜索框会自动填入。",
     "wel.reload":"⚠️ <strong>此前已打开的标签页需要刷新</strong>后快捷键才生效。新打开的标签页可直接使用。",
     "wel.toShortcut":"更改快捷键",
     "wel.toLang":"更改语言",
@@ -400,8 +404,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 安裝完成，馬上就能用",
-    "wel.use":"連按兩下 <kbd class=\"welKbd\">Shift</kbd> → 輸入 → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"先在頁面上選取文字再開啟，搜尋框會自動填入。",
+    "wel.use":"在任何頁面，連按兩下 <kbd class=\"welKbd\">Shift</kbd> 就能搜尋",
+    "wel.how":"搜尋框會直接浮現在頁面上。輸入後按 <kbd class=\"welKbd\">Enter</kbd>。",
+    "wel.select":"提示：先選取文字再開啟，搜尋框會自動填入。",
     "wel.reload":"⚠️ <strong>先前已開啟的分頁需要重新整理</strong>，快速鍵才會生效。新開的分頁可直接使用。",
     "wel.toShortcut":"變更快速鍵",
     "wel.toLang":"變更語言",
@@ -491,8 +496,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Listo para usar",
-    "wel.use":"Pulsa <kbd class=\"welKbd\">Shift</kbd> dos veces → escribe → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Si seleccionas texto antes, el buscador se abre con ese texto.",
+    "wel.use":"Pulsa <kbd class=\"welKbd\">Shift</kbd> dos veces para buscar desde cualquier página",
+    "wel.how":"Aparece un buscador sobre la página. Escribe y pulsa <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Consejo: si seleccionas texto antes, el buscador se abre con ese texto.",
     "wel.reload":"⚠️ <strong>Las pestañas que ya tenías abiertas necesitan recargarse</strong> para que funcione el atajo. Las nuevas funcionan enseguida.",
     "wel.toShortcut":"Cambiar atajo",
     "wel.toLang":"Cambiar idioma",
@@ -582,8 +588,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Prêt à l’emploi",
-    "wel.use":"Deux appuis sur <kbd class=\"welKbd\">Shift</kbd> → saisissez → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Sélectionnez du texte avant d’ouvrir : il est repris dans le champ.",
+    "wel.use":"Appuyez deux fois sur <kbd class=\"welKbd\">Shift</kbd> pour chercher depuis n’importe quelle page",
+    "wel.how":"Un champ de recherche s’ouvre par-dessus la page. Saisissez, puis <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Astuce : sélectionnez du texte avant d’ouvrir, il est repris dans le champ.",
     "wel.reload":"⚠️ <strong>Les onglets déjà ouverts doivent être rechargés</strong> pour que le raccourci fonctionne. Les nouveaux onglets fonctionnent tout de suite.",
     "wel.toShortcut":"Changer le raccourci",
     "wel.toLang":"Changer la langue",
@@ -673,8 +680,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Fertig – es kann losgehen",
-    "wel.use":"Zweimal <kbd class=\"welKbd\">Shift</kbd> → tippen → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Markiere vorher Text, dann steht er schon im Suchfeld.",
+    "wel.use":"Zweimal <kbd class=\"welKbd\">Shift</kbd> tippen – und auf jeder Seite suchen",
+    "wel.how":"Über der Seite erscheint ein Suchfeld. Eintippen und <kbd class=\"welKbd\">Enter</kbd> drücken.",
+    "wel.select":"Tipp: Markiere vorher Text, dann steht er schon im Suchfeld.",
     "wel.reload":"⚠️ <strong>Bereits geöffnete Tabs musst du neu laden</strong>, damit das Tastenkürzel dort wirkt. Neue Tabs funktionieren sofort.",
     "wel.toShortcut":"Tastenkürzel ändern",
     "wel.toLang":"Sprache ändern",
@@ -764,8 +772,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Готово к работе",
-    "wel.use":"Дважды <kbd class=\"welKbd\">Shift</kbd> → ввод → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Выделите текст заранее — он подставится в строку поиска.",
+    "wel.use":"Дважды нажмите <kbd class=\"welKbd\">Shift</kbd> — и ищите с любой страницы",
+    "wel.how":"Поверх страницы появится строка поиска. Введите запрос и нажмите <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Совет: выделите текст заранее — он подставится в строку поиска.",
     "wel.reload":"⚠️ <strong>Вкладки, открытые до установки, нужно обновить</strong>, иначе сочетание там не сработает. Новые вкладки работают сразу.",
     "wel.toShortcut":"Изменить сочетание",
     "wel.toLang":"Изменить язык",
@@ -855,8 +864,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Sẵn sàng sử dụng",
-    "wel.use":"Nhấn <kbd class=\"welKbd\">Shift</kbd> hai lần → gõ → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Bôi đen văn bản trước khi mở, ô tìm kiếm sẽ tự điền.",
+    "wel.use":"Nhấn <kbd class=\"welKbd\">Shift</kbd> hai lần để tìm kiếm trên bất kỳ trang nào",
+    "wel.how":"Ô tìm kiếm hiện ngay trên trang. Gõ rồi nhấn <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Mẹo: bôi đen văn bản trước khi mở, ô tìm kiếm sẽ tự điền.",
     "wel.reload":"⚠️ <strong>Các tab đang mở từ trước cần được tải lại</strong> thì phím tắt mới hoạt động. Tab mở mới dùng được ngay.",
     "wel.toShortcut":"Đổi phím tắt",
     "wel.toLang":"Đổi ngôn ngữ",
@@ -946,8 +956,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Sedia digunakan",
-    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali → taip → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Pilih teks dahulu, kotak carian akan terisi dengan teks itu.",
+    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali untuk mencari dari mana-mana halaman",
+    "wel.how":"Kotak carian muncul terus di atas halaman. Taip, kemudian tekan <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Petua: pilih teks dahulu, kotak carian akan terisi dengan teks itu.",
     "wel.reload":"⚠️ <strong>Tab yang sudah dibuka perlu dimuat semula</strong> sebelum pintasan berfungsi di situ. Tab baharu terus berfungsi.",
     "wel.toShortcut":"Tukar pintasan",
     "wel.toLang":"Tukar bahasa",
@@ -1037,8 +1048,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 พร้อมใช้งานแล้ว",
-    "wel.use":"กด <kbd class=\"welKbd\">Shift</kbd> สองครั้ง → พิมพ์ → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"เลือกข้อความบนหน้าเว็บก่อน ช่องค้นหาจะใส่ข้อความนั้นให้",
+    "wel.use":"กด <kbd class=\"welKbd\">Shift</kbd> สองครั้งเพื่อค้นหาได้จากทุกหน้าเว็บ",
+    "wel.how":"ช่องค้นหาจะเด้งขึ้นบนหน้าเว็บทันที พิมพ์แล้วกด <kbd class=\"welKbd\">Enter</kbd>",
+    "wel.select":"เคล็ดลับ: เลือกข้อความก่อน ช่องค้นหาจะใส่ข้อความนั้นให้",
     "wel.reload":"⚠️ <strong>แท็บที่เปิดค้างไว้ต้องรีเฟรชก่อน</strong> คีย์ลัดจึงจะทำงาน แท็บที่เปิดใหม่ใช้ได้ทันที",
     "wel.toShortcut":"เปลี่ยนคีย์ลัด",
     "wel.toLang":"เปลี่ยนภาษา",
@@ -1128,8 +1140,9 @@ const OPT_I18N = {
 
     // 설치 직후 안내 카드 — 설치 전부터 열려 있던 탭은 새로고침해야 동작한다
     "wel.title":"🎉 Siap dipakai",
-    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali → ketik → <kbd class=\"welKbd\">Enter</kbd>",
-    "wel.select":"Pilih teks lebih dulu, kotak pencarian akan terisi otomatis.",
+    "wel.use":"Tekan <kbd class=\"welKbd\">Shift</kbd> dua kali untuk mencari dari halaman mana pun",
+    "wel.how":"Kotak pencarian muncul langsung di atas halaman. Ketik, lalu tekan <kbd class=\"welKbd\">Enter</kbd>.",
+    "wel.select":"Tips: pilih teks lebih dulu, kotak pencarian akan terisi otomatis.",
     "wel.reload":"⚠️ <strong>Tab yang sudah terbuka perlu dimuat ulang</strong> agar pintasan bekerja di sana. Tab baru langsung bisa.",
     "wel.toShortcut":"Ubah pintasan",
     "wel.toLang":"Ubah bahasa",
