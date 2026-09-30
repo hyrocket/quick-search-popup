@@ -43,35 +43,73 @@ const NOTE_IMG_TIMEOUT     = 8000;
 const NOTE_IMG_PARALLEL    = 6;
 
 async function saveNote(msg) {
-  const html   = typeof msg.html === "string" ? msg.html : "";
-  const token  = typeof msg.token === "string" ? msg.token : "";
-  const images = Array.isArray(msg.images) ? msg.images.slice(0, 60) : [];
-  if (!html.trim()) return { ok: false, error: "empty" };
-
-  const inlined = await fetchImagesAsDataUrls(images);
-  let out = html;
-  images.forEach((src, i) => {
-    out = out.split(`${token}/${i}"`).join(`${inlined[i] || escAttr(src)}"`);
-  });
-
+  const isMemo = msg.kind === "memo";
   const now = Date.now();
   let site = "";
   try { site = new URL(msg.url).hostname; } catch {}
-  const pageTitle = String(msg.title || site || "").trim().slice(0, 200);
+  const url = String(msg.url || "");
+
+  let out, text, title;
+  if (isMemo) {
+    // 검색창에 적은 짧은 메모. 제목은 메모 앞부분, 원본 링크는 메모를 적은 페이지
+    const memo = String(msg.text || "").trim().slice(0, 5000);
+    if (!memo) return { ok: false, error: "empty" };
+    out = memo.split(/\n+/).map(l => `<p>${escHtml(l)}</p>`).join("");
+    text = memo;
+    title = `${notesFmtDate(now)} ${memo.replace(/\s+/g, " ").slice(0, 60)}`;
+  } else {
+    const html   = typeof msg.html === "string" ? msg.html : "";
+    const token  = typeof msg.token === "string" ? msg.token : "";
+    const images = Array.isArray(msg.images) ? msg.images.slice(0, 60) : [];
+    if (!html.trim()) return { ok: false, error: "empty" };
+    const inlined = await fetchImagesAsDataUrls(images);
+    out = html;
+    // data-orig: 원래 이미지 주소. Markdown 내보내기에서 base64 대신 이 주소를 쓴다
+    images.forEach((src, i) => {
+      const rep = inlined[i] ? `${inlined[i]}" data-orig="${escAttr(src)}` : escAttr(src);
+      out = out.split(`${token}/${i}"`).join(`${rep}"`);
+    });
+    text = String(msg.text || "");
+    const pageTitle = String(msg.title || site || "").trim().slice(0, 200);
+    title = `${notesFmtDate(now)} ${pageTitle}`.trim();
+  }
+
+  const st = await chrome.storage.local.get([K_NOTE_TARGET, K_NOTE_APPEND]);
+  const folders = await foldersList();
+
+  // 같은 페이지에서 또 긁으면 그 페이지의 가장 최근 노트 아래에 이어 붙인다 (메모는 제외)
+  if (!isMemo && st[K_NOTE_APPEND] !== false) {
+    const key = notesPageKey(url);
+    const prev = (await notesListMeta()).find(m => m.kind !== "memo" && notesPageKey(m.url) === key);
+    if (prev) {
+      const body = await notesGetBody(prev.id);
+      prev.text = `${prev.text || ""} ${text}`.slice(0, 5000);
+      prev.updatedAt = now;
+      await notesPut(prev, `${body}<hr>${out}`);
+      notesAnnounce({ type: "updated", id: prev.id });
+      const f = folders.find(x => x.id === prev.folderId);
+      return { ok: true, id: prev.id, appended: true, folderName: f?.name || "" };
+    }
+  }
+
+  const target = folders.find(x => x.id === st[K_NOTE_TARGET]) || null;
   const meta = {
     id: crypto.randomUUID(),
-    title: `${notesFmtDate(now)} ${pageTitle}`.trim(),
-    url: String(msg.url || ""),
+    kind: isMemo ? "memo" : "clip",
+    title,
+    url,
     site,
     createdAt: now,
     updatedAt: now,
-    text: String(msg.text || "").slice(0, 5000),   // 목록 검색용. 본문은 body 에만
+    text: text.slice(0, 5000),   // 목록 검색용. 본문은 body 에만
+    folderId: target?.id || null,
   };
   await notesPut(meta, out);
   notesAnnounce({ type: "saved", id: meta.id });
-  return { ok: true, id: meta.id };
+  return { ok: true, id: meta.id, appended: false, folderName: target?.name || "" };
 }
 
+function escHtml(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function escAttr(s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;"); }
 
 async function fetchImagesAsDataUrls(urls) {

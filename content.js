@@ -88,7 +88,9 @@ const I18N = {
     noHistory: "검색 기록 없음",
     noteBtn: "노트",
     noteSaving: "저장 중…",
-    noteSaved: "노트에 저장됨",
+    noteSaved: (folder) => folder ? `📂 ${folder} 에 저장됨` : "노트에 저장됨",
+    noteAppended: "같은 페이지 노트에 이어 붙임",
+    noteTip: "선택한 부분 또는 입력한 메모를 노트로 저장",
     noteOpen: "노트 보기",
     noteFail: "저장 실패",
     hint: (engine, newTab) => `${engine} · ↑/↓: 엔진 변경 · ${newTab ? "새탭 ON" : "새탭 OFF"}`
@@ -105,7 +107,9 @@ const I18N = {
     noHistory: "No recent searches",
     noteBtn: "Note",
     noteSaving: "Saving…",
-    noteSaved: "Saved to notes",
+    noteSaved: (folder) => folder ? `Saved to 📂 ${folder}` : "Saved to notes",
+    noteAppended: "Added to this page's note",
+    noteTip: "Save the selection, or what you typed, as a note",
     noteOpen: "Open notes",
     noteFail: "Couldn't save",
     hint: (engine, newTab) => `${engine} · ↑/↓: change engine · ${newTab ? "New tab ON" : "New tab OFF"}`
@@ -122,7 +126,9 @@ const I18N = {
     noHistory: "検索履歴なし",
     noteBtn: "ノート",
     noteSaving: "保存中…",
-    noteSaved: "ノートに保存しました",
+    noteSaved: (folder) => folder ? `📂 ${folder} に保存しました` : "ノートに保存しました",
+    noteAppended: "このページのノートに追記しました",
+    noteTip: "選択部分または入力したメモをノートに保存",
     noteOpen: "ノートを見る",
     noteFail: "保存できませんでした",
     hint: (engine, newTab) => `${engine} · ↑/↓: エンジン変更 · ${newTab ? "新タブ ON" : "新タブ OFF"}`
@@ -139,7 +145,9 @@ const I18N = {
     noHistory: "无搜索历史",
     noteBtn: "笔记",
     noteSaving: "保存中…",
-    noteSaved: "已保存到笔记",
+    noteSaved: (folder) => folder ? `已保存到 📂 ${folder}` : "已保存到笔记",
+    noteAppended: "已追加到本页笔记",
+    noteTip: "把选中的内容或输入的文字存为笔记",
     noteOpen: "查看笔记",
     noteFail: "保存失败",
     hint: (engine, newTab) => `${engine} · ↑/↓: 切换 · ${newTab ? "新标签 ON" : "OFF"}`
@@ -156,7 +164,9 @@ const I18N = {
     noHistory: "無搜尋記錄",
     noteBtn: "筆記",
     noteSaving: "儲存中…",
-    noteSaved: "已儲存到筆記",
+    noteSaved: (folder) => folder ? `已儲存到 📂 ${folder}` : "已儲存到筆記",
+    noteAppended: "已附加到本頁筆記",
+    noteTip: "把選取的內容或輸入的文字存為筆記",
     noteOpen: "查看筆記",
     noteFail: "儲存失敗",
     hint: (engine, newTab) => `${engine} · ↑/↓: 切換 · ${newTab ? "新分頁 ON" : "OFF"}`
@@ -173,7 +183,9 @@ const I18N = {
     noHistory: "Sin historial",
     noteBtn: "Nota",
     noteSaving: "Guardando…",
-    noteSaved: "Guardado en notas",
+    noteSaved: (folder) => folder ? `Guardado en 📂 ${folder}` : "Guardado en notas",
+    noteAppended: "Añadido a la nota de esta página",
+    noteTip: "Guarda la selección, o lo que escribiste, como nota",
     noteOpen: "Ver notas",
     noteFail: "No se pudo guardar",
     hint: (engine, newTab) => `${engine} · ↑/↓: cambiar · ${newTab ? "Nueva pestaña ON" : "OFF"}`
@@ -190,7 +202,9 @@ const I18N = {
     noHistory: "Aucun historique",
     noteBtn: "Note",
     noteSaving: "Enregistrement…",
-    noteSaved: "Enregistré dans les notes",
+    noteSaved: (folder) => folder ? `Enregistré dans 📂 ${folder}` : "Enregistré dans les notes",
+    noteAppended: "Ajouté à la note de cette page",
+    noteTip: "Enregistrer la sélection, ou ce que vous avez saisi, en note",
     noteOpen: "Voir les notes",
     noteFail: "Échec de l’enregistrement",
     hint: (engine, newTab) => `${engine} · ↑/↓: changer · ${newTab ? "Nouvel onglet ON" : "OFF"}`
@@ -207,7 +221,9 @@ const I18N = {
     noHistory: "Kein Verlauf",
     noteBtn: "Notiz",
     noteSaving: "Speichern…",
-    noteSaved: "In Notizen gespeichert",
+    noteSaved: (folder) => folder ? `In 📂 ${folder} gespeichert` : "In Notizen gespeichert",
+    noteAppended: "Zur Notiz dieser Seite hinzugefügt",
+    noteTip: "Auswahl oder Eingabe als Notiz speichern",
     noteOpen: "Notizen öffnen",
     noteFail: "Speichern fehlgeschlagen",
     hint: (engine, newTab) => `${engine} · ↑/↓: wechseln · ${newTab ? "Neuer Tab AN" : "AUS"}`
@@ -224,7 +240,9 @@ const I18N = {
     noHistory: "Нет истории",
     noteBtn: "Заметка",
     noteSaving: "Сохранение…",
-    noteSaved: "Сохранено в заметки",
+    noteSaved: (folder) => folder ? `Сохранено в 📂 ${folder}` : "Сохранено в заметки",
+    noteAppended: "Добавлено к заметке этой страницы",
+    noteTip: "Сохранить выделенное или введённый текст как заметку",
     noteOpen: "Открыть заметки",
     noteFail: "Не удалось сохранить",
     hint: (engine, newTab) => `${engine} · ↑/↓: сменить · ${newTab ? "Новая вкл. ВКЛ" : "ВЫКЛ"}`
@@ -241,7 +259,9 @@ const I18N = {
     noHistory: "Không có lịch sử",
     noteBtn: "Ghi chú",
     noteSaving: "Đang lưu…",
-    noteSaved: "Đã lưu vào ghi chú",
+    noteSaved: (folder) => folder ? `Đã lưu vào 📂 ${folder}` : "Đã lưu vào ghi chú",
+    noteAppended: "Đã thêm vào ghi chú của trang này",
+    noteTip: "Lưu phần đã chọn hoặc nội dung đã gõ thành ghi chú",
     noteOpen: "Xem ghi chú",
     noteFail: "Không lưu được",
     hint: (engine, newTab) => `${engine} · ↑/↓: đổi · ${newTab ? "Tab mới ON" : "OFF"}`
@@ -258,7 +278,9 @@ const I18N = {
     noHistory: "Tiada sejarah",
     noteBtn: "Nota",
     noteSaving: "Menyimpan…",
-    noteSaved: "Disimpan ke nota",
+    noteSaved: (folder) => folder ? `Disimpan ke 📂 ${folder}` : "Disimpan ke nota",
+    noteAppended: "Ditambah pada nota halaman ini",
+    noteTip: "Simpan pilihan, atau apa yang anda taip, sebagai nota",
     noteOpen: "Buka nota",
     noteFail: "Gagal menyimpan",
     hint: (engine, newTab) => `${engine} · ↑/↓: tukar · ${newTab ? "Tab baharu ON" : "OFF"}`
@@ -275,7 +297,9 @@ const I18N = {
     noHistory: "ไม่มีประวัติ",
     noteBtn: "โน้ต",
     noteSaving: "กำลังบันทึก…",
-    noteSaved: "บันทึกลงโน้ตแล้ว",
+    noteSaved: (folder) => folder ? `บันทึกลง 📂 ${folder} แล้ว` : "บันทึกลงโน้ตแล้ว",
+    noteAppended: "เพิ่มต่อในโน้ตของหน้านี้แล้ว",
+    noteTip: "บันทึกส่วนที่เลือกหรือข้อความที่พิมพ์เป็นโน้ต",
     noteOpen: "ดูโน้ต",
     noteFail: "บันทึกไม่สำเร็จ",
     hint: (engine, newTab) => `${engine} · ↑/↓: เปลี่ยน · ${newTab ? "แท็บใหม่ ON" : "OFF"}`
@@ -292,7 +316,9 @@ const I18N = {
     noHistory: "Tidak ada riwayat",
     noteBtn: "Catatan",
     noteSaving: "Menyimpan…",
-    noteSaved: "Tersimpan di catatan",
+    noteSaved: (folder) => folder ? `Tersimpan di 📂 ${folder}` : "Tersimpan di catatan",
+    noteAppended: "Ditambahkan ke catatan halaman ini",
+    noteTip: "Simpan pilihan, atau yang Anda ketik, sebagai catatan",
     noteOpen: "Buka catatan",
     noteFail: "Gagal menyimpan",
     hint: (engine, newTab) => `${engine} · ↑/↓: ganti · ${newTab ? "Tab baru ON" : "OFF"}`
@@ -1201,10 +1227,8 @@ function ensurePanel() {
       color:var(--ss-on-accent);
     }
     .btn.primary:hover{background:var(--ss-primary-bg-hover);border-color:var(--ss-primary-bg-hover)}
-    /* [노트] — 선택 영역이 있을 때만 보인다 (_showPanel) */
-    .btn.noteBtn{display:none}
-    .btn.noteBtn.visible{display:flex}
-    .btn.noteBtn:disabled{opacity:.55;cursor:default}
+    /* [노트] — 선택이 있으면 선택 영역을, 없으면 입력창의 메모를 저장한다 */
+    .btn.noteBtn:disabled{opacity:.45;cursor:default}
     /* ↵ 글리프는 폰트에 따라 거의 안 보인다 → 인라인 SVG 사용 */
     .btn .btnIcon{display:flex;align-items:center;flex-shrink:0}
     .btn .btnIcon svg{display:block;width:15px;height:15px}
@@ -1414,6 +1438,7 @@ function ensurePanel() {
     setTimeout(() => hideHistoryDrop(), 80);
   });
   inputEl.addEventListener("input", () => {
+    updateNoteBtn();
     closeEngineDrop();   // 타이핑을 시작했으면 엔진 선택은 끝난 것
     filterHistoryDrop(inputEl.value);
   });
@@ -1445,6 +1470,8 @@ function ensurePanel() {
     if (e.key === "Enter") {
       e.preventDefault();
       if (engOpen) { pickHighlightedEngine(); return; }
+      // Ctrl/⌘ + Enter = 노트로 저장 (Enter 는 검색)
+      if (e.ctrlKey || e.metaKey) { saveNote(); return; }
       doSearch(); return;
     }
     if (e.key === "Tab") { e.preventDefault(); if (!engOpen) cycleEngine(+1); return; }
@@ -1478,7 +1505,7 @@ function ensurePanel() {
     `stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">` +
     `<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/>` +
     `</svg></span><span class="noteLabel">Note</span>`;
-  noteBtn.addEventListener("click", () => saveNoteFromSelection());
+  noteBtn.addEventListener("click", () => saveNote());
   noteBtnEl = noteBtn;
 
   actBtns.append(searchBtnEl, noteBtn, closeBtnEl);
@@ -1947,6 +1974,7 @@ function updateTexts() {
   if (lbl) lbl.textContent = t(lang, "enterBtn");
   const noteLbl = sr?.querySelector(".noteLabel");
   if (noteLbl) noteLbl.textContent = t(lang, "noteBtn");
+  if (noteBtnEl) noteBtnEl.title = t(lang, "noteTip") + "  (Ctrl+Enter)";
   updateHint();
 }
 
@@ -2041,7 +2069,8 @@ function _showPanel() {
   const ws = window.getSelection?.();
   if (sel && ws && ws.rangeCount && !ws.isCollapsed) clipRange = ws.getRangeAt(0).cloneRange();
   noteBusy = false;
-  if (noteBtnEl) { noteBtnEl.disabled = false; noteBtnEl.classList.toggle("visible", !!clipRange); }
+  noteDone = false;
+  updateNoteBtn();
   setNoteStatus(null);
 
   hideHistoryDrop();
@@ -2068,6 +2097,13 @@ function _showPanel() {
 // 모든 페이지에 로드되는 파일이라 무거운 일은 전부 버튼을 누른 뒤에만 한다.
 let clipRange = null;
 let noteBusy = false;
+let noteDone = false;   // 같은 선택 영역을 두 번 저장하지 않게 (다음에 팝업을 열면 풀린다)
+
+function updateNoteBtn() {
+  if (!noteBtnEl) return;
+  const hasMemo = !!(inputEl?.value || "").trim();
+  noteBtnEl.disabled = noteBusy || (clipRange ? noteDone : !hasMemo);
+}
 
 const CLIP_DROP = new Set(["SCRIPT","STYLE","NOSCRIPT","IFRAME","OBJECT","EMBED","LINK","META","TEMPLATE",
   "SVG","CANVAS","VIDEO","AUDIO","SOURCE","INPUT","BUTTON","SELECT","TEXTAREA","FORM","DIALOG"]);
@@ -2157,7 +2193,7 @@ function setNoteStatus(kind) {
   if (kind === "saving") { noteStatusEl.textContent = t(lang, "noteSaving"); return; }
   if (kind === "fail")   { noteStatusEl.textContent = "⚠ " + t(lang, "noteFail"); return; }
   const msg = document.createElement("span");
-  msg.textContent = "✓ " + t(lang, "noteSaved");
+  msg.textContent = "✓ " + (kind === "appended" ? t(lang, "noteAppended") : t(lang, "noteSaved", noteStatusEl.dataset.folder || ""));
   const open = document.createElement("button");
   open.type = "button";
   open.textContent = t(lang, "noteOpen");
@@ -2168,30 +2204,38 @@ function setNoteStatus(kind) {
   noteStatusEl.append(msg, open);
 }
 
-function saveNoteFromSelection() {
-  if (!clipRange || noteBusy || !extAlive()) return;
-  noteBusy = true;
-  noteBtnEl.disabled = true;
-  setNoteStatus("saving");
-  let clip = null;
-  try { clip = buildClip(clipRange); } catch {}
-  if (!clip || (!clip.text && !clip.images.length)) {
-    noteBusy = false; noteBtnEl.disabled = false; setNoteStatus("fail"); return;
+function saveNote() {
+  if (noteBusy || !extAlive()) return;
+  const memo = (inputEl?.value || "").trim();
+  if (clipRange ? noteDone : !memo) return;
+
+  let payload;
+  if (clipRange) {
+    let clip = null;
+    try { clip = buildClip(clipRange); } catch {}
+    if (!clip || (!clip.text && !clip.images.length)) { setNoteStatus("fail"); return; }
+    payload = { kind: "clip", html: clip.html, text: clip.text, images: clip.images, token: clip.token };
+  } else {
+    // 선택 없이 연 팝업 — 검색창에 적은 글을 짧은 메모로 저장한다
+    payload = { kind: "memo", text: memo };
   }
-  chrome.runtime.sendMessage({
-    type: "NOTE_SAVE",
-    html: clip.html, text: clip.text, images: clip.images, token: clip.token,
-    url: location.href, title: document.title
-  }, (res) => {
+
+  noteBusy = true;
+  updateNoteBtn();
+  setNoteStatus("saving");
+  chrome.runtime.sendMessage({ type: "NOTE_SAVE", ...payload, url: location.href, title: document.title }, (res) => {
     noteBusy = false;
     if (chrome.runtime.lastError || !res?.ok) {
-      noteBtnEl.disabled = false;
+      updateNoteBtn();
       setNoteStatus("fail");
       return;
     }
-    // 같은 조각을 두 번 저장하지 않도록 버튼은 잠가 둔다 (다음에 팝업을 열면 풀린다)
     noteStatusEl.dataset.id = res.id;
-    setNoteStatus("saved");
+    noteStatusEl.dataset.folder = res.folderName || "";
+    if (clipRange) noteDone = true;
+    else if (inputEl) inputEl.value = "";   // 메모는 저장했으니 비워서 바로 검색에 쓸 수 있게
+    updateNoteBtn();
+    setNoteStatus(res.appended ? "appended" : "saved");
     inputEl?.focus();
   });
 }

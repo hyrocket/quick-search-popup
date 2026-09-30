@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- 노트 페이지. 팝업의 [노트] 로 저장한 조각을 보고 고친다.
+<!-- 노트 페이지. 팝업의 [노트] 로 저장한 조각과 메모를 보고 고친다.
      색 토큰·사이드바는 options.html 과 같은 모양 — 두 페이지를 오가도 한 앱처럼 보여야 한다.
      저장소는 notes-db.js (IndexedDB), 문구는 i18n-options.js 의 "n.*" 키. -->
 <html lang="en">
@@ -26,12 +26,14 @@
       background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;
       height:100vh;overflow:hidden;
     }
+    button{font:inherit;color:inherit}
     .layout{display:flex;height:100vh}
+    svg.ic{width:15px;height:15px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
     /* ── Sidebar (options.html 과 같은 모양) ── */
     .sidebar{
-      width:220px;flex-shrink:0;background:var(--card);border-right:1px solid var(--border);
-      padding:20px 12px;display:flex;flex-direction:column;gap:4px;
+      width:230px;flex-shrink:0;background:var(--card);border-right:1px solid var(--border);
+      padding:20px 12px 14px;display:flex;flex-direction:column;gap:3px;overflow-y:auto;
     }
     .sideTitle{display:flex;align-items:baseline;gap:5px;padding:4px 10px 10px;white-space:nowrap;user-select:none}
     .sideTitle .bolt{color:#F5B301;align-self:center;display:flex}
@@ -46,33 +48,70 @@
     .navItem:hover{background:rgba(99,102,241,.07);color:var(--accent)}
     .navItem.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
     .navItem .navIcon{font-size:17px;flex-shrink:0}
-    .sideNote{margin-top:auto;padding:10px;font-size:11.5px;line-height:1.55;color:var(--muted)}
+
+    /* 폴더 */
+    .secLabel{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:14px 10px 4px}
+    .folder{
+      display:flex;align-items:center;gap:8px;padding:6px 8px 6px 10px;border-radius:8px;
+      font-size:13px;cursor:pointer;user-select:none;border:1.5px solid transparent;
+    }
+    .folder:hover{background:var(--bg)}
+    .folder.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+    .folder.dropOver{border-color:var(--accent);background:var(--accent-soft)}
+    .folder .fIcon{flex:none;width:18px;text-align:center}
+    .folder .fName{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .folder .fCount{font-size:11.5px;color:var(--muted);font-weight:500}
+    .folder .fTarget{font-size:11px}
+    .folder .fAct{display:none;border:none;background:none;cursor:pointer;color:var(--muted);padding:2px;border-radius:5px}
+    .folder:hover .fAct{display:block}
+    .folder:hover .fCount{display:none}
+    .folder .fAct:hover{color:var(--text);background:var(--card)}
+    .folder .fAct.del:hover{color:var(--danger)}
+    .folder input{flex:1;min-width:0;font:inherit;font-size:13px;padding:2px 6px;border:1px solid var(--accent);
+      border-radius:6px;background:var(--card);color:var(--text);outline:none}
+    .newFolder{color:var(--muted)}
+    .newFolder:hover{color:var(--accent)}
+
+    .sideFoot{margin-top:auto;padding:12px 8px 0;display:flex;flex-direction:column;gap:9px;font-size:11.5px;color:var(--muted);line-height:1.55}
+    .sideFoot label{display:flex;gap:7px;align-items:flex-start;cursor:pointer;color:var(--text);font-size:12px}
+    .sideFoot input[type=checkbox]{margin-top:3px;accent-color:var(--accent)}
+    .targetLine b{color:var(--text);font-weight:600}
 
     /* ── 목록 ── */
-    .listCol{
-      width:300px;flex-shrink:0;border-right:1px solid var(--border);
-      display:flex;flex-direction:column;background:var(--bg);
-    }
+    .listCol{width:310px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg)}
     .listHead{padding:18px 14px 10px}
-    .listTitle{font-size:18px;font-weight:700;margin-bottom:10px;display:flex;align-items:baseline;gap:8px}
-    .listCount{font-size:12px;font-weight:500;color:var(--muted)}
+    .listTitle{font-size:18px;font-weight:700;margin-bottom:10px;display:flex;align-items:baseline;gap:8px;min-width:0}
+    .listTitle #listName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .listCount{font-size:12px;font-weight:500;color:var(--muted);flex:none}
     .searchBox{
       width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);
       background:var(--card);color:var(--text);font:inherit;font-size:13px;outline:none;
     }
     .searchBox:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    .bulkRow{display:flex;gap:6px;margin-top:8px}
+    .bulkBtn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 8px;
+      border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .bulkBtn:hover{border-color:var(--accent);color:var(--accent)}
     .list{flex:1;overflow-y:auto;padding:4px 8px 16px}
     .item{
-      display:block;width:100%;text-align:left;border:1px solid transparent;background:none;
-      color:inherit;font:inherit;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;
+      position:relative;display:block;width:100%;text-align:left;border:1px solid transparent;background:none;
+      padding:10px 34px 10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;
     }
     .item:hover{background:var(--card);border-color:var(--border)}
     .item.active{background:var(--accent-soft);border-color:var(--accent)}
+    .item.dragging{opacity:.45}
     .itemTitle{font-size:13px;font-weight:600;line-height:1.4;
       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .itemMeta{font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .itemSnip{font-size:12px;color:var(--muted);margin-top:3px;
       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .itemDel{
+      position:absolute;top:8px;right:6px;width:24px;height:24px;display:none;align-items:center;justify-content:center;
+      border:none;border-radius:6px;background:none;color:var(--muted);cursor:pointer;
+    }
+    .item:hover .itemDel{display:flex}
+    .itemDel:hover{color:var(--danger);background:var(--danger-soft)}
+    .itemDel svg.ic{width:14px;height:14px}
     .listEmpty{padding:24px 12px;font-size:13px;color:var(--muted);line-height:1.6}
     .listEmpty kbd, .emptyPane kbd{
       display:inline-block;padding:0 6px;border:1px solid var(--border);border-bottom-width:2px;
@@ -93,12 +132,13 @@
     .titleInput:hover{border-color:var(--border)}
     .titleInput:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
     .metaRow{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;margin-top:6px;font-size:12px;color:var(--muted)}
-    .metaRow a{color:var(--accent);text-decoration:none;max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
+    .metaRow a{color:var(--accent);text-decoration:none;max-width:480px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
     .metaRow a:hover{text-decoration:underline}
+    .folderSel{font:inherit;font-size:12px;padding:3px 6px;border:1px solid var(--border);border-radius:7px;background:var(--card);color:var(--text)}
     .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:12px}
     .tb{
       min-width:30px;height:30px;padding:0 8px;border:1px solid var(--border);border-radius:7px;
-      background:var(--card);color:var(--text);font:inherit;font-size:13px;cursor:pointer;
+      background:var(--card);font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;
     }
     .tb:hover{border-color:var(--accent);color:var(--accent)}
     .tbSep{width:1px;height:20px;background:var(--border);margin:0 4px}
@@ -107,7 +147,7 @@
     .tb.danger:hover{border-color:var(--danger);color:var(--danger);background:var(--danger-soft)}
     .edBody{flex:1;overflow-y:auto;padding:22px 28px 60px}
     /* 본문 — 저장된 HTML 은 class/style 이 없으니 여기서 읽기 좋게 */
-    .doc{max-width:760px;outline:none;font-size:15px;line-height:1.75;word-wrap:break-word}
+    .doc{max-width:760px;outline:none;font-size:15px;line-height:1.75;word-wrap:break-word;min-height:200px}
     .doc > *:first-child{margin-top:0}
     .doc p,.doc ul,.doc ol,.doc blockquote,.doc pre,.doc table,.doc figure{margin:0 0 .9em}
     .doc h1,.doc h2,.doc h3,.doc h4{line-height:1.35;margin:1.2em 0 .5em}
@@ -120,14 +160,21 @@
     .doc code{font-family:ui-monospace,Consolas,monospace;font-size:.9em}
     .doc table{border-collapse:collapse}
     .doc td,.doc th{border:1px solid var(--border);padding:5px 9px;vertical-align:top}
-    .doc hr{border:none;border-top:1px solid var(--border);margin:1.2em 0}
+    .doc hr{border:none;border-top:1px dashed var(--border);margin:1.4em 0}
 
-    /* 좁으면 사이드바를 아이콘만 남긴다 — 없애면 설정으로 돌아갈 길이 사라진다 */
-    @media (max-width:900px){
-      .sidebar{width:56px;padding:16px 8px}
-      .sideTitle,.sideNote,.navItem span:not(.navIcon){display:none}
-      .navItem{justify-content:center;padding:8px 0}
-      .listCol{width:240px}
+    /* ── 알림 (삭제 되돌리기 · 복사됨) ── */
+    .toast{
+      position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;
+      display:flex;align-items:center;gap:14px;padding:10px 16px;border-radius:10px;
+      background:#111827;color:#F9FAFB;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:all .18s;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%);pointer-events:auto}
+    .toast button{border:none;background:none;color:#A5B4FC;font-weight:700;cursor:pointer;padding:0}
+
+    @media (max-width:980px){
+      .sidebar{width:190px}
+      .listCol{width:250px}
+      .sideTitle .brandSub{display:none}
     }
   </style>
 </head>
@@ -140,13 +187,27 @@
     </div>
     <a class="navItem active" href="notes.html"><span class="navIcon">📒</span><span data-i18n="nav.notes">Notes</span></a>
     <a class="navItem" href="options.html"><span class="navIcon">⚙️</span><span data-i18n="nav.settings">Settings</span></a>
-    <div class="sideNote" data-i18n="n.localOnly"></div>
+
+    <div class="secLabel" data-i18n="n.folders">Folders</div>
+    <div id="folderList"></div>
+    <div class="folder newFolder" id="newFolderBtn"><span class="fIcon">＋</span><span class="fName" data-i18n="n.newFolder">New folder</span></div>
+
+    <div class="sideFoot">
+      <div class="targetLine" id="targetLine"></div>
+      <label><input type="checkbox" id="appendOpt"/><span data-i18n="n.appendOpt"></span></label>
+      <div id="usageLine"></div>
+      <div data-i18n="n.localOnly"></div>
+    </div>
   </nav>
 
   <section class="listCol">
     <div class="listHead">
-      <div class="listTitle"><span data-i18n="n.title">Notes</span><span class="listCount" id="listCount"></span></div>
+      <div class="listTitle"><span id="listName"></span><span class="listCount" id="listCount"></span></div>
       <input class="searchBox" id="searchBox" type="search" data-i18n-ph="n.search"/>
+      <div class="bulkRow">
+        <button class="bulkBtn" id="bulkCopyBtn" data-i18n-title="n.copyAllTip"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span data-i18n="n.copyAll"></span></button>
+        <button class="bulkBtn" id="bulkExportBtn" data-i18n-title="n.exportAllTip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>.md</span></button>
+      </div>
     </div>
     <div class="list" id="list"></div>
   </section>
@@ -163,6 +224,7 @@
         <div class="metaRow">
           <span>🔗 <a id="srcLink" target="_blank" rel="noopener noreferrer"></a></span>
           <span id="dateInfo"></span>
+          <span>📂 <select class="folderSel" id="folderSel"></select></span>
         </div>
         <div class="toolbar">
           <button class="tb" data-cmd="bold" data-i18n-title="n.bold"><b>B</b></button>
@@ -174,8 +236,10 @@
           <button class="tb" data-cmd="removeFormat" data-i18n-title="n.clear">T̸</button>
           <span class="tbGrow"></span>
           <span class="saveState" id="saveState"></span>
-          <button class="tb" id="exportBtn" data-i18n="n.export">Export</button>
-          <button class="tb danger" id="deleteBtn" data-i18n="n.delete">Delete</button>
+          <button class="tb" id="copyMdBtn" data-i18n-title="n.copyMdTip"><svg class="ic" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span data-i18n="n.copyMd"></span></button>
+          <button class="tb" id="exportMdBtn" data-i18n-title="n.exportMdTip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>.md</button>
+          <button class="tb" id="exportBtn" data-i18n-title="n.exportTip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>.html</button>
+          <button class="tb danger" id="deleteBtn" data-i18n-title="n.delete"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
         </div>
       </div>
       <div class="edBody">
@@ -184,6 +248,8 @@
     </div>
   </main>
 </div>
+
+<div class="toast" id="toast"><span id="toastMsg"></span><button id="toastAct"></button></div>
 
 <script src="i18n-options.js"></script>
 <script src="notes-db.js"></script>

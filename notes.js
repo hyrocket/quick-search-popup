@@ -4,26 +4,34 @@
 // 목록은 meta 만 읽고, 본문(이미지 포함이라 무겁다)은 고른 노트 하나만 읽는다 (notes-db.js).
 // 편집은 contenteditable + 자동 저장. 원본 링크·저장 날짜는 고칠 수 없다 (출처가 바뀌면 안 된다).
 //
-// 보안: 저장된 HTML 은 페이지에서 긁어 온 것이다. 화면에 그리기 전·저장하기 전에
+// 보안: 저장된 HTML 은 페이지에서 긁어 온 것이다. 화면에 그리기 전·저장하기 전·붙여넣을 때
 // 반드시 sanitizeNoteHtml() 을 거친다. content.js 의 buildClip() 정리는 용량 줄이기일 뿐이다.
 // =====================================================================
 
 const K_LANG = "shiftsearch:lang";
 const LANG_CODES = ["kr","en","ja","zh-CN","zh-TW","es","fr","de","ru","vn","ms","th","id"];
 const SAVE_DELAY = 600;
+const UNDO_MS = 6000;
 const ME = Math.random().toString(36).slice(2);   // 내가 보낸 방송은 무시하려고
+
+// 폴더 필터: "all" | "unsorted" | 폴더 id
+const F_ALL = "all", F_UNSORTED = "unsorted";
 
 let lang = "en";
 let metas = [];          // 최신순
+let folders = [];
+let curFolder = F_ALL;
+let targetFolderId = null;
 let currentId = null;
 let saveTimer = null;
 let dirty = false;
 
 const $ = (id) => document.getElementById(id);
-const listEl = $("list"), searchBox = $("searchBox"), countEl = $("listCount");
+const listEl = $("list"), searchBox = $("searchBox"), countEl = $("listCount"), listName = $("listName");
 const editorEl = $("editor"), emptyPane = $("emptyPane"), emptyText = $("emptyText");
 const titleInput = $("titleInput"), docEl = $("doc"), srcLink = $("srcLink");
-const dateInfo = $("dateInfo"), saveState = $("saveState");
+const dateInfo = $("dateInfo"), saveState = $("saveState"), folderSel = $("folderSel");
+const folderListEl = $("folderList");
 
 // ── i18n (popup.js 와 같은 방식. 표는 i18n-options.js) ──
 function t(key, vars) {
@@ -61,7 +69,8 @@ const SAN_DROP = new Set(["SCRIPT","STYLE","NOSCRIPT","IFRAME","FRAME","OBJECT",
 const SAN_KEEP = new Set(["P","BR","HR","H1","H2","H3","H4","H5","H6","UL","OL","LI","DL","DT","DD",
   "BLOCKQUOTE","PRE","CODE","B","STRONG","I","EM","U","S","SUB","SUP","MARK","SMALL","A","IMG",
   "TABLE","THEAD","TBODY","TFOOT","TR","TD","TH","CAPTION","FIGURE","FIGCAPTION","DIV","SPAN"]);
-const SAN_ATTRS = { A:["href"], IMG:["src","alt","width","height"], TD:["colspan","rowspan"],
+// data-orig: 이미지의 원래 주소 (background 가 base64 로 바꿀 때 남긴다). Markdown 에서 쓴다
+const SAN_ATTRS = { A:["href"], IMG:["src","alt","width","height","data-orig"], TD:["colspan","rowspan"],
   TH:["colspan","rowspan"], OL:["start"] };
 
 function sanitizeNoteHtml(html) {
@@ -82,7 +91,9 @@ function sanitizeNoteHtml(html) {
       }
       if (tag === "IMG") {
         const s = child.getAttribute("src") || "";
-        if (!/^(data:image\/|https?:\/\/)/i.test(s)) child.remove();
+        if (!/^(data:image\/|https?:\/\/)/i.test(s)) { child.remove(); continue; }
+        const o = child.getAttribute("data-orig") || "";
+        if (o && !/^https?:\/\//i.test(o)) child.removeAttribute("data-orig");
       }
     }
   };
@@ -91,57 +102,353 @@ function sanitizeNoteHtml(html) {
 }
 
 // =====================================================================
+// Markdown — LLM 에 넘기기 좋은 형태
+// base64 이미지는 토큰만 잡아먹는다 → 원래 주소(data-orig)가 있으면 그걸 쓰고, 없으면 [image]
+// =====================================================================
+function htmlToMarkdown(html, headingShift = 0) {
+  const doc = new DOMParser().parseFromString(`<body>${sanitizeNoteHtml(html)}</body>`, "text/html");
+  const esc = (s) => s.replace(/([\\`*_[\]])/g, "\\$1");
+
+  function inline(node) {
+    let out = "";
+    for (const n of node.childNodes) {
+      if (n.nodeType === 3) { out += esc(n.nodeValue.replace(/\s+/g, " ")); continue; }
+      if (n.nodeType !== 1) continue;
+      const tag = n.tagName;
+      if (tag === "BR") { out += "  \n"; continue; }
+      if (tag === "IMG") { out += imgMd(n); continue; }
+      const inner = inline(n);
+      if (!inner.trim()) { out += inner; continue; }
+      if (tag === "B" || tag === "STRONG") out += `**${inner.trim()}**`;
+      else if (tag === "I" || tag === "EM") out += `*${inner.trim()}*`;
+      else if (tag === "S") out += `~~${inner.trim()}~~`;
+      else if (tag === "CODE") out += "`" + n.textContent.replace(/`/g, "'") + "`";
+      else if (tag === "A" && n.getAttribute("href")) out += `[${inner.trim()}](${n.getAttribute("href")})`;
+      else if (isBlock(tag)) out += "\n" + block(n).trim() + "\n";
+      else out += inner;
+    }
+    return out;
+  }
+  function imgMd(img) {
+    const alt = (img.getAttribute("alt") || "").replace(/[[\]]/g, "");
+    const src = img.getAttribute("data-orig") || img.getAttribute("src") || "";
+    return /^https?:/i.test(src) ? `![${alt}](${src})` : `[image${alt ? ": " + alt : ""}]`;
+  }
+  const BLOCKS = new Set(["P","DIV","H1","H2","H3","H4","H5","H6","UL","OL","LI","BLOCKQUOTE","PRE","TABLE",
+    "HR","FIGURE","FIGCAPTION","DL","DT","DD","THEAD","TBODY","TFOOT","TR"]);
+  function isBlock(tag) { return BLOCKS.has(tag); }
+
+  function list(el, depth) {
+    const ordered = el.tagName === "OL";
+    let i = parseInt(el.getAttribute("start") || "1", 10) || 1;
+    const lines = [];
+    for (const li of el.children) {
+      if (li.tagName !== "LI") continue;
+      const nested = [];
+      const clone = li.cloneNode(true);
+      for (const sub of [...clone.children]) if (sub.tagName === "UL" || sub.tagName === "OL") { nested.push(sub); sub.remove(); }
+      const bullet = ordered ? `${i++}.` : "-";
+      lines.push("  ".repeat(depth) + bullet + " " + inline(clone).trim().replace(/\n+/g, " "));
+      for (const sub of nested) lines.push(list(sub, depth + 1));
+    }
+    return lines.join("\n");
+  }
+  function table(el) {
+    const rows = [...el.querySelectorAll("tr")].map(tr =>
+      [...tr.children].map(c => inline(c).trim().replace(/\|/g, "\\|").replace(/\n+/g, " ")));
+    if (!rows.length) return "";
+    const w = Math.max(...rows.map(r => r.length));
+    const fix = (r) => "| " + [...r, ...Array(w - r.length).fill("")].join(" | ") + " |";
+    return [fix(rows[0]), "| " + Array(w).fill("---").join(" | ") + " |", ...rows.slice(1).map(fix)].join("\n");
+  }
+  function block(el) {
+    const parts = [];
+    let buf = "";
+    const flush = () => { if (buf.trim()) parts.push(buf.trim()); buf = ""; };
+    for (const n of el.childNodes) {
+      if (n.nodeType === 1 && isBlock(n.tagName)) {
+        flush();
+        const tag = n.tagName;
+        if (/^H[1-6]$/.test(tag)) {
+          const lv = Math.min(6, +tag[1] + headingShift);
+          parts.push("#".repeat(lv) + " " + inline(n).trim());
+        } else if (tag === "UL" || tag === "OL") parts.push(list(n, 0));
+        else if (tag === "BLOCKQUOTE") parts.push(block(n).split("\n").map(l => "> " + l).join("\n"));
+        else if (tag === "PRE") parts.push("```\n" + n.textContent.replace(/\n$/, "") + "\n```");
+        else if (tag === "TABLE") parts.push(table(n));
+        else if (tag === "HR") parts.push("---");
+        else parts.push(block(n));
+      } else {
+        buf += n.nodeType === 1 ? inline({ childNodes: [n] }) : (n.nodeType === 3 ? esc(n.nodeValue.replace(/\s+/g, " ")) : "");
+      }
+    }
+    flush();
+    return parts.filter(p => p.trim()).join("\n\n");
+  }
+  return block(doc.body).replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function folderNameOf(id) {
+  return folders.find(f => f.id === id)?.name || "";
+}
+function yamlStr(s) { return JSON.stringify(String(s ?? "")); }
+
+// 노트 한 개: YAML 머리말(출처·날짜·폴더) + 본문
+async function noteToMarkdown(m) {
+  const body = htmlToMarkdown(await notesGetBody(m.id));
+  const head = ["---", `title: ${yamlStr(displayTitle(m))}`, `source: ${m.url || ""}`,
+    `saved: ${notesFmtDate(m.createdAt)}`];
+  const fn = folderNameOf(m.folderId);
+  if (fn) head.push(`folder: ${yamlStr(fn)}`);
+  head.push("---", "");
+  return head.join("\n") + "\n" + body + "\n";
+}
+
+// 여러 노트를 한 덩어리로 — AI 에 한 번에 붙여 넣는 용도. 본문 제목은 두 단계 내려서 구조를 유지한다
+async function notesToBundle(list, label) {
+  const parts = [`# ${label} (${list.length})`, ""];
+  let i = 0;
+  for (const m of list) {
+    i++;
+    const body = htmlToMarkdown(await notesGetBody(m.id), 2);
+    parts.push(`## ${i}. ${displayTitle(m)}`, "",
+      `- Source: ${m.url || "-"}`, `- Saved: ${notesFmtDate(m.createdAt)}`, "", body, "");
+  }
+  return parts.join("\n").trim() + "\n";
+}
+
+// =====================================================================
+// 폴더
+// =====================================================================
+function folderLabel(f) { return f === F_ALL ? t("n.all") : f === F_UNSORTED ? t("n.unsorted") : folderNameOf(f); }
+
+function notesInFolder(f) {
+  if (f === F_ALL) return metas;
+  if (f === F_UNSORTED) return metas.filter(m => !m.folderId || !folders.some(x => x.id === m.folderId));
+  return metas.filter(m => m.folderId === f);
+}
+
+const ICON_EDIT = `<svg class="ic" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>`;
+const ICON_TRASH = `<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>`;
+
+function renderFolders() {
+  folderListEl.textContent = "";
+  const rows = [
+    { id: F_ALL, icon: "🗂️" },
+    { id: F_UNSORTED, icon: "📥" },
+    ...folders.map(f => ({ id: f.id, icon: "📂", user: true })),
+  ];
+  for (const r of rows) {
+    const el = document.createElement("div");
+    el.className = "folder" + (curFolder === r.id ? " active" : "");
+    el.dataset.id = r.id;
+    const ic = document.createElement("span"); ic.className = "fIcon"; ic.textContent = r.icon;
+    const nm = document.createElement("span"); nm.className = "fName"; nm.textContent = folderLabel(r.id);
+    el.append(ic, nm);
+    const isTarget = r.user ? targetFolderId === r.id : (r.id === F_UNSORTED && !targetFolderId);
+    if (isTarget) {
+      const tg = document.createElement("span"); tg.className = "fTarget"; tg.textContent = "📌"; tg.title = t("n.saveTarget");
+      el.appendChild(tg);
+    }
+    const ct = document.createElement("span"); ct.className = "fCount"; ct.textContent = String(notesInFolder(r.id).length);
+    el.appendChild(ct);
+    if (r.user) {
+      const ed = document.createElement("button"); ed.className = "fAct"; ed.innerHTML = ICON_EDIT; ed.title = t("n.rename");
+      ed.addEventListener("click", (e) => { e.stopPropagation(); startRename(el, r.id); });
+      const dl = document.createElement("button"); dl.className = "fAct del"; dl.innerHTML = ICON_TRASH; dl.title = t("n.delFolder");
+      dl.addEventListener("click", (e) => { e.stopPropagation(); removeFolder(r.id); });
+      el.append(ed, dl);
+    }
+    el.addEventListener("click", () => selectFolder(r.id));
+    // 노트를 끌어다 놓으면 그 폴더로 옮긴다 ("전체" 는 폴더가 아니라서 제외)
+    if (r.id !== F_ALL) {
+      el.addEventListener("dragover", (e) => {
+        if (!e.dataTransfer.types.includes("text/x-taptap-note")) return;
+        e.preventDefault(); e.dataTransfer.dropEffect = "move"; el.classList.add("dropOver");
+      });
+      el.addEventListener("dragleave", () => el.classList.remove("dropOver"));
+      el.addEventListener("drop", (e) => {
+        e.preventDefault(); el.classList.remove("dropOver");
+        const id = e.dataTransfer.getData("text/x-taptap-note");
+        if (id) moveNote(id, r.id === F_UNSORTED ? null : r.id);
+      });
+    }
+    folderListEl.appendChild(el);
+  }
+  renderTargetLine();
+  renderFolderSelect();
+}
+
+function renderTargetLine() {
+  const name = targetFolderId ? folderNameOf(targetFolderId) : t("n.unsorted");
+  const line = $("targetLine");
+  line.textContent = "";
+  const b = document.createElement("b"); b.textContent = name;
+  line.append(t("n.saveTargetLabel") + " 📌 ", b);
+}
+
+function renderFolderSelect() {
+  folderSel.textContent = "";
+  const opt = (v, label) => { const o = document.createElement("option"); o.value = v; o.textContent = label; folderSel.appendChild(o); };
+  opt("", t("n.unsorted"));
+  folders.forEach(f => opt(f.id, f.name));
+  const m = metas.find(x => x.id === currentId);
+  folderSel.value = (m && folders.some(f => f.id === m.folderId)) ? m.folderId : "";
+}
+
+// 폴더를 고르면 그 폴더가 "새 노트 저장 위치" 가 된다 (분류 안 됨 → 폴더 없음).
+// "전체" 는 둘러보기용이라 저장 위치를 바꾸지 않는다
+function selectFolder(id) {
+  curFolder = id;
+  if (id !== F_ALL) {
+    targetFolderId = (id === F_UNSORTED) ? null : id;
+    chrome.storage.local.set({ [K_NOTE_TARGET]: targetFolderId });
+  }
+  renderFolders();
+  renderList();
+}
+
+async function createFolder() {
+  const f = { id: crypto.randomUUID(), name: t("n.newFolder"), createdAt: Date.now() };
+  await folderPut(f);
+  folders.push(f);
+  notesAnnounce({ type: "folders", from: ME });
+  selectFolder(f.id);
+  const el = folderListEl.querySelector(`.folder[data-id="${f.id}"]`);
+  if (el) startRename(el, f.id);
+}
+$("newFolderBtn").addEventListener("click", createFolder);
+
+function startRename(el, id) {
+  const f = folders.find(x => x.id === id);
+  if (!f) return;
+  const nm = el.querySelector(".fName");
+  const input = document.createElement("input");
+  input.value = f.name;
+  input.maxLength = 60;
+  nm.replaceWith(input);
+  el.querySelectorAll(".fAct,.fCount,.fTarget").forEach(x => x.style.display = "none");
+  input.focus(); input.select();
+  let done = false;
+  const finish = async (save) => {
+    if (done) return; done = true;
+    const v = input.value.trim();
+    if (save && v && v !== f.name) {
+      f.name = v;
+      await folderPut(f);
+      notesAnnounce({ type: "folders", from: ME });
+    }
+    renderFolders(); renderList();
+  };
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); finish(true); }
+    if (e.key === "Escape") { e.preventDefault(); finish(false); }
+  });
+  input.addEventListener("blur", () => finish(true));
+  input.addEventListener("click", (e) => e.stopPropagation());
+}
+
+async function removeFolder(id) {
+  const f = folders.find(x => x.id === id);
+  if (!f || !confirm(t("n.confirmDelFolder", { name: f.name }))) return;
+  await flushSave();
+  await folderDelete(id);
+  folders = folders.filter(x => x.id !== id);
+  metas.forEach(m => { if (m.folderId === id) m.folderId = null; });
+  if (targetFolderId === id) { targetFolderId = null; chrome.storage.local.set({ [K_NOTE_TARGET]: null }); }
+  if (curFolder === id) curFolder = F_ALL;
+  notesAnnounce({ type: "folders", from: ME });
+  renderFolders(); renderList();
+}
+
+async function moveNote(id, folderId) {
+  if (id === currentId) await flushSave();
+  const m = metas.find(x => x.id === id);
+  if (!m || (m.folderId || null) === folderId) return;
+  m.folderId = folderId;
+  await notesPut({ ...m });              // html 없이 → 본문은 그대로
+  notesAnnounce({ type: "updated", id, from: ME });
+  renderFolders(); renderList();
+}
+folderSel.addEventListener("change", () => { if (currentId) moveNote(currentId, folderSel.value || null); });
+
+// =====================================================================
 // 목록
 // =====================================================================
 function displayTitle(m) { return (m.title || "").trim() || t("n.untitled"); }
 
-function renderList() {
+function shownNotes() {
   const q = searchBox.value.trim().toLowerCase();
-  const shown = q
-    ? metas.filter(m => (m.title + " " + m.site + " " + m.text).toLowerCase().includes(q))
-    : metas;
-  countEl.textContent = metas.length ? String(metas.length) : "";
+  const inF = notesInFolder(curFolder);
+  return q ? inF.filter(m => (m.title + " " + m.site + " " + m.text).toLowerCase().includes(q)) : inF;
+}
+
+function renderList() {
+  const shown = shownNotes();
+  listName.textContent = folderLabel(curFolder);
+  countEl.textContent = String(shown.length);
   listEl.textContent = "";
 
-  if (!metas.length) {
+  if (!metas.length || !shown.length) {
     const d = document.createElement("div");
     d.className = "listEmpty";
-    d.innerHTML = t("n.emptyHow");
-    listEl.appendChild(d);
-    return;
-  }
-  if (!shown.length) {
-    const d = document.createElement("div");
-    d.className = "listEmpty";
-    d.textContent = t("n.noResult");
+    if (!metas.length) d.innerHTML = t("n.emptyHow");
+    else d.textContent = searchBox.value.trim() ? t("n.noResult") : t("n.emptyFolder");
     listEl.appendChild(d);
     return;
   }
   const frag = document.createDocumentFragment();
   for (const m of shown) {
-    const b = document.createElement("button");
-    b.type = "button";
+    const b = document.createElement("div");
     b.className = "item" + (m.id === currentId ? " active" : "");
     b.dataset.id = m.id;
-    const ti = document.createElement("div"); ti.className = "itemTitle"; ti.textContent = displayTitle(m);
+    b.draggable = true;
+    const ti = document.createElement("div"); ti.className = "itemTitle";
+    ti.textContent = (m.kind === "memo" ? "✏️ " : "") + displayTitle(m);
     const me = document.createElement("div"); me.className = "itemMeta";
-    me.textContent = [m.site, notesFmtDate(m.createdAt)].filter(Boolean).join(" · ");
+    const fn = curFolder === F_ALL ? folderNameOf(m.folderId) : "";
+    me.textContent = [m.site, notesFmtDate(m.createdAt), fn && "📂 " + fn].filter(Boolean).join(" · ");
     const sn = document.createElement("div"); sn.className = "itemSnip"; sn.textContent = (m.text || "").slice(0, 160);
-    b.append(ti, me, sn);
+    const del = document.createElement("button"); del.className = "itemDel"; del.innerHTML = ICON_TRASH; del.title = t("n.delete");
+    b.append(ti, me, sn, del);
     frag.appendChild(b);
   }
   listEl.appendChild(frag);
 }
 
 listEl.addEventListener("click", (e) => {
-  const b = e.target.closest(".item");
-  if (b) openNote(b.dataset.id);
+  const del = e.target.closest(".itemDel");
+  const item = e.target.closest(".item");
+  if (!item) return;
+  if (del) { e.stopPropagation(); deleteNote(item.dataset.id); return; }
+  openNote(item.dataset.id);
 });
+listEl.addEventListener("dragstart", (e) => {
+  const item = e.target.closest(".item");
+  if (!item) return;
+  e.dataTransfer.setData("text/x-taptap-note", item.dataset.id);
+  e.dataTransfer.effectAllowed = "move";
+  item.classList.add("dragging");
+});
+listEl.addEventListener("dragend", (e) => { e.target.closest(".item")?.classList.remove("dragging"); });
 searchBox.addEventListener("input", renderList);
 
-async function reloadMetas() {
-  metas = await notesListMeta();
+async function reloadAll() {
+  [metas, folders] = await Promise.all([notesListMeta(), foldersList()]);
+  if (curFolder !== F_ALL && curFolder !== F_UNSORTED && !folders.some(f => f.id === curFolder)) curFolder = F_ALL;
+  renderFolders();
   renderList();
+  renderUsage();
+}
+
+async function renderUsage() {
+  let size = "";
+  try {
+    const est = await navigator.storage.estimate();
+    const mb = (est.usage || 0) / (1024 * 1024);
+    size = mb < 1 ? `${Math.max(1, Math.round(mb * 1024))} KB` : `${mb.toFixed(1)} MB`;
+  } catch {}
+  $("usageLine").textContent = t("n.usage", { n: metas.length, size });
 }
 
 // =====================================================================
@@ -177,6 +484,7 @@ async function openNote(id) {
   emptyPane.style.display = "none";
   editorEl.classList.add("show");
   if (location.hash.slice(1) !== encodeURIComponent(id)) history.replaceState(null, "", "#" + encodeURIComponent(id));
+  renderFolderSelect();
   renderList();
   docEl.parentElement.scrollTop = 0;
 }
@@ -252,34 +560,102 @@ document.querySelectorAll(".tb[data-cmd]").forEach(b => {
 });
 
 // =====================================================================
-// 삭제 / 내보내기
+// 알림 (삭제 되돌리기 · 복사됨)
 // =====================================================================
-$("deleteBtn").addEventListener("click", async () => {
-  if (!currentId || !confirm(t("n.confirmDel"))) return;
-  const id = currentId;
-  clearTimeout(saveTimer); dirty = false;
-  const idx = metas.findIndex(m => m.id === id);
+let toastTimer = null;
+function toast(msg, actLabel, onAct) {
+  const el = $("toast"), act = $("toastAct");
+  $("toastMsg").textContent = msg;
+  act.style.display = actLabel ? "" : "none";
+  act.textContent = actLabel || "";
+  act.onclick = () => { hideToast(); onAct?.(); };
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(hideToast, actLabel ? UNDO_MS : 2200);
+}
+function hideToast() { $("toast").classList.remove("show"); }
+
+// =====================================================================
+// 삭제 — 확인 창 대신 "되돌리기". 지울 때 meta+body 를 메모리에 들고 있다가 되살린다
+// =====================================================================
+async function deleteNote(id) {
+  if (id === currentId) { clearTimeout(saveTimer); if (dirty) await flushSave(); }
+  const m = metas.find(x => x.id === id);
+  if (!m) return;
+  const body = await notesGetBody(id);
+  const idxInView = shownNotes().findIndex(x => x.id === id);
   await notesDelete(id);
   notesAnnounce({ type: "deleted", id, from: ME });
-  metas = metas.filter(m => m.id !== id);
-  const next = metas[Math.min(idx, metas.length - 1)];
-  if (next) openNote(next.id); else showEmpty();
-});
+  metas = metas.filter(x => x.id !== id);
+  if (id === currentId) {
+    const view = shownNotes();
+    const next = view[Math.min(idxInView, view.length - 1)];
+    if (next) openNote(next.id); else showEmpty();
+  }
+  renderFolders(); renderList(); renderUsage();
 
+  toast(t("n.deleted"), t("n.undo"), async () => {
+    await notesPut(m, body);
+    notesAnnounce({ type: "saved", id, from: ME });
+    await reloadAll();
+    openNote(id);
+  });
+}
+$("deleteBtn").addEventListener("click", () => { if (currentId) deleteNote(currentId); });
+
+// =====================================================================
+// 내보내기 · 복사
+// =====================================================================
 function escHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
-function safeFileName(s) {
+function safeFileName(s, ext) {
   const base = String(s || "note").replace(/(\d{2}):(\d{2})/, "$1$2")
     .replace(/[\\/:*?"<>|\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
-  return (base || "note") + ".html";
+  return (base || "note") + ext;
 }
+function download(text, name, type) {
+  const blob = new Blob([text], { type });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); toast(t("n.copied")); }
+  catch { toast("⚠ " + t("n.saveFail")); }
+}
+function currentMeta() { return metas.find(x => x.id === currentId); }
 
-// 내보낸 파일은 확장 없이 더블클릭으로 열린다. 원본 링크와 저장 날짜를 맨 위에 둔다
-$("exportBtn").addEventListener("click", async () => {
-  if (!currentId) return;
+$("copyMdBtn").addEventListener("click", async () => {
   await flushSave();
-  const m = metas.find(x => x.id === currentId);
+  const m = currentMeta(); if (m) copyText(await noteToMarkdown(m));
+});
+$("exportMdBtn").addEventListener("click", async () => {
+  await flushSave();
+  const m = currentMeta(); if (m) download(await noteToMarkdown(m), safeFileName(displayTitle(m), ".md"), "text/markdown");
+});
+
+// 보이는 목록(폴더 + 검색) 전체를 한 덩어리 Markdown 으로 — AI 에 자료로 넘기는 용도
+$("bulkCopyBtn").addEventListener("click", async () => {
+  await flushSave();
+  const list = shownNotes(); if (!list.length) return;
+  copyText(await notesToBundle(list, "TapTap — " + folderLabel(curFolder)));
+});
+$("bulkExportBtn").addEventListener("click", async () => {
+  await flushSave();
+  const list = shownNotes(); if (!list.length) return;
+  const label = "TapTap — " + folderLabel(curFolder);
+  download(await notesToBundle(list, label), safeFileName(`${label} ${notesFmtDate(Date.now())}`, ".md"), "text/markdown");
+});
+
+// 내보낸 HTML 은 확장 없이 더블클릭으로 열린다. 원본 링크와 저장 날짜를 맨 위에 둔다
+$("exportBtn").addEventListener("click", async () => {
+  await flushSave();
+  const m = currentMeta();
   if (!m) return;
   const body = sanitizeNoteHtml(await notesGetBody(m.id));
   const url = /^https?:/i.test(m.url) ? m.url : "";
@@ -311,26 +687,25 @@ ${body}
 </article>
 </body>
 </html>`;
-  const blob = new Blob([page], { type: "text/html" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = safeFileName(displayTitle(m));
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  download(page, safeFileName(displayTitle(m), ".html"), "text/html");
 });
 
 // =====================================================================
-// 다른 곳에서 저장·수정·삭제되면 목록을 다시 읽는다 (팝업에서 새 노트, 다른 노트 탭)
+// 같은 페이지 이어 붙이기 옵션 (background 가 저장할 때 읽는다)
+// =====================================================================
+const appendOpt = $("appendOpt");
+appendOpt.addEventListener("change", () => chrome.storage.local.set({ [K_NOTE_APPEND]: appendOpt.checked }));
+
+// =====================================================================
+// 다른 곳에서 저장·수정·삭제되면 다시 읽는다 (팝업에서 새 노트, 다른 노트 탭)
 // =====================================================================
 try {
   const ch = new BroadcastChannel(NOTES_CHANNEL);
   ch.onmessage = async (ev) => {
     const msg = ev.data || {};
     if (msg.from === ME) return;
-    await reloadMetas();
-    if (msg.id === currentId) {
+    await reloadAll();
+    if (msg.id && msg.id === currentId) {
       if (msg.type === "deleted") showEmpty();
       else if (!dirty) openNote(currentId);   // 편집 중이면 내 편집을 우선한다
     }
@@ -346,13 +721,19 @@ window.addEventListener("hashchange", () => {
 // =====================================================================
 // Init
 // =====================================================================
-chrome.storage.sync.get([K_LANG], async (res) => {
+chrome.storage.sync.get([K_LANG], (res) => {
   const saved = res?.[K_LANG];
   lang = LANG_CODES.includes(saved) ? saved : guessDefaultLang();
   applyI18n();
-  await reloadMetas();
-  const id = decodeURIComponent(location.hash.slice(1));
-  if (id && metas.some(m => m.id === id)) openNote(id);
-  else if (metas.length) openNote(metas[0].id);
-  else showEmpty();
+  chrome.storage.local.get([K_NOTE_TARGET, K_NOTE_APPEND], async (st) => {
+    targetFolderId = st?.[K_NOTE_TARGET] || null;
+    appendOpt.checked = st?.[K_NOTE_APPEND] !== false;
+    await reloadAll();
+    if (targetFolderId && !folders.some(f => f.id === targetFolderId)) targetFolderId = null;
+    renderFolders();
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (id && metas.some(m => m.id === id)) openNote(id);
+    else if (metas.length) openNote(metas[0].id);
+    else showEmpty();
+  });
 });
