@@ -167,7 +167,8 @@ let addColor = "sky";
 // =====================
 document.querySelectorAll(".navItem[data-tab]").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".navItem").forEach(b => b.classList.remove("active"));
+    // 맨 위 노트·설정 링크는 탭이 아니다 — 설정의 active 는 이 페이지에 있는 동안 늘 켜 둔다
+    document.querySelectorAll(".navItem[data-tab]").forEach(b => b.classList.remove("active"));
     document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
     btn.classList.add("active");
     const tab = $("tab-" + btn.dataset.tab);
@@ -825,6 +826,7 @@ langSelect.addEventListener("change", () => {
   applyI18n();        // 정적 라벨 + About 본문
   renderEngineList(); // 엔진 이름은 언어별 표시명을 쓴다
   renderThemeGrid();  // 테마 카드 이름/설명
+  renderAccentRow();
   syncAutoDarkRow();  // 동적 설명 두 줄
   renderPreview();
 });
@@ -1135,6 +1137,7 @@ function loadAll() {
 // =====================
 function initAppearanceUI() {
   renderThemeGrid();
+  renderAccentRow();
 
   autoDarkChk.checked   = state.appearance.autoDark;
   engineTintChk.checked = state.appearance.engineTint;
@@ -1164,6 +1167,35 @@ function syncAutoDarkRow() {
     : t("ap.autoDarkOff", { theme: t("theme." + state.appearance.theme) });
   engineTintDesc.textContent = isClassic ? t("ap.tintOn") : t("ap.tintOff");
 }
+
+// 페이지 강조색 (accent.js · accent.css). 검색 팝업 테마와 달리 [저장] 없이 바로 저장한다 —
+// 이 페이지 자신의 색이라 고르는 순간 보이는데, 저장을 따로 누르게 하면 "바뀐 줄 알았는데 안 남는" 상태가 된다
+const ACCENT_SWATCH = { purple:"#6366F1", blue:"#2563EB", navy:"#1E40AF", teal:"#0F766E", orange:"#C2410C", graphite:"#334155" };
+function renderAccentRow() {
+  const row = $("accentRow");
+  if (!row) return;
+  const cur = document.documentElement.dataset.accent || "purple";
+  row.innerHTML = "";
+  for (const id of UI_ACCENTS) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "accentChip" + (id === cur ? " active" : "");
+    b.innerHTML = '<span class="accentDot"></span><span></span>';
+    b.firstChild.style.background = ACCENT_SWATCH[id];
+    b.lastChild.textContent = t("accent." + id);
+    b.addEventListener("click", () => {
+      applyUiAccent(id);
+      chrome.storage.sync.set({ [K_UI_ACCENT]: id });
+      renderAccentRow();
+    });
+    row.appendChild(b);
+  }
+}
+
+// 다른 설정 탭에서 바꿨을 때 (색 자체는 accent.js 가 이미 바꿨다 — 여기선 선택 표시만)
+chrome.storage.onChanged.addListener((ch, area) => {
+  if (area === "sync" && ch[K_UI_ACCENT]) renderAccentRow();
+});
 
 function renderThemeGrid() {
   themeGrid.innerHTML = "";

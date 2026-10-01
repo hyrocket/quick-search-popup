@@ -100,6 +100,16 @@ function folderDelete(id) {
   });
 }
 
+// 백업 복원 — 폴더와 노트를 한 트랜잭션에 넣는다 (중간에 실패하면 아무것도 안 들어간다)
+// entries: [{ meta, html }]. 정리·병합 판단은 부르는 쪽(notes.js)이 끝낸 뒤에 넘긴다
+function notesImport(folderArr, entries) {
+  return _tx(["folders", "meta", "body"], "readwrite", (tx) => {
+    const fs = tx.objectStore("folders"), ms = tx.objectStore("meta"), bs = tx.objectStore("body");
+    for (const f of folderArr) fs.put(f);
+    for (const e of entries) { ms.put(e.meta); bs.put({ id: e.meta.id, html: e.html }); }
+  });
+}
+
 function notesAnnounce(msg) {
   try { const ch = new BroadcastChannel(NOTES_CHANNEL); ch.postMessage(msg); ch.close(); } catch {}
 }

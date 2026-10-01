@@ -7,17 +7,19 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>TapTap — Notes</title>
+  <link rel="stylesheet" href="accent.css"/>
+  <script src="accent.js"></script>
   <style>
     :root {
       --bg:#F8F9FB; --card:#FFFFFF; --border:#E5E7EB; --text:#111827; --muted:#6B7280;
-      --accent:#6366F1; --accent-soft:#EEF2FF; --danger:#EF4444; --danger-soft:#FEF2F2;
+      --danger:#EF4444; --danger-soft:#FEF2F2;
       --radius:14px; --radius-sm:9px;
     }
     @media(prefers-color-scheme:dark){
       :root{
         --bg:#0D1117; --card:#161B22; --border:#30363D;
-        --text:#E6EDF3; --muted:#8B949E; --accent:#818CF8;
-        --accent-soft:#1E2035; --danger:#F87171; --danger-soft:#2D1B1B;
+        --text:#E6EDF3; --muted:#8B949E;
+        --danger:#F87171; --danger-soft:#2D1B1B;
       }
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -45,7 +47,7 @@
       color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;user-select:none;
       text-decoration:none;transition:all .13s;
     }
-    .navItem:hover{background:rgba(99,102,241,.07);color:var(--accent)}
+    .navItem:hover{background:rgba(var(--accent-rgb),.07);color:var(--accent)}
     .navItem.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
     .navItem .navIcon{font-size:17px;flex-shrink:0}
 
@@ -76,6 +78,21 @@
     .sideFoot label{display:flex;gap:7px;align-items:flex-start;cursor:pointer;color:var(--text);font-size:12px}
     .sideFoot input[type=checkbox]{margin-top:3px;accent-color:var(--accent)}
     .targetLine b{color:var(--text);font-weight:600}
+    .backupRow{display:flex;gap:6px}
+    .backupBtn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:5px 6px;
+      border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .backupBtn:hover{border-color:var(--accent);color:var(--accent)}
+    .backupBtn svg.ic{width:13px;height:13px}
+    .backupLine{margin-top:-4px}
+    .backupLine.warn{color:#D97706}
+    .localOnly{font-size:11px;opacity:.85}
+
+    /* ── 컬럼 폭 손잡이 (사이드바|목록, 목록|편집). 테두리 위에 겹쳐 놓는다. 더블클릭 = 기본 폭 ── */
+    .resizer{flex:none;width:7px;margin:0 -3px 0 -4px;cursor:col-resize;position:relative;z-index:5;touch-action:none}
+    .resizer::after{content:"";position:absolute;top:0;bottom:0;left:3px;width:1px;background:transparent;transition:background .12s}
+    .resizer:hover::after,.resizer.dragging::after{background:var(--accent);width:2px;left:2.5px}
+    body.colResizing{cursor:col-resize;user-select:none}
+    body.colResizing iframe,body.colResizing .doc{pointer-events:none}
 
     /* ── 목록 ── */
     .listCol{width:310px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg)}
@@ -169,7 +186,7 @@
       background:#111827;color:#F9FAFB;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:all .18s;
     }
     .toast.show{opacity:1;transform:translateX(-50%);pointer-events:auto}
-    .toast button{border:none;background:none;color:#A5B4FC;font-weight:700;cursor:pointer;padding:0}
+    .toast button{border:none;background:none;color:color-mix(in srgb,var(--accent) 45%,#fff);font-weight:700;cursor:pointer;padding:0}
 
     @media (max-width:980px){
       .sidebar{width:190px}
@@ -196,9 +213,16 @@
       <div class="targetLine" id="targetLine"></div>
       <label><input type="checkbox" id="appendOpt"/><span data-i18n="n.appendOpt"></span></label>
       <div id="usageLine"></div>
-      <div data-i18n="n.localOnly"></div>
+      <div class="backupRow">
+        <button class="backupBtn" id="backupBtn" data-i18n-title="n.backupTip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="n.backup"></span></button>
+        <button class="backupBtn" id="restoreBtn" data-i18n-title="n.restoreTip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"/></svg><span data-i18n="n.restore"></span></button>
+      </div>
+      <input type="file" id="restoreFile" accept=".json,application/json" hidden/>
+      <div class="backupLine" id="backupLine"></div>
+      <div class="localOnly" data-i18n="n.localOnly"></div>
     </div>
   </nav>
+  <div class="resizer" data-col="sidebar"></div>
 
   <section class="listCol">
     <div class="listHead">
@@ -211,6 +235,7 @@
     </div>
     <div class="list" id="list"></div>
   </section>
+  <div class="resizer" data-col="list"></div>
 
   <main class="editCol">
     <div class="emptyPane" id="emptyPane">

@@ -1,0 +1,26 @@
+/* =====================================================================
+   확장 페이지 강조색 — options.html · notes.html · popup.html 이 같이 쓴다
+   검색 팝업(content.js 의 :host([data-ss-theme=...]))과는 별개다. 거기 색은 건드리지 않는다.
+
+   <html data-accent="blue"> 처럼 accent.js 가 붙인다. 속성이 없으면 보라(기본).
+   - --accent      : 글자·테두리·버튼 배경
+   - --accent-soft : 선택된 항목 배경
+   - --accent-rgb  : rgba(var(--accent-rgb), .25) 처럼 투명도를 줄 때
+   - --on-accent   : accent 배경 위 글자. 다크는 accent 가 밝은 색이라 어두운 글자를 쓴다
+   라이트 accent 는 흰 배경 대비 4.5:1 이상, 다크는 #0D1117 대비 6:1 이상만 골랐다.
+   ===================================================================== */
+:root{--accent:#6366F1;--accent-soft:#EEF2FF;--accent-rgb:99,102,241;--on-accent:#fff}
+:root[data-accent="blue"]{--accent:#2563EB;--accent-soft:#EFF6FF;--accent-rgb:37,99,235}
+:root[data-accent="navy"]{--accent:#1E40AF;--accent-soft:#E8EEFB;--accent-rgb:30,64,175}
+:root[data-accent="teal"]{--accent:#0F766E;--accent-soft:#E6F4F2;--accent-rgb:15,118,110}
+:root[data-accent="orange"]{--accent:#C2410C;--accent-soft:#FFF1E8;--accent-rgb:194,65,12}
+:root[data-accent="graphite"]{--accent:#334155;--accent-soft:#EEF1F5;--accent-rgb:51,65,85}
+
+@media (prefers-color-scheme:dark){
+  :root{--accent:#818CF8;--accent-soft:#1E2035;--accent-rgb:129,140,248;--on-accent:#0D1117}
+  :root[data-accent="blue"]{--accent:#60A5FA;--accent-soft:#16233A;--accent-rgb:96,165,250}
+  :root[data-accent="navy"]{--accent:#93C5FD;--accent-soft:#1A2638;--accent-rgb:147,197,253}
+  :root[data-accent="teal"]{--accent:#2DD4BF;--accent-soft:#12302D;--accent-rgb:45,212,191}
+  :root[data-accent="orange"]{--accent:#FB923C;--accent-soft:#36200F;--accent-rgb:251,146,60}
+  :root[data-accent="graphite"]{--accent:#CBD5E1;--accent-soft:#232A33;--accent-rgb:203,213,225}
+}

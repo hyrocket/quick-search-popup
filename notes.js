@@ -449,6 +449,7 @@ async function renderUsage() {
     size = mb < 1 ? `${Math.max(1, Math.round(mb * 1024))} KB` : `${mb.toFixed(1)} MB`;
   } catch {}
   $("usageLine").textContent = t("n.usage", { n: metas.length, size });
+  renderBackupLine();
 }
 
 // =====================================================================
@@ -614,8 +615,9 @@ function safeFileName(s, ext) {
     .replace(/[\\/:*?"<>|\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
   return (base || "note") + ext;
 }
+// text 는 문자열 또는 문자열 조각 배열 (백업은 노트마다 조각 — 수백 MB 를 한 문자열로 합치지 않으려고)
 function download(text, name, type) {
-  const blob = new Blob([text], { type });
+  const blob = new Blob(Array.isArray(text) ? text : [text], { type });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = name;
@@ -691,6 +693,142 @@ ${body}
 });
 
 // =====================================================================
+// 전체 백업 · 복원 — 확장을 지우면 IndexedDB 도 지워진다. 되살릴 길은 이 파일뿐이다
+// 파일: { app, format, exportedAt, folders:[...], notes:[{ meta, html }] } (이미지는 html 안의 base64)
+// 복원은 "합치기": 같은 id 는 더 최근에 고친 쪽을 남긴다. 지금 있는 노트는 지우지 않는다
+// =====================================================================
+const BACKUP_APP = "taptap-notes", BACKUP_FORMAT = 1;
+const BACKUP_WARN_DAYS = 30;
+const K_NOTE_BACKUP_AT = "shiftsearch:noteBackupAt";   // storage.local — 이 기기의 마지막 백업 시각
+let lastBackupAt = 0;
+
+function renderBackupLine() {
+  const el = $("backupLine");
+  el.textContent = lastBackupAt ? t("n.lastBackup", { date: notesFmtDate(lastBackupAt) }) : t("n.neverBackup");
+  const stale = !lastBackupAt || Date.now() - lastBackupAt > BACKUP_WARN_DAYS * 864e5;
+  el.classList.toggle("warn", metas.length > 0 && stale);
+}
+
+$("backupBtn").addEventListener("click", async () => {
+  await flushSave();
+  const all = await notesListMeta();
+  const parts = [`{"app":"${BACKUP_APP}","format":${BACKUP_FORMAT},"exportedAt":${Date.now()},` +
+    `"folders":${JSON.stringify(folders)},"notes":[`];
+  for (let i = 0; i < all.length; i++) {
+    const html = await notesGetBody(all[i].id);
+    parts.push((i ? "," : "") + JSON.stringify({ meta: all[i], html }));
+  }
+  parts.push("]}");
+  const day = notesFmtDate(Date.now()).slice(0, 10);
+  download(parts, `TapTap-notes-backup-${day}.json`, "application/json");
+  lastBackupAt = Date.now();
+  chrome.storage.local.set({ [K_NOTE_BACKUP_AT]: lastBackupAt });
+  renderBackupLine();
+});
+
+const restoreFile = $("restoreFile");
+$("restoreBtn").addEventListener("click", () => { restoreFile.value = ""; restoreFile.click(); });
+restoreFile.addEventListener("change", async () => {
+  const file = restoreFile.files?.[0];
+  if (!file) return;
+  let data;
+  try { data = JSON.parse(await file.text()); } catch { data = null; }
+  if (data?.app !== BACKUP_APP || !Array.isArray(data.notes)) { toast("⚠ " + t("n.restoreBad")); return; }
+  await flushSave();
+
+  // 백업 파일도 남이 만든 파일일 수 있다 — 필드를 하나씩 다시 만들고 본문은 sanitize 를 거친다
+  const str = (v, max) => (typeof v === "string" ? v : "").slice(0, max);
+  const num = (v) => (Number.isFinite(v) ? v : Date.now());
+  const haveFolder = new Set(folders.map(f => f.id));
+  const newFolders = [];
+  for (const f of Array.isArray(data.folders) ? data.folders : []) {
+    if (typeof f?.id !== "string" || !f.id || haveFolder.has(f.id)) continue;
+    newFolders.push({ id: f.id, name: str(f.name, 100) || t("n.newFolder"), createdAt: num(f.createdAt) });
+    haveFolder.add(f.id);
+  }
+  const haveNote = new Map(metas.map(m => [m.id, m]));
+  const entries = [];
+  for (const n of data.notes) {
+    const m = n?.meta;
+    if (typeof m?.id !== "string" || !m.id) continue;
+    const mine = haveNote.get(m.id);
+    if (mine && (mine.updatedAt || 0) >= num(m.updatedAt)) continue;
+    entries.push({
+      meta: {
+        id: m.id,
+        kind: m.kind === "memo" ? "memo" : "clip",
+        title: str(m.title, 300),
+        url: str(m.url, 4000),
+        site: str(m.site, 300),
+        createdAt: num(m.createdAt),
+        updatedAt: num(m.updatedAt),
+        text: str(m.text, 5000),
+        folderId: haveFolder.has(m.folderId) ? m.folderId : null,
+      },
+      html: sanitizeNoteHtml(typeof n.html === "string" ? n.html : ""),
+    });
+  }
+  try { await notesImport(newFolders, entries); }
+  catch { toast("⚠ " + t("n.saveFail")); return; }
+  notesAnnounce({ type: "saved", from: ME });
+  await reloadAll();
+  if (currentId && entries.some(e => e.meta.id === currentId)) openNote(currentId);
+  else if (!currentId && metas.length) openNote(metas[0].id);
+  toast(entries.length ? t("n.restored", { n: entries.length }) : t("n.restoreNone"));
+});
+
+// =====================================================================
+// 컬럼 폭 조절 — 경계를 끌어서. 이 기기·이 브라우저만의 편의라 localStorage 에 둔다 (sync 할 값 아님)
+// 편집 영역은 최소 EDIT_MIN 을 남긴다. 더블클릭하면 CSS 기본 폭으로
+// =====================================================================
+const K_COLS = "taptap:notesCols";
+const COL_LIMITS = { sidebar: [170, 380], list: [220, 600] };
+const EDIT_MIN = 360;
+const colEl = { sidebar: document.querySelector(".sidebar"), list: document.querySelector(".listCol") };
+let colWidths = {};
+try { colWidths = JSON.parse(localStorage.getItem(K_COLS) || "{}") || {}; } catch {}
+
+function setColWidth(col, w) {
+  const [lo, hi] = COL_LIMITS[col];
+  const other = col === "sidebar" ? colEl.list : colEl.sidebar;
+  const room = window.innerWidth - other.getBoundingClientRect().width - EDIT_MIN;
+  w = Math.round(Math.max(lo, Math.min(hi, room, w)));
+  colEl[col].style.width = w + "px";
+  colWidths[col] = w;
+}
+function saveColWidths() { try { localStorage.setItem(K_COLS, JSON.stringify(colWidths)); } catch {} }
+for (const col of Object.keys(colEl)) if (Number.isFinite(colWidths[col])) setColWidth(col, colWidths[col]);
+
+document.querySelectorAll(".resizer").forEach(rz => {
+  const col = rz.dataset.col;
+  rz.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    const startX = e.clientX, startW = colEl[col].getBoundingClientRect().width;
+    rz.setPointerCapture(e.pointerId);
+    rz.classList.add("dragging");
+    document.body.classList.add("colResizing");
+    const move = (ev) => setColWidth(col, startW + ev.clientX - startX);
+    const up = () => {
+      rz.removeEventListener("pointermove", move);
+      rz.removeEventListener("pointerup", up);
+      rz.removeEventListener("pointercancel", up);
+      rz.classList.remove("dragging");
+      document.body.classList.remove("colResizing");
+      saveColWidths();
+    };
+    rz.addEventListener("pointermove", move);
+    rz.addEventListener("pointerup", up);
+    rz.addEventListener("pointercancel", up);
+  });
+  rz.addEventListener("dblclick", () => {
+    colEl[col].style.width = "";
+    delete colWidths[col];
+    saveColWidths();
+  });
+});
+
+// =====================================================================
 // 같은 페이지 이어 붙이기 옵션 (background 가 저장할 때 읽는다)
 // =====================================================================
 const appendOpt = $("appendOpt");
@@ -725,9 +863,10 @@ chrome.storage.sync.get([K_LANG], (res) => {
   const saved = res?.[K_LANG];
   lang = LANG_CODES.includes(saved) ? saved : guessDefaultLang();
   applyI18n();
-  chrome.storage.local.get([K_NOTE_TARGET, K_NOTE_APPEND], async (st) => {
+  chrome.storage.local.get([K_NOTE_TARGET, K_NOTE_APPEND, K_NOTE_BACKUP_AT], async (st) => {
     targetFolderId = st?.[K_NOTE_TARGET] || null;
     appendOpt.checked = st?.[K_NOTE_APPEND] !== false;
+    lastBackupAt = Number(st?.[K_NOTE_BACKUP_AT]) || 0;
     await reloadAll();
     if (targetFolderId && !folders.some(f => f.id === targetFolderId)) targetFolderId = null;
     renderFolders();

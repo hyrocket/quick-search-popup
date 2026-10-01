@@ -6,15 +6,17 @@
 <head>
   <meta charset="utf-8">
   <title>TapTap - Quick Search</title>
+  <link rel="stylesheet" href="accent.css"/>
+  <script src="accent.js"></script>
   <style>
     :root{
       --bg:#fff; --fg:#1f2430; --muted:#6b7280; --line:#e5e7eb;
-      --accent:#4f46e5; --accentFg:#fff; --softBg:#f6f7f9;
+      --softBg:#f6f7f9;
     }
     @media (prefers-color-scheme: dark){
       :root{
         --bg:#1e2128; --fg:#e8eaed; --muted:#9aa0a6; --line:#343a44;
-        --accent:#7c7cf0; --accentFg:#fff; --softBg:#262a32;
+        --softBg:#262a32;
       }
     }
     *{box-sizing:border-box}
@@ -36,7 +38,7 @@
       width:100%; padding:9px 12px; border-radius:8px; font:inherit; font-weight:600;
       cursor:pointer; border:1px solid transparent;
     }
-    .primary{background:var(--accent); color:var(--accentFg)}
+    .primary{background:var(--accent); color:var(--on-accent)}
     .primary:hover{filter:brightness(1.08)}
     .ghost{background:transparent; color:var(--fg); border-color:var(--line); margin-top:7px; font-weight:500}
     .ghost:hover{background:var(--softBg)}

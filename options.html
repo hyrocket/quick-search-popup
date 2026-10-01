@@ -4,6 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>TapTap - Quick Search — Settings</title>
+  <link rel="stylesheet" href="accent.css"/>
+  <script src="accent.js"></script>
   <style>
     :root {
       --bg: #F8F9FB;
@@ -11,8 +13,6 @@
       --border: #E5E7EB;
       --text: #111827;
       --muted: #6B7280;
-      --accent: #6366F1;
-      --accent-soft: #EEF2FF;
       --danger: #EF4444;
       --danger-soft: #FEF2F2;
       --radius: 14px;
@@ -21,8 +21,8 @@
     @media(prefers-color-scheme:dark){
       :root{
         --bg:#0D1117; --card:#161B22; --border:#30363D;
-        --text:#E6EDF3; --muted:#8B949E; --accent:#818CF8;
-        --accent-soft:#1E2035; --danger:#F87171; --danger-soft:#2D1B1B;
+        --text:#E6EDF3; --muted:#8B949E;
+        --danger:#F87171; --danger-soft:#2D1B1B;
       }
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -61,7 +61,7 @@
       cursor:pointer;user-select:none;transition:all .13s;
       text-decoration:none;border:none;background:none;width:100%;text-align:left;
     }
-    .navItem:hover{background:rgba(99,102,241,.07);color:var(--accent)}
+    .navItem:hover{background:rgba(var(--accent-rgb),.07);color:var(--accent)}
     .navItem.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
     .navItem .navIcon{font-size:17px;flex-shrink:0}
     .navSep{height:1px;background:var(--border);margin:6px 10px}
@@ -121,7 +121,7 @@
     .wdCaret{width:1.5px;height:15px;background:var(--text);animation:wdBlink 1s steps(1) infinite}
     .wdGo{width:38px;height:30px;border-radius:7px;background:var(--accent);
       display:flex;align-items:center;justify-content:center}
-    .wdGo svg{width:15px;height:15px;stroke:#fff}
+    .wdGo svg{width:15px;height:15px;stroke:var(--on-accent)}
     /* 0.0s·0.3s 에 키 눌림 → 0.7s 팝업 등장 → 3.4s 까지 유지 → 사라지고 반복 */
     @keyframes wdTap{0%,4%{transform:none;border-bottom-width:4px;border-color:var(--border)}
       2%{transform:translateY(3px);border-bottom-width:1px;border-color:var(--accent)}
@@ -165,6 +165,14 @@
     /* ── Appearance: theme cards ──
        ⚠ 아래 테마 색상값은 content.js의 [data-ss-theme] 블록과 짝이다.
           한쪽만 고치면 설정 카드와 실제 팝업이 어긋난다. */
+    /* 페이지 강조색 고르기 — 동그라미는 라이트 색 고정 (다크에서도 "어떤 색인지" 알아보게) */
+    .accentDesc{font-size:12px;color:var(--muted);margin:-6px 0 12px}
+    .accentRow{display:flex;flex-wrap:wrap;gap:8px}
+    .accentChip{display:flex;align-items:center;gap:7px;padding:6px 12px 6px 8px;border:1.5px solid var(--border);
+      border-radius:999px;background:var(--card);color:var(--text);font:inherit;font-size:12.5px;font-weight:500;cursor:pointer}
+    .accentChip:hover{border-color:var(--accent)}
+    .accentChip.active{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+    .accentDot{width:16px;height:16px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
     .themeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     @media(max-width:1000px){.themeGrid{grid-template-columns:repeat(2,1fr)}}
     .themeCard{
@@ -255,7 +263,7 @@
     .kbKey.mod{min-width:58px;font-size:11px}
     .kbKey.wide{min-width:72px}
     .kbKey.selected{
-      background:var(--accent);color:#fff;
+      background:var(--accent);color:var(--on-accent);
       border-color:var(--accent);border-bottom-color:color-mix(in srgb,var(--accent) 70%,#000);
     }
     .kbKey.selected:hover{filter:brightness(1.1)}
@@ -287,7 +295,7 @@
       letter-spacing:.04em;margin-bottom:14px;min-height:44px;
     }
     .scKeyBadge{
-      background:var(--accent);color:#fff;
+      background:var(--accent);color:var(--on-accent);
       padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700;
     }
     .scPlus{color:var(--muted);font-size:16px;font-weight:300}
@@ -338,7 +346,7 @@
 
     .aiTag{
       font-size:9px;font-weight:700;letter-spacing:.05em;
-      background:var(--accent);color:#fff;
+      background:var(--accent);color:var(--on-accent);
       border-radius:4px;padding:1px 5px;
       user-select:none;transition:opacity .15s;
       white-space:nowrap;flex-shrink:0;
@@ -361,7 +369,7 @@
       position:relative;flex-shrink:0;
     }
     .colorSwatch:hover{transform:scale(1.12);box-shadow:0 2px 8px rgba(0,0,0,.18)}
-    .colorSwatch.active{border-color:var(--text);box-shadow:0 0 0 3px rgba(99,102,241,.25)}
+    .colorSwatch.active{border-color:var(--text);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.25)}
 
     /* ── Color palette popover ── */
     .colorPopover{
@@ -381,7 +389,7 @@
       transition:transform .1s,border-color .1s;
     }
     .colorPopover .palDot:hover{transform:scale(1.12)}
-    .colorPopover .palDot.active{border-color:var(--text);box-shadow:0 0 0 2px rgba(99,102,241,.3)}
+    .colorPopover .palDot.active{border-color:var(--text);box-shadow:0 0 0 2px rgba(var(--accent-rgb),.3)}
     .colorPopover .hexRow{display:flex;gap:6px;align-items:center;margin-top:2px}
     .colorPopover .hexRow span{font-size:11px;color:var(--muted);white-space:nowrap}
     .colorPopover .hexInline{
@@ -523,7 +531,7 @@
     .recAddBtn{
       padding:8px 16px;font-size:13px;font-weight:700;
       border:none;border-radius:9px;cursor:pointer;
-      background:var(--accent);color:#fff;
+      background:var(--accent);color:var(--on-accent);
     }
     .recAddBtn:disabled{opacity:.4;cursor:default}
     /* 창이 좁으면 2열 -> 1열 */
@@ -547,12 +555,12 @@
     }
     .saveBtn{
       padding:11px 20px;min-width:200px;border-radius:9px;
-      background:var(--accent);color:#fff;border:none;
+      background:var(--accent);color:var(--on-accent);border:none;
       font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.01em;
-      box-shadow:0 2px 10px rgba(99,102,241,.35);
+      box-shadow:0 2px 10px rgba(var(--accent-rgb),.35);
       transition:filter .15s,box-shadow .15s;
     }
-    .saveBtn:active{box-shadow:0 1px 4px rgba(99,102,241,.3)}
+    .saveBtn:active{box-shadow:0 1px 4px rgba(var(--accent-rgb),.3)}
     .saveBtn:hover{filter:brightness(1.1)}
     .savedMsg{font-size:13px;color:#22C55E;display:none;font-weight:600}
 
@@ -594,7 +602,7 @@
     /* ── URL hint box ── */
     .urlHintBox{
       padding:10px 14px;border-radius:9px;
-      background:var(--accent-soft);border:1px solid rgba(99,102,241,.25);
+      background:var(--accent-soft);border:1px solid rgba(var(--accent-rgb),.25);
       font-size:12px;color:var(--muted);margin-top:8px;
       font-family:monospace;
     }
@@ -623,6 +631,13 @@
       <span class="bolt"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"/></svg></span>
       <span class="brand">TapTap</span><span class="brandSub">- Quick Search</span>
     </div>
+    <!-- 노트·설정은 두 페이지 모두 맨 위에 같은 순서로 고정 (notes.html 과 같은 모양).
+         지금 페이지의 하위 항목(여기선 설정 탭, 노트 페이지에선 폴더)은 그 아래에 펼친다 -->
+    <a class="navItem" href="notes.html">
+      <span class="navIcon">📒</span><span data-i18n="nav.notes">Notes</span></a>
+    <a class="navItem active" href="options.html">
+      <span class="navIcon">⚙️</span><span data-i18n="nav.settings">Settings</span></a>
+    <div class="navSep"></div>
     <button class="navItem active" data-tab="engines">
       <span class="navIcon">🔍</span><span data-i18n="nav.engines">Search Engines</span></button>
     <button class="navItem" data-tab="shortcut">
@@ -633,10 +648,6 @@
       <span class="navIcon">🌐</span><span data-i18n-html="nav.language">Language</span></button>
     <button class="navItem" data-tab="about">
       <span class="navIcon">ℹ️</span><span data-i18n="nav.about">About</span></button>
-    <!-- 노트는 별도 페이지(notes.html). 탭이 아니라 링크라서 data-tab 이 없다 -->
-    <div class="navSep"></div>
-    <a class="navItem" href="notes.html">
-      <span class="navIcon">📒</span><span data-i18n="nav.notes">Notes</span></a>
     <div class="sideFooter" id="versionLabel"></div>
   </nav>
 
@@ -873,6 +884,13 @@
           </select>
         </div>
       </div>
+
+      <!-- 설정·노트 페이지의 강조색 (accent.css). 검색 팝업 테마와 별개라 카드를 나눴다. 누르면 바로 저장 -->
+      <div class="card">
+        <div class="cardTitle" data-i18n="ap.pageColor">Page color</div>
+        <div class="accentDesc" data-i18n="ap.pageColorDesc"></div>
+        <div class="accentRow" id="accentRow"></div>
+      </div>
     </div>
 
     <div class="section" id="tab-general">
@@ -901,7 +919,7 @@
           <a href="https://github.com/hyrocket/quick-search-popup" target="_blank"
              style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;
                     border-radius:9px;background:var(--accent-soft);color:var(--accent);
-                    font-weight:700;font-size:13px;text-decoration:none;border:1px solid rgba(99,102,241,.25)">
+                    font-weight:700;font-size:13px;text-decoration:none;border:1px solid rgba(var(--accent-rgb),.25)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
             </svg>

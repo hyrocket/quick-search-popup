@@ -687,7 +687,7 @@ function clearHistory() {
 // =======================
 let host, sr, overlay, panelWrap, panelEl, inputEl, selectEl, hintEl, newTabEl;
 let historyDropEl, engineDropEl, engStripEl, selBadgeEl, titleHintEl;
-let noteBtnEl, noteStatusEl;
+let noteBtnEl, noteStatusEl, notesNavBtnEl;
 let overlayOpen = false;
 
 // 편집 가능한 요소인가 (입력을 절대 막으면 안 되는 대상)
@@ -1603,7 +1603,23 @@ function ensurePanel() {
   settingsBtn.textContent = "⚙";
   settingsBtn.addEventListener("click", () => chrome.runtime.sendMessage({ type: "OPEN_OPTIONS" }));
 
-  bottomRight.append(hintEl, settingsBtn);
+  // 📒 노트 페이지 — [노트] 버튼은 "저장" 전용이라 보러 가는 길을 따로 둔다 (한 버튼에 두 뜻을 싣지 않는다)
+  // 설정과 짝으로 둔다 (노트·설정 페이지 사이드바의 순서와 같다)
+  notesNavBtnEl = document.createElement("button");
+  notesNavBtnEl.type = "button";
+  notesNavBtnEl.className = "iconBtn";
+  notesNavBtnEl.innerHTML =
+    `<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" ` +
+    `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">` +
+    `<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>` +
+    `<path d="M9 7.5h6M9 11h4"/></svg>`;
+  notesNavBtnEl.addEventListener("click", () => {
+    if (!extAlive()) return;
+    chrome.runtime.sendMessage({ type: "OPEN_NOTES" });
+    closePanel();
+  });
+
+  bottomRight.append(hintEl, notesNavBtnEl, settingsBtn);
   bottomBar.append(bottomLeft, bottomRight);
 
   panelWrap.append(panelEl, bottomBar);
@@ -1975,6 +1991,7 @@ function updateTexts() {
   const noteLbl = sr?.querySelector(".noteLabel");
   if (noteLbl) noteLbl.textContent = t(lang, "noteBtn");
   if (noteBtnEl) noteBtnEl.title = t(lang, "noteTip") + "  (Ctrl+Enter)";
+  if (notesNavBtnEl) notesNavBtnEl.title = notesNavBtnEl.ariaLabel = t(lang, "noteOpen");
   updateHint();
 }
 
